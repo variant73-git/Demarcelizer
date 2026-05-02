@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style></head>
+<body class="antialiased relative selection:bg-[#eab308] selection:text-white text-white overflow-x-hidden" style="font-family: 'Inter', sans-serif; background-color: #1a1a1a; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 12px), linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: auto, 48px 48px, 48px 48px;">
+    
+    <!-- WebGL Background -->
+    <canvas id="webgl-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <div class="relative z-10 w-full max-w-[1600px] mx-auto border-x border-white/10 min-h-screen flex flex-col">
+
+        <!-- Navigation -->
+        <nav class="flex items-center justify-between px-6 lg:px-10 py-5 border border-white/[0.05] bg-[#1a1a1a]/90 backdrop-blur-md sticky top-0 z-50">
+            <div class="text-xl font-medium tracking-tight font-sans">Prime</div>
+            <ul class="hidden lg:flex gap-10 text-sm text-neutral-400 font-medium">
+                <li class="text-white relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-[2px] after:bg-[#eab308] cursor-pointer font-sans">Start</li>
+                <li class="hover:text-white transition-colors cursor-pointer font-sans">Process</li>
+                <li class="hover:text-white transition-colors cursor-pointer font-sans">Assets</li>
+                <li class="hover:text-white transition-colors cursor-pointer font-sans">Firm</li>
+                <li class="hover:text-white transition-colors cursor-pointer font-sans">Insights</li>
+                <li class="hover:text-white transition-colors cursor-pointer font-sans">Reach out</li>
+            </ul>
+            
+            <!-- Premium Border Button -->
+            <button class="relative group p-[1px] overflow-hidden hidden sm:block">
+                <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent -z-10 transition-colors group-hover:from-white/60"></div>
+                <div class="bg-[#f4f4f4] text-neutral-900 px-5 py-2 text-sm font-medium relative z-10 transition-colors group-hover:bg-white font-sans">
+                    Schedule call
+                </div>
+            </button>
+            <button class="sm:hidden text-white"><iconify-icon icon="solar:hamburger-menu-linear" width="24"></iconify-icon></button>
+        </nav>
+
+        <main class="flex-grow flex flex-col relative">
+            <!-- Hero Image Frame -->
+            <div class="w-full h-[50vh] md:h-[60vh] relative border-b border-white/10">
+                <!-- Frame Brackets -->
+                <div class="bracket absolute w-2 h-2 border-white/30 z-20" style="top: -1px; left: -1px; border-width: 1px 0 0 1px; border-style: solid;"></div>
+                <div class="bracket absolute w-2 h-2 border-white/30 z-20" style="top: -1px; right: -1px; border-width: 1px 1px 0 0; border-style: solid;"></div>
+                
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/99ba349f-6119-4d26-b759-12862567fbc0_3840w.webp" alt="Modern Architecture" class="w-full h-full object-cover object-center grayscale-[15%] contrast-110 brightness-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-[#1a1a1a]/20"></div>
+            </div>
+
+            <!-- Content Section -->
+            <section class="px-6 lg:px-10 pt-16 pb-32 relative z-20 flex-grow">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+                    <!-- Left Column -->
+                    <div class="lg:col-span-7 relative pt-4">
+                        <!-- Frame Brackets -->
+                        <div class="bracket absolute w-2 h-2 border-white/30 z-20" style="top: -1px; left: -1px; border-width: 1px 0 0 1px; border-style: solid;"></div>
+                        <div class="bracket absolute w-2 h-2 border-white/30 z-20" style="bottom: -1px; left: -1px; border-width: 0 0 1px 1px; border-style: solid;"></div>
+
+                        <h1 class="text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[1.02] mb-8 text-reveal font-instrument-serif">
+                            Expand your portfolio
+                            <span class="inline-flex items-center align-middle mx-2 -mt-3">
+                                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/005600e5-f6ab-4e59-bc86-eaeb02797dfa_1600w.jpg" class="w-12 h-12 md:w-16 md:h-16 object-cover transform -rotate-3 shadow-lg border border-white/20 rounded-sm" alt="Asset">
+                                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/724142aa-44a6-48d3-9cf3-761e00d05b78_1600w.jpg" class="w-12 h-12 md:w-16 md:h-16 object-cover transform rotate-6 -ml-3 shadow-md border border-neutral-300 rounded-sm" alt="Asset">
+                            </span>
+                            with prime real estate assets.
+                        </h1>
+
+                        <p class="text-lg md:text-xl text-neutral-400 max-w-xl mb-12 font-normal text-reveal leading-relaxed font-sans">
+                            At PrimeEstates, we facilitate your growth through carefully vetted properties, data-backed strategies, and end-to-end investment support.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between max-w-2xl gap-8">
+                            
+                            <!-- Premium Border Input Form -->
+                            <div class="flex w-full sm:w-auto items-stretch relative group p-[1px] flex-grow max-w-[400px]">
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent -z-10 transition-opacity opacity-50 group-hover:opacity-100"></div>
+                                <div class="bg-[#f4f4f4] flex w-full relative z-10">
+                                    <input type="email" placeholder="Book a session" class="bg-transparent text-neutral-900 px-5 py-4 w-full outline-none text-sm placeholder-neutral-500 font-medium">
+                                    <button class="bg-[#eab308] text-white px-6 flex items-center justify-center hover:bg-yellow-600 transition-colors">
+                                        <iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Social Proof -->
+                            <div class="flex items-center gap-4 flex-shrink-0">
+                                <div class="flex -space-x-3">
+                                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3ef87ef2-3b8d-4459-a9ef-5c7b64ad9e1b_320w.jpg" class="w-10 h-10 rounded-full border-2 border-[#1a1a1a] object-cover grayscale-[30%]" alt="Member">
+                                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ef8b45e-c678-465f-8372-c36234710b39_320w.webp" class="w-10 h-10 rounded-full border-2 border-[#1a1a1a] object-cover grayscale-[30%]" alt="Member">
+                                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2bac6570-3bee-4c9c-a3a7-ad80b0766eb3_320w.jpg" class="w-10 h-10 rounded-full border-2 border-[#1a1a1a] object-cover grayscale-[30%]" alt="Member">
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm font-medium tracking-tight font-sans">15k +</span>
+                                    <span class="text-xs text-neutral-500 font-normal font-sans">Active investors</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column (Overlapping Card) -->
+                    <div class="lg:col-span-5 relative mt-16 lg:mt-0 z-30">
+                        
+                        <!-- Premium Border Card -->
+                        <div class="lg:absolute lg:-top-56 lg:right-0 w-full relative p-[1px] group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent -z-10"></div>
+                            
+                            <div class="w-full h-full relative z-10 flex flex-col" style="box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);">
+                                <!-- Frame Brackets for Card -->
+                                <div class="bracket absolute w-2 h-2 border-neutral-300 z-20" style="top: -1px; left: -1px; border-width: 1px 0 0 1px; border-style: solid;"></div>
+                                <div class="bracket absolute w-2 h-2 border-neutral-300 z-20" style="top: -1px; right: -1px; border-width: 1px 1px 0 0; border-style: solid;"></div>
+                                <div class="bracket absolute w-2 h-2 border-neutral-300 z-20" style="bottom: -1px; left: -1px; border-width: 0 0 1px 1px; border-style: solid;"></div>
+                                <div class="bracket absolute w-2 h-2 border-neutral-300 z-20" style="bottom: -1px; right: -1px; border-width: 0 1px 1px 0; border-style: solid;"></div>
+
+                                <!-- White Part -->
+                                <div class="bg-white p-10 md:p-14 pb-6 md:pb-8 flex-1">
+                                    <div class="mb-6 opacity-20 text-neutral-800">
+                                        <iconify-icon icon="solar:quote-left-linear" width="48"></iconify-icon>
+                                    </div>
+                                    <p class="text-2xl md:text-[2rem] leading-[1.2] tracking-tight font-medium text-neutral-800 font-sans">
+                                        PrimeEstates transformed my approach to property.
+                                    </p>
+                                </div>
+
+                                <!-- Off-White Part -->
+                                <div class="bg-[#f4f4f4] p-10 md:p-14 pt-6 md:pt-8 flex-1 flex flex-col justify-between border-t border-neutral-100">
+                                    <p class="text-xl md:text-2xl leading-[1.3] tracking-tight font-medium text-neutral-600 font-sans mb-10">
+                                        The yields appeared quicker than anticipated, and their advisors ensured total transparency throughout the journey.
+                                    </p>
+                                    <div class="flex items-center justify-between border-t border-neutral-200 pt-6">
+                                        <div>
+                                            <div class="text-base font-medium tracking-tight font-sans text-neutral-900">Sarah Jenkins</div>
+                                            <div class="text-sm text-neutral-500 font-normal mt-0.5 font-sans">Seattle, WA</div>
+                                        </div>
+                                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/70f42fcd-9df2-4ed0-aaa4-6582ce1171fa_320w.jpg" alt="Sarah Jenkins" class="w-12 h-12 rounded-full object-cover border border-neutral-200">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts for Logic and Animations -->
+    <script>
+        // 1. Masked Text Reveal Logic
+        function setupTextReveal() {
+            const elements = document.querySelectorAll('.text-reveal');
+            
+            elements.forEach(el => {
+                const childNodes = Array.from(el.childNodes);
+                el.innerHTML = '';
+                
+                childNodes.forEach(node => {
+                    if (node.nodeType === 3) { // Text node
+                        const words = node.textContent.trim().split(/\s+/);
+                        if(words.length === 1 && words[0] === "") return;
+                        
+                        words.forEach(word => {
+                            const mask = document.createElement('span');
+                            mask.style.cssText = 'overflow: hidden; display: inline-flex; vertical-align: top; margin-right: 0.25em; padding-bottom: 0.1em; margin-bottom: -0.1em;';
+                            
+                            const inner = document.createElement('span');
+                            inner.className = 'word-inner';
+                            inner.style.cssText = 'display: inline-block; transform: translateY(110%); opacity: 0;';
+                            inner.textContent = word;
+                            
+                            mask.appendChild(inner);
+                            el.appendChild(mask);
+                        });
+                    } else if (node.nodeType === 1) { // Element node (like the icon span)
+                        const mask = document.createElement('span');
+                        mask.style.cssText = 'overflow: hidden; display: inline-flex; vertical-align: middle; margin-right: 0.25em;';
+                        
+                        const inner = document.createElement('span');
+                        inner.className = 'word-inner block';
+                        inner.style.cssText = 'display: inline-block; transform: translateY(110%); opacity: 0;';
+                        inner.appendChild(node.cloneNode(true));
+                        
+                        mask.appendChild(inner);
+                        el.appendChild(mask);
+                    }
+                });
+            });
+        }
+
+        // 2. GSAP Animations
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Animate text reveal
+            gsap.utils.toArray('.text-reveal').forEach(container => {
+                const words = container.querySelectorAll('.word-inner');
+                gsap.to(words, {
+                    y: '0%',
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: 'power4.out',
+                    stagger: 0.04,
+                    delay: 0.1,
+                    scrollTrigger: {
+                        trigger: container,
+                        start: 'top 90%',
+                    }
+                });
+            });
+
+            // Animate frame brackets
+            gsap.fromTo('.bracket', 
+                { scale: 0, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.6, stagger: 0.05, ease: 'back.out(1.5)', delay: 0.5 }
+            );
+        }
+
+        // 3. WebGL Subtle Background Particles
+        function initWebGL() {
+            const canvas = document.getElementById('webgl-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const geometry = new THREE.BufferGeometry();
+            const particlesCount = 400;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 20;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 0.015,
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(geometry, material);
+            scene.add(particlesMesh);
+
+            camera.position.z = 4;
+
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+            const windowHalfX = window.innerWidth / 2;
+            const windowHalfY = window.innerHeight / 2;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - windowHalfX) * 0.0003;
+                mouseY = (event.clientY - windowHalfY) * 0.0003;
+            });
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                targetX = mouseX * 0.5;
+                targetY = mouseY * 0.5;
+
+                particlesMesh.rotation.y += 0.0005;
+                particlesMesh.rotation.x += 0.0002;
+                
+                // Float effect
+                const positions = geometry.attributes.position.array;
+                for(let i = 0; i < particlesCount; i++) {
+                    const i3 = i * 3;
+                    const x = positions[i3];
+                    positions[i3 + 1] += Math.sin(elapsedTime * 0.5 + x) * 0.0005;
+                }
+                geometry.attributes.position.needsUpdate = true;
+
+                particlesMesh.rotation.y += 0.02 * (targetX - particlesMesh.rotation.y);
+                particlesMesh.rotation.x += 0.02 * (targetY - particlesMesh.rotation.x);
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Initialize all
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTextReveal();
+            // Slight delay to ensure fonts load before calculating layout for GSAP
+            setTimeout(() => {
+                initAnimations();
+                initWebGL();
+            }, 100);
+        });
+    </script>
+
+</body></html>

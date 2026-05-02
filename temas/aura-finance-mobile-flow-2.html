@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Finance - Mobile Flow</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        aura: {
+                            main: '#080808',
+                            card: '#0A0A0A',
+                            surface: '#121212',
+                            control: '#1A1A1A',
+                            gold: '#E2C854',
+                            emerald: '#10b981',
+                            red: '#f87171',
+                            text: '#EDEDED',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-yellow-100 min-h-screen flex items-center justify-center p-4 py-12 md:p-12 font-sans text-aura-text selection:bg-aura-gold/30 antialiased">
+
+    <div class="flex flex-col xl:flex-row gap-8 items-center xl:items-start w-full max-w-[1200px] mx-auto justify-center">
+
+        <!-- SCREEN 1: Dashboard (Left - Moved from center) -->
+        <div class="glow-card relative [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[radial-gradient(400px_circle_at_var(--mouse-x,0px)_var(--mouse-y,0px),rgba(226,200,84,0.4),transparent_40%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none [&::before]:z-20 w-[340px] h-[740px] bg-aura-card rounded-[3rem] shadow-2xl overflow-hidden flex flex-col shrink-0 border border-neutral-800/60 z-0">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 pt-12 pb-2 relative z-10">
+                <div class="flex items-center gap-3">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d868fef-f560-45ca-ab35-5dad4fc29059_3840w.webp" alt="Alex" class="w-10 h-10 rounded-full object-cover border border-neutral-700">
+                    <span class="text-sm font-normal tracking-tight text-aura-text">System ID: Alex</span>
+                </div>
+                <div class="flex items-center gap-4 text-neutral-400">
+                    <button class="hover:text-aura-text transition-colors">
+                        <iconify-icon icon="solar:bell-bing-linear" width="22" stroke-width="1.5"></iconify-icon>
+                    </button>
+                    <button class="hover:text-aura-text transition-colors">
+                        <iconify-icon icon="solar:settings-linear" width="22" stroke-width="1.5"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Balance / Chart Card -->
+            <div class="mx-5 mt-4 relative z-10">
+                <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-3xl p-6 shadow-lg overflow-hidden group">
+
+                    <div class="flex justify-between items-start relative z-10">
+                        <div class="flex flex-col w-full">
+                            <div class="flex items-center justify-between w-full mb-4">
+                                <span class="text-xs font-normal text-neutral-400 uppercase tracking-widest">Total Value</span>
+                                <span class="text-[10px] text-aura-gold font-normal bg-aura-gold/10 px-2 py-0.5 rounded-full">+1.54%</span>
+                            </div>
+                            
+                            <!-- Masked Reveal Element -->
+                            <div class="reveal-mask overflow-hidden pt-1 pb-1">
+                                <h1 class="reveal-text text-4xl tracking-tight font-medium text-aura-text leading-none">
+                                    €34,550.80
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="flex justify-between px-8 mt-6 relative z-10">
+                <button class="flex flex-col items-center group">
+                    <div class="w-12 h-12 bg-aura-surface rounded-full flex items-center justify-center text-neutral-300 border border-neutral-800 group-hover:border-aura-gold group-hover:text-aura-gold transition-all duration-300">
+                        <iconify-icon icon="solar:arrow-right-up-linear" width="20" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <span class="text-[10px] font-normal text-neutral-400 mt-2 uppercase tracking-wide">Send</span>
+                </button>
+                <button class="flex flex-col items-center group">
+                    <div class="w-12 h-12 bg-aura-surface rounded-full flex items-center justify-center text-neutral-300 border border-neutral-800 group-hover:border-aura-gold group-hover:text-aura-gold transition-all duration-300">
+                        <iconify-icon icon="solar:transfer-horizontal-linear" width="20" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <span class="text-[10px] font-normal text-neutral-400 mt-2 uppercase tracking-wide">Move</span>
+                </button>
+                <button class="flex flex-col items-center group">
+                    <div class="w-12 h-12 bg-aura-surface rounded-full flex items-center justify-center text-neutral-300 border border-neutral-800 group-hover:border-aura-gold group-hover:text-aura-gold transition-all duration-300">
+                        <iconify-icon icon="solar:arrow-left-down-linear" width="20" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <span class="text-[10px] font-normal text-neutral-400 mt-2 uppercase tracking-wide">Recv</span>
+                </button>
+            </div>
+
+            <!-- Latest Transaction -->
+            <div class="px-5 mt-8 relative z-10">
+                <div class="flex justify-between items-end mb-3 px-1">
+                    <h3 class="text-sm font-normal text-neutral-300 tracking-tight">Recent</h3>
+                    <button class="text-[10px] text-neutral-500 hover:text-aura-text transition-colors uppercase tracking-wide">All</button>
+                </div>
+                <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-xl p-3.5 flex items-center justify-between z-10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-aura-control flex items-center justify-center text-aura-gold border border-neutral-800">
+                            <iconify-icon icon="solar:shop-linear" width="20" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div>
+                            <div class="text-sm font-normal text-aura-text">Whole Foods</div>
+                            <div class="text-[10px] text-neutral-500 mt-0.5">2 mins ago</div>
+                        </div>
+                    </div>
+                    <div class="text-aura-text text-sm font-normal">-€45.20</div>
+                </div>
+                <!-- Stack visual effect -->
+                <div class="bg-aura-surface border border-neutral-800/50 mx-4 h-2 rounded-b-lg -mt-1 opacity-50"></div>
+            </div>
+
+            <!-- Wallets / Data Cards -->
+            <div class="mt-8 px-5 relative z-10">
+                <h3 class="text-sm font-normal text-neutral-300 tracking-tight mb-3 px-1">Assets</h3>
+                
+                <div class="flex gap-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 pr-5">
+                    
+                    <!-- Wallet Card 1 -->
+                    <div class="relative p-[1px] rounded-[1.25rem] bg-gradient-to-br from-aura-gold/40 via-neutral-800 to-transparent shrink-0">
+                        <div class="w-[100px] h-[110px] bg-aura-surface rounded-[1.25rem] p-3.5 flex flex-col justify-between relative z-10">
+                            <div class="w-7 h-7 rounded-full bg-aura-control text-aura-gold border border-aura-gold/20 flex items-center justify-center text-xs font-normal">
+                                €
+                            </div>
+                            <div>
+                                <div class="text-[10px] text-neutral-500 mb-0.5 uppercase tracking-wide">Euro</div>
+                                <div class="text-sm font-normal text-aura-text tracking-tight">0.92</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wallet Card 2 -->
+                    <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none w-[100px] h-[110px] rounded-[1.25rem] p-3.5 flex flex-col justify-between shrink-0">
+                        <div class="w-7 h-7 rounded-full bg-aura-control text-neutral-300 border border-neutral-800 flex items-center justify-center text-xs font-normal">
+                            $
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-neutral-500 mb-0.5 uppercase tracking-wide">USD</div>
+                            <div class="text-sm font-normal text-aura-text tracking-tight">1.08</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+                <div class="relative p-[1px] rounded-full bg-gradient-to-b from-neutral-700 to-transparent">
+                    <div class="bg-aura-control/80 backdrop-blur-md rounded-full px-5 py-2.5 flex items-center gap-6 shadow-2xl">
+                        <button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-aura-text transition-colors">
+                            <iconify-icon icon="solar:history-linear" width="22" stroke-width="1.5"></iconify-icon>
+                        </button>
+                        <button class="w-10 h-10 flex items-center justify-center text-aura-gold transition-colors">
+                            <iconify-icon icon="solar:home-smile-linear" width="22" stroke-width="1.5"></iconify-icon>
+                        </button>
+                        <button class="w-10 h-10 flex items-center justify-center text-neutral-500 hover:text-aura-text transition-colors">
+                            <iconify-icon icon="solar:user-circle-linear" width="22" stroke-width="1.5"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: Activity List (Center - Moved from Left) -->
+        <div class="glow-card relative [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[radial-gradient(400px_circle_at_var(--mouse-x,0px)_var(--mouse-y,0px),rgba(226,200,84,0.4),transparent_40%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none [&::before]:z-20 w-[340px] h-[740px] bg-aura-card rounded-[3rem] shadow-[0_0_80px_rgba(0,0,0,0.6)] overflow-hidden flex flex-col shrink-0 border border-neutral-800 xl:-mt-8 z-20">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 pt-12 pb-4 relative z-10">
+                <button class="text-neutral-400 hover:text-aura-text transition-colors">
+                    <iconify-icon icon="solar:alt-arrow-left-linear" width="24" stroke-width="1.5"></iconify-icon>
+                </button>
+                <span class="text-sm font-normal tracking-tight">Activity Log</span>
+                <button class="text-neutral-400 hover:text-aura-text transition-colors">
+                    <iconify-icon icon="solar:magnifer-linear" width="24" stroke-width="1.5"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Account Selector -->
+            <div class="flex justify-center mb-6 relative z-10">
+                <button class="bg-aura-control border border-neutral-800 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+                    <div class="flex -space-x-1">
+                        <div class="w-3 h-3 rounded-full bg-aura-text opacity-80"></div>
+                        <div class="w-3 h-3 rounded-full bg-aura-gold opacity-80"></div>
+                    </div>
+                    <span class="text-[11px] font-normal tracking-wider text-neutral-300">**** 8204</span>
+                    <iconify-icon icon="solar:alt-arrow-down-linear" width="16" class="text-neutral-500"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Scrollable List -->
+            <div class="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-8 px-5 relative z-10">
+                
+                <!-- Section: Today -->
+                <div class="text-[10px] font-normal text-neutral-600 uppercase tracking-widest mb-3 mt-2 pl-1">Today</div>
+                
+                <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-xl p-3.5 flex items-center justify-between mb-3 hover:bg-aura-control transition-colors cursor-default">
+                    <div class="flex items-center gap-3">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3186f9ea-5f5a-49f7-8fcf-568ad52f515e_3840w.webp" alt="Elena" class="w-10 h-10 rounded-full object-cover border border-neutral-800 grayscale opacity-80">
+                        <div>
+                            <div class="text-sm font-normal">Elena Rostova</div>
+                            <div class="text-[10px] text-neutral-500 flex items-center gap-1 mt-0.5">
+                                Incoming <iconify-icon icon="solar:check-circle-linear" width="12"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-aura-gold text-sm font-normal">+€4,250.00</div>
+                </div>
+
+                <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-xl p-3.5 flex items-center justify-between mb-3 hover:bg-aura-control transition-colors cursor-default">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-aura-control border border-neutral-800 flex items-center justify-center text-aura-gold">
+                            <iconify-icon icon="solar:chart-square-linear" width="20" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div>
+                            <div class="text-sm font-normal">Kraken Node</div>
+                            <div class="text-[10px] text-neutral-500 flex items-center gap-1 mt-0.5">
+                                Settled <iconify-icon icon="solar:check-circle-linear" width="12"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-aura-gold text-sm font-normal">+€850.00</div>
+                </div>
+
+                <!-- Section: Yesterday -->
+                <div class="text-[10px] font-normal text-neutral-600 uppercase tracking-widest mb-3 mt-6 pl-1">Yesterday</div>
+
+                <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-xl p-3.5 flex items-center justify-between mb-3 hover:bg-aura-control transition-colors cursor-default">
+                    <div class="flex items-center gap-3">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/65695f80-23f9-46ee-8487-cbb6c93cc48b_3840w.webp" alt="Marcus" class="w-10 h-10 rounded-full object-cover border border-neutral-800 grayscale opacity-80">
+                        <div>
+                            <div class="text-sm font-normal">Marcus Cole</div>
+                            <div class="text-[10px] text-neutral-500 flex items-center gap-1 mt-0.5">
+                                Incoming <iconify-icon icon="solar:check-circle-linear" width="12"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-aura-gold text-sm font-normal">+€315.50</div>
+                </div>
+
+                <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-xl p-3.5 flex items-center justify-between mb-3 hover:bg-aura-control transition-colors cursor-default">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-aura-control border border-neutral-800 flex items-center justify-center text-neutral-400 text-[9px] font-medium tracking-widest">
+                            NETF
+                        </div>
+                        <div>
+                            <div class="text-sm font-normal">Netflix Sub</div>
+                            <div class="text-[10px] text-neutral-500 flex items-center gap-1 mt-0.5">
+                                Cleared <iconify-icon icon="solar:check-circle-linear" width="12"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-neutral-400 text-sm font-normal">-€19.99</div>
+                </div>
+
+                 <!-- Section: October -->
+                 <div class="text-[10px] font-normal text-neutral-600 uppercase tracking-widest mb-3 mt-6 pl-1">12 Oct</div>
+                 
+                 <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-xl p-3.5 flex items-center justify-between mb-3 hover:bg-aura-control transition-colors cursor-default">
+                    <div class="flex items-center gap-3">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d063fd9-f7c1-4536-ade0-9fd133f07279_3840w.webp" alt="David" class="w-10 h-10 rounded-full object-cover border border-neutral-800 grayscale opacity-80">
+                        <div>
+                            <div class="text-sm font-normal">David Chen</div>
+                            <div class="text-[10px] text-neutral-500 flex items-center gap-1 mt-0.5">
+                                Incoming <iconify-icon icon="solar:check-circle-linear" width="12"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-aura-gold text-sm font-normal">+€890.00</div>
+                </div>
+            </div>
+            
+            <!-- Bottom Fade overlay -->
+            <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-aura-card to-transparent pointer-events-none z-20"></div>
+        </div>
+
+        <!-- SCREEN 3: Pay (Right) -->
+        <div class="glow-card relative [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[radial-gradient(400px_circle_at_var(--mouse-x,0px)_var(--mouse-y,0px),rgba(226,200,84,0.4),transparent_40%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none [&::before]:z-20 w-[340px] h-[740px] bg-aura-card rounded-[3rem] shadow-2xl overflow-hidden flex flex-col shrink-0 border border-neutral-800/60 z-0">
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 pt-12 pb-4 relative z-10">
+                <button class="text-neutral-400 hover:text-aura-text transition-colors">
+                    <iconify-icon icon="solar:alt-arrow-left-linear" width="24" stroke-width="1.5"></iconify-icon>
+                </button>
+                <span class="text-sm font-normal tracking-tight">Initiate Transfer</span>
+                <button class="text-neutral-400 hover:text-aura-text transition-colors">
+                    <iconify-icon icon="solar:users-group-rounded-linear" width="24" stroke-width="1.5"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Source Account Selector -->
+            <div class="flex justify-center mb-4 relative z-10">
+                <button class="bg-aura-control border border-neutral-800 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-neutral-800 transition-colors">
+                    <div class="flex -space-x-1">
+                        <div class="w-3 h-3 rounded-full bg-aura-text opacity-80"></div>
+                        <div class="w-3 h-3 rounded-full bg-aura-gold opacity-80"></div>
+                    </div>
+                    <span class="text-[11px] font-normal tracking-wider text-neutral-300">**** 8204</span>
+                    <iconify-icon icon="solar:alt-arrow-down-linear" width="16" class="text-neutral-500"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Recipient Card -->
+            <div class="relative bg-[linear-gradient(to_bottom,#121212,#0A0A0A)] [&::before]:content-[''] [&::before]:absolute [&::before]:inset-0 [&::before]:rounded-[inherit] [&::before]:p-[1px] [&::before]:bg-[linear-gradient(135deg,rgba(255,255,255,0.1)_0%,rgba(255,255,255,0.02)_100%)] [&::before]:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] [&::before]:[-webkit-mask-composite:xor] [&::before]:[mask-composite:exclude] [&::before]:pointer-events-none rounded-[1.5rem] p-4 mx-5 flex items-center justify-between shadow-md mt-2 z-10">
+                <div class="flex items-center gap-3">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d063fd9-f7c1-4536-ade0-9fd133f07279_3840w.webp" alt="David" class="w-10 h-10 rounded-full object-cover border border-neutral-800 grayscale">
+                    <div>
+                        <div class="text-sm font-normal">David Chen</div>
+                        <div class="text-[10px] text-neutral-500 mt-0.5 tracking-widest font-mono">IBAN *4920</div>
+                    </div>
+                </div>
+                <button class="text-[10px] font-normal text-aura-gold hover:text-white transition-colors uppercase tracking-wide">Edit</button>
+            </div>
+
+            <!-- Amount Display -->
+            <div class="flex flex-col items-center justify-center mt-12 mb-8 relative z-10">
+                <!-- Masked Reveal Element -->
+                <div class="reveal-mask overflow-hidden py-2">
+                    <div class="reveal-text text-5xl tracking-tight font-medium text-aura-text leading-none">
+                        €1,500.00
+                    </div>
+                </div>
+                <div class="text-[10px] text-neutral-500 mt-4 font-normal tracking-wide uppercase">Available: €34,550.80</div>
+            </div>
+
+            <!-- Note Input -->
+            <div class="mx-5 mb-8 relative z-10">
+                <div class="bg-aura-control/50 rounded-xl p-3.5 flex items-center gap-3 border border-neutral-800 focus-within:border-neutral-600 transition-colors">
+                    <iconify-icon icon="solar:document-text-linear" width="18" class="text-neutral-500"></iconify-icon>
+                    <input type="text" placeholder="Add reference note" class="bg-transparent border-none outline-none text-sm w-full text-aura-text placeholder-neutral-600 font-light">
+                </div>
+            </div>
+
+            <!-- Minimal Numpad -->
+            <div class="grid grid-cols-3 gap-y-8 px-12 mt-auto mb-28 relative z-10">
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">1</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">2</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">3</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">4</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">5</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">6</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">7</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">8</button>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">9</button>
+                <div></div>
+                <button class="text-2xl font-light text-neutral-300 hover:text-white active:scale-95 transition-all">0</button>
+                <button class="flex items-center justify-center text-neutral-500 hover:text-white active:scale-95 transition-all">
+                    <iconify-icon icon="solar:backspace-linear" width="24" stroke-width="1.5"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Action Button -->
+            <div class="absolute bottom-6 left-0 w-full px-5 z-20">
+                <button class="w-full bg-aura-gold text-aura-main rounded-[2rem] py-4 text-sm font-medium shadow-lg hover:bg-white transition-colors active:scale-[0.98]">
+                    Confirm Transfer
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Interactions & Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Register GSAP ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Text Reveal Animation Setup
+            const revealContainers = document.querySelectorAll('.reveal-mask');
+            revealContainers.forEach(container => {
+                const textElement = container.querySelector('.reveal-text');
+                
+                gsap.set(textElement, { y: '100%' });
+
+                gsap.to(textElement, {
+                    y: '0%',
+                    duration: 0.8,
+                    ease: "power4.out",
+                    delay: 0.1,
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 95%",
+                        toggleActions: "play none none none"
+                    }
+                });
+            });
+
+            // Flashlight / Proximity Effect Tracker
+            const cards = document.querySelectorAll('.glow-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+                
+                // Reset slightly off-center on leave
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--mouse-x', `50%`);
+                    card.style.setProperty('--mouse-y', `-50%`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

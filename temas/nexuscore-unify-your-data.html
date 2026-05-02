@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusCore - Unify Your Data</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: '#FF0B0B',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js for WebGL Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="bg-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-accent/30 selection:text-white" style="background-color: #000000;">
+
+    <!-- Background Texture/Pattern -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-20" style="background-image: linear-gradient(45deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+    <!-- WebGL Canvas Container -->
+    <canvas id="webgl-bg" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- Main Framed Grid Container -->
+    <div class="relative z-10 max-w-[1400px] mx-auto min-h-screen flex flex-col border-x border-white/10" style="border-image: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%) 1;">
+        
+        <!-- Corner Brackets -->
+        <div class="absolute top-0 left-0 w-3 h-3 border-t border-l border-white/40 -translate-x-[1px] -translate-y-[1px]"></div>
+        <div class="absolute top-0 right-0 w-3 h-3 border-t border-r border-white/40 translate-x-[1px] -translate-y-[1px]"></div>
+        <div class="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-white/40 -translate-x-[1px] translate-y-[1px]"></div>
+        <div class="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-white/40 translate-x-[1px] translate-y-[1px]"></div>
+
+        <!-- Header -->
+        <header class="border-b border-white/10 py-5 px-6 md:px-12 flex justify-between items-center bg-black/50 backdrop-blur-sm relative">
+            <div class="text-white text-lg tracking-tight font-medium">
+                NexusCore
+            </div>
+            
+            <nav class="hidden md:flex gap-10 text-sm font-normal text-gray-400">
+                <a href="#" class="hover:text-white transition-colors duration-300">Platform</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Solutions</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Pricing</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Company</a>
+            </nav>
+
+            <a href="#" class="bg-gray-100 hover:bg-white text-black text-xs font-medium px-4 py-2 flex items-center gap-1.5 transition-colors duration-300 rounded-[2px]">
+                Dashboard <iconify-icon icon="solar:arrow-right-up-linear" class="text-accent text-sm" stroke-width="1.5"></iconify-icon>
+            </a>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="flex-grow flex items-center px-6 md:px-12 pt-16 pb-32 relative">
+            <div class="max-w-3xl relative z-10">
+                <h1 id="hero-title" class="text-4xl md:text-[3.5rem] leading-[1.1] text-white tracking-tighter mb-6 font-light">
+                    Unify Your Data. Accelerate Growth.
+                </h1>
+                
+                <p class="text-base md:text-lg text-gray-400 max-w-xl mb-10 leading-relaxed font-normal">
+                    Streamline operations, synchronize your entire tech stack, and drive predictable revenue with a single source of truth built for modern enterprise.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 items-center">
+                    <a href="#" class="bg-white text-black px-7 py-3.5 text-sm font-medium hover:bg-gray-200 transition-colors duration-300 rounded-[2px]">
+                        Start Building
+                    </a>
+                    
+                    <!-- Button with subtle border gradient -->
+                    <a href="#" class="px-7 py-3.5 text-sm font-medium text-white transition-all duration-300 rounded-[2px] group relative" style="background: linear-gradient(#000, #000) padding-box, linear-gradient(to bottom right, rgba(255,255,255,0.3), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                        <span class="relative z-10 group-hover:text-gray-300 transition-colors">Read Docs</span>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Logic -->
+    <script>
+        // --- 1. Text Mask Reveal Animation (GSAP) ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        const titleElement = document.getElementById('hero-title');
+        const text = titleElement.innerText;
+        // Basic split by spaces
+        const words = text.split(' ');
+        titleElement.innerHTML = '';
+        
+        words.forEach((word) => {
+            // Outer span for masking
+            const maskSpan = document.createElement('span');
+            maskSpan.style.display = 'inline-block';
+            maskSpan.style.overflow = 'hidden';
+            maskSpan.style.verticalAlign = 'top';
+            maskSpan.style.marginRight = '0.25em';
+            maskSpan.style.paddingBottom = '0.1em'; // Prevent descender clipping
+
+            // Inner span to animate
+            const innerSpan = document.createElement('span');
+            innerSpan.className = 'reveal-word';
+            innerSpan.style.display = 'inline-block';
+            innerSpan.style.transform = 'translateY(110%)';
+            innerSpan.innerText = word;
+
+            maskSpan.appendChild(innerSpan);
+            titleElement.appendChild(maskSpan);
+        });
+
+        // Execute animation on load
+        window.addEventListener('load', () => {
+            gsap.to('.reveal-word', {
+                y: '0%',
+                duration: 0.85,
+                stagger: 0.04,
+                ease: 'power3.out',
+                delay: 0.2
+            });
+        });
+
+
+        // --- 2. WebGL Background Mesh (Three.js Custom Shader) ---
+        const canvas = document.getElementById('webgl-bg');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+        
+        // Handle resizing
+        function resize() {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const scene = new THREE.Scene();
+        // Orthographic camera for 2D full-screen shader effect
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+        const geometry = new THREE.PlaneGeometry(2, 2);
+
+        // Fragment Shader mimicking the noisy, stepped red gradient
+        const fragmentShader = `
+            uniform float u_time;
+            uniform vec2 u_resolution;
+
+            // Simple 2D noise pseudo-random generator
+            float random(vec2 st) {
+                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+            }
+
+            // Value Noise
+            float noise(vec2 st) {
+                vec2 i = floor(st);
+                vec2 f = fract(st);
+                float a = random(i);
+                float b = random(i + vec2(1.0, 0.0));
+                float c = random(i + vec2(0.0, 1.0));
+                float d = random(i + vec2(1.0, 1.0));
+                vec2 u = f * f * (3.0 - 2.0 * f);
+                return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+            }
+
+            void main() {
+                vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                
+                // 1. Create stepped vertical columns (roughly 6 visible steps on right)
+                float columns = 7.0;
+                float colIndex = floor(uv.x * columns);
+                
+                // Normalize colIndex for calculations
+                float nx = colIndex / columns;
+
+                // 2. Define the height curve for the red area (rises sharply to the right)
+                // Use a power function to keep the left side low and right side high
+                float baseHeight = pow(nx, 1.5) * 0.9; 
+
+                // 3. Add dynamic noise to the edge of each column to break it up
+                // Time scales the noise movement
+                float n = noise(vec2(colIndex * 5.0, uv.y * 10.0 - u_time * 0.4));
+                
+                // Calculate the noisy threshold boundary
+                float edge = baseHeight + (n * 0.2);
+
+                // 4. Create the grainy gradient fade
+                // Use random noise scaled by proximity to the edge to create the "dithered" look
+                float grain = random(uv * (u_time * 0.1 + 1.0));
+                
+                // Smoothly interpolate across the edge boundary, adding grain to spread it
+                float intensity = smoothstep(edge + 0.15, edge - 0.25, uv.y + grain * 0.15);
+
+                // 5. Fade out completely towards the far left edge
+                intensity *= smoothstep(0.05, 0.3, uv.x);
+
+                // 6. Color Mapping
+                vec3 bgColor = vec3(0.0);
+                // Base red is dark, edge is bright vibrant red
+                vec3 darkRed = vec3(0.3, 0.0, 0.0);
+                vec3 brightRed = vec3(1.0, 0.05, 0.0); // Exact match for vibrant reference
+                
+                // Mix colors based on vertical position within the masked area
+                float colorMix = smoothstep(0.0, edge, uv.y);
+                vec3 gradientColor = mix(darkRed, brightRed, colorMix);
+
+                vec3 finalColor = mix(bgColor, gradientColor, intensity);
+
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                u_time: { value: 0 },
+                u_resolution: { value: new THREE.Vector2() }
+            },
+            vertexShader: `
+                void main() {
+                    gl_Position = vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: fragmentShader,
+            transparent: true
+        });
+
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        // Animation Loop
+        let clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            material.uniforms.u_time.value = clock.getElapsedTime();
+            material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+
+</body></html>

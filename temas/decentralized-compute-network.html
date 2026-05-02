@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Compute Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .font-dm-sans { font-family: 'DM Sans', sans-serif !important; }
+    </style>
+</head>
+<body class="bg-[#030303] text-white antialiased overflow-x-hidden font-light" style="font-family: 'Inter', system-ui, sans-serif; selection-background-color: rgba(255,255,255,0.2); selection-color: white;">
+
+    <!-- Background Container Lines with Corner Squares -->
+    <div class="fixed inset-0 pointer-events-none z-0 flex justify-between px-6 md:px-24">
+        <div class="w-px h-full bg-white/[0.04] relative">
+            <div class="absolute top-12 -left-[2px] w-[5px] h-[5px] border border-white/20 bg-[#030303]"></div>
+            <div class="absolute bottom-12 -left-[2px] w-[5px] h-[5px] border border-white/20 bg-[#030303]"></div>
+        </div>
+        <div class="w-px h-full bg-white/[0.04] relative hidden lg:block"></div>
+        <div class="w-px h-full bg-white/[0.04] relative">
+            <div class="absolute top-12 -left-[2px] w-[5px] h-[5px] border border-white/20 bg-[#030303]"></div>
+            <div class="absolute bottom-12 -left-[2px] w-[5px] h-[5px] border border-white/20 bg-[#030303]"></div>
+        </div>
+    </div>
+
+    <!-- Main Layout Wrapper -->
+    <div class="min-h-screen p-3 md:p-6 lg:p-8 flex flex-col relative z-10">
+        
+        <!-- Hero Card Container with Glass Border Gradient -->
+        <div class="flex-1 relative rounded-[2rem] overflow-hidden flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.4)]" style="background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.03) 100%); padding: 1px;">
+            <!-- Inner Solid Background -->
+            <div class="absolute inset-[1px] bg-[#09090b] rounded-[calc(2rem-1px)] z-0"></div>
+
+            <!-- WebGL Mesh Gradient Background (Vibrant & Active Variant) -->
+            <canvas id="darkveil-canvas" class="absolute inset-0 z-0 opacity-100 mix-blend-screen pointer-events-none"></canvas>
+
+            <!-- Vertical dropping lines -->
+            <div class="absolute left-1/2 top-[55%] -translate-x-1/2 w-[300px] h-[300px] pointer-events-none z-0">
+                <div class="drop-line absolute left-[35%] top-0 w-[1px] h-32" style="background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3), transparent); opacity: 0;"></div>
+                <div class="drop-line absolute left-[50%] top-10 w-[1px] h-48" style="background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6), transparent); opacity: 0;"></div>
+                <div class="drop-line absolute left-[65%] top-4 w-[1px] h-24" style="background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.25), transparent); opacity: 0;"></div>
+            </div>
+
+            <!-- Content Z-Layering -->
+            <div class="relative z-10 flex flex-col h-full w-full px-6 py-6 md:px-10 md:py-8 flex-1">
+                
+                <!-- Navigation -->
+                <nav class="flex items-center justify-between w-full">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                            <iconify-icon icon="solar:infinity-linear" stroke-width="1.5" class="text-black text-lg"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Center Pill Menu with Glass Border -->
+                    <div class="hidden lg:flex items-center rounded-full backdrop-blur-md px-1.5 py-1.5" style="background: linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)) padding-box, linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0.02)) border-box; border: 1px solid transparent; box-shadow: inset 0 0 20px rgba(255,255,255,0.02);">
+                        <div class="flex items-center px-4 gap-6 text-xs font-normal text-gray-400">
+                            <a href="#" class="text-white font-sans">Overview</a>
+                            <a href="#" class="hover:text-gray-200 transition-colors font-sans">Clusters</a>
+                            <a href="#" class="hover:text-gray-200 transition-colors font-sans">Topology</a>
+                            <a href="#" class="hover:text-gray-200 transition-colors font-sans">API</a>
+                            <a href="#" class="hover:text-gray-200 transition-colors font-sans">Pricing</a>
+                        </div>
+                        <div class="w-px h-4 bg-white/[0.1] mx-2"></div>
+                        <a href="#" class="flex items-center gap-1.5 text-xs font-normal text-gray-300 hover:text-white transition-colors px-3 font-sans">
+                            Console <iconify-icon icon="solar:arrow-up-right-linear" stroke-width="1.5"></iconify-icon>
+                        </a>
+                        <div class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center ml-1">
+                            <iconify-icon icon="solar:shield-check-linear" class="text-white text-sm" stroke-width="1.5"></iconify-icon>
+                        </div>
+                    </div>
+
+                    <!-- Right Actions -->
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="hidden md:flex items-center gap-2 text-xs font-normal text-gray-300 hover:text-white transition-colors font-sans">
+                            <iconify-icon icon="solar:user-linear" class="text-lg" stroke-width="1.5"></iconify-icon>
+                            Authenticate
+                        </a>
+                        <button class="lg:hidden text-white">
+                            <iconify-icon icon="solar:hamburger-menu-linear" stroke-width="1.5" class="text-2xl"></iconify-icon>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- Central Hero Content -->
+                <main class="flex-1 flex flex-col items-center justify-center text-center relative w-full mt-16 md:mt-0">
+                    
+                    <!-- Floating Nodes (Desktop Only) with Gradient Glass Borders -->
+                    <div class="absolute hidden lg:flex items-center gap-3 top-[15%] left-[8%] group cursor-default">
+                        <div class="relative flex items-center justify-center w-8 h-8 rounded-full backdrop-blur-md z-10 transition-colors" style="background: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.7)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                            <iconify-icon icon="solar:cpu-linear" class="text-white text-sm" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="w-12 h-px bg-gradient-to-r from-white/30 to-transparent"></div>
+                        <div class="text-left translate-y-[-2px]">
+                            <div class="text-xs font-normal text-gray-200 flex items-center gap-1.5 font-sans"><span class="w-1 h-1 rounded-full bg-emerald-400/80 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span> Edge</div>
+                            <div class="text-xs text-gray-500 mt-0.5 tracking-wider font-mono font-sans">4.102 ms</div>
+                        </div>
+                    </div>
+
+                    <div class="absolute hidden lg:flex items-center gap-3 top-[65%] left-[12%] group cursor-default">
+                        <div class="relative flex items-center justify-center w-8 h-8 rounded-full backdrop-blur-md z-10 transition-colors" style="background: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.7)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                            <iconify-icon icon="solar:server-square-linear" class="text-white text-sm" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="w-16 h-px bg-gradient-to-r from-white/30 to-transparent"></div>
+                        <div class="text-left translate-y-[-2px]">
+                            <div class="text-xs font-normal text-gray-200 flex items-center gap-1.5 font-sans"><span class="w-1 h-1 rounded-full bg-blue-400/80 shadow-[0_0_8px_rgba(96,165,250,0.8)]"></span> Node</div>
+                            <div class="text-xs text-gray-500 mt-0.5 tracking-wider font-mono font-sans">99.999% SLA</div>
+                        </div>
+                    </div>
+
+                    <div class="absolute hidden lg:flex flex-row-reverse items-center gap-3 top-[22%] right-[10%] group cursor-default">
+                        <div class="relative flex items-center justify-center w-8 h-8 rounded-full backdrop-blur-md z-10 transition-colors" style="background: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.7)) padding-box, linear-gradient(225deg, rgba(255,255,255,0.5), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                            <iconify-icon icon="solar:database-linear" class="text-white text-sm" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="w-10 h-px bg-gradient-to-l from-white/30 to-transparent"></div>
+                        <div class="text-right translate-y-[-2px]">
+                            <div class="text-xs font-normal text-gray-200 flex items-center justify-end gap-1.5 font-sans">State <span class="w-1 h-1 rounded-full bg-white/60"></span></div>
+                            <div class="text-xs text-gray-500 mt-0.5 tracking-wider font-mono font-sans">v5.2.0</div>
+                        </div>
+                    </div>
+
+                    <div class="absolute hidden lg:flex flex-row-reverse items-center gap-3 top-[55%] right-[15%] group cursor-default">
+                        <div class="relative flex items-center justify-center w-8 h-8 rounded-full backdrop-blur-md z-10 transition-colors" style="background: linear-gradient(rgba(17,17,17,0.7), rgba(17,17,17,0.7)) padding-box, linear-gradient(225deg, rgba(255,255,255,0.5), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                            <iconify-icon icon="solar:code-square-linear" class="text-white text-sm" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <div class="w-20 h-px bg-gradient-to-l from-white/30 to-transparent"></div>
+                        <div class="text-right translate-y-[-2px]">
+                            <div class="text-xs font-normal text-gray-200 flex items-center justify-end gap-1.5 font-sans">Relay <span class="w-1 h-1 rounded-full bg-white/60"></span></div>
+                            <div class="text-xs text-gray-500 mt-0.5 tracking-wider font-mono font-sans">50,000 TPS</div>
+                        </div>
+                    </div>
+
+                    <!-- Top Floating Play Button -->
+                    <div class="w-10 h-10 rounded-full backdrop-blur-md flex items-center justify-center mb-10 cursor-pointer group hover:opacity-80 transition-opacity" style="background: linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                        <iconify-icon icon="solar:play-linear" class="text-white text-lg group-hover:scale-110 transition-transform" stroke-width="1.5"></iconify-icon>
+                    </div>
+
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-normal text-gray-300 mb-6 backdrop-blur-md cursor-pointer hover:opacity-80 transition-opacity font-sans" style="background: linear-gradient(rgba(255,255,255,0.04), rgba(255,255,255,0.04)) padding-box, linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                        <iconify-icon icon="solar:star-fall-linear" stroke-width="1.5"></iconify-icon>
+                        Explore Platform v5.0 <span class="text-white ml-1 font-sans">→</span>
+                    </div>
+
+                    <!-- Headline (Masked Reveal Target) -->
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl text-white mb-6 max-w-4xl mx-auto leading-tight reveal-text drop-shadow-2xl font-dm-sans tracking-tighter">
+                        Decentralized Compute Network
+                    </h1>
+
+                    <!-- Subcopy -->
+                    <p class="text-sm md:text-base text-gray-300 font-light max-w-xl mx-auto mb-10 leading-relaxed reveal-fade font-sans">
+                        Enabling engineering teams to orchestrate globally distributed services with infinite scaling and microsecond latency.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex items-center gap-4 reveal-fade">
+                        <a href="#" class="px-6 py-3 bg-white text-black rounded-full text-sm font-medium hover:bg-gray-100 transition-colors shadow-[0_0_20px_rgba(255,255,255,0.3)] font-sans">
+                            Deploy Clusters <span class="ml-1 opacity-60 font-sans">↗</span>
+                        </a>
+                        <a href="#" class="px-6 py-3 text-white rounded-full text-sm font-normal backdrop-blur-md hover:opacity-80 transition-opacity font-sans" style="background: linear-gradient(rgba(255,255,255,0.03), rgba(255,255,255,0.03)) padding-box, linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05)) border-box; border: 1px solid transparent;">
+                            Read the Docs
+                        </a>
+                    </div>
+                </main>
+
+                <!-- Bottom Footer/Indicators -->
+                <footer class="flex flex-col md:flex-row justify-between items-center md:items-end w-full gap-6 md:gap-0 mt-16 md:mt-0">
+                    <!-- Left: Scroll -->
+                    <div class="flex items-center gap-3 rounded-full pl-1 pr-4 py-1 backdrop-blur-md" style="background: linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)) padding-box, linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02)) border-box; border: 1px solid transparent;">
+                        <div class="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center">
+                            <iconify-icon icon="solar:arrow-down-linear" class="text-xs" stroke-width="1.5"></iconify-icon>
+                        </div>
+                        <span class="text-xs font-normal text-gray-400 tracking-wide uppercase font-sans">01 / 04 &nbsp;·&nbsp; Scroll</span>
+                    </div>
+
+                    <!-- Right: Carousel Indicator -->
+                    <div class="flex flex-col items-center md:items-end gap-2">
+                        <span class="text-xs font-normal text-gray-400 tracking-wide uppercase font-sans">Active Regions</span>
+                        <div class="flex gap-1.5">
+                            <div class="w-6 h-0.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]"></div>
+                            <div class="w-4 h-0.5 rounded-full bg-white/20"></div>
+                            <div class="w-4 h-0.5 rounded-full bg-white/20"></div>
+                            <div class="w-4 h-0.5 rounded-full bg-white/20"></div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Logo Cloud using Simple Icons -->
+        <div class="w-full pt-10 pb-4 flex justify-center items-center gap-10 md:gap-16 opacity-50 flex-wrap px-4">
+            <iconify-icon icon="simple-icons:vercel" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+            <iconify-icon icon="simple-icons:stripe" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+            <iconify-icon icon="simple-icons:supabase" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+            <iconify-icon icon="simple-icons:github" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+            <iconify-icon icon="simple-icons:amazonaws" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+            <iconify-icon icon="simple-icons:cloudflare" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+            <iconify-icon icon="simple-icons:prisma" width="64" height="64" class="text-white hover:opacity-100 transition-opacity"></iconify-icon>
+        </div>
+    </div>
+
+    <!-- GSAP Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            const revealElements = document.querySelectorAll('.reveal-text');
+            revealElements.forEach(el => {
+                const text = el.innerText;
+                el.innerHTML = '';
+                const words = text.split(/(\s+)/);
+                
+                words.forEach((word, i) => {
+                    if(word.trim() === '') {
+                        el.appendChild(document.createTextNode(word));
+                        return;
+                    }
+                    const wordWrap = document.createElement('span');
+                    wordWrap.style.overflow = 'hidden';
+                    wordWrap.style.display = 'inline-block';
+                    wordWrap.style.verticalAlign = 'top';
+                    
+                    const wordInner = document.createElement('span');
+                    wordInner.innerText = word;
+                    wordInner.style.display = 'inline-block';
+                    wordInner.style.transform = 'translateY(110%)';
+                    wordInner.style.willChange = 'transform';
+                    
+                    wordWrap.appendChild(wordInner);
+                    el.appendChild(wordWrap);
+                    
+                    gsap.to(wordInner, {
+                        y: '0%',
+                        ease: 'power4.out',
+                        duration: 1.2,
+                        delay: i * 0.05 + 0.1,
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 85%',
+                        }
+                    });
+                });
+            });
+
+            gsap.fromTo('.reveal-fade', 
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: 'power3.out', delay: 0.6, scrollTrigger: { trigger: '.reveal-text', start: 'top 85%' } }
+            );
+
+            const dropLines = document.querySelectorAll('.drop-line');
+            dropLines.forEach((line, index) => {
+                gsap.fromTo(line, 
+                    { y: -100, opacity: 0 },
+                    { y: 200, opacity: 1, duration: 2.0 + index, repeat: -1, ease: "linear", delay: index * 0.5 }
+                );
+            });
+        });
+    </script>
+
+    <!-- WebGL Background using OGL (Highly Active & Vibrant Variant) -->
+    <script type="module">
+        import { Renderer, Program, Mesh, Triangle, Vec2 } from 'https://cdn.jsdelivr.net/npm/ogl@1.0.11/+esm';
+
+        const vertex = `
+            attribute vec2 position;
+            void main(){gl_Position=vec4(position,0.0,1.0);}
+        `;
+
+        const fragment = `
+            #ifdef GL_ES
+            precision lowp float;
+            #endif
+            uniform vec2 uResolution;
+            uniform float uTime; uniform float uHueShift; uniform float uNoise;
+            uniform float uScan; uniform float uScanFreq; uniform float uWarp;
+            vec4 buf[8]; float rand(vec2 c){return fract(sin(dot(c,vec2(12.9898,78.233)))*43758.5453);}
+            mat3 rgb2yiq=mat3(0.299,0.587,0.114,0.596,-0.274,-0.322,0.211,-0.523,0.312);
+            mat3 yiq2rgb=mat3(1.0,0.956,0.621,1.0,-0.272,-0.647,1.0,-1.106,1.703);
+            vec3 hueShiftRGB(vec3 col,float deg){vec3 yiq=rgb2yiq*col;float rad=radians(deg);float cosh=cos(rad),sinh=sin(rad);vec3 yiqShift=vec3(yiq.x,yiq.y*cosh-yiq.z*sinh,yiq.y*sinh+yiq.z*cosh);return clamp(yiq2rgb*yiqShift,0.0,1.0);}
+            vec4 sigmoid(vec4 x){return 1./(1.+exp(-x));}
+            vec4 cppn(vec2 c,float i0,float i1,float i2){
+                buf[6]=vec4(c.x,c.y,0.39+i0,0.36+i1); buf[7]=vec4(0.14+i2,length(c),0.,0.);
+                buf[0]=sigmoid(mat4(6.5,-3.6,0.7,-1.1,2.4,3.1,1.2,0.06,-5.4,-6.1,1.8,-4.7,6.0,-5.5,-0.9,3.2)*buf[6]+mat4(0.8,-5.7,3.9,1.6,-0.2,0.5,-1.7,-5.3,0.,0.,0.,0.,0.,0.,0.,0.)*buf[7]+vec4(0.2,1.1,-1.7,5.0));
+                buf[1]=sigmoid(mat4(-3.3,-6.0,0.5,-4.4,0.8,1.7,5.6,1.6,2.4,-3.5,1.7,6.3,3.3,8.2,1.1,-1.1)*buf[6]+mat4(5.2,-13.0,0.0,15.8,2.9,3.1,-0.8,-1.6,0.,0.,0.,0.,0.,0.,0.,0.)*buf[7]+vec4(-5.9,-6.5,-0.8,1.5));
+                buf[2]=sigmoid(mat4(-15.2,8.0,-2.4,-1.9,-5.9,4.3,2.6,1.2,-7.3,6.7,5.2,5.9,5.0,8.9,-1.7,-1.1)*buf[6]+mat4(-11.9,-11.6,6.1,11.2,2.1,-6.2,-1.7,-0.7,0.,0.,0.,0.,0.,0.,0.,0.)*buf[7]+vec4(-4.1,-3.2,-4.5,-3.6));
+                buf[3]=sigmoid(mat4(3.1,-13.7,1.8,3.2,0.6,12.7,1.9,0.5,-0.0,4.4,1.4,1.8,5.0,13.0,3.3,-4.5)*buf[6]+mat4(-0.1,7.7,-3.1,4.7,0.6,3.7,-0.8,-0.3,0.,0.,0.,0.,0.,0.,0.,0.)*buf[7]+vec4(-1.1,-21.6,0.7,1.2));
+                buf[0]=sigmoid(mat4(1.6,1.3,2.9,0.,-1.8,-1.4,-3.5,0.,-1.3,-1.0,-2.3,0.,0.2,0.2,0.4,0.)*buf[0]+mat4(-0.6,-0.5,-0.9,0.,0.1,0.1,0.1,0.,-2.9,-2.5,-4.9,0.,1.4,1.1,2.5,0.)*buf[1]+mat4(-1.2,-1.0,-2.1,0.,-0.7,-0.5,-1.4,0.,0.1,0.1,0.2,0.,0.9,0.8,1.2,0.)*buf[2]+mat4(-2.4,-1.9,-4.3,0.,-22.6,-18.0,-41.9,0.,0.6,0.5,1.1,0.,-1.5,-1.3,-2.6,0.)*buf[3]+vec4(-1.5,-3.6,0.2,0.));
+                return vec4(buf[0].xyz,1.);
+            }
+            void main(){
+                vec2 uv=(gl_FragCoord.xy/uResolution.xy)*2.-1.; uv.y*=-1.;
+                uv+=uWarp*vec2(sin(uv.y*6.2+uTime*0.5),cos(uv.x*6.2+uTime*0.5))*0.05;
+                // Amplified inputs for extreme vibrance & activity
+                vec4 col=cppn(uv,0.3*sin(0.8*uTime),0.3*sin(1.2*uTime),0.3*sin(0.9*uTime));
+                col.rgb=hueShiftRGB(col.rgb,uHueShift);
+                col.rgb*=2.5; // Massive vibrance boost
+                col.rgb*=1.-(sin(gl_FragCoord.y*uScanFreq)*0.5+0.5)*uScan;
+                col.rgb+=(rand(gl_FragCoord.xy+uTime)-0.5)*uNoise;
+                gl_FragColor=vec4(clamp(col.rgb,0.,1.),1.);
+            }
+        `;
+
+        const canvas = document.getElementById('darkveil-canvas');
+        const parent = canvas.parentElement;
+        const renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), canvas, alpha: true });
+        const gl = renderer.gl;
+        const geometry = new Triangle(gl);
+        
+        const program = new Program(gl, {
+            vertex, fragment,
+            uniforms: {
+                uTime: { value: 0 },
+                uResolution: { value: new Vec2() },
+                uHueShift: { value: 20 },
+                uNoise: { value: 0.05 },
+                uScan: { value: 0 },
+                uScanFreq: { value: 0 },
+                uWarp: { value: 2.5 } // Significantly increased warp distortion
+            }
+        });
+
+        const mesh = new Mesh(gl, { geometry, program });
+
+        const resize = () => {
+            const w = parent.clientWidth, h = parent.clientHeight;
+            renderer.setSize(w, h);
+            program.uniforms.uResolution.value.set(w, h);
+        };
+        window.addEventListener('resize', resize);
+        resize();
+
+        const start = performance.now();
+        const loop = () => {
+            program.uniforms.uTime.value = ((performance.now() - start) / 1000) * 2.5; // Boosted animation speed
+            renderer.render({ scene: mesh });
+            requestAnimationFrame(loop);
+        };
+        loop();
+    </script>
+</body>
+</html>

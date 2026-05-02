@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - AI Synthetic Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=JetBrains+Mono:wght@300;400&amp;display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#F5F5F1',
+                            border: '#E2E2DC',
+                            text: '#1A1A1A',
+                            muted: '#666666'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#ECECE8] text-brand-text font-sans antialiased selection:bg-black selection:text-white overflow-x-hidden">
+
+    <!-- Fluid Background Canvas (WebGL fallback to 2D for stability in single file) -->
+    <canvas id="mesh-gradient" class="fixed inset-0 w-full h-full pointer-events-none opacity-[0.15] z-0 mix-blend-multiply"></canvas>
+
+    <!-- Main Container Layout -->
+    <main class="relative z-10 max-w-[1100px] mx-auto mt-2 min-h-screen bg-brand-bg border-l border-r border-brand-border shadow-2xl shadow-black/5 flex flex-col">
+
+        <!-- Left/Right Border Intersection Nodes (Top/Bottom) -->
+        <div class="absolute top-0 -left-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+        <div class="absolute top-0 -right-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+        <div class="absolute bottom-0 -left-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+        <div class="absolute bottom-0 -right-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+
+        <!-- Navigation -->
+        <nav class="relative border-b border-brand-border px-6 py-5 flex items-center justify-between">
+            <!-- Bottom Border Intersection Nodes -->
+            <div class="absolute -bottom-[3px] -left-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+            <div class="absolute -bottom-[3px] -right-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+
+            <div class="flex items-center gap-2 font-mono font-medium tracking-tight">
+                <iconify-icon icon="solar:align-horizonta-spacing-broken" class="text-xl"></iconify-icon>
+                <span>Nexus</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-normal text-brand-muted">
+                <a href="#" class="text-brand-text">Product</a>
+                <a href="#" class="hover:text-brand-text transition-colors">Company</a>
+                <a href="#" class="hover:text-brand-text transition-colors">Solutions</a>
+                <a href="#" class="hover:text-brand-text transition-colors">Resources</a>
+                <a href="#" class="hover:text-brand-text transition-colors">Pricing</a>
+            </div>
+
+            <button class="bg-black text-white text-sm font-medium px-5 py-2.5 flex items-center gap-2 hover:bg-black/80 transition-colors shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                Start Building Now
+                <iconify-icon icon="solar:arrow-right-broken" class="text-lg"></iconify-icon>
+            </button>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="relative border-b border-brand-border px-6 py-24 flex flex-col items-center text-center">
+            <!-- Bottom Border Intersection Nodes -->
+            <div class="absolute -bottom-[3px] -left-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+            <div class="absolute -bottom-[3px] -right-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-brand-border rounded-full text-xs font-medium text-brand-muted mb-8 bg-white/50 backdrop-blur-sm">
+                <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
+                Trusted by 500+ Deep Tech Innovators
+            </div>
+
+            <h1 class="masked-reveal font-mono font-light text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.1] max-w-3xl mb-6 text-black">
+                Synthesize Perfect Data,<br>Train Superior Models
+            </h1>
+
+            <p class="text-base text-brand-muted max-w-xl mb-10 font-light">
+                Generate high-fidelity synthetic datasets that protect privacy while accelerating your machine learning and analytics initiatives.
+            </p>
+
+            <button class="bg-black text-white text-sm font-medium px-6 py-3 flex items-center gap-2 hover:bg-black/80 transition-colors shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                Deploy Environment
+                <iconify-icon icon="solar:arrow-right-broken" class="text-lg"></iconify-icon>
+            </button>
+        </header>
+
+        <!-- Mockup Showcase Section -->
+        <section class="relative border-b border-brand-border overflow-hidden bg-black min-h-[800px] flex items-center justify-center">
+            <!-- Bottom Border Intersection Nodes -->
+            <div class="absolute -bottom-[3px] -left-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+            <div class="absolute -bottom-[3px] -right-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/75134536-4198-40bf-9944-315511fe8c0b_3840w.jpg" alt="Abstract Background" class="w-full h-full object-cover opacity-80">
+            </div>
+
+            <!-- Dashboard UI (Dark Mode & Cleaner) -->
+            <div class="relative z-10 w-full max-w-[1000px] px-8">
+                <div class="w-full bg-[#0A0A0A]/90 backdrop-blur-2xl rounded-xl border border-white/10 p-3 flex gap-4 text-white transition-transform duration-1000 ease-out shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]">
+                    
+                    <!-- Sidebar -->
+                    <aside class="w-[200px] shrink-0 border-r border-white/5 pr-3 flex flex-col hidden md:flex">
+                        <div class="flex items-center gap-2 mb-8 mt-2 px-2">
+                            <div class="w-6 h-6 bg-white rounded-full"></div>
+                            <span class="font-mono font-medium text-sm text-white">Nexus_OS</span>
+                        </div>
+                        
+                        <div class="text-[10px] uppercase font-medium text-gray-500 px-2 mb-2 tracking-wider">Main Menu</div>
+                        <nav class="flex flex-col gap-1 mb-8">
+                            <a href="#" class="flex items-center gap-3 px-2 py-1.5 bg-white/10 text-white rounded text-xs font-medium"><iconify-icon icon="solar:widget-broken"></iconify-icon> Dashboard</a>
+                            <a href="#" class="flex items-center gap-3 px-2 py-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded text-xs transition-colors"><iconify-icon icon="solar:bell-broken"></iconify-icon> Alerts</a>
+                            <a href="#" class="flex items-center gap-3 px-2 py-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded text-xs transition-colors"><iconify-icon icon="solar:chart-square-broken"></iconify-icon> Workloads</a>
+                            <a href="#" class="flex items-center gap-3 px-2 py-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded text-xs transition-colors"><iconify-icon icon="solar:database-broken"></iconify-icon> Datasets</a>
+                            <a href="#" class="flex items-center gap-3 px-2 py-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded text-xs transition-colors"><iconify-icon icon="solar:users-group-two-rounded-broken"></iconify-icon> Identity</a>
+                        </nav>
+
+                        <div class="mt-auto bg-white/5 p-3 rounded-lg border border-white/5">
+                            <div class="flex items-center gap-2 mb-1">
+                                <iconify-icon icon="solar:bolt-broken" class="text-white"></iconify-icon>
+                                <span class="text-xs font-medium text-white">Pro Plan</span>
+                            </div>
+                            <p class="text-[10px] text-gray-400 mb-2">85% quota used this month.</p>
+                            <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+                                <div class="bg-white w-[85%] h-full"></div>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <main class="flex-1 flex flex-col gap-4">
+                        <!-- Header -->
+                        <header class="flex items-center justify-between mt-1">
+                            <div class="flex items-center gap-2 text-sm">
+                                <iconify-icon icon="solar:widget-broken" class="text-gray-400"></iconify-icon>
+                                <span class="font-medium text-white">Overview</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="relative w-64 hidden lg:block">
+                                    <iconify-icon icon="solar:magnifer-broken" class="absolute left-2.5 top-1.5 text-gray-400 text-sm"></iconify-icon>
+                                    <input type="text" placeholder="Search parameters..." class="w-full pl-8 pr-3 py-1.5 bg-black/50 text-white placeholder:text-gray-500 border border-white/10 rounded text-xs outline-none focus:border-white/30 transition-colors">
+                                </div>
+                                <button class="px-3 py-1.5 border border-white/10 text-white rounded text-xs font-medium flex items-center gap-1 hover:bg-white/5 transition-colors"><iconify-icon icon="solar:export-broken"></iconify-icon> Export</button>
+                                <button class="px-3 py-1.5 bg-white text-black rounded text-xs font-medium flex items-center gap-1 hover:bg-gray-100 transition-colors shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">Create <iconify-icon icon="solar:alt-arrow-down-broken"></iconify-icon></button>
+                            </div>
+                        </header>
+
+                        <!-- Time Filter -->
+                        <div class="flex items-center gap-1 border-b border-white/5 pb-3">
+                            <button class="px-3 py-1 bg-white/10 text-white text-xs font-medium rounded-sm">7 Days</button>
+                            <button class="px-3 py-1 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-xs font-medium rounded-sm">30 Days</button>
+                            <button class="px-3 py-1 text-gray-400 hover:text-white hover:bg-white/5 transition-colors text-xs font-medium rounded-sm">3 Months</button>
+                        </div>
+
+                        <!-- Stats Row -->
+                        <div class="grid grid-cols-4 gap-3">
+                            <div class="bg-white/5 backdrop-blur-md p-3 rounded-lg border border-white/10 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                                <div class="text-[10px] text-gray-400 mb-1 flex items-center gap-1"><iconify-icon icon="solar:server-square-broken"></iconify-icon> Generated Rows</div>
+                                <div class="text-lg font-mono tracking-tight font-medium text-white">8.42M</div>
+                                <div class="text-[10px] text-emerald-400 mt-1">+12% vs last week</div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-md p-3 rounded-lg border border-white/10 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                                <div class="text-[10px] text-gray-400 mb-1 flex items-center gap-1"><iconify-icon icon="solar:cpu-broken"></iconify-icon> Compute Hours</div>
+                                <div class="text-lg font-mono tracking-tight font-medium text-white">1,240</div>
+                                <div class="text-[10px] text-emerald-400 mt-1">+5% vs last week</div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-md p-3 rounded-lg border border-white/10 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                                <div class="text-[10px] text-gray-400 mb-1 flex items-center gap-1"><iconify-icon icon="solar:shield-check-broken"></iconify-icon> Privacy Score</div>
+                                <div class="text-lg font-mono tracking-tight font-medium text-white">99.8%</div>
+                                <div class="text-[10px] text-gray-500 mt-1">Optimal Anonymity</div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-md p-3 rounded-lg border border-white/10 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                                <div class="text-[10px] text-gray-400 mb-1 flex items-center gap-1"><iconify-icon icon="solar:database-broken"></iconify-icon> Active Models</div>
+                                <div class="text-lg font-mono tracking-tight font-medium text-white">24</div>
+                                <div class="text-[10px] text-rose-400 mt-1">-2 stopped this week</div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row -->
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="col-span-2 bg-white/5 backdrop-blur-md p-4 rounded-lg border border-white/10 flex flex-col shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h3 class="text-xs font-medium flex items-center gap-1 text-white"><iconify-icon icon="solar:graph-up-broken"></iconify-icon> Generation Volume</h3>
+                                        <div class="text-[10px] text-gray-400">Tokens per day</div>
+                                    </div>
+                                </div>
+                                <div class="flex-1 relative mt-2">
+                                    <!-- Simplified Chart Lines -->
+                                    <svg class="w-full h-full overflow-visible" viewBox="0 0 100 30" preserveAspectRatio="none">
+                                        <path d="M0,25 Q10,20 20,22 T40,15 T60,18 T80,5 T100,2" fill="none" stroke="#333333" stroke-width="0.5"></path>
+                                        <path d="M0,28 Q15,25 25,18 T45,22 T65,10 T85,15 T100,8" fill="none" stroke="#FFFFFF" stroke-width="1" class="drop-shadow-sm"></path>
+                                    </svg>
+                                    <div class="absolute bottom-0 left-0 w-full flex justify-between text-[8px] text-gray-500 border-t border-white/5 pt-1">
+                                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-md p-4 rounded-lg border border-white/10 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] flex flex-col items-center justify-center">
+                                <h3 class="text-xs font-medium w-full text-left mb-4 flex items-center gap-1 text-white"><iconify-icon icon="solar:pie-chart-2-broken"></iconify-icon> Data Types</h3>
+                                <div class="relative w-24 h-24 rounded-full border-[8px] border-white/10 flex items-center justify-center mb-4">
+                                    <div class="absolute inset-[-8px] rounded-full border-[8px] border-transparent border-t-white border-r-white transform rotate-45"></div>
+                                    <div class="text-center">
+                                        <div class="text-sm font-mono font-medium text-white">72%</div>
+                                        <div class="text-[8px] text-gray-400">Text</div>
+                                    </div>
+                                </div>
+                                <div class="w-full space-y-1">
+                                    <div class="flex justify-between text-[10px] text-gray-300"><span class="flex items-center gap-1"><div class="w-1.5 h-1.5 bg-white rounded-sm"></div> Text</span><span>72%</span></div>
+                                    <div class="flex justify-between text-[10px] text-gray-300"><span class="flex items-center gap-1"><div class="w-1.5 h-1.5 bg-gray-500 rounded-sm"></div> Image</span><span>18%</span></div>
+                                    <div class="flex justify-between text-[10px] text-gray-300"><span class="flex items-center gap-1"><div class="w-1.5 h-1.5 bg-gray-700 rounded-sm"></div> Audio</span><span>10%</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="bg-white/5 backdrop-blur-md rounded-lg border border-white/10 overflow-hidden shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                            <div class="px-4 py-2 border-b border-white/10 flex justify-between items-center">
+                                <h3 class="text-xs font-medium text-white">Recent Workloads</h3>
+                                <div class="flex gap-2">
+                                    <button class="text-[10px] flex items-center gap-1 border border-white/10 text-white hover:bg-white/5 transition-colors px-2 py-1 rounded"><iconify-icon icon="solar:filter-broken"></iconify-icon> Filter</button>
+                                </div>
+                            </div>
+                            <div class="w-full text-left text-xs">
+                                <div class="grid grid-cols-4 px-4 py-2 bg-black/20 text-[10px] font-medium text-gray-400 uppercase tracking-wider">
+                                    <div>ID</div>
+                                    <div>Model Name</div>
+                                    <div>Status</div>
+                                    <div>Completed</div>
+                                </div>
+                                <div class="grid grid-cols-4 px-4 py-2.5 border-b border-white/5 items-center">
+                                    <div class="font-mono text-[10px] text-gray-400">#WL-091</div>
+                                    <div class="font-medium text-gray-200">Llama-3-Fin-Tune</div>
+                                    <div><span class="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 rounded text-[9px] font-medium">Completed</span></div>
+                                    <div class="text-[10px] text-gray-500">2 mins ago</div>
+                                </div>
+                                <div class="grid grid-cols-4 px-4 py-2.5 border-b border-white/5 items-center">
+                                    <div class="font-mono text-[10px] text-gray-400">#WL-090</div>
+                                    <div class="font-medium text-gray-200">Vision-Transformer-V2</div>
+                                    <div><span class="px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded text-[9px] font-medium">Processing</span></div>
+                                    <div class="text-[10px] text-gray-500">In progress</div>
+                                </div>
+                                <div class="grid grid-cols-4 px-4 py-2.5 items-center">
+                                    <div class="font-mono text-[10px] text-gray-400">#WL-089</div>
+                                    <div class="font-medium text-gray-200">Medical-BERT-Base</div>
+                                    <div><span class="px-2 py-0.5 bg-white/5 text-gray-400 rounded text-[9px] font-medium">Queued</span></div>
+                                    <div class="text-[10px] text-gray-500">-</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </main>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logo Cloud Section -->
+        <section class="relative border-b border-brand-border grid grid-cols-2 md:grid-cols-5">
+            <!-- Bottom Border Intersection Nodes -->
+            <div class="absolute -bottom-[3px] -left-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+            <div class="absolute -bottom-[3px] -right-[3px] w-[5px] h-[5px] bg-brand-bg border border-brand-border z-20"></div>
+
+            <div class="py-8 flex justify-center items-center border-r border-b md:border-b-0 border-brand-border text-brand-muted hover:text-black transition-colors grayscale hover:grayscale-0 gap-2 font-mono text-sm font-medium">
+                <iconify-icon icon="solar:box-minimalistic-broken" class="text-2xl"></iconify-icon> Voxel Labs
+            </div>
+            <div class="py-8 flex justify-center items-center border-r border-b md:border-b-0 border-brand-border text-brand-muted hover:text-black transition-colors grayscale hover:grayscale-0 gap-2 font-mono text-sm font-medium">
+                <iconify-icon icon="solar:infinity-broken" class="text-2xl"></iconify-icon> Warpspeed
+            </div>
+            <div class="py-8 flex justify-center items-center border-r border-b md:border-b-0 border-brand-border text-brand-muted hover:text-black transition-colors grayscale hover:grayscale-0 gap-2 font-mono text-sm font-medium">
+                <iconify-icon icon="solar:layers-broken" class="text-2xl"></iconify-icon> Mastermail
+            </div>
+            <div class="py-8 flex justify-center items-center border-r border-b md:border-b-0 border-brand-border text-brand-muted hover:text-black transition-colors grayscale hover:grayscale-0 gap-2 font-mono text-sm font-medium">
+                <iconify-icon icon="solar:routing-2-broken" class="text-2xl"></iconify-icon> Leapyear
+            </div>
+            <div class="py-8 flex justify-center items-center text-brand-muted hover:text-black transition-colors grayscale hover:grayscale-0 gap-2 font-mono text-sm font-medium">
+                <iconify-icon icon="solar:moon-broken" class="text-2xl"></iconify-icon> Lightspeed
+            </div>
+        </section>
+
+        <!-- Bottom Feature Section -->
+        <section class="relative py-32 px-6 flex flex-col items-center text-center">
+            <h2 class="masked-reveal font-mono font-light text-3xl md:text-5xl tracking-tight leading-tight max-w-2xl text-black">
+                Your Ultimate AI Training Partner Handles Everything
+            </h2>
+        </section>
+
+    </main>
+
+    <script>
+        // GSAP Masked Word Reveal
+        gsap.registerPlugin(ScrollTrigger);
+
+        const revealElements = document.querySelectorAll('.masked-reveal');
+
+        revealElements.forEach(element => {
+            // Store original HTML if needed, but here we process text content
+            // Need to handle <br> tags carefully. 
+            const htmlContent = element.innerHTML;
+            element.innerHTML = '';
+            
+            // Basic text splitting preserving <br> for simple layouts
+            const parts = htmlContent.split(/(<br\s*\/?>)/i);
+            
+            parts.forEach(part => {
+                if (part.toLowerCase().includes('<br')) {
+                    element.appendChild(document.createElement('br'));
+                } else if (part.trim() !== '') {
+                    const words = part.split(' ');
+                    words.forEach(word => {
+                        if(word.trim() === '') {
+                            element.appendChild(document.createTextNode(' '));
+                            return;
+                        }
+                        
+                        // Create mask container
+                        const wrapper = document.createElement('span');
+                        wrapper.style.display = 'inline-flex';
+                        wrapper.style.overflow = 'hidden';
+                        wrapper.style.verticalAlign = 'top';
+                        wrapper.style.marginRight = '0.25em'; // standard space
+                        
+                        // Create inner animated element
+                        const inner = document.createElement('span');
+                        inner.style.display = 'inline-block';
+                        inner.innerHTML = word;
+                        
+                        wrapper.appendChild(inner);
+                        element.appendChild(wrapper);
+                    });
+                }
+            });
+
+            // Animate
+            const innerSpans = element.querySelectorAll('span > span');
+            gsap.fromTo(innerSpans, 
+                { y: '120%' },
+                { 
+                    y: '0%', 
+                    stagger: 0.04, 
+                    duration: 0.8, 
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Lightweight Canvas Fluid Background (WebGL effect fallback)
+        const canvas = document.getElementById('mesh-gradient');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawBlob(x, y, radius, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        function animate() {
+            time += 0.005;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Global composite operation to blend colors nicely
+            ctx.globalCompositeOperation = 'screen';
+            ctx.filter = 'blur(100px)';
+
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // Moving colored blobs
+            drawBlob(
+                w * 0.3 + Math.sin(time) * w * 0.2, 
+                h * 0.4 + Math.cos(time * 0.8) * h * 0.2, 
+                w * 0.4, 
+                'rgba(220, 220, 200, 0.8)' // Cream highlight
+            );
+            
+            drawBlob(
+                w * 0.7 + Math.cos(time * 1.2) * w * 0.2, 
+                h * 0.6 + Math.sin(time * 0.9) * h * 0.2, 
+                w * 0.4, 
+                'rgba(200, 210, 220, 0.6)' // Subtle blue/grey
+            );
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+</body></html>

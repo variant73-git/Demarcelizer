@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether / Architects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        zinc: { 850: '#1f1f22', 950: '#09090b' } // Custom darks
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#050505] text-zinc-300 min-h-screen flex flex-col overflow-x-hidden selection:bg-white/20">
+
+    <!-- Navbar / Top Brand -->
+    <nav class="w-full border-b border-white/10 relative z-20">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-sm tracking-tight font-medium text-white">
+                <iconify-icon icon="solar:atom-linear" width="20"></iconify-icon>
+                <span>AETHER / OS</span>
+            </div>
+            <div class="flex items-center gap-6 text-xs font-mono text-zinc-500">
+                <span class="hidden sm:block">SYS.VER.4.0.2</span>
+                <span class="flex items-center gap-2 text-zinc-400">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                    ONLINE
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Layout with Vertical Container Lines -->
+    <main class="flex-grow w-full max-w-7xl mx-auto border-l border-r border-white/5 relative grid grid-cols-1 lg:grid-cols-3">
+        
+        <!-- Decoration: Corner Squares for Container Lines -->
+        <div class="absolute -top-[1px] -left-[3px] w-[5px] h-[5px] bg-white z-20"></div>
+        <div class="absolute -top-[1px] -right-[3px] w-[5px] h-[5px] bg-white z-20"></div>
+        <div class="absolute -bottom-[1px] -left-[3px] w-[5px] h-[5px] bg-white z-20"></div>
+        <div class="absolute -bottom-[1px] -right-[3px] w-[5px] h-[5px] bg-white z-20"></div>
+
+        <!-- Section 01: Hypercube -->
+        <div class="group relative border-b lg:border-b-0 lg:border-r border-white/5 p-8 lg:p-10 flex flex-col justify-between h-[600px] lg:h-[800px] hover:bg-white/[0.02] transition-colors duration-700">
+            <!-- Header -->
+            <div class="flex justify-between items-start font-mono text-xs text-zinc-500 uppercase tracking-widest">
+                <span class="text-zinc-300 font-semibold tracking-tight font-sans">Quantum Lattice</span>
+                <span>01//</span>
+            </div>
+            
+            <!-- Description Top -->
+            <p class="mt-8 text-xs text-zinc-400 leading-relaxed max-w-[280px]">
+                The central framework of the lattice contains patterns of creation. It maps the glyphs that shape matter and energy in the void.
+            </p>
+
+            <!-- Visual (Canvas) -->
+            <div class="relative flex-grow flex items-center justify-center py-12">
+                <canvas id="canvas1" class="w-full max-w-[300px] aspect-square opacity-80 mix-blend-screen"></canvas>
+                <!-- Axis Labels -->
+                <span class="absolute left-0 top-1/2 text-[10px] text-zinc-700 font-mono -translate-y-1/2">Energy</span>
+                <span class="absolute right-0 top-1/2 text-[10px] text-zinc-700 font-mono -translate-y-1/2">Matter</span>
+            </div>
+
+            <!-- Footer -->
+            <div class="space-y-6">
+                <div class="border-t border-white/10 pt-4">
+                    <h3 class="text-sm font-medium text-white mb-2">Protocol: Genesis</h3>
+                    <p class="text-xs text-zinc-500 leading-relaxed">
+                        Aether empowers you to challenge limits of the real and digital world. Finding wonders most will never know exist.
+                    </p>
+                </div>
+                <!-- Mini Grid Decor -->
+                <div class="flex justify-end">
+                    <div class="grid grid-cols-4 grid-rows-3 gap-[1px] bg-zinc-800 border border-zinc-800 w-24 h-16 opacity-50">
+                        <div class="bg-zinc-950"></div><div class="bg-zinc-950"></div><div class="bg-zinc-950"></div><div class="bg-zinc-950"></div>
+                        <div class="bg-zinc-950"></div><div class="bg-zinc-950"></div><div class="bg-zinc-950 flex items-center justify-center"><div class="w-1 h-1 bg-white rounded-full"></div></div><div class="bg-zinc-950"></div>
+                        <div class="bg-zinc-950"></div><div class="bg-zinc-950"></div><div class="bg-zinc-950"></div><div class="bg-zinc-950"></div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-end font-mono text-[10px] text-zinc-600">
+                    <span>Aether.sys</span>
+                    <span>C-XX.XX.9001</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 02: Logic Cylinders -->
+        <div class="group relative border-b lg:border-b-0 lg:border-r border-white/5 p-8 lg:p-10 flex flex-col justify-between h-[600px] lg:h-[800px] hover:bg-white/[0.02] transition-colors duration-700">
+            <!-- Gradient Border Effect (Top) -->
+            <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent lg:hidden"></div>
+            
+            <div class="flex justify-between items-start font-mono text-xs text-zinc-500 uppercase tracking-widest">
+                <span class="text-zinc-300 font-semibold tracking-tight font-sans">Neural Syntax</span>
+                <span>02//</span>
+            </div>
+
+            <p class="mt-8 text-xs text-zinc-400 leading-relaxed max-w-[280px]">
+                XP derives from ancient computation. A monogram formed by the intersection of logic gates and sacred symbols.
+            </p>
+
+            <div class="relative flex-grow flex items-center justify-center py-12">
+                <canvas id="canvas2" class="w-full max-w-[300px] aspect-square opacity-80 mix-blend-screen"></canvas>
+                <!-- Floating Glyphs -->
+                <div class="absolute inset-0 flex items-center justify-center gap-16 pointer-events-none">
+                    <iconify-icon icon="solar:code-scan-linear" class="text-white/20 text-4xl animate-[pulse_4s_ease-in-out_infinite]"></iconify-icon>
+                    <iconify-icon icon="solar:database-linear" class="text-white/20 text-4xl animate-[pulse_4s_ease-in-out_infinite] animation-delay-2000"></iconify-icon>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="text-right">
+                    <p class="text-xs text-zinc-500 leading-relaxed max-w-[240px] ml-auto">
+                        In Aether, XP is transfigured: it bridges the gap between the sacred and the gamified. The unifying mark of digital progression.
+                    </p>
+                </div>
+                <div class="flex justify-between items-end font-mono text-[10px] text-zinc-600 pt-12 border-t border-white/5">
+                    <span>Aether.sys</span>
+                    <span>LOG.KERNEL.PANIC</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 03: Esoteric Sphere -->
+        <div class="group relative p-8 lg:p-10 flex flex-col justify-between h-[600px] lg:h-[800px] hover:bg-white/[0.02] transition-colors duration-700">
+             <!-- Gradient Border Effect (Top) -->
+             <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent lg:hidden"></div>
+
+            <div class="flex justify-between items-start font-mono text-xs text-zinc-500 uppercase tracking-widest">
+                <span class="text-zinc-300 font-semibold tracking-tight font-sans">Harmonic Resonance</span>
+                <span>03//</span>
+            </div>
+
+            <p class="mt-8 text-xs text-zinc-400 leading-relaxed max-w-[280px]">
+                "Resonance" refers to the connection and attraction of experiences, thoughts, or people that vibrate at the same frequency.
+            </p>
+
+            <div class="relative flex-grow flex items-center justify-center py-12">
+                <canvas id="canvas3" class="w-full max-w-[300px] aspect-square opacity-80 mix-blend-screen"></canvas>
+            </div>
+
+            <div class="space-y-6">
+                 <div class="border-t border-white/10 pt-4">
+                    <h3 class="text-sm font-medium text-white mb-2">Status: Aligned</h3>
+                    <p class="text-xs text-zinc-500 leading-relaxed">
+                        Resonance: XP = the intersection between spirit (transcendence) and matter (experience). Aligning with deepest energies.
+                    </p>
+                </div>
+                <div class="flex justify-between items-end font-mono text-[10px] text-zinc-600">
+                    <div class="flex gap-2">
+                        <span class="w-2 h-2 rounded-full border border-zinc-700"></span>
+                        <span class="w-2 h-2 rounded-full border border-zinc-700 bg-white/20"></span>
+                        <span class="w-2 h-2 rounded-full border border-zinc-700"></span>
+                    </div>
+                    <span>Aether.sys</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Interface Bar -->
+    <footer class="w-full border-t border-white/10 bg-zinc-950 relative z-20">
+        <div class="max-w-7xl mx-auto px-6 h-12 flex items-center justify-between font-mono text-[10px] text-zinc-600 uppercase">
+            <div class="flex items-center gap-4">
+                <span>Latency: 4ms</span>
+                <span class="hidden sm:inline">Encryption: AES-256</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+                <a href="#" class="hover:text-white transition-colors">Manifesto</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WebGL-like Canvas Animation Script -->
+    <script>
+        class WireframeEngine {
+            constructor(canvasId, shapeType) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.width = this.canvas.offsetWidth;
+                this.height = this.canvas.offsetHeight;
+                this.canvas.width = this.width * 2; // Retina scale
+                this.canvas.height = this.height * 2;
+                this.ctx.scale(2, 2);
+                this.cx = this.width / 2;
+                this.cy = this.height / 2;
+                this.shapeType = shapeType;
+                
+                this.points = [];
+                this.edges = [];
+                this.angleX = 0;
+                this.angleY = 0;
+                
+                this.initShape();
+                this.animate();
+            }
+
+            initShape() {
+                if (this.shapeType === 'cube') {
+                    // Merkaba-ish (Two tetrahedrons)
+                    const s = 80;
+                    // Tetrahedron 1
+                    this.points.push({x: s, y: s, z: s}, {x: -s, y: -s, z: s}, {x: -s, y: s, z: -s}, {x: s, y: -s, z: -s});
+                    // Tetrahedron 2 (Inverted)
+                    this.points.push({x: -s, y: -s, z: -s}, {x: s, y: s, z: -s}, {x: s, y: -s, z: s}, {x: -s, y: s, z: s});
+                    
+                    // Edges for Tet 1
+                    this.edges.push([0,1], [0,2], [0,3], [1,2], [1,3], [2,3]);
+                    // Edges for Tet 2
+                    this.edges.push([4,5], [4,6], [4,7], [5,6], [5,7], [6,7]);
+
+                } else if (this.shapeType === 'cylinders') {
+                    // Two intersecting rings/cylinders
+                    const r = 70;
+                    const segments = 24;
+                    // Ring 1
+                    for(let i=0; i<segments; i++) {
+                        const theta = (i/segments) * Math.PI * 2;
+                        this.points.push({ x: Math.cos(theta)*r, y: Math.sin(theta)*r, z: -30 });
+                        this.points.push({ x: Math.cos(theta)*r, y: Math.sin(theta)*r, z: 30 });
+                        // Connect segments
+                        let next = (i+1)%segments;
+                        this.edges.push([i*2, next*2], [i*2+1, next*2+1], [i*2, i*2+1]);
+                    }
+                     // Ring 2 (Perpendicular)
+                     let offset = this.points.length;
+                     for(let i=0; i<segments; i++) {
+                        const theta = (i/segments) * Math.PI * 2;
+                        this.points.push({ x: Math.cos(theta)*r, y: -30, z: Math.sin(theta)*r });
+                        this.points.push({ x: Math.cos(theta)*r, y: 30, z: Math.sin(theta)*r });
+                        let next = (i+1)%segments;
+                        this.edges.push([offset + i*2, offset + next*2], [offset + i*2+1, offset + next*2+1], [offset + i*2, offset + i*2+1]);
+                    }
+                } else if (this.shapeType === 'sphere') {
+                    // Icosahedron
+                    const t = (1.0 + Math.sqrt(5.0)) / 2.0;
+                    const s = 50; 
+                    
+                    const p = [
+                        [-1,  t,  0], [ 1,  t,  0], [-1, -t,  0], [ 1, -t,  0],
+                        [ 0, -1,  t], [ 0,  1,  t], [ 0, -1, -t], [ 0,  1, -t],
+                        [ t,  0, -1], [ t,  0,  1], [-t,  0, -1], [-t,  0,  1]
+                    ];
+                    
+                    p.forEach(v => this.points.push({x: v[0]*s, y: v[1]*s, z: v[2]*s}));
+                    
+                    // Edges (simplified connectivity for visual clutter)
+                    for(let i=0; i<this.points.length; i++){
+                        for(let j=i+1; j<this.points.length; j++){
+                            let d = Math.hypot(this.points[i].x - this.points[j].x, this.points[i].y - this.points[j].y, this.points[i].z - this.points[j].z);
+                            if(d < s*2.1) this.edges.push([i,j]);
+                        }
+                    }
+                    // Add nested shape for complexity
+                     p.forEach(v => this.points.push({x: v[0]*s*0.5, y: v[1]*s*0.5, z: v[2]*s*0.5}));
+                     let off = 12;
+                     for(let i=0; i<12; i++){
+                        for(let j=i+1; j<12; j++){
+                            let d = Math.hypot(this.points[off+i].x - this.points[off+j].x, this.points[off+i].y - this.points[off+j].y, this.points[off+i].z - this.points[off+j].z);
+                            if(d < s*1.1) this.edges.push([off+i,off+j]);
+                        }
+                        this.edges.push([i, off+i]); // connect layers
+                     }
+
+                }
+            }
+
+            project(p) {
+                // Rotation
+                let x = p.x * Math.cos(this.angleY) - p.z * Math.sin(this.angleY);
+                let z = p.z * Math.cos(this.angleY) + p.x * Math.sin(this.angleY);
+                let y = p.y * Math.cos(this.angleX) - z * Math.sin(this.angleX);
+                z = z * Math.cos(this.angleX) + p.y * Math.sin(this.angleX);
+                
+                // Perspective
+                let fov = 400;
+                let scale = fov / (fov + z);
+                return { x: x * scale + this.cx, y: y * scale + this.cy, z: z };
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.width, this.height);
+                this.angleY += 0.005;
+                this.angleX += 0.002;
+                
+                this.ctx.lineWidth = 0.8;
+                this.ctx.strokeStyle = '#52525b'; // Zinc-600
+
+                // Project Points
+                let projected = this.points.map(p => this.project(p));
+
+                // Draw Edges
+                this.edges.forEach(e => {
+                    let p1 = projected[e[0]];
+                    let p2 = projected[e[1]];
+                    // Depth fog
+                    let depth = (p1.z + p2.z) / 2;
+                    let alpha = Math.max(0.1, (1 - (depth / 200)));
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(p1.x, p1.y);
+                    this.ctx.lineTo(p2.x, p2.y);
+                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${alpha * 0.4})`;
+                    this.ctx.stroke();
+                });
+
+                // Draw Nodes
+                projected.forEach(p => {
+                    let alpha = Math.max(0.1, (1 - (p.z / 200)));
+                    if (alpha > 0.5) {
+                        this.ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                        this.ctx.fillRect(p.x-1, p.y-1, 2, 2);
+                    }
+                });
+
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // Initialize animations on load
+        window.onload = () => {
+            new WireframeEngine('canvas1', 'cube');
+            new WireframeEngine('canvas2', 'cylinders');
+            new WireframeEngine('canvas3', 'sphere');
+        };
+    </script>
+</body>
+</html>

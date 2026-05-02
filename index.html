@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demarcelizer 2.0 — Re-skin any website with any design system</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --color-primary: #F97316;
+            --color-secondary: #E4E2DD;
+            --color-accent: #D97706;
+            --color-background: #E4E2DD;
+            --color-surface: #2C1D11;
+            --color-text-primary: #111827;
+            --color-text-secondary: #4B5563;
+            --color-border: #E5E7EB;
+        }
+        html, body { font-family: 'Inter', system-ui, sans-serif; }
+        .font-mono { font-family: 'Inter', system-ui, sans-serif; letter-spacing: normal; font-variant-numeric: tabular-nums; }
+        .uppercase { text-transform: none !important; }
+        body { background: var(--color-background); color: var(--color-text-primary); }
+        .gs-word { display: inline-block; transform: translateY(110%); }
+        .grain::before {
+            content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.35; mix-blend-mode: multiply;
+            background-image: radial-gradient(rgba(44,29,17,0.18) 1px, transparent 1px);
+            background-size: 3px 3px;
+        }
+        .browser-shadow { box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 30px 60px -20px rgba(44,29,17,0.18), 0 10px 24px -12px rgba(44,29,17,0.12); }
+        .corner-tick { position: absolute; width: 6px; height: 6px; background: var(--color-background); border: 1px solid #94a3b8; }
+        input::placeholder { color: rgba(75,85,99,0.55); }
+        input:focus { outline: none; }
+        .url-input-ring { transition: box-shadow .25s ease, border-color .25s ease, background-color .25s ease; }
+        .url-input-ring:focus-within { box-shadow: 0 0 0 3px rgba(249,115,22,0.18); border-color: rgba(249,115,22,0.55); }
+        .pulse-dot { box-shadow: 0 0 0 0 rgba(249,115,22,0.55); animation: pulseDot 2.4s infinite; }
+        @keyframes pulseDot { 0% { box-shadow: 0 0 0 0 rgba(249,115,22,0.5); } 70% { box-shadow: 0 0 0 10px rgba(249,115,22,0); } 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0); } }
+        .arrow-line { background: linear-gradient(90deg, rgba(44,29,17,0) 0%, rgba(44,29,17,0.35) 30%, rgba(249,115,22,0.9) 100%); }
+        details[open] .chev { transform: rotate(180deg); }
+        .chev { transition: transform .2s ease; }
+        .key-pop { box-shadow: 0 20px 40px -16px rgba(44,29,17,0.25), 0 4px 12px rgba(44,29,17,0.1); }
+        .gradient-mesh {
+            background:
+              radial-gradient(60% 60% at 12% 0%, rgba(249,115,22,0.18), transparent 60%),
+              radial-gradient(50% 60% at 95% 10%, rgba(217,119,6,0.16), transparent 60%),
+              radial-gradient(40% 40% at 50% 100%, rgba(44,29,17,0.1), transparent 60%);
+        }
+        .cta-shadow { box-shadow: 0 20px 40px -12px rgba(217,119,6,0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+        .ring-tick { position: absolute; width: 1px; background: rgba(44,29,17,0.18); }
+        @media (max-width: 768px) {
+            .browser-card { aspect-ratio: auto; }
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden antialiased selection:bg-orange-500 selection:text-white">
+
+    <div class="absolute inset-0 gradient-mesh pointer-events-none -z-0"></div>
+
+    <!-- Top navigation -->
+    <nav class="fixed top-5 left-1/2 -translate-x-1/2 z-50 rounded-full p-[1px] bg-gradient-to-b from-white/70 via-slate-300/50 to-slate-400/30 shadow-sm w-[min(92vw,860px)]">
+        <div class="bg-[#E4E2DD]/85 backdrop-blur-xl rounded-full pl-4 pr-2 py-2 flex items-center gap-3 sm:gap-6">
+            <a href="#" class="text-sm font-semibold tracking-tight text-slate-900 flex items-center gap-2 shrink-0">
+                <div class="w-1.5 h-1.5 rounded-full bg-orange-500 pulse-dot"></div>
+                Demarcelizer<span class="font-mono text-[10px] text-slate-500 ml-0.5">2.0</span>
+                <span id="engine-badge" class="hidden text-[9px] font-mono uppercase tracking-widest text-emerald-700 bg-emerald-100 border border-emerald-200 px-1.5 py-0.5 rounded-full ml-1" title="Local engine on">LOCAL</span>
+            </a>
+
+            <div class="ml-auto flex items-center gap-2">
+                <!-- BYO-Key dropdown -->
+                <details class="relative" id="key-menu">
+                    <summary class="list-none cursor-pointer select-none flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-full bg-white/60 hover:bg-white border border-slate-300/70 text-[11px] font-mono uppercase tracking-wider text-slate-700 transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-400" id="key-status-dot"></span>
+                        <span id="key-provider-label">BYO-KEY</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-slate-500 chev"></iconify-icon>
+                    </summary>
+                    <div class="absolute right-0 mt-2 w-[320px] rounded-2xl bg-[#FAFAF7] border border-slate-300/70 key-pop p-3 z-50">
+                        <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500 px-2 pb-2">Bring your own key</div>
+
+                        <!-- Provider tabs -->
+                        <div class="flex p-1 bg-slate-200/60 rounded-full text-[11px] font-medium">
+                            <button data-provider="anthropic" class="provider-tab flex-1 py-1.5 rounded-full bg-white shadow-sm text-slate-900 transition-colors flex items-center justify-center gap-1.5">
+                                <iconify-icon icon="simple-icons:anthropic" class="text-[13px]"></iconify-icon>
+                                Anthropic
+                            </button>
+                            <button data-provider="google" class="provider-tab flex-1 py-1.5 rounded-full text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-center gap-1.5">
+                                <iconify-icon icon="simple-icons:google" class="text-[13px]"></iconify-icon>
+                                Google
+                            </button>
+                        </div>
+
+                        <!-- Key field -->
+                        <div class="mt-3">
+                            <label class="block text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-1.5 px-1" id="key-label-text">Anthropic API Key</label>
+                            <div class="flex items-center gap-1.5 bg-white border border-slate-300 rounded-xl px-3 py-2 url-input-ring">
+                                <iconify-icon icon="solar:key-minimalistic-linear" class="text-slate-400"></iconify-icon>
+                                <input id="api-key-input" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..." class="flex-1 bg-transparent text-[12px] font-mono text-slate-800 placeholder:text-slate-400" />
+                                <button id="toggle-key-visibility" class="text-slate-400 hover:text-slate-700 transition-colors p-0.5" aria-label="Toggle visibility">
+                                    <iconify-icon icon="solar:eye-linear" class="text-base"></iconify-icon>
+                                </button>
+                            </div>
+                            <p class="text-[10px] text-slate-500 mt-2 px-1 leading-relaxed">
+                                Stored locally in your browser. Never sent anywhere except the provider you choose.
+                            </p>
+                        </div>
+
+                        <button id="save-key-btn" class="mt-3 w-full text-[11px] font-medium tracking-wide text-white bg-slate-900 hover:bg-slate-800 transition-colors py-2 rounded-full">
+                            Save Key
+                        </button>
+                    </div>
+                </details>
+
+                <a href="#run" class="hidden sm:inline-flex text-xs font-medium text-white bg-slate-900 hover:bg-slate-800 transition-colors px-3.5 py-1.5 rounded-full shadow-md">
+                    Run
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative w-full pt-32 pb-24 z-10">
+        <div class="relative w-full max-w-7xl mx-auto px-4 md:px-8">
+
+            <!-- Container vertical lines + corner ticks -->
+            <div class="absolute inset-y-0 left-4 md:left-8 w-px bg-slate-300/70 z-0 hidden sm:block pointer-events-none mix-blend-multiply"></div>
+            <div class="absolute inset-y-0 right-4 md:right-8 w-px bg-slate-300/70 z-0 hidden sm:block pointer-events-none mix-blend-multiply"></div>
+            <div class="corner-tick top-0 left-4 md:left-8 -ml-[3px] -mt-[3px] hidden sm:block"></div>
+            <div class="corner-tick top-0 right-4 md:right-8 -mr-[3px] -mt-[3px] hidden sm:block"></div>
+            <div class="corner-tick bottom-0 left-4 md:left-8 -ml-[3px] -mb-[3px] hidden sm:block"></div>
+            <div class="corner-tick bottom-0 right-4 md:right-8 -mr-[3px] -mb-[3px] hidden sm:block"></div>
+
+            <!-- Hero -->
+            <section class="relative z-20 text-center max-w-4xl mx-auto pt-6 md:pt-12 mb-14">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/60 border border-slate-300/70 mb-7 shadow-sm">
+                    <div class="w-1.5 h-1.5 rounded-full bg-orange-500 pulse-dot"></div>
+                    <span class="text-[11px] font-mono tracking-wider text-slate-700 uppercase">Re-skin Engine · v2.0</span>
+                </div>
+
+                <h1 class="text-[40px] sm:text-5xl md:text-7xl font-light tracking-tighter text-slate-900 leading-[1.04] mb-5">
+                    <span class="gs-reveal-text">Wear any website's design.</span>
+                </h1>
+                <p class="text-base md:text-lg text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
+                    Drop a target. Drop a reference. Demarcelizer extracts the reference's
+                    <span class="font-mono text-slate-800">DESIGN.md</span>, HTML and a screenshot,
+                    then rewrites the target — verbatim, faithfully, with no prompt drift.
+                </p>
+            </section>
+
+            <!-- Mode tab bar -->
+            <div class="flex items-center justify-center mb-6 relative z-20">
+                <div class="flex items-center gap-1 p-1 rounded-full bg-white/70 border border-slate-300/70 shadow-sm">
+                    <button id="mode-tab-url" class="mode-tab text-xs font-medium px-4 py-1.5 rounded-full bg-slate-900 text-white transition-colors">URL</button>
+                    <button id="mode-tab-template" class="mode-tab text-xs font-medium px-4 py-1.5 rounded-full text-slate-600 hover:text-slate-900 transition-colors">Usar template</button>
+                </div>
+            </div>
+
+            <!-- Two browsers side by side -->
+            <section id="run" class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+
+                <!-- Connector arrow on desktop -->
+                <div class="hidden md:flex absolute inset-y-0 left-1/2 -translate-x-1/2 items-center justify-center pointer-events-none z-20">
+                    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2C1D11] text-[10px] font-mono uppercase tracking-widest text-orange-300 shadow-lg">
+                        <iconify-icon icon="solar:transfer-horizontal-linear" class="text-orange-400"></iconify-icon>
+                        Apply
+                    </div>
+                </div>
+
+                <!-- TARGET browser (left) -->
+                <div class="browser-card relative rounded-[28px] p-[1px] bg-gradient-to-b from-white/80 via-white/30 to-transparent browser-shadow group">
+                    <div class="relative h-full bg-[#FAFAF7] rounded-[27px] overflow-hidden flex flex-col">
+
+                        <!-- Browser chrome -->
+                        <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-200/80 bg-gradient-to-b from-white to-[#F2F0EA]">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+                            </div>
+                            <div class="hidden sm:flex items-center gap-1.5 ml-2 text-slate-400">
+                                <iconify-icon icon="solar:alt-arrow-left-linear" class="text-base"></iconify-icon>
+                                <iconify-icon icon="solar:alt-arrow-right-linear" class="text-base"></iconify-icon>
+                                <iconify-icon icon="solar:refresh-linear" class="text-base"></iconify-icon>
+                            </div>
+                            <div class="ml-auto inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                                Target
+                            </div>
+                        </div>
+
+                        <!-- URL bar -->
+                        <div class="px-5 pt-5">
+                            <label for="target-url" class="block text-[10px] font-mono uppercase tracking-widest text-slate-500 mb-2">Site to be re-skinned</label>
+                            <div class="url-input-ring flex items-center gap-2 bg-white border border-slate-300 rounded-2xl px-4 py-3">
+                                <iconify-icon icon="solar:lock-keyhole-minimalistic-linear" class="text-slate-400 text-base"></iconify-icon>
+                                <span class="font-mono text-[12px] text-slate-400 hidden sm:inline">https://</span>
+                                <input id="target-url" type="url" inputmode="url" spellcheck="false" autocomplete="off"
+                                    placeholder="your-old-site.com"
+                                    class="flex-1 bg-transparent text-[14px] font-mono tracking-tight text-slate-900 placeholder:text-slate-400" />
+                                <button id="paste-target" class="text-[10px] font-mono uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors px-2 py-1 rounded-md hover:bg-slate-100">Paste</button>
+                            </div>
+
+                            <details class="mt-2 group">
+                                <summary class="list-none cursor-pointer select-none text-[10px] font-mono uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:alt-arrow-right-linear" class="chev group-open:rotate-90 transition-transform"></iconify-icon>
+                                    Or paste HTML manually <span class="normal-case tracking-normal text-slate-400 ml-1">(bypasses fetch)</span>
+                                </summary>
+                                <textarea id="target-html-input" rows="4" placeholder="<!DOCTYPE html>..." class="mt-2 w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-[11px] font-mono text-slate-700 placeholder:text-slate-400 url-input-ring resize-y"></textarea>
+                            </details>
+                        </div>
+
+                        <!-- Preview / placeholder -->
+                        <div class="relative flex-1 m-5 mt-4 rounded-2xl border border-dashed border-slate-300 bg-[radial-gradient(circle_at_1px_1px,rgba(44,29,17,0.18)_1px,transparent_0)] bg-[size:14px_14px] flex items-center justify-center min-h-[220px]">
+                            <div class="text-center px-6">
+                                <div class="mx-auto mb-3 w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm">
+                                    <iconify-icon icon="solar:globus-linear" class="text-slate-500 text-lg"></iconify-icon>
+                                </div>
+                                <p class="text-[12px] font-mono uppercase tracking-widest text-slate-500">Awaiting target</p>
+                                <p class="text-[12px] text-slate-500 mt-1">Paste a URL above to lock the canvas.</p>
+                            </div>
+                        </div>
+
+                        <!-- Footer caption -->
+                        <div class="px-5 pb-5 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                            <span class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-slate-400"></span> Source</span>
+                            <span>01 / Target</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REFERENCE browser (right) -->
+                <div id="reference-card" class="browser-card relative rounded-[28px] p-[1px] bg-gradient-to-b from-white/40 via-white/10 to-transparent browser-shadow group">
+                    <div class="relative h-full bg-[#2C1D11] rounded-[27px] overflow-hidden flex flex-col text-white">
+
+                        <!-- Browser chrome -->
+                        <div class="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-gradient-to-b from-[#3a2614] to-[#2C1D11]">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]/80"></span>
+                            </div>
+                            <div class="hidden sm:flex items-center gap-1.5 ml-2 text-white/40">
+                                <iconify-icon icon="solar:alt-arrow-left-linear" class="text-base"></iconify-icon>
+                                <iconify-icon icon="solar:alt-arrow-right-linear" class="text-base"></iconify-icon>
+                                <iconify-icon icon="solar:refresh-linear" class="text-base"></iconify-icon>
+                            </div>
+                            <div class="ml-auto inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-orange-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                Reference
+                            </div>
+                        </div>
+
+                        <!-- URL bar -->
+                        <div class="px-5 pt-5">
+                            <label for="reference-url" class="block text-[10px] font-mono uppercase tracking-widest text-white/50 mb-2">Site to extract design from</label>
+                            <div class="url-input-ring flex items-center gap-2 bg-black/30 border border-white/10 rounded-2xl px-4 py-3">
+                                <iconify-icon icon="solar:magic-stick-3-linear" class="text-orange-400 text-base"></iconify-icon>
+                                <span class="font-mono text-[12px] text-white/30 hidden sm:inline">https://</span>
+                                <input id="reference-url" type="url" inputmode="url" spellcheck="false" autocomplete="off"
+                                    placeholder="design-you-love.com"
+                                    class="flex-1 bg-transparent text-[14px] font-mono tracking-tight text-white placeholder:text-white/30" />
+                                <button id="paste-reference" class="text-[10px] font-mono uppercase tracking-widest text-white/50 hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-white/10">Paste</button>
+                            </div>
+
+                            <details class="mt-2 group">
+                                <summary class="list-none cursor-pointer select-none text-[10px] font-mono uppercase tracking-widest text-white/50 hover:text-white transition-colors flex items-center gap-1.5">
+                                    <iconify-icon icon="solar:alt-arrow-right-linear" class="chev group-open:rotate-90 transition-transform"></iconify-icon>
+                                    Or paste HTML manually <span class="normal-case tracking-normal text-white/30 ml-1">(bypasses fetch)</span>
+                                </summary>
+                                <textarea id="reference-html-input" rows="4" placeholder="<!DOCTYPE html>..." class="mt-2 w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-[11px] font-mono text-white/90 placeholder:text-white/30 url-input-ring resize-y"></textarea>
+                            </details>
+
+                            <div class="mt-2 flex items-center gap-3 flex-wrap">
+                                <label class="cursor-pointer text-[10px] font-mono uppercase tracking-widest text-white/50 hover:text-white transition-colors flex items-center gap-1.5">
+                                    <input type="file" id="reference-screenshot" accept="image/*" class="hidden" />
+                                    <iconify-icon icon="solar:gallery-add-linear"></iconify-icon>
+                                    <span id="reference-screenshot-label">Attach screenshot</span>
+                                </label>
+                                <span class="text-[10px] font-mono normal-case tracking-normal text-white/30">boosts visual fidelity</span>
+                                <button id="reference-screenshot-clear" class="hidden text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white px-1.5 py-0.5 rounded">×</button>
+                            </div>
+                        </div>
+
+                        <!-- Extraction stack -->
+                        <div class="relative flex-1 m-5 mt-4 rounded-2xl bg-[#1c130a] border border-white/5 overflow-hidden min-h-[220px]">
+                            <div class="absolute inset-0 opacity-30 pointer-events-none" style="background:radial-gradient(80% 60% at 30% 20%, rgba(249,115,22,0.45), transparent 60%), radial-gradient(60% 60% at 80% 90%, rgba(217,119,6,0.35), transparent 60%);"></div>
+                            <div class="relative z-10 p-5 flex flex-col gap-2 h-full justify-end">
+                                <div class="flex items-center gap-2 text-[11px] font-mono">
+                                    <iconify-icon icon="solar:code-square-linear" class="text-orange-300"></iconify-icon>
+                                    <span class="text-white/80">DESIGN.md</span>
+                                    <span class="ml-auto text-white/40">extract</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono">
+                                    <iconify-icon icon="solar:document-text-linear" class="text-orange-300"></iconify-icon>
+                                    <span class="text-white/80">index.html</span>
+                                    <span class="ml-auto text-white/40">capture</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-[11px] font-mono">
+                                    <iconify-icon icon="solar:gallery-linear" class="text-orange-300"></iconify-icon>
+                                    <span class="text-white/80">screenshot.png</span>
+                                    <span class="ml-auto text-white/40">render</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer caption -->
+                        <div class="px-5 pb-5 flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-white/45">
+                            <span class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-white/30"></span> Style donor</span>
+                            <span>02 / Reference</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEMPLATE picker (right, alternate) -->
+                <div id="template-card" class="hidden browser-card relative rounded-[28px] p-[1px] bg-gradient-to-b from-white/40 via-white/10 to-transparent browser-shadow">
+                    <div class="relative h-full bg-[#2C1D11] rounded-[27px] overflow-hidden flex flex-col text-white">
+
+                        <!-- Browser chrome -->
+                        <div class="flex items-center gap-3 px-4 py-3 border-b border-white/10 bg-gradient-to-b from-[#3a2614] to-[#2C1D11]">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]/80"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]/80"></span>
+                            </div>
+                            <div class="ml-auto inline-flex items-center gap-1.5 text-[10px] tracking-wide text-orange-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                                Template
+                            </div>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="px-5 pt-5">
+                            <label for="template-search" class="block text-[10px] tracking-wide text-white/50 mb-2">Pick a pre-built design system</label>
+                            <div class="url-input-ring flex items-center gap-2 bg-black/30 border border-white/10 rounded-2xl px-4 py-3">
+                                <iconify-icon icon="solar:magnifer-linear" class="text-orange-400 text-base"></iconify-icon>
+                                <input id="template-search" type="text" spellcheck="false" autocomplete="off"
+                                    placeholder="search themes…"
+                                    class="flex-1 bg-transparent text-[14px] tracking-tight text-white placeholder:text-white/30" />
+                                <span id="template-count" class="text-[10px] text-white/40"></span>
+                            </div>
+                        </div>
+
+                        <!-- Grid -->
+                        <div id="template-grid" class="flex-1 overflow-auto p-5 grid grid-cols-2 gap-3 min-h-[280px]">
+                            <div class="col-span-2 text-center text-[12px] text-white/40 py-10" id="template-empty">Loading templates…</div>
+                        </div>
+
+                        <!-- Footer caption -->
+                        <div class="px-5 pb-5 flex items-center justify-between text-[10px] tracking-wide text-white/45">
+                            <span class="flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-white/30"></span> Pre-built design</span>
+                            <span id="template-selected-label">none selected</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA + flow indicator -->
+            <section class="relative z-20 mt-10 md:mt-14 flex flex-col items-center gap-5">
+                <div class="hidden md:flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                    <span>Target</span>
+                    <span class="w-24 h-px arrow-line"></span>
+                    <span class="text-orange-700">Demarcelizer</span>
+                    <span class="w-24 h-px arrow-line"></span>
+                    <span>Reborn</span>
+                </div>
+
+                <button id="demarcelize-btn" class="cta-shadow group inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 transition-colors text-white font-medium tracking-tight pl-6 pr-2 py-2 rounded-full">
+                    <span class="text-[15px]">Demarcelize</span>
+                    <span class="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 group-hover:bg-white/25 transition-colors">
+                        <iconify-icon icon="solar:arrow-right-linear" class="text-white text-base"></iconify-icon>
+                    </span>
+                </button>
+
+                <p id="status-line" class="text-[11px] font-mono uppercase tracking-widest text-slate-500 min-h-[16px]">
+                    Idle · waiting for target & reference
+                </p>
+            </section>
+
+            <!-- Result · Reborn target -->
+            <section id="result" class="hidden relative z-10 mt-20">
+                <div class="flex items-center gap-2 mb-3 flex-wrap">
+                    <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                        <span class="w-1.5 h-1.5 rounded-full bg-orange-500 pulse-dot"></span>
+                        Reborn target
+                    </div>
+                    <div class="h-px flex-1 bg-slate-300/70 mx-2 min-w-[20px]"></div>
+                    <div class="inline-flex items-center gap-1 p-1 rounded-full bg-white/60 border border-slate-300/70">
+                        <button id="result-tab-preview" class="result-tab text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-full bg-slate-900 text-white">Preview</button>
+                        <button id="result-tab-design" class="result-tab text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-full text-slate-600 hover:text-slate-900">DESIGN.md</button>
+                        <button id="result-tab-html" class="result-tab text-[10px] font-mono uppercase tracking-widest px-3 py-1 rounded-full text-slate-600 hover:text-slate-900">HTML</button>
+                    </div>
+                    <button id="open-result" title="Open in new tab" class="text-[10px] font-mono uppercase tracking-widest text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/60 border border-slate-300/70">
+                        <iconify-icon icon="solar:square-arrow-right-up-linear"></iconify-icon> Open
+                    </button>
+                    <button id="download-result" title="Download HTML" class="text-[10px] font-mono uppercase tracking-widest text-slate-600 hover:text-slate-900 transition-colors flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/60 border border-slate-300/70">
+                        <iconify-icon icon="solar:download-linear"></iconify-icon> Download
+                    </button>
+                </div>
+
+                <div class="rounded-[28px] p-[1px] bg-gradient-to-b from-white/80 via-white/30 to-transparent browser-shadow">
+                    <div class="relative bg-[#FAFAF7] rounded-[27px] overflow-hidden flex flex-col">
+                        <!-- Browser chrome -->
+                        <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-200/80 bg-gradient-to-b from-white to-[#F2F0EA]">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></span>
+                            </div>
+                            <div class="ml-auto flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
+                                <span id="result-url-label">target · re-skinned</span>
+                            </div>
+                        </div>
+
+                        <div id="result-pane-preview" class="result-pane">
+                            <iframe id="result-iframe" sandbox="allow-scripts allow-forms allow-popups" class="w-full bg-white" style="min-height:640px;border:0;"></iframe>
+                        </div>
+                        <div id="result-pane-design" class="result-pane hidden">
+                            <pre id="result-design" class="font-mono text-[12px] leading-relaxed text-slate-800 whitespace-pre-wrap p-6 max-h-[640px] overflow-auto"></pre>
+                        </div>
+                        <div id="result-pane-html" class="result-pane hidden">
+                            <pre id="result-html" class="font-mono text-[11px] leading-relaxed text-slate-800 whitespace-pre-wrap p-6 max-h-[640px] overflow-auto"></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How it works -->
+            <section id="how" class="relative z-10 mt-24 grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="rounded-3xl p-5 bg-white/50 border border-slate-300/60 backdrop-blur">
+                    <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">01</div>
+                    <h3 class="text-lg font-light tracking-tight text-slate-900 mt-2 mb-1">Pick the donor</h3>
+                    <p class="text-[13px] text-slate-600 leading-relaxed">Drop a reference URL. We crawl the site, render it, and synthesize a self-contained DESIGN.md.</p>
+                </div>
+                <div class="rounded-3xl p-5 bg-[#2C1D11] text-white border border-white/5">
+                    <div class="text-[10px] font-mono uppercase tracking-widest text-orange-300">02</div>
+                    <h3 class="text-lg font-light tracking-tight mt-2 mb-1">Run the model</h3>
+                    <p class="text-[13px] text-white/70 leading-relaxed">Your BYO key powers the rewrite. Anthropic for fidelity, Google for speed — your call.</p>
+                </div>
+                <div class="rounded-3xl p-5 bg-white/50 border border-slate-300/60 backdrop-blur">
+                    <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">03</div>
+                    <h3 class="text-lg font-light tracking-tight text-slate-900 mt-2 mb-1">Reborn target</h3>
+                    <p class="text-[13px] text-slate-600 leading-relaxed">The target site keeps its content and structure, but inherits the donor's tokens, motion, and tone.</p>
+                </div>
+            </section>
+
+            <footer class="relative z-10 mt-24 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono uppercase tracking-widest text-slate-500">
+                <span>© Demarcelizer 2.0 · re-skin engine</span>
+                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 pulse-dot"></span> Local-first · BYO Key</span>
+            </footer>
+        </div>
+    </main>
+
+    <script>
+        // ---- Verbatim prompt (kept exactly as supplied) ----
+        const VERBATIM_PROMPT = `Analyze the design system of this codebase with the goal of creating a DESIGN.md file in the project root and giving the user a file for easy copy & pasting.
+
+Reference material:
+
+  Overview : https://stitch.withgoogle.com/docs/design-md/overview/
+
+  Format   : https://stitch.withgoogle.com/docs/design-md/format/
+
+  Spec     : https://github.com/google-labs-code/design.md
+
+Examples from the spec repo:
+
+  https://github.com/google-labs-code/design.md/blob/main/examples/atmospheric-glass/DESIGN.md
+
+  https://github.com/google-labs-code/design.md/blob/main/examples/paws-and-paths/DESIGN.md
+
+Requirements:
+
+- Begin with YAML frontmatter containing all structured design tokens
+
+  (colors, typography, spacing, elevation, motion, radii, shadows, etc.)
+
+- Follow with free-form Markdown that describes the look & feel and
+
+  captures design intent that token values alone cannot convey
+
+- The file must be entirely self-contained — do not reference any
+
+  files, variables, or paths from the codebase
+
+- All token values must use valid YAML design token format
+
+If you have access to a running local server or screenshots of the
+
+product, compare your DESIGN.md against the rendered UI. Revise until
+
+both the YAML tokens and the written description faithfully capture
+
+the product's visual identity.`;
+
+        // ---- Paste helpers ----
+        async function pasteInto(inputEl) {
+            try {
+                const text = await navigator.clipboard.readText();
+                inputEl.value = text.trim();
+                inputEl.dispatchEvent(new Event('input'));
+                inputEl.focus();
+            } catch (e) {
+                inputEl.focus();
+            }
+        }
+        document.getElementById('paste-target').addEventListener('click', () => pasteInto(document.getElementById('target-url')));
+        document.getElementById('paste-reference').addEventListener('click', () => pasteInto(document.getElementById('reference-url')));
+
+        // ---- BYO Key ----
+        const KEY_STORAGE = 'demarcelizer.byok.v1';
+        const providerLabel = document.getElementById('key-provider-label');
+        const statusDot = document.getElementById('key-status-dot');
+        const keyInput = document.getElementById('api-key-input');
+        const keyLabel = document.getElementById('key-label-text');
+        const keyMenu = document.getElementById('key-menu');
+        const tabs = document.querySelectorAll('.provider-tab');
+
+        const PROVIDERS = {
+            anthropic: { label: 'Anthropic', placeholder: 'sk-ant-...', fieldLabel: 'Anthropic API Key' },
+            google: { label: 'Google',  placeholder: 'AIza...',     fieldLabel: 'Google AI API Key' }
+        };
+
+        let state = JSON.parse(localStorage.getItem(KEY_STORAGE) || '{}');
+        if (!state.provider) state.provider = 'anthropic';
+        if (!state.keys) state.keys = {};
+
+        function syncProviderUi(provider) {
+            tabs.forEach(t => {
+                const active = t.dataset.provider === provider;
+                t.classList.toggle('bg-white', active);
+                t.classList.toggle('shadow-sm', active);
+                t.classList.toggle('text-slate-900', active);
+                t.classList.toggle('text-slate-600', !active);
+            });
+            const cfg = PROVIDERS[provider];
+            keyInput.placeholder = cfg.placeholder;
+            keyLabel.textContent = cfg.fieldLabel;
+            keyInput.value = state.keys[provider] || '';
+            const hasKey = !!state.keys[provider];
+            providerLabel.textContent = hasKey ? `${cfg.label} · key set` : `BYO-KEY · ${cfg.label}`;
+            statusDot.className = 'w-1.5 h-1.5 rounded-full ' + (hasKey ? 'bg-orange-500' : 'bg-slate-400');
+        }
+
+        tabs.forEach(t => t.addEventListener('click', (e) => {
+            e.preventDefault();
+            state.provider = t.dataset.provider;
+            localStorage.setItem(KEY_STORAGE, JSON.stringify(state));
+            syncProviderUi(state.provider);
+        }));
+
+        document.getElementById('save-key-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            state.keys[state.provider] = keyInput.value.trim();
+            localStorage.setItem(KEY_STORAGE, JSON.stringify(state));
+            syncProviderUi(state.provider);
+            if (keyMenu) keyMenu.removeAttribute('open');
+        });
+
+        // Toggle visibility
+        document.getElementById('toggle-key-visibility').addEventListener('click', (e) => {
+            e.preventDefault();
+            keyInput.type = keyInput.type === 'password' ? 'text' : 'password';
+        });
+
+        syncProviderUi(state.provider);
+
+        // ---- Demarcelize action ----
+        const status = document.getElementById('status-line');
+        const targetEl = document.getElementById('target-url');
+        const referenceEl = document.getElementById('reference-url');
+
+        function isValidUrl(value) {
+            if (!value) return false;
+            try {
+                const u = new URL(/^https?:\/\//i.test(value) ? value : 'https://' + value);
+                return !!u.hostname && u.hostname.includes('.');
+            } catch { return false; }
+        }
+
+        function updateIdle() {
+            const t = isValidUrl(targetEl.value);
+            const r = isValidUrl(referenceEl.value);
+            if (!t && !r) status.textContent = 'Idle · waiting for target & reference';
+            else if (t && !r) status.textContent = 'Target locked · awaiting reference';
+            else if (!t && r) status.textContent = 'Reference locked · awaiting target';
+            else status.textContent = 'Ready · press Demarcelize to start';
+        }
+        targetEl.addEventListener('input', updateIdle);
+        referenceEl.addEventListener('input', updateIdle);
+        updateIdle();
+
+        // ---- Result section refs + tabs ----
+        const resultSection = document.getElementById('result');
+        const iframeEl = document.getElementById('result-iframe');
+        const designOutEl = document.getElementById('result-design');
+        const htmlOutEl = document.getElementById('result-html');
+        const resultUrlLabel = document.getElementById('result-url-label');
+        const RESULT_PANES = {
+            preview: { pane: document.getElementById('result-pane-preview'), tab: document.getElementById('result-tab-preview') },
+            design:  { pane: document.getElementById('result-pane-design'),  tab: document.getElementById('result-tab-design') },
+            html:    { pane: document.getElementById('result-pane-html'),    tab: document.getElementById('result-tab-html') }
+        };
+        function setResultTab(name) {
+            Object.entries(RESULT_PANES).forEach(([k, { pane, tab }]) => {
+                const active = k === name;
+                pane.classList.toggle('hidden', !active);
+                tab.classList.toggle('bg-slate-900', active);
+                tab.classList.toggle('text-white', active);
+                tab.classList.toggle('text-slate-600', !active);
+            });
+        }
+        Object.entries(RESULT_PANES).forEach(([k, { tab }]) => tab.addEventListener('click', () => setResultTab(k)));
+
+        document.getElementById('open-result').addEventListener('click', () => {
+            const html = htmlOutEl.textContent;
+            if (!html) return;
+            const blob = new Blob([html], { type: 'text/html' });
+            window.open(URL.createObjectURL(blob), '_blank');
+        });
+        document.getElementById('download-result').addEventListener('click', () => {
+            const html = htmlOutEl.textContent;
+            if (!html) return;
+            const blob = new Blob([html], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'reborn.html';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        });
+
+        // ---- Network + LLM helpers ----
+        function normalizeUrl(u) { return /^https?:\/\//i.test(u) ? u : 'https://' + u; }
+
+        const PROXIES = [
+            u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+            u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+            u => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(u)}`,
+            u => `https://thingproxy.freeboard.io/fetch/${u}`,
+            u => `https://proxy.cors.sh/${u}`,
+            u => `https://r.jina.ai/${u}`
+        ];
+
+        async function fetchThrough(url) {
+            let lastErr;
+            for (const make of PROXIES) {
+                try {
+                    const res = await fetch(make(url), { redirect: 'follow', headers: { 'x-requested-with': 'demarcelizer' } });
+                    if (!res.ok) { lastErr = new Error(`${res.status} ${res.statusText}`); continue; }
+                    const text = await res.text();
+                    if (text && text.length > 50) return text;
+                    lastErr = new Error('empty response');
+                } catch (e) { lastErr = e; }
+            }
+            throw new Error(`Could not fetch ${url} — ${lastErr?.message || 'all proxies failed'}. Tip: open the site, View Source (⌘⌥U / Ctrl+U), copy, then use "Or paste HTML manually".`);
+        }
+
+        async function fetchHtml(url) { return fetchThrough(normalizeUrl(url)); }
+
+        async function fetchSourceBundle(url, onProgress) {
+            const full = normalizeUrl(url);
+            onProgress?.('Fetching HTML…');
+            const html = await fetchThrough(full);
+            const base = new URL(full);
+            const sheetUrls = [];
+            const linkRe = /<link\b[^>]*>/gi;
+            let m;
+            while ((m = linkRe.exec(html)) !== null) {
+                if (!/rel\s*=\s*["']?stylesheet["']?/i.test(m[0])) continue;
+                const hrefMatch = m[0].match(/href\s*=\s*["']([^"']+)["']/i);
+                if (!hrefMatch) continue;
+                try {
+                    const abs = new URL(hrefMatch[1], base).toString();
+                    if (!sheetUrls.includes(abs)) sheetUrls.push(abs);
+                } catch {}
+            }
+            const slice = sheetUrls.slice(0, 6);
+            const cssChunks = [];
+            for (let i = 0; i < slice.length; i++) {
+                onProgress?.(`Fetching CSS ${i + 1}/${slice.length}…`);
+                try {
+                    const css = await fetchThrough(slice[i]);
+                    cssChunks.push(`/* === ${slice[i]} === */\n${css}`);
+                } catch { /* skip dead sheet */ }
+            }
+            return { html, css: cssChunks.join('\n\n'), sheets: slice };
+        }
+
+        function trimForContext(text, max) {
+            if (!text) return '';
+            const cleaned = text.replace(/<!--[\s\S]*?-->/g, '');
+            return cleaned.length <= max ? cleaned : cleaned.slice(0, max) + '\n/* …truncated */';
+        }
+
+        function extractHtmlBlock(text) {
+            if (!text) return '';
+            const fenced = text.match(/```(?:html)?\s*([\s\S]*?)```/i);
+            if (fenced) return fenced[1].trim();
+            const doc = text.match(/<!DOCTYPE[\s\S]*<\/html>\s*$/i) || text.match(/<html[\s\S]*<\/html>/i);
+            if (doc) return doc[0];
+            return text.trim();
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(String(r.result).split(',')[1]);
+                r.onerror = reject;
+                r.readAsDataURL(file);
+            });
+        }
+
+        async function llmCall({ system, parts, provider, apiKey, model }) {
+            if (provider === 'anthropic') {
+                const content = parts.map(p => p.type === 'image'
+                    ? { type: 'image', source: { type: 'base64', media_type: p.mediaType, data: p.base64 } }
+                    : { type: 'text', text: p.text });
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        'x-api-key': apiKey,
+                        'anthropic-version': '2023-06-01',
+                        'anthropic-dangerous-direct-browser-access': 'true'
+                    },
+                    body: JSON.stringify({
+                        model: model || 'claude-opus-4-7',
+                        max_tokens: 32000,
+                        system,
+                        messages: [{ role: 'user', content }]
+                    })
+                });
+                if (!res.ok) throw new Error(`Anthropic ${res.status}: ${(await res.text()).slice(0, 280)}`);
+                const data = await res.json();
+                return (data.content || []).map(c => c.text || '').join('');
+            }
+            const geminiParts = parts.map(p => p.type === 'image'
+                ? { inlineData: { mimeType: p.mediaType, data: p.base64 } }
+                : { text: p.text });
+            const body = {
+                systemInstruction: system ? { parts: [{ text: system }] } : undefined,
+                contents: [{ role: 'user', parts: geminiParts }],
+                generationConfig: { maxOutputTokens: 32000, temperature: 0.3 }
+            };
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model || 'gemini-2.5-pro'}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            if (!res.ok) throw new Error(`Gemini ${res.status}: ${(await res.text()).slice(0, 280)}`);
+            const data = await res.json();
+            return (data.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
+        }
+
+        // ---- Demarcelize action (real) ----
+        const EXTRACT_SYSTEM = `You extract visible content from a website's HTML. Output ONLY a single JSON object — no markdown fences, no preface, no commentary, no surrounding text.`;
+
+        const INJECT_SYSTEM = `You receive STRUCTURED CONTENT (JSON) and a REFERENCE HTML chassis. Your job: emit the REFERENCE HTML with every visible text node REPLACED by values from STRUCTURED CONTENT.
+
+MAPPING
+- content.brand → every brand/logo/product-name text node (nav, hero, footer, badges).
+- content.tagline → small tagline element if present.
+- content.hero.headline → primary hero headline.
+- content.hero.subheadline → supporting line.
+- content.hero.cta_primary → primary CTA button label.
+- content.hero.cta_secondary → secondary CTA label.
+- content.nav[] → nav link labels.
+- content.features[] → feature card titles + descriptions (in order).
+- content.stats[] → metric/stat blocks.
+- content.testimonials[] → testimonial cards.
+- content.pricing[] → pricing tiers.
+- content.faq[] → FAQ items.
+- content.sections[] → other section content.
+- content.footer → footer text and links.
+
+PRESERVE EXACTLY
+- Reference's HTML structure, tag tree, classes, IDs, inline styles, attributes.
+- Reference's <script> blocks (animation, canvas, GSAP) — copy verbatim.
+- Reference's <style> blocks and CSS.
+- Reference's section count and order.
+- Reference's component shapes, colors, typography, motion.
+- Reference's canvas/WebGL/SVG decorative elements.
+
+HARD RULES
+- Reference's original placeholder copy must NOT appear in the output.
+- If STRUCTURED CONTENT has a value, USE IT verbatim.
+- If null/missing for a slot, expand from related fields in the same brand context.
+
+OUTPUT
+Single complete self-contained HTML5 document starting with <!DOCTYPE html>. No commentary, no markdown fences, no preface.`;
+
+        function parseJsonLoose(text) {
+            const cleaned = (text || '')
+                .replace(/^```(?:json)?\s*/i, '')
+                .replace(/```\s*$/, '')
+                .trim();
+            try { return JSON.parse(cleaned); } catch {}
+            const m = cleaned.match(/\{[\s\S]*\}/);
+            if (m) { try { return JSON.parse(m[0]); } catch {} }
+            throw new Error(`Could not parse JSON. First 200 chars: ${cleaned.slice(0, 200)}`);
+        }
+
+        const RESKIN_SYSTEM = `You are a senior frontend engineer performing a CONTENT TRANSPLANT.
+
+THE CHASSIS (preserve 1:1, do not redesign)
+- REFERENCE HTML provides the visual chassis: layout, sections, hero composition, navigation, cards, grids, footers, motion, scripts, CSS, canvas/SVG/WebGL effects, every visual decision.
+- REFERENCE DESIGN.md provides the design tokens of that chassis.
+- REFERENCE CSS provides the donor's actual stylesheets.
+
+THE CONTENT SOURCE (transplant the words only)
+- TARGET HTML provides only the copy: brand name, headlines, paragraphs, button labels, links, list items, section titles, CTAs, navigation labels, footer text. Use TARGET'S content. Do NOT use TARGET'S structure, layout, components, or visuals.
+
+YOUR JOB
+Output the REFERENCE HTML with its placeholder copy REPLACED by the TARGET's actual content, mapped into the reference's existing slots:
+- Target brand / product name → Reference brand slot (logo text, nav title, footer name).
+- Target main headline → Reference hero headline slot.
+- Target subheadline / value prop → Reference hero subheadline slot.
+- Target primary CTA label → Reference primary button label.
+- Target nav links → Reference nav link labels.
+- Target feature/value props → Reference feature cards (same shapes, same count when possible).
+- Target testimonials, FAQs, pricing, footer → Reference matching section types.
+
+PRESERVE EXACTLY (from REFERENCE)
+- Section count, order, hierarchy, hero composition, density.
+- Component shapes: cards, buttons, pills, badges, inputs, navs, radii, shadows.
+- Color tokens, typography (display + body + label fonts and scales), spacing rhythm.
+- Motion language: GSAP timelines, ScrollTrigger logic, hover lifts, masked reveals.
+- Canvas/WebGL/dither/atmospheric effects, decorative SVGs, gradient meshes.
+- All <script> blocks of the reference (animation logic, canvas draws, init code).
+
+ADAPTATION RULES
+- If target has more content than reference slots: pick the highest-impact items (headline, primary CTA, top 3-6 features). Don't add new sections.
+- If target has fewer items than reference slots: expand from target's tone and domain. Don't invent unrelated content.
+- Numeric data, prices, dates, names from the target stay numeric/literal — don't paraphrase facts.
+
+OUTPUT
+Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. No commentary, no markdown fences, no preface, no truncation.`;
+
+        const demBtn = document.getElementById('demarcelize-btn');
+        const targetHtmlInput = document.getElementById('target-html-input');
+        const referenceHtmlInput = document.getElementById('reference-html-input');
+
+        // Reference screenshot upload
+        let referenceShot = null;
+        const shotInput = document.getElementById('reference-screenshot');
+        const shotLabel = document.getElementById('reference-screenshot-label');
+        const shotClear = document.getElementById('reference-screenshot-clear');
+        shotInput.addEventListener('change', async (e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const base64 = await fileToBase64(file);
+            referenceShot = { mediaType: file.type || 'image/png', base64, name: file.name };
+            shotLabel.textContent = file.name.length > 22 ? file.name.slice(0, 22) + '…' : file.name;
+            shotClear.classList.remove('hidden');
+        });
+        shotClear.addEventListener('click', (e) => {
+            e.preventDefault();
+            referenceShot = null;
+            shotInput.value = '';
+            shotLabel.textContent = 'Attach screenshot';
+            shotClear.classList.add('hidden');
+        });
+
+        // ---- Local engine detection (Bun server) ----
+        let LOCAL_ENGINE = false;
+        const ENGINE_BASE = (location.protocol === 'http:' || location.protocol === 'https:') ? '' : 'http://localhost:3000';
+        const engineBadge = document.getElementById('engine-badge');
+
+        async function probeEngine() {
+            try {
+                const res = await fetch(`${ENGINE_BASE}/api/health`, { cache: 'no-store' });
+                if (res.ok) {
+                    LOCAL_ENGINE = true;
+                    engineBadge.classList.remove('hidden');
+                }
+            } catch { /* engine off */ }
+        }
+        probeEngine();
+
+        // ---- Mode tabs + template picker ----
+        let MODE = 'url'; // 'url' | 'template'
+        let TEMPLATES = [];
+        let SELECTED_TEMPLATE = null;
+        const referenceCardEl = document.getElementById('reference-card');
+        const templateCardEl = document.getElementById('template-card');
+        const tabUrl = document.getElementById('mode-tab-url');
+        const tabTemplate = document.getElementById('mode-tab-template');
+        const templateGrid = document.getElementById('template-grid');
+        const templateEmpty = document.getElementById('template-empty');
+        const templateSearch = document.getElementById('template-search');
+        const templateCount = document.getElementById('template-count');
+        const templateSelectedLabel = document.getElementById('template-selected-label');
+
+        function setMode(next) {
+            MODE = next;
+            const isUrl = next === 'url';
+            referenceCardEl.classList.toggle('hidden', !isUrl);
+            templateCardEl.classList.toggle('hidden', isUrl);
+            tabUrl.classList.toggle('bg-slate-900', isUrl);
+            tabUrl.classList.toggle('text-white', isUrl);
+            tabUrl.classList.toggle('text-slate-600', !isUrl);
+            tabTemplate.classList.toggle('bg-slate-900', !isUrl);
+            tabTemplate.classList.toggle('text-white', !isUrl);
+            tabTemplate.classList.toggle('text-slate-600', isUrl);
+            if (next === 'template' && TEMPLATES.length === 0) loadTemplates();
+        }
+        tabUrl.addEventListener('click', () => setMode('url'));
+        tabTemplate.addEventListener('click', () => setMode('template'));
+
+        function loadGoogleFonts(families) {
+            const valid = Array.from(new Set(families.filter(f => f && /^[A-Za-z][A-Za-z0-9 ]*$/.test(f))));
+            if (!valid.length) return;
+            const param = valid.map(f => 'family=' + f.replace(/\s+/g, '+') + ':wght@400;500;600;700').join('&');
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `https://fonts.googleapis.com/css2?${param}&display=swap`;
+            document.head.appendChild(link);
+        }
+
+        function renderTemplates(filter = '') {
+            const q = filter.toLowerCase().trim();
+            const filtered = q
+                ? TEMPLATES.filter(t => (t.name + ' ' + t.description + ' ' + t.slug).toLowerCase().includes(q))
+                : TEMPLATES;
+            templateCount.textContent = `${filtered.length}/${TEMPLATES.length}`;
+
+            if (!filtered.length) {
+                templateGrid.innerHTML = '<div class="col-span-2 text-center text-[12px] text-white/40 py-10">No matches</div>';
+                return;
+            }
+
+            templateGrid.innerHTML = filtered.map(t => {
+                const c = t.colors || {};
+                const f = t.fonts || {};
+                const bg = c['background'] || '#FAFAF7';
+                const surface = c['surface'] || c['background'] || '#F2F0EA';
+                const primary = c['primary'] || '#F97316';
+                const accent = c['accent'] || c['primary'] || '#D97706';
+                const textPrimary = c['text-primary'] || '#111827';
+                const textSecondary = c['text-secondary'] || '#4B5563';
+                const border = c['border'] || 'rgba(0,0,0,0.1)';
+                const display = (f.display || 'Inter').replace(/"/g, '&quot;');
+                const body = (f.body || 'Inter').replace(/"/g, '&quot;');
+                const swatches = [primary, accent, c['secondary'] || surface, surface, textPrimary, textSecondary, border]
+                    .map(col => `<span class="flex-1 h-2 rounded-sm" style="background:${col}"></span>`).join('');
+                const desc = (t.description || '').replace(/"/g, '&quot;');
+                const isSel = SELECTED_TEMPLATE && SELECTED_TEMPLATE.slug === t.slug;
+                return `
+                <button data-slug="${t.slug}" class="template-card text-left rounded-xl overflow-hidden border transition-all hover:-translate-y-0.5 ${isSel ? 'ring-2 ring-orange-400 ring-offset-2 ring-offset-[#2C1D11]' : ''}" style="border-color:${border};">
+                    <div class="flex items-center gap-1 px-2 py-1.5" style="background:${surface}; border-bottom:1px solid ${border};">
+                        <span class="w-1.5 h-1.5 rounded-full" style="background:${primary}"></span>
+                        <span class="w-1.5 h-1.5 rounded-full" style="background:${accent}"></span>
+                        <span class="w-1.5 h-1.5 rounded-full" style="background:${textSecondary}"></span>
+                        <span class="ml-auto text-[8px] truncate" style="color:${textSecondary}; font-family:'${body}', system-ui;">${t.slug.slice(0, 18)}</span>
+                    </div>
+                    <div class="p-3" style="background:${bg}; color:${textPrimary};">
+                        <div class="leading-tight truncate" style="font-family:'${display}', system-ui; font-size:14px; font-weight:500;">${(t.name || t.slug).replace(/"/g, '&quot;')}</div>
+                        <div class="text-[10px] mt-1 leading-snug opacity-60" style="font-family:'${body}', system-ui; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${desc.slice(0, 110)}</div>
+                        <div class="mt-3 flex gap-0.5">${swatches}</div>
+                    </div>
+                </button>`;
+            }).join('');
+
+            templateGrid.querySelectorAll('.template-card').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const slug = btn.getAttribute('data-slug');
+                    SELECTED_TEMPLATE = TEMPLATES.find(t => t.slug === slug) || null;
+                    templateSelectedLabel.textContent = SELECTED_TEMPLATE ? SELECTED_TEMPLATE.name || SELECTED_TEMPLATE.slug : 'none selected';
+                    renderTemplates(templateSearch.value);
+                });
+            });
+        }
+
+        async function loadTemplates() {
+            templateGrid.innerHTML = '<div class="col-span-2 text-center text-[12px] text-white/40 py-10">Loading templates…</div>';
+            let list = null;
+            // 1) Engine endpoint
+            try {
+                const res = await fetch(`${ENGINE_BASE}/api/templates`, { cache: 'no-store' });
+                if (res.ok) {
+                    const data = await res.json();
+                    list = data.templates;
+                }
+            } catch (e) { console.warn('templates: api failed, falling back to manifest', e); }
+            // 2) Static manifest fallback (works via http://localhost:3000 OR any same-origin server)
+            if (!list) {
+                try {
+                    const res = await fetch('temas/manifest.json', { cache: 'no-store' });
+                    if (res.ok) list = await res.json();
+                } catch (e) { console.warn('templates: manifest fallback failed', e); }
+            }
+            if (!list || !list.length) {
+                templateGrid.innerHTML = `<div class="col-span-2 text-center text-[12px] text-white/50 py-10 leading-relaxed">
+                    Couldn't load templates.<br/>
+                    <span class="text-white/40">Run <code class="bg-white/10 px-1.5 py-0.5 rounded">bun run dev</code> and open <code class="bg-white/10 px-1.5 py-0.5 rounded">http://localhost:3000</code>.</span>
+                </div>`;
+                return;
+            }
+            TEMPLATES = list;
+            console.log(`Loaded ${TEMPLATES.length} templates`);
+            const families = [];
+            TEMPLATES.forEach(t => {
+                if (t.fonts?.display) families.push(t.fonts.display);
+                if (t.fonts?.body) families.push(t.fonts.body);
+            });
+            loadGoogleFonts(families);
+            renderTemplates();
+        }
+
+        templateSearch.addEventListener('input', (e) => renderTemplates(e.target.value));
+
+        async function runViaLocalEngine({ target, reference, pastedTarget, pastedReference, provider, apiKey, template }) {
+            const res = await fetch(`${ENGINE_BASE}/api/demarcelize`, {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                    referenceUrl: isValidUrl(reference) ? normalizeUrl(reference) : '',
+                    targetUrl: isValidUrl(target) ? normalizeUrl(target) : '',
+                    pastedReference, pastedTarget, provider, apiKey,
+                    template: template ? { slug: template.slug } : undefined
+                })
+            });
+            if (!res.ok || !res.body) throw new Error(`Engine returned ${res.status}`);
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder();
+            let buf = '';
+            let designMd = '';
+            let html = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buf += decoder.decode(value, { stream: true });
+                const chunks = buf.split('\n\n');
+                buf = chunks.pop() || '';
+                for (const chunk of chunks) {
+                    const evLine = chunk.split('\n').find(l => l.startsWith('event:'));
+                    const dataLine = chunk.split('\n').find(l => l.startsWith('data:'));
+                    if (!evLine || !dataLine) continue;
+                    const evType = evLine.slice(6).trim();
+                    let data; try { data = JSON.parse(dataLine.slice(5).trim()); } catch { continue; }
+                    if (evType === 'progress') status.textContent = `Engine · ${data.msg}`;
+                    else if (evType === 'chunk') status.textContent = `Engine · streaming ${data.len.toLocaleString()} chars…`;
+                    else if (evType === 'content') {
+                        console.log('Engine extracted target content:', data.json);
+                    }
+                    else if (evType === 'design') {
+                        designMd = data.md;
+                        designOutEl.textContent = designMd;
+                    }
+                    else if (evType === 'done') {
+                        html = data.html;
+                        designMd = data.designMd || designMd;
+                        return { html, designMd };
+                    }
+                    else if (evType === 'error') throw new Error(data.message || 'engine error');
+                }
+            }
+            throw new Error('Stream ended without result');
+        }
+
+        demBtn.addEventListener('click', async () => {
+            const target = targetEl.value.trim();
+            const reference = referenceEl.value.trim();
+            const pastedTarget = targetHtmlInput.value.trim();
+            const pastedReference = referenceHtmlInput.value.trim();
+
+            if (!pastedTarget && !isValidUrl(target)) { status.textContent = 'Missing target URL or pasted HTML'; targetEl.focus(); return; }
+            if (MODE === 'template') {
+                if (!SELECTED_TEMPLATE) { status.textContent = 'Pick a template first'; return; }
+            } else {
+                if (!pastedReference && !isValidUrl(reference) && !referenceShot) { status.textContent = 'Missing reference URL, HTML, or screenshot'; referenceEl.focus(); return; }
+            }
+            const provider = state.provider;
+            const apiKey = state.keys[provider];
+            if (!apiKey) { status.textContent = `Add your ${PROVIDERS[provider].label} key (top right) first`; return; }
+
+            demBtn.disabled = true;
+            demBtn.classList.add('opacity-60', 'pointer-events-none');
+            resultSection.classList.add('hidden');
+
+            // ---- LOCAL ENGINE PATH (preferred) ----
+            if (LOCAL_ENGINE) {
+                try {
+                    status.textContent = 'Engine · starting…';
+                    const { html, designMd } = await runViaLocalEngine({
+                        target, reference, pastedTarget, pastedReference, provider, apiKey,
+                        template: MODE === 'template' ? SELECTED_TEMPLATE : null
+                    });
+                    designOutEl.textContent = designMd;
+                    htmlOutEl.textContent = html;
+                    iframeEl.srcdoc = html;
+                    try { resultUrlLabel.textContent = new URL(normalizeUrl(target || 'target.local')).hostname + ' · re-skinned'; }
+                    catch { resultUrlLabel.textContent = 'target · re-skinned'; }
+                    resultSection.classList.remove('hidden');
+                    setResultTab('preview');
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    status.textContent = 'Done · target reborn (local engine)';
+                } catch (err) {
+                    console.error(err);
+                    status.textContent = `Engine error · ${err.message || err}`;
+                } finally {
+                    demBtn.disabled = false;
+                    demBtn.classList.remove('opacity-60', 'pointer-events-none');
+                }
+                return;
+            }
+
+            // ---- BROWSER FALLBACK PATH ----
+            try {
+                // ---- Reference: template OR URL+CSS bundle OR pasted ----
+                let referenceHtml = pastedReference;
+                let referenceCss = '';
+                let templateDesignMd = '';
+
+                if (MODE === 'template' && SELECTED_TEMPLATE) {
+                    status.textContent = `Loading template ${SELECTED_TEMPLATE.slug}…`;
+                    try {
+                        const [mdRes, htmlRes] = await Promise.all([
+                            fetch(`temas/${SELECTED_TEMPLATE.slug}-DESIGN.md`),
+                            fetch(`temas/${SELECTED_TEMPLATE.slug}.html`)
+                        ]);
+                        if (!mdRes.ok || !htmlRes.ok) throw new Error('template files unreachable');
+                        templateDesignMd = await mdRes.text();
+                        referenceHtml = await htmlRes.text();
+                    } catch (e) {
+                        throw new Error('Template fetch failed — local engine required for templates without HTTP origin');
+                    }
+                } else if (!pastedReference && isValidUrl(reference)) {
+                    const bundle = await fetchSourceBundle(reference, msg => status.textContent = `Reference · ${msg}`);
+                    referenceHtml = bundle.html;
+                    referenceCss = bundle.css;
+                    status.textContent = `Reference bundle · ${bundle.sheets.length} stylesheet(s) loaded`;
+                } else if (pastedReference) {
+                    status.textContent = 'Using pasted reference HTML…';
+                }
+
+                // ---- Target: HTML only ----
+                let targetHtml = pastedTarget;
+                if (!pastedTarget) {
+                    status.textContent = 'Target · Fetching HTML…';
+                    targetHtml = await fetchHtml(target);
+                }
+
+                // ---- Step 1: DESIGN.md (skipped if template provides one) ----
+                let designMd = templateDesignMd;
+                if (!designMd) {
+                    status.textContent = `Generating DESIGN.md via ${PROVIDERS[provider].label}…`;
+                    const refLabel = isValidUrl(reference) ? normalizeUrl(reference) : '(pasted)';
+                    const designParts = [];
+                    if (referenceShot) designParts.push({ type: 'image', mediaType: referenceShot.mediaType, base64: referenceShot.base64 });
+                    designParts.push({ type: 'text', text:
+`Reference site URL: ${refLabel}
+
+REFERENCE HTML (the codebase to analyze):
+${trimForContext(referenceHtml || '', 40000)}
+
+REFERENCE CSS (linked stylesheets — use these exact token values where possible):
+${trimForContext(referenceCss || '/* none captured — rely on inline <style> in HTML and screenshot */', 100000)}
+
+${referenceShot ? 'A screenshot of the rendered reference UI is attached above. Compare your DESIGN.md to it and revise until both the YAML tokens and prose faithfully capture what is visible.' : ''}` });
+
+                    designMd = await llmCall({
+                        system: VERBATIM_PROMPT,
+                        parts: designParts,
+                        provider, apiKey
+                    });
+                } else {
+                    status.textContent = `Using template DESIGN.md (${SELECTED_TEMPLATE.slug})`;
+                }
+                designOutEl.textContent = designMd;
+
+                // ---- Step 2a: extract target content as JSON ----
+                status.textContent = `Extracting target content as JSON via ${PROVIDERS[provider].label}…`;
+                const extractRaw = await llmCall({
+                    system: EXTRACT_SYSTEM,
+                    parts: [{ type: 'text', text:
+`Extract the visible content from the HTML below. Return a single JSON object with this shape (use null for missing fields, [] for empty arrays):
+
+{
+  "brand": "string",
+  "tagline": "string or null",
+  "hero": { "headline": "string", "subheadline": "string or null", "cta_primary": "string or null", "cta_secondary": "string or null" },
+  "nav": ["string"],
+  "features": [{ "title": "string", "description": "string" }],
+  "stats": [{ "label": "string", "value": "string" }],
+  "testimonials": [{ "quote": "string", "author": "string or null" }],
+  "pricing": [{ "name": "string", "price": "string", "features": ["string"] }],
+  "faq": [{ "question": "string", "answer": "string" }],
+  "sections": [{ "type": "string", "title": "string", "body": "string" }],
+  "footer": { "tagline": "string or null", "links": ["string"], "copyright": "string or null" }
+}
+
+HTML:
+${trimForContext(targetHtml || '', 60000)}` }],
+                    provider, apiKey
+                });
+                let targetContent;
+                try { targetContent = parseJsonLoose(extractRaw); }
+                catch (e) { throw new Error('Could not extract target content as JSON: ' + (e.message || e)); }
+                console.log('Extracted target content:', targetContent);
+
+                // ---- Step 2b: inject content into reference chassis ----
+                status.textContent = `Injecting content into reference chassis via ${PROVIDERS[provider].label}…`;
+                const reskinParts = [];
+                if (referenceShot) reskinParts.push({ type: 'image', mediaType: referenceShot.mediaType, base64: referenceShot.base64 });
+                reskinParts.push({ type: 'text', text:
+`STRUCTURED CONTENT (JSON) — these are the words that must appear in your output:
+${JSON.stringify(targetContent, null, 2)}
+
+REFERENCE DESIGN.md (visual identity tokens):
+${designMd}
+
+REFERENCE HTML to populate (preserve every tag, class, style, script, and section — replace only visible text nodes):
+${trimForContext(referenceHtml || '', 80000)}
+
+REFERENCE CSS (donor's actual stylesheets):
+${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe attached image is the rendered REFERENCE — match its visual decisions exactly while substituting its copy with the JSON content above.' : ''}`
+                });
+
+                const reskinned = await llmCall({
+                    system: INJECT_SYSTEM,
+                    parts: reskinParts,
+                    provider, apiKey
+                });
+                const html = extractHtmlBlock(reskinned);
+                htmlOutEl.textContent = html;
+                iframeEl.srcdoc = html;
+
+                try { resultUrlLabel.textContent = new URL(normalizeUrl(target)).hostname + ' · re-skinned'; }
+                catch { resultUrlLabel.textContent = 'target · re-skinned'; }
+
+                resultSection.classList.remove('hidden');
+                setResultTab('preview');
+                resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                status.textContent = 'Done · target reborn';
+            } catch (err) {
+                console.error(err);
+                status.textContent = `Error · ${err.message || err}`;
+            } finally {
+                demBtn.disabled = false;
+                demBtn.classList.remove('opacity-60', 'pointer-events-none');
+            }
+        });
+
+        // ---- GSAP reveal ----
+        document.addEventListener('DOMContentLoaded', () => {
+            const titleEl = document.querySelector('.gs-reveal-text');
+            if (titleEl && window.gsap) {
+                const words = titleEl.innerText.split(' ');
+                titleEl.innerHTML = '';
+                words.forEach(word => {
+                    const wrap = document.createElement('span');
+                    wrap.style.cssText = 'overflow:hidden;display:inline-block;vertical-align:bottom;margin-right:0.25em;padding-bottom:0.1em;margin-bottom:-0.1em;';
+                    const inner = document.createElement('span');
+                    inner.className = 'gs-word';
+                    inner.innerText = word;
+                    wrap.appendChild(inner);
+                    titleEl.appendChild(wrap);
+                });
+                gsap.to('.gs-word', { y: '0%', duration: 1.05, stagger: 0.05, ease: 'power4.out', delay: 0.15 });
+            }
+            if (window.gsap) {
+                gsap.from('.browser-card', { y: 40, opacity: 0, duration: 1, stagger: 0.15, ease: 'power3.out', delay: 0.4 });
+                gsap.from('#demarcelize-btn', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.9 });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Metrics Overview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        /* Base styles to ensure smooth rendering */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen items-center justify-center bg-neutral-950 p-4 font-sans text-neutral-200">
+
+    <!-- Main Presentation Card -->
+    <main class="relative w-full max-w-xl rounded-xl bg-black p-6 shadow-2xl shadow-black/50">
+        
+        <!-- Skill: Pseudo-element masked gradient border implemented via absolute div to adhere to inline-style constraint -->
+        <div class="pointer-events-none absolute inset-0 z-0 rounded-xl" 
+             style="padding: 1px; background: linear-gradient(to bottom, #525252, #171717); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;">
+        </div>
+
+        <div class="relative z-10 flex flex-col gap-6">
+            
+            <!-- Header Section -->
+            <header class="flex flex-col gap-4">
+                <!-- Decorative Top Bar -->
+                <div class="flex items-center justify-between font-mono text-xs text-neutral-600">
+                    <span>[</span>
+                    <div class="flex gap-1.5">
+                        <span class="h-1.5 w-1.5 bg-neutral-700"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-700"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-700"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-800"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-800"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-700"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-700"></span>
+                        <span class="h-1.5 w-1.5 bg-neutral-800"></span>
+                    </div>
+                    <span>]</span>
+                </div>
+
+                <!-- Title & High-level Stats -->
+                <div class="flex items-start justify-between">
+                    <h1 class="font-mono text-lg font-normal uppercase leading-tight tracking-tight text-neutral-100">
+                        System<br>Metrics
+                    </h1>
+                    
+                    <ul class="flex flex-col gap-1.5 text-right font-mono text-xs">
+                        <li class="flex items-center justify-end gap-2">
+                            <span class="text-neutral-600">[</span>
+                            <span class="text-neutral-500">Nodes:</span>
+                            <span class="font-medium text-neutral-200">48</span>
+                            <span class="text-neutral-600">]</span>
+                        </li>
+                        <li class="flex items-center justify-end gap-2">
+                            <span class="text-neutral-600">[</span>
+                            <span class="text-neutral-500">Cores:</span>
+                            <span class="font-medium text-neutral-200">256</span>
+                            <span class="text-neutral-600">]</span>
+                        </li>
+                        <li class="flex items-center justify-end gap-2">
+                            <span class="text-neutral-600">[</span>
+                            <span class="text-neutral-500">RTX4090:</span>
+                            <span class="font-medium text-neutral-200">32</span>
+                            <span class="text-neutral-600">]</span>
+                        </li>
+                        <li class="flex items-center justify-end gap-2">
+                            <span class="text-neutral-600">[</span>
+                            <span class="text-neutral-500">A6000:</span>
+                            <span class="font-medium text-neutral-200">16</span>
+                            <span class="text-neutral-600">]</span>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Divider -->
+            <div class="h-px w-full bg-neutral-800/80"></div>
+
+            <!-- Controls & Legend Section -->
+            <section class="flex flex-col gap-4">
+                
+                <!-- Controls -->
+                <div class="flex items-center justify-between">
+                    <h2 class="font-mono text-xs font-normal uppercase text-neutral-400">Analysis</h2>
+                    <div class="flex gap-2">
+                        <button class="flex items-center gap-1.5 rounded-sm border border-neutral-800 bg-neutral-900/50 px-2 py-1 font-mono text-xs text-neutral-300 transition-colors hover:bg-neutral-800">
+                            7 days
+                            <iconify-icon icon="solar:alt-arrow-down-linear" width="14" height="14" class="text-neutral-500"></iconify-icon>
+                        </button>
+                        <button class="flex items-center gap-1.5 rounded-sm border border-neutral-800 bg-neutral-900/50 px-2 py-1 font-mono text-xs text-neutral-300 transition-colors hover:bg-neutral-800">
+                            <span class="text-neutral-500">Node:</span> Cluster Alpha
+                            <iconify-icon icon="solar:alt-arrow-down-linear" width="14" height="14" class="text-neutral-500"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="grid grid-cols-2 gap-y-2 font-mono text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="text-neutral-600">[</span>
+                        <span class="h-1.5 w-1.5 rounded-sm bg-red-600"></span>
+                        <span class="text-neutral-400">compute-alpha</span>
+                        <span class="text-neutral-600">]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-neutral-600">[</span>
+                        <span class="h-1.5 w-1.5 rounded-sm bg-orange-500"></span>
+                        <span class="text-neutral-400">render-farm</span>
+                        <span class="text-neutral-600">]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-neutral-600">[</span>
+                        <span class="h-1.5 w-1.5 rounded-sm bg-yellow-500"></span>
+                        <span class="text-neutral-400">data-pipeline</span>
+                        <span class="text-neutral-600">]</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-neutral-600">[</span>
+                        <span class="h-1.5 w-1.5 rounded-sm bg-yellow-200"></span>
+                        <span class="text-neutral-400">idle-state</span>
+                        <span class="text-neutral-600">]</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chart Section -->
+            <section class="mt-2 flex flex-col gap-2">
+                <!-- Canvas Container -->
+                <div class="relative h-48 w-full border border-neutral-800/80 bg-neutral-950/30 overflow-hidden" id="chart-container">
+                    <canvas id="metricsChart" class="absolute inset-0 h-full w-full block"></canvas>
+                </div>
+                
+                <!-- X-Axis Labels -->
+                <div class="flex justify-between px-1 font-mono text-xs text-neutral-600">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span><span>24</span>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('metricsChart');
+            const container = document.getElementById('chart-container');
+            const ctx = canvas.getContext('2d');
+            
+            let width, height;
+            const numBars = 60;
+            const gap = 1;
+
+            // Colors matching the legend
+            const layers = [
+                { color: '#dc2626', baseHeight: 0.8, frequency: 0.05, speed: 0.001, phase: 0 },   // Red (Back)
+                { color: '#f97316', baseHeight: 0.6, frequency: 0.08, speed: 0.0015, phase: 2 },  // Orange
+                { color: '#eab308', baseHeight: 0.4, frequency: 0.12, speed: 0.002, phase: 4 },   // Yellow
+                { color: '#fef08a', baseHeight: 0.2, frequency: 0.15, speed: 0.0025, phase: 6 }   // Light Yellow (Front)
+            ];
+
+            function resize() {
+                const rect = container.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                width = canvas.width;
+                height = canvas.height;
+                ctx.scale(dpr, dpr);
+                width = rect.width;
+                height = rect.height;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+                const time = Date.now();
+
+                // Draw faint vertical grid lines
+                ctx.strokeStyle = '#262626';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                for (let i = 1; i < 12; i++) {
+                    const x = (width / 12) * i;
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                }
+                ctx.stroke();
+
+                const barWidth = (width / numBars) - gap;
+
+                // Draw layers from back to front
+                layers.forEach((layer) => {
+                    ctx.fillStyle = layer.color;
+                    
+                    for (let i = 0; i < numBars; i++) {
+                        const xPos = i * (barWidth + gap);
+                        const normalizedX = i / numBars;
+                        
+                        // Create a wave that generally peaks towards the middle-right
+                        const envelope = Math.sin(normalizedX * Math.PI) * 0.8 + 0.2;
+                        
+                        // Add animated noise/wave
+                        const noise = Math.sin(i * layer.frequency + time * layer.speed + layer.phase);
+                        const secondaryNoise = Math.cos(i * layer.frequency * 2 - time * layer.speed * 0.5);
+                        
+                        // Combine for organic movement
+                        const value = ((noise + secondaryNoise) * 0.25 + 0.5); 
+                        
+                        // Calculate final height
+                        const barHeight = height * layer.baseHeight * value * envelope;
+                        
+                        // Draw bar originating from bottom
+                        ctx.fillRect(xPos, height - barHeight, barWidth, barHeight);
+                    }
+                });
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        });
+    </script>
+</body>
+</html>

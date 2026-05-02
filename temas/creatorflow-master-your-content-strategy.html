@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CreatorFlow — Master your content strategy</title>
+  <meta name="description" content="Connect with elite content creators, brand strategists, and marketing experts to elevate your digital presence." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Manrope', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#112345',
+              pink: '#FB2875',
+              light: '#f8fafc'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white text-brand-dark antialiased selection:bg-brand-pink/20 selection:text-brand-dark font-sans overflow-x-hidden relative">
+  
+  <!-- Container Lines -->
+  <div class="fixed inset-y-0 left-1/2 hidden w-full max-w-7xl -translate-x-1/2 lg:block pointer-events-none z-0">
+    <div class="absolute inset-y-0 left-4 w-px bg-brand-dark/5"></div>
+    <div class="absolute inset-y-0 right-4 w-px bg-brand-dark/5"></div>
+    <div class="absolute left-4 top-32 h-1.5 w-1.5 -translate-x-1/2 border border-brand-dark/10 bg-white"></div>
+    <div class="absolute right-4 top-32 h-1.5 w-1.5 translate-x-1/2 border border-brand-dark/10 bg-white"></div>
+    <div class="absolute left-4 bottom-32 h-1.5 w-1.5 -translate-x-1/2 border border-brand-dark/10 bg-white"></div>
+    <div class="absolute right-4 bottom-32 h-1.5 w-1.5 translate-x-1/2 border border-brand-dark/10 bg-white"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 border-b border-brand-dark/5 bg-white/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8 relative z-10">
+      <a href="#top" class="flex items-center gap-3 group" aria-label="CreatorFlow home">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-dark text-white transition-transform group-hover:scale-105">
+          <iconify-icon icon="solar:pen-new-round-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+        </span>
+        <div>
+          <div class="text-sm font-heading font-medium tracking-tight text-brand-dark">CreatorFlow</div>
+          <div class="text-xs text-brand-dark/50">Content mentorship</div>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        <a href="#how" class="text-sm text-brand-dark/70 transition hover:text-brand-pink">Process</a>
+        <a href="#why" class="text-sm text-brand-dark/70 transition hover:text-brand-pink">Benefits</a>
+        <a href="#categories" class="text-sm text-brand-dark/70 transition hover:text-brand-pink">Expertise</a>
+        <a href="#testimonials" class="text-sm text-brand-dark/70 transition hover:text-brand-pink">Results</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#mentor-cta" class="hidden rounded-full px-4 py-2 text-sm font-medium text-brand-dark transition hover:bg-brand-dark/5 md:inline-flex">Join as Mentor</a>
+        <a href="#hero-cta" class="inline-flex rounded-full bg-brand-pink px-4 py-2 text-sm font-medium text-white transition hover:bg-[#e01e65] shadow-sm shadow-brand-pink/20">Find an Expert</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="relative z-10">
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-16 pb-12 sm:pt-24 lg:pt-32 lg:pb-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+        <!-- Subtle background glow -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-pink/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
+          <div class="max-w-2xl relative z-10">
+            <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-dark/10 bg-white px-3 py-1.5 text-xs font-medium text-brand-dark/70 shadow-sm">
+              <span class="flex h-2 w-2 rounded-full bg-brand-pink relative">
+                <span class="absolute inset-0 rounded-full bg-brand-pink animate-ping opacity-75"></span>
+              </span>
+              Elite strategists available now
+            </div>
+
+            <h1 class="reveal font-heading text-4xl font-medium leading-tight tracking-tight text-brand-dark sm:text-5xl lg:text-6xl">
+              Elevate your content game with industry experts.
+            </h1>
+
+            <p class="mt-6 max-w-xl text-base leading-relaxed text-brand-dark/70 sm:text-lg">
+              Stop guessing the algorithm. Get practical 1:1 guidance on strategy, production, and monetization from creators who have actually done it.
+            </p>
+
+            <div id="hero-cta" class="mt-8 flex flex-col gap-4 sm:flex-row">
+              <a href="#categories" class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-dark px-6 py-3.5 text-sm font-medium text-white transition hover:bg-brand-dark/90 shadow-lg shadow-brand-dark/10">
+                <iconify-icon icon="solar:magnifer-linear" width="18" height="18" stroke-width="1.5"></iconify-icon>
+                Browse Mentors
+              </a>
+              <a href="#how" class="inline-flex items-center justify-center gap-2 rounded-full border border-brand-dark/10 bg-white px-6 py-3.5 text-sm font-medium text-brand-dark transition hover:bg-brand-dark/5">
+                <iconify-icon icon="solar:play-circle-linear" width="18" height="18" stroke-width="1.5"></iconify-icon>
+                See how it works
+              </a>
+            </div>
+
+            <div class="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-brand-dark/5 pt-8">
+              <div>
+                <div class="font-heading text-2xl font-medium tracking-tight text-brand-dark">50+</div>
+                <div class="mt-1 text-xs text-brand-dark/60">Vetted creators</div>
+              </div>
+              <div>
+                <div class="font-heading text-2xl font-medium tracking-tight text-brand-dark">10k+</div>
+                <div class="mt-1 text-xs text-brand-dark/60">Hours mentored</div>
+              </div>
+              <div>
+                <div class="font-heading text-2xl font-medium tracking-tight text-brand-dark">4.9/5</div>
+                <div class="mt-1 text-xs text-brand-dark/60">Average rating</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+            <!-- Premium Border Gradient Wrapper -->
+            <div class="rounded-[2.5rem] p-[1px]" style="background: linear-gradient(135deg, rgba(17,35,69,0.15), rgba(251,40,117,0.2), rgba(17,35,69,0.05));">
+              <div class="relative overflow-hidden rounded-[calc(2.5rem-1px)] bg-white p-2">
+                <div class="relative overflow-hidden rounded-[2rem] aspect-[4/5]">
+                  <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/582afef4-b810-47b8-a047-8b3597c323e1_3840w.webp" alt="Content creator mentoring session" class="h-full w-full object-cover" />
+                  
+                  <!-- Floating UI Element -->
+                  <div class="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/20 bg-white/90 p-4 backdrop-blur-md shadow-xl">
+                    <div class="flex items-center gap-3">
+                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2f563338-39fa-47ea-9761-658d4f3f84db_1600w.jpg" alt="Mentor" class="h-10 w-10 rounded-full object-cover border border-brand-dark/10" />
+                      <div class="flex-1">
+                        <div class="text-sm font-medium text-brand-dark">Session with Elena</div>
+                        <div class="text-xs text-brand-dark/60">Brand Strategy Review</div>
+                      </div>
+                      <div class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-pink/10 text-brand-pink">
+                        <iconify-icon icon="solar:check-circle-linear" width="18" height="18" stroke-width="1.5"></iconify-icon>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo Cloud (Optional subtle trust building) -->
+    <section class="border-y border-brand-dark/5 bg-brand-light/30 py-8">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-xs font-medium uppercase tracking-[0.15em] text-brand-dark/40 mb-6">Mentors featured in</p>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 grayscale">
+          <div class="text-lg font-heading font-medium tracking-tight">Forbes</div>
+          <div class="text-lg font-heading font-medium tracking-tight">Vogue</div>
+          <div class="text-lg font-heading font-medium tracking-tight">TechCrunch</div>
+          <div class="text-lg font-heading font-medium tracking-tight">FastCompany</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="py-16 sm:py-24 lg:py-32 relative">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-16 max-w-2xl">
+          <h2 class="reveal font-heading text-3xl font-medium tracking-tight text-brand-dark sm:text-4xl">Your path to mastering <br/>the digital landscape.</h2>
+          <p class="mt-4 text-sm leading-relaxed text-brand-dark/70 sm:text-base">A streamlined process designed to get you the exact actionable advice you need, without the fluff.</p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- Premium Border Gradient Card -->
+          <div class="rounded-3xl p-[1px] group" style="background: linear-gradient(180deg, rgba(17,35,69,0.08), rgba(17,35,69,0.02));">
+            <article class="h-full rounded-[calc(1.5rem-1px)] bg-white p-8 transition-all hover:shadow-lg hover:shadow-brand-dark/5">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-brand-dark/5 text-brand-dark">
+                <iconify-icon icon="solar:target-bold-duotone" width="24" height="24"></iconify-icon>
+              </div>
+              <div class="text-xs font-medium text-brand-pink mb-2">Phase 01</div>
+              <h3 class="font-heading text-xl font-medium tracking-tight text-brand-dark">Define the goal</h3>
+              <p class="mt-3 text-sm leading-relaxed text-brand-dark/60">Identify your current bottleneck—whether it's audience retention, aesthetic coherence, or monetization pathways.</p>
+            </article>
+          </div>
+
+          <div class="rounded-3xl p-[1px]" style="background: linear-gradient(180deg, rgba(17,35,69,0.08), rgba(17,35,69,0.02));">
+            <article class="h-full rounded-[calc(1.5rem-1px)] bg-white p-8 transition-all hover:shadow-lg hover:shadow-brand-dark/5">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-brand-pink/10 text-brand-pink">
+                <iconify-icon icon="solar:users-group-rounded-bold-duotone" width="24" height="24"></iconify-icon>
+              </div>
+              <div class="text-xs font-medium text-brand-pink mb-2">Phase 02</div>
+              <h3 class="font-heading text-xl font-medium tracking-tight text-brand-dark">Match with an expert</h3>
+              <p class="mt-3 text-sm leading-relaxed text-brand-dark/60">Browse profiles of vetted industry leaders based on your specific niche and desired outcomes.</p>
+            </article>
+          </div>
+
+          <div class="rounded-3xl p-[1px]" style="background: linear-gradient(180deg, rgba(17,35,69,0.08), rgba(17,35,69,0.02));">
+            <article class="h-full rounded-[calc(1.5rem-1px)] bg-white p-8 transition-all hover:shadow-lg hover:shadow-brand-dark/5">
+              <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-brand-dark/5 text-brand-dark">
+                <iconify-icon icon="solar:video-frame-bold-duotone" width="24" height="24"></iconify-icon>
+              </div>
+              <div class="text-xs font-medium text-brand-pink mb-2">Phase 03</div>
+              <h3 class="font-heading text-xl font-medium tracking-tight text-brand-dark">Execute in 1:1 sessions</h3>
+              <p class="mt-3 text-sm leading-relaxed text-brand-dark/60">Jump on a focused video call to review strategy, analyze data, and build an actionable roadmap together.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories / Areas of Expertise -->
+    <section id="categories" class="border-t border-brand-dark/5 bg-brand-light/20 py-16 sm:py-24 lg:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <h2 class="reveal font-heading text-3xl font-medium tracking-tight text-brand-dark sm:text-4xl">Areas of expertise.</h2>
+            <p class="mt-4 text-sm leading-relaxed text-brand-dark/70">Targeted support across the entire content lifecycle.</p>
+          </div>
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-brand-pink hover:text-[#e01e65]">
+            View all categories <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+          </a>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Category Item -->
+          <a href="#" class="group flex items-start gap-4 rounded-2xl border border-brand-dark/10 bg-white p-6 transition-all hover:border-brand-pink/30 hover:shadow-md">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-dark text-white">
+              <iconify-icon icon="solar:clapperboard-edit-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-medium tracking-tight text-brand-dark group-hover:text-brand-pink transition-colors">Video Strategy</h3>
+              <p class="mt-1 text-xs leading-relaxed text-brand-dark/60">YouTube growth, short-form editing, scripting, and retention mechanics.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group flex items-start gap-4 rounded-2xl border border-brand-dark/10 bg-white p-6 transition-all hover:border-brand-pink/30 hover:shadow-md">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-dark text-white">
+              <iconify-icon icon="solar:pen-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-medium tracking-tight text-brand-dark group-hover:text-brand-pink transition-colors">Copywriting</h3>
+              <p class="mt-1 text-xs leading-relaxed text-brand-dark/60">Newsletters, Twitter threads, persuasive landing pages, and storytelling.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group flex items-start gap-4 rounded-2xl border border-brand-dark/10 bg-white p-6 transition-all hover:border-brand-pink/30 hover:shadow-md">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-dark text-white">
+              <iconify-icon icon="solar:tag-price-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-medium tracking-tight text-brand-dark group-hover:text-brand-pink transition-colors">Brand & Monetization</h3>
+              <p class="mt-1 text-xs leading-relaxed text-brand-dark/60">Sponsorship deals, digital products, positioning, and funnel architecture.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group flex items-start gap-4 rounded-2xl border border-brand-dark/10 bg-white p-6 transition-all hover:border-brand-pink/30 hover:shadow-md">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-dark text-white">
+              <iconify-icon icon="solar:palette-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-medium tracking-tight text-brand-dark group-hover:text-brand-pink transition-colors">Visual Design</h3>
+              <p class="mt-1 text-xs leading-relaxed text-brand-dark/60">Thumbnail design, aesthetic consistency, and platform-native visuals.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group flex items-start gap-4 rounded-2xl border border-brand-dark/10 bg-white p-6 transition-all hover:border-brand-pink/30 hover:shadow-md">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-dark text-white">
+              <iconify-icon icon="solar:chart-square-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-medium tracking-tight text-brand-dark group-hover:text-brand-pink transition-colors">Growth Analytics</h3>
+              <p class="mt-1 text-xs leading-relaxed text-brand-dark/60">Data interpretation, A/B testing, and actionable metric tracking.</p>
+            </div>
+          </a>
+
+          <a href="#" class="group flex items-start gap-4 rounded-2xl border border-brand-dark/10 bg-white p-6 transition-all hover:border-brand-pink/30 hover:shadow-md">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-dark text-white">
+              <iconify-icon icon="solar:laptop-linear" width="20" height="20" stroke-width="1.5"></iconify-icon>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-medium tracking-tight text-brand-dark group-hover:text-brand-pink transition-colors">Systems & Operations</h3>
+              <p class="mt-1 text-xs leading-relaxed text-brand-dark/60">Content pipelines, hiring editors, and scaling your personal brand.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Feature -->
+    <section class="py-16 sm:py-24 lg:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+          
+          <div class="order-2 lg:order-1">
+            <div class="rounded-3xl p-[1px]" style="background: linear-gradient(135deg, rgba(17,35,69,0.1), rgba(251,40,117,0.15), rgba(17,35,69,0.05));">
+              <div class="rounded-[calc(1.5rem-1px)] bg-white p-6 sm:p-8">
+                <div class="grid gap-6 sm:grid-cols-[1fr_1.5fr]">
+                  <div class="overflow-hidden rounded-2xl aspect-[3/4]">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3186f9ea-5f5a-49f7-8fcf-568ad52f515e_3840w.webp" alt="Mentor profile" class="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
+                  </div>
+
+                  <div class="flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="inline-flex items-center gap-1 rounded-md bg-brand-pink/10 px-2 py-1 text-xs font-medium uppercase tracking-wider text-brand-pink">
+                          <span class="h-1.5 w-1.5 rounded-full bg-brand-pink"></span> Top Creator
+                        </span>
+                        <div class="flex items-center gap-1 text-sm font-medium text-brand-dark">
+                          4.98 <iconify-icon icon="solar:star-bold" width="14" height="14" class="text-yellow-400"></iconify-icon>
+                        </div>
+                      </div>
+                      <h3 class="font-heading text-2xl font-medium tracking-tight text-brand-dark">Sarah Jenkins</h3>
+                      <p class="mt-1 text-sm text-brand-dark/60">Creative Director & Brand Strategist</p>
+                      
+                      <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="rounded-full border border-brand-dark/10 px-3 py-1 text-xs text-brand-dark/70">YouTube</span>
+                        <span class="rounded-full border border-brand-dark/10 px-3 py-1 text-xs text-brand-dark/70">Storytelling</span>
+                        <span class="rounded-full border border-brand-dark/10 px-3 py-1 text-xs text-brand-dark/70">Sponsorships</span>
+                      </div>
+
+                      <p class="mt-4 text-sm leading-relaxed text-brand-dark/70">
+                        Helps independent creators transition into scalable media companies. Focuses on deep narrative structure and securing premium brand deals.
+                      </p>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between border-t border-brand-dark/5 pt-4">
+                      <div>
+                        <div class="text-xs text-brand-dark/50">45 min session</div>
+                        <div class="font-medium text-brand-dark">$150</div>
+                      </div>
+                      <button class="rounded-full bg-brand-dark px-5 py-2.5 text-sm font-medium text-white transition hover:bg-brand-pink">
+                        Book Session
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2 max-w-xl lg:pl-8">
+            <h2 class="reveal font-heading text-3xl font-medium tracking-tight text-brand-dark sm:text-4xl">Learn from the practitioners, not the theorists.</h2>
+            <p class="mt-4 text-sm leading-relaxed text-brand-dark/70 sm:text-base">
+              Every mentor on our platform is actively building in the trenches. You get access to real data, unreleased strategies, and honest feedback on your work from people whose full-time job is understanding what works today.
+            </p>
+            <ul class="mt-8 space-y-4">
+              <li class="flex items-start gap-3 text-sm text-brand-dark/80">
+                <iconify-icon icon="solar:check-circle-bold-duotone" width="20" height="20" class="text-brand-pink shrink-0 mt-0.5"></iconify-icon>
+                <span>Rigorous vetting process ensuring only active top 1% creators.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-brand-dark/80">
+                <iconify-icon icon="solar:check-circle-bold-duotone" width="20" height="20" class="text-brand-pink shrink-0 mt-0.5"></iconify-icon>
+                <span>Clear session structures and pre-call questionnaires.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm text-brand-dark/80">
+                <iconify-icon icon="solar:check-circle-bold-duotone" width="20" height="20" class="text-brand-pink shrink-0 mt-0.5"></iconify-icon>
+                <span>Post-session recordings and actionable roadmaps provided.</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="bg-brand-dark py-16 sm:py-24 lg:py-32">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-16 text-center">
+          <h2 class="reveal font-heading text-3xl font-medium tracking-tight text-white sm:text-4xl">Transformations that speak volumes.</h2>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+            <div class="flex items-center gap-1 mb-6 text-brand-pink">
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+            </div>
+            <p class="text-sm leading-relaxed text-white/80">“My retention graph was flatlining. One session breaking down my intro hook structure changed everything. My next video hit 500k views.”</p>
+            <div class="mt-8 flex items-center gap-3">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/eca707cc-a5b7-439a-b4fd-247f6106c2e1_1600w.jpg" alt="Client" class="h-10 w-10 rounded-full object-cover" />
+              <div>
+                <div class="text-sm font-medium text-white">David Chen</div>
+                <div class="text-xs text-white/50">Tech Reviewer</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Highlight Card in Brand Pink -->
+          <article class="rounded-2xl bg-brand-pink p-8 shadow-2xl shadow-brand-pink/20 relative overflow-hidden">
+            <div class="absolute -right-4 -top-4 text-white/10">
+              <iconify-icon icon="solar:quote-right-bold" width="100" height="100"></iconify-icon>
+            </div>
+            <div class="flex items-center gap-1 mb-6 text-white">
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+            </div>
+            <p class="relative z-10 text-sm leading-relaxed text-white">“The clarity I got on my pricing model for sponsorships paid for the session 10x over in my very next brand deal negotiation. Essential.”</p>
+            <div class="mt-8 flex items-center gap-3 relative z-10">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d868fef-f560-45ca-ab35-5dad4fc29059_3840w.webp" alt="Client" class="h-10 w-10 rounded-full object-cover border border-white/20" />
+              <div>
+                <div class="text-sm font-medium text-white">Amina Yusuf</div>
+                <div class="text-xs text-white/80">Lifestyle Creator</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+            <div class="flex items-center gap-1 mb-6 text-brand-pink">
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+              <iconify-icon icon="solar:star-bold" width="16" height="16"></iconify-icon>
+            </div>
+            <p class="text-sm leading-relaxed text-white/80">“I was completely burnt out creating across 4 platforms. My mentor helped me build a repurposing system that cut my editing time in half.”</p>
+            <div class="mt-8 flex items-center gap-3">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4f5668c5-fc4a-44e0-bc5e-a664189d3c31_1600w.jpg" alt="Client" class="h-10 w-10 rounded-full object-cover" />
+              <div>
+                <div class="text-sm font-medium text-white">Marcus Webb</div>
+                <div class="text-xs text-white/50">Educator</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mentor CTA Section -->
+    <section id="mentor-cta" class="py-16 sm:py-24 lg:py-32">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="reveal font-heading text-3xl font-medium tracking-tight text-brand-dark sm:text-5xl">Monetize your expertise.<br/> Shape the next generation.</h2>
+        <p class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-dark/70">
+          Join our curated roster of top-tier creators. Set your own rates, manage your availability, and get paid to share the operational secrets you've already figured out.
+        </p>
+        <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href="#" class="rounded-full bg-brand-dark px-8 py-4 text-sm font-medium text-white transition hover:bg-brand-pink">
+            Apply as a Mentor
+          </a>
+          <a href="#" class="rounded-full border border-brand-dark/10 px-8 py-4 text-sm font-medium text-brand-dark transition hover:bg-brand-dark/5">
+            Read Mentor FAQs
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="border-t border-brand-dark/5 bg-brand-light/30 py-16 sm:py-24">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-12 text-center">
+          <h2 class="font-heading text-3xl font-medium tracking-tight text-brand-dark">Common questions.</h2>
+        </div>
+
+        <div class="space-y-4">
+          <details class="group rounded-2xl border border-brand-dark/10 bg-white p-6 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-medium text-brand-dark outline-none">
+              How are mentors vetted?
+              <span class="transition group-open:rotate-180 text-brand-dark/50 group-hover:text-brand-pink">
+                <iconify-icon icon="solar:alt-arrow-down-linear" width="20" height="20"></iconify-icon>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-brand-dark/70 border-t border-brand-dark/5 pt-4">We manually review every application. We look for verifiable audience size, engagement metrics, revenue figures (for business mentors), and a track record of clearly articulating concepts.</p>
+          </details>
+
+          <details class="group rounded-2xl border border-brand-dark/10 bg-white p-6 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-medium text-brand-dark outline-none">
+              What happens after I book?
+              <span class="transition group-open:rotate-180 text-brand-dark/50 group-hover:text-brand-pink">
+                <iconify-icon icon="solar:alt-arrow-down-linear" width="20" height="20"></iconify-icon>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-brand-dark/70 border-t border-brand-dark/5 pt-4">You'll fill out a specific questionnaire so the mentor can prepare. You will receive a calendar invite with a video link. After the call, you'll get a recording and any notes taken during the session.</p>
+          </details>
+
+          <details class="group rounded-2xl border border-brand-dark/10 bg-white p-6 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-medium text-brand-dark outline-none">
+              Can I get a refund if the session wasn't helpful?
+              <span class="transition group-open:rotate-180 text-brand-dark/50 group-hover:text-brand-pink">
+                <iconify-icon icon="solar:alt-arrow-down-linear" width="20" height="20"></iconify-icon>
+              </span>
+            </summary>
+            <p class="mt-4 text-sm leading-relaxed text-brand-dark/70 border-t border-brand-dark/5 pt-4">Yes. If the mentor doesn't show up or fails to provide the value promised in their profile, we offer a full guarantee. We hold funds in escrow until the session is successfully completed.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-brand-dark/10 bg-white py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-10 md:flex-row md:justify-between">
+        <div class="max-w-xs">
+          <a href="#top" class="flex items-center gap-2 mb-4 group">
+            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-dark text-white">
+              <iconify-icon icon="solar:pen-new-round-linear" width="16" height="16"></iconify-icon>
+            </span>
+            <span class="font-heading font-medium tracking-tight text-brand-dark text-lg">CreatorFlow</span>
+          </a>
+          <p class="text-sm text-brand-dark/60 leading-relaxed">
+            The private mentorship network for ambitious digital creators and brand builders.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div>
+            <div class="text-xs font-medium uppercase tracking-[0.15em] text-brand-dark/40 mb-4">Platform</div>
+            <ul class="space-y-3 text-sm text-brand-dark/70">
+              <li><a href="#" class="hover:text-brand-pink transition-colors">Browse Mentors</a></li>
+              <li><a href="#" class="hover:text-brand-pink transition-colors">How it works</a></li>
+              <li><a href="#" class="hover:text-brand-pink transition-colors">Pricing</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-xs font-medium uppercase tracking-[0.15em] text-brand-dark/40 mb-4">Company</div>
+            <ul class="space-y-3 text-sm text-brand-dark/70">
+              <li><a href="#" class="hover:text-brand-pink transition-colors">About Us</a></li>
+              <li><a href="#" class="hover:text-brand-pink transition-colors">Become a Mentor</a></li>
+              <li><a href="#" class="hover:text-brand-pink transition-colors">Contact Support</a></li>
+            </ul>
+          </div>
+          <div class="col-span-2 sm:col-span-1">
+            <div class="text-xs font-medium uppercase tracking-[0.15em] text-brand-dark/40 mb-4">Connect</div>
+            <div class="flex items-center gap-3">
+              <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full border border-brand-dark/10 text-brand-dark hover:bg-brand-dark hover:text-white transition-colors">
+                <iconify-icon icon="solar:letter-linear" width="18" height="18"></iconify-icon>
+              </a>
+              <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full border border-brand-dark/10 text-brand-dark hover:bg-brand-dark hover:text-white transition-colors">
+                <iconify-icon icon="solar:hashtag-linear" width="18" height="18"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col items-center justify-between border-t border-brand-dark/5 pt-8 sm:flex-row text-xs text-brand-dark/50">
+        <p>© 2026 CreatorFlow. All rights reserved.</p>
+        <div class="mt-4 flex gap-4 sm:mt-0">
+          <a href="#" class="hover:text-brand-dark">Privacy Policy</a>
+          <a href="#" class="hover:text-brand-dark">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // GSAP Masked Reveal for Headings
+    (function () {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach((el) => {
+        const text = el.textContent.trim().split(' ');
+        el.innerHTML = text.map((word) => {
+          return '<span style="display:inline-block; overflow:hidden; vertical-align:top; margin-right:0.25em;"><span class="reveal-word" style="display:inline-block; transform:translateY(110%); opacity:0;">' + word + '</span></span>';
+        }).join('');
+      });
+
+      gsap.registerPlugin(ScrollTrigger);
+      document.querySelectorAll('.reveal').forEach((el) => {
+        gsap.to(el.querySelectorAll('.reveal-word'), {
+          y: 0,
+          opacity: 1,
+          ease: 'power4.out',
+          duration: 1,
+          stagger: 0.05,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            once: true
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

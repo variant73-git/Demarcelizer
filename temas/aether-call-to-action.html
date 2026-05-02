@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether - Call to Action</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body class="bg-gradient-to-b from-[#111111] to-[#000000] min-h-screen flex items-center justify-center p-4 md:p-8 antialiased font-sans overflow-hidden">
+
+    <!-- Main Container -->
+    <div class="relative w-full max-w-[1400px] aspect-[4/3] max-h-[90vh] bg-gradient-to-b from-[#1e1e1e] to-[#0a0a0a] rounded-[2rem] border border-[#333]/50 shadow-[0_30px_60px_-15px_rgba(0,0,0,1),inset_0_1px_2px_rgba(255,255,255,0.08),inset_0_-3px_12px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col">
+        
+        <!-- Surface Noise Texture -->
+        <div class="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay z-0" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+        <!-- WebGL Canvas Background -->
+        <canvas id="glcanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+        <!-- UI Overlay -->
+        <div class="relative z-10 flex flex-col h-full w-full p-6 md:p-12 pointer-events-none">
+            
+            <!-- Feature Tag -->
+            <header class="flex justify-start w-full pointer-events-auto">
+                <div class="flex items-center gap-2 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a] border border-[#000] rounded-full px-4 py-2 shadow-[inset_0_2px_6px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.05)]">
+                    <iconify-icon icon="solar:rocket-linear" width="18" height="18" class="text-indigo-400 drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"></iconify-icon>
+                    <span class="font-normal text-xs tracking-widest uppercase text-[#a1a1aa] [text-shadow:0_1px_1px_rgba(0,0,0,1)]">Initiate Sequence</span>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 flex flex-col items-start justify-end pointer-events-auto w-full">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl leading-tight font-normal tracking-tight text-[#f4f4f5] [text-shadow:0_2px_4px_rgba(0,0,0,0.8),0_1px_1px_rgba(255,255,255,0.1)] mb-6 max-w-3xl">
+                    Launch your worldwide infrastructure now.
+                </h2>
+                
+                <p class="text-[#a1a1aa] text-base md:text-lg leading-relaxed max-w-2xl mb-8 [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">
+                    Connect with a community of engineers scaling at the periphery. Register to immediately launch robust applications without any setup or manual server management needed.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 mb-12">
+                    <button class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-b from-[#f0f0f0] to-[#c8c8c8] text-[#111111] font-normal text-sm px-6 py-2.5 rounded-full border border-[#ffffff]/60 shadow-[0_8px_16px_rgba(0,0,0,0.6),inset_0_2px_3px_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.3)] hover:from-[#ffffff] hover:to-[#e0e0e0] active:shadow-[inset_0_3px_6px_rgba(0,0,0,0.3),0_2px_4px_rgba(0,0,0,0.5)] active:translate-y-[1px] transition-all [text-shadow:0_1px_0_rgba(255,255,255,0.6)]">
+                        Open free account
+                    </button>
+                    <button class="w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-b from-[#3a3a3a] to-[#222222] text-[#f4f4f5] border border-[#555555]/30 shadow-[0_8px_16px_rgba(0,0,0,0.8),inset_0_1px_2px_rgba(255,255,255,0.15),inset_0_-2px_5px_rgba(0,0,0,0.6)] font-normal text-sm px-6 py-2.5 rounded-full hover:from-[#444444] hover:to-[#2a2a2a] active:shadow-[inset_0_3px_6px_rgba(0,0,0,0.7),0_2px_4px_rgba(0,0,0,0.4)] active:translate-y-[1px] transition-all [text-shadow:0_-1px_0_rgba(0,0,0,0.8)]">
+                        Contact sales
+                    </button>
+                </div>
+                
+                <!-- Benefits Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 w-full border-t border-[#000] shadow-[0_1px_0_rgba(255,255,255,0.05)] pt-8">
+                    <div class="flex flex-col gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] border border-[#000] flex items-center justify-center mb-1 shadow-[inset_0_4px_8px_rgba(0,0,0,0.9),0_1px_1px_rgba(255,255,255,0.08)]">
+                            <iconify-icon icon="solar:bolt-linear" width="20" height="20" class="text-[#e4e4e7] drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"></iconify-icon>
+                        </div>
+                        <h3 class="text-[#f4f4f5] font-normal text-base tracking-tight [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">Immediate Deployment</h3>
+                        <p class="text-[#71717a] text-sm leading-relaxed [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">Initialize enterprise-grade environments spanning 35+ global zones within fractions of a second.</p>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] border border-[#000] flex items-center justify-center mb-1 shadow-[inset_0_4px_8px_rgba(0,0,0,0.9),0_1px_1px_rgba(255,255,255,0.08)]">
+                            <iconify-icon icon="solar:database-linear" width="20" height="20" class="text-[#e4e4e7] drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"></iconify-icon>
+                        </div>
+                        <h3 class="text-[#f4f4f5] font-normal text-base tracking-tight [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">Elastic Datastores</h3>
+                        <p class="text-[#71717a] text-sm leading-relaxed [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">Be billed purely for the capacity you truly utilize through our auto-expanding storage core.</p>
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a] border border-[#000] flex items-center justify-center mb-1 shadow-[inset_0_4px_8px_rgba(0,0,0,0.9),0_1px_1px_rgba(255,255,255,0.08)]">
+                            <iconify-icon icon="solar:shield-check-linear" width="20" height="20" class="text-[#e4e4e7] drop-shadow-[0_1px_2px_rgba(0,0,0,1)]"></iconify-icon>
+                        </div>
+                        <h3 class="text-[#f4f4f5] font-normal text-base tracking-tight [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">Corporate Security</h3>
+                        <p class="text-[#71717a] text-sm leading-relaxed [text-shadow:0_1px_1px_rgba(0,0,0,0.8)]">Fully certified infrastructure featuring next-generation cryptographic protection enabled out of the box.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // WebGL Setup for the glowing wireframe torus effect
+        const canvas = document.getElementById('glcanvas');
+        const gl = canvas.getContext('webgl');
+
+        if (!gl) {
+            console.error('WebGL not supported');
+        }
+
+        // Vertex Shader
+        const vsSource = `
+            attribute vec4 aVertexPosition;
+            void main() {
+                gl_Position = aVertexPosition;
+            }
+        `;
+
+        // Fragment Shader
+        const fsSource = `
+            precision highp float;
+            uniform vec2 u_resolution;
+            uniform float u_time;
+
+            void main() {
+                // Normalize pixel coordinates (from 0 to 1)
+                vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                
+                // Remap to centered coordinates, adjust aspect ratio
+                vec2 p = uv * 2.0 - 1.0;
+                p.x *= u_resolution.x / u_resolution.y;
+
+                // Shift the shape up to match reference (half visible at top)
+                p.y += 0.8;
+
+                // Parameters for the fake torus
+                float radius = 1.6;
+                float thickness = 0.5;
+                
+                // Polar coordinates
+                float r = length(p);
+                float a = atan(p.y, p.x);
+
+                // Distance to the ring center
+                float dist = abs(r - radius);
+
+                // Create curved lines simulating a 3D wireframe
+                // The angle 'a' defines position around the ring
+                // The radius 'r' warps the lines to simulate depth/curvature
+                float warp = sin(r * 4.0 - u_time * 0.5) * 0.3;
+                
+                // Base frequency of lines
+                float lineFreq = 80.0;
+                
+                // Generate sine wave pattern
+                float lines = sin((a + warp) * lineFreq + u_time * 2.0);
+                
+                // Sharpen lines and make them thinner
+                lines = smoothstep(0.85, 1.0, lines);
+
+                // Mask lines to only appear within the thickness of the ring
+                // Soft mask for a glowing edge
+                float mask = smoothstep(thickness, 0.0, dist);
+
+                // Core glow independent of lines
+                float coreGlow = 0.05 / (dist * dist + 0.05);
+
+                // Combine lines and mask
+                float pattern = lines * mask;
+
+                // Colors transitioning from bright blue to purple
+                vec3 color1 = vec3(0.0, 0.4, 1.0); // Blue
+                vec3 color2 = vec3(0.8, 0.1, 0.9); // Purple
+                
+                // Mix colors based on angle to create gradient along the ring
+                vec3 baseColor = mix(color1, color2, sin(a * 2.0 + u_time * 0.5) * 0.5 + 0.5);
+                
+                // Add white highlights to the lines themselves
+                vec3 lineColor = mix(baseColor, vec3(1.0), 0.4);
+
+                // Final color composition
+                vec3 finalColor = lineColor * pattern * 2.5 + baseColor * coreGlow * 1.5;
+
+                // Fade out at the bottom edges to blend into black background
+                finalColor *= smoothstep(1.5, -0.5, p.y);
+                
+                // Global fade out based on distance to center to prevent sharp cuts
+                finalColor *= smoothstep(3.0, 1.0, r);
+
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        // Compile Shader Function
+        function loadShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+                gl.deleteShader(shader);
+                return null;
+            }
+            return shader;
+        }
+
+        // Initialize Shader Program
+        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+        const shaderProgram = gl.createProgram();
+        gl.attachShader(shaderProgram, vertexShader);
+        gl.attachShader(shaderProgram, fragmentShader);
+        gl.linkProgram(shaderProgram);
+
+        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+            console.error('Program link error:', gl.getProgramInfoLog(shaderProgram));
+        }
+
+        // Setup Geometry (Full Screen Quad)
+        const positions = new Float32Array([
+            -1.0,  1.0,
+             1.0,  1.0,
+            -1.0, -1.0,
+             1.0, -1.0,
+        ]);
+
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+        // Get Locations
+        const vertexPosition = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+        const resolutionLocation = gl.getUniformLocation(shaderProgram, 'u_resolution');
+        const timeLocation = gl.getUniformLocation(shaderProgram, 'u_time');
+
+        // Resize Handling
+        function resizeCanvasToDisplaySize(canvas) {
+            const displayWidth  = canvas.clientWidth;
+            const displayHeight = canvas.clientHeight;
+
+            if (canvas.width  !== displayWidth || canvas.width !== displayHeight) {
+                canvas.width  = displayWidth;
+                canvas.height = displayHeight;
+                gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+            }
+        }
+
+        // Render Loop
+        function render(time) {
+            resizeCanvasToDisplaySize(gl.canvas);
+
+            gl.clearColor(0.0, 0.0, 0.0, 0.0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            gl.useProgram(shaderProgram);
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.vertexAttribPointer(vertexPosition, 2, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(vertexPosition);
+
+            // Set Uniforms
+            gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
+            gl.uniform1f(timeLocation, time * 0.001);
+
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+            requestAnimationFrame(render);
+        }
+
+        requestAnimationFrame(render);
+    </script>
+</body>
+</html>

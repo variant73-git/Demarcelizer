@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Infrastructure Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #131315;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes slowPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.9); }
+        }
+
+        .animate-slow-pulse {
+            animation: slowPulse 3s ease-in-out infinite;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #131315;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f46;
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen flex flex-col xl:flex-row overflow-x-hidden xl:overflow-hidden selection:bg-[#6366F1] selection:text-white">
+
+    <!-- Panel 1: Active Feature -->
+    <div class="bg-[#6366F1] w-full xl:w-[28%] flex-shrink-0 flex flex-col p-8 xl:p-10 transition-all duration-500 z-10 rounded-b-3xl xl:rounded-b-none xl:rounded-r-3xl shadow-2xl xl:shadow-[10px_0_30px_rgba(0,0,0,0.5)]">
+        
+        <!-- Header -->
+        <div class="flex items-start gap-3 text-white/90 fade-in-up" style="animation-delay: 0.1s;">
+            <iconify-icon icon="solar:arrow-right-up-linear" class="text-3xl mt-3" stroke-width="1.5"></iconify-icon>
+            <span class="text-7xl font-extralight tracking-tighter">01</span>
+        </div>
+
+        <!-- Content -->
+        <div class="mt-12 xl:mt-16 space-y-4 fade-in-up" style="animation-delay: 0.2s;">
+            <h2 class="text-2xl tracking-tight text-white font-normal">Neural Network</h2>
+            <p class="text-white/85 text-sm leading-relaxed pr-4 font-extralight">
+                A self-learning intelligence core that observes, learns, and makes smart decisions in milliseconds to optimize your operations.
+            </p>
+        </div>
+
+        <!-- Image Container -->
+        <div class="mt-10 xl:mt-12 rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.3)] group relative fade-in-up" style="animation-delay: 0.3s;">
+            
+            <!-- WebGL Container replacing the simple dark overlay -->
+            <div id="webgl-container" class="absolute inset-0 z-10 bg-black/30 transition-opacity duration-700 group-hover:opacity-0 pointer-events-none">
+                <canvas id="webgl-canvas" class="w-full h-full block"></canvas>
+            </div>
+
+            <img 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1200&auto=format&fit=crop" 
+                alt="Neural Network Hardware" 
+                class="w-full h-56 xl:h-64 object-cover object-center grayscale opacity-90 transition-transform duration-1000 ease-out group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100"
+            />
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-12 xl:mt-auto pt-8 flex flex-col gap-2 fade-in-up" style="animation-delay: 0.4s;">
+            <iconify-icon icon="solar:waterdrops-linear" class="text-3xl text-white/90" stroke-width="1.5"></iconify-icon>
+            <span class="text-lg font-normal tracking-wide">learning</span>
+        </div>
+    </div>
+
+    <!-- Narrow Navigation Panels Container -->
+    <div class="flex flex-row xl:flex-row w-full xl:w-auto divide-x divide-[#27272a] border-y xl:border-y-0 xl:border-r border-[#27272a]">
+        
+        <!-- Panel 2 -->
+        <div class="bg-[#18181b] flex-1 xl:w-[140px] flex-shrink-0 flex flex-col justify-between p-6 xl:p-8 hover:bg-[#1e1e22] transition-colors duration-300 cursor-pointer group">
+            <div class="border-b border-[#27272a] pb-4 inline-flex items-center gap-2 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                <iconify-icon icon="solar:arrow-down-linear" class="text-xl group-hover:translate-y-1 transition-transform" stroke-width="1.5"></iconify-icon>
+                <span class="text-3xl font-extralight tracking-tighter">02</span>
+            </div>
+            <span class="text-zinc-500 text-sm tracking-wide mt-12 xl:mt-auto pt-8 group-hover:text-zinc-300 transition-colors font-extralight">architecture</span>
+        </div>
+
+        <!-- Panel 3 -->
+        <div class="bg-[#18181b] flex-1 xl:w-[140px] flex-shrink-0 flex flex-col justify-between p-6 xl:p-8 hover:bg-[#1e1e22] transition-colors duration-300 cursor-pointer group">
+            <div class="border-b border-[#27272a] pb-4 inline-flex items-center gap-2 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                <iconify-icon icon="solar:arrow-down-linear" class="text-xl group-hover:translate-y-1 transition-transform" stroke-width="1.5"></iconify-icon>
+                <span class="text-3xl font-extralight tracking-tighter">03</span>
+            </div>
+            <span class="text-zinc-500 text-sm tracking-wide mt-12 xl:mt-auto pt-8 group-hover:text-zinc-300 transition-colors font-extralight">protection</span>
+        </div>
+
+        <!-- Panel 4 -->
+        <div class="bg-[#18181b] flex-1 xl:w-[140px] flex-shrink-0 flex flex-col justify-between p-6 xl:p-8 hover:bg-[#1e1e22] transition-colors duration-300 cursor-pointer group">
+            <div class="border-b border-[#27272a] pb-4 inline-flex items-center gap-2 text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                <iconify-icon icon="solar:arrow-down-linear" class="text-xl group-hover:translate-y-1 transition-transform" stroke-width="1.5"></iconify-icon>
+                <span class="text-3xl font-extralight tracking-tighter">04</span>
+            </div>
+            <span class="text-zinc-500 text-sm tracking-wide mt-12 xl:mt-auto pt-8 group-hover:text-zinc-300 transition-colors font-extralight">growth</span>
+        </div>
+    </div>
+
+    <!-- Panel 5: Main Content Area -->
+    <div class="bg-[#18181b] flex-1 flex flex-col p-8 xl:p-14 2xl:p-20 relative overflow-hidden">
+        
+        <!-- Top Navigation Line -->
+        <div class="flex items-center gap-4 text-xs font-normal text-zinc-400 w-full max-w-4xl fade-in-up" style="animation-delay: 0.2s;">
+            <span class="whitespace-nowrap">Core Services</span>
+            <div class="flex-1 h-px bg-[#27272a]"></div>
+            <span class="whitespace-nowrap">4/4</span>
+        </div>
+
+        <!-- Main Typography -->
+        <div class="mt-16 xl:mt-24 max-w-3xl fade-in-up" style="animation-delay: 0.4s;">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-zinc-100 leading-[1.1]">
+                Modular, flexible solutions for modern digital infrastructure
+            </h1>
+            <p class="mt-8 text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl font-extralight">
+                We create future-proof systems that scale seamlessly and adapt to your business needs. Platform's key capabilities include:
+            </p>
+        </div>
+
+        <!-- Dot Grid Graphic -->
+        <div class="mt-16 xl:mt-24 ml-2 grid grid-cols-6 gap-x-12 gap-y-10 w-max fade-in-up" style="animation-delay: 0.6s;">
+            <!-- Row 1 -->
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            
+            <!-- Row 2 -->
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#6366F1] shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-slow-pulse" style="animation-delay: 0s;"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            
+            <!-- Row 3 -->
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#6366F1] shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-slow-pulse" style="animation-delay: 1s;"></div>
+            
+            <!-- Row 4 -->
+            <div class="w-1.5 h-1.5 rounded-full bg-[#6366F1] shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-slow-pulse" style="animation-delay: 0.5s;"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#6366F1] shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-slow-pulse" style="animation-delay: 1.5s;"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            
+            <!-- Row 5 -->
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#6366F1] shadow-[0_0_8px_rgba(99,102,241,0.6)] animate-slow-pulse" style="animation-delay: 2s;"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+            <div class="w-1.5 h-1.5 rounded-full bg-[#27272a]"></div>
+        </div>
+
+        <!-- Footer Service Line -->
+        <div class="mt-16 xl:mt-auto pt-8 flex items-center gap-4 text-zinc-400 text-sm fade-in-up" style="animation-delay: 0.8s;">
+            <iconify-icon icon="solar:widget-5-linear" class="text-[#6366F1] text-2xl" stroke-width="1.5"></iconify-icon>
+            <span class="font-extralight tracking-wide">Design, optimize, scale, and secure.</span>
+        </div>
+        
+    </div>
+
+    <script>
+        // WebGL Background Grid logic applied specifically to the image container
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById('webgl-container');
+            const canvas = document.getElementById('webgl-canvas');
+            if (!container || !canvas || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.08);
+
+            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 50);
+            camera.position.set(0, 1.5, 4);
+            camera.lookAt(0, 0, 0);
+
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Immersive Grid Layer
+            const gridHelper = new THREE.GridHelper(30, 30, 0x6366F1, 0x6366F1);
+            gridHelper.material.opacity = 0.4;
+            gridHelper.material.transparent = true;
+            gridHelper.position.y = -1;
+            scene.add(gridHelper);
+
+            // Light field of floating particles
+            const particlesGeo = new THREE.BufferGeometry();
+            const particlesCount = 80;
+            const posArray = new Float32Array(particlesCount * 3);
+            for(let i=0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 15;
+            }
+            particlesGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const particlesMat = new THREE.PointsMaterial({
+                size: 0.04,
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.4
+            });
+            const particles = new THREE.Points(particlesGeo, particlesMat);
+            scene.add(particles);
+
+            // Responsive handling
+            const observer = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const width = entry.contentRect.width;
+                    const height = entry.contentRect.height;
+                    renderer.setSize(width, height);
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                }
+            });
+            observer.observe(container);
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Forward drift for the grid
+                gridHelper.position.z += 0.015;
+                if (gridHelper.position.z >= 1) {
+                    gridHelper.position.z = 0; 
+                }
+
+                // Subtle particle drift
+                particles.rotation.y -= 0.0008;
+                particles.position.y += Math.sin(Date.now() * 0.001) * 0.001;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+        });
+    </script>
+</body>
+</html>

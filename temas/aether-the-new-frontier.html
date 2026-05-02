@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether - The New Frontier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <!-- GSAP for Masked Reveal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#050505] text-white min-h-screen w-full flex items-center justify-center overflow-hidden font-['Inter',sans-serif] antialiased selection:bg-white/30 selection:text-white">
+
+    <!-- Header Navigation -->
+    <nav class="absolute top-0 inset-x-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-6 pointer-events-auto">
+        <div class="text-sm font-semibold tracking-tight text-white uppercase">
+            AETHER
+        </div>
+        <ul class="hidden md:flex items-center gap-10 text-xs font-medium tracking-widest text-white/60 uppercase">
+            <li><a href="#" class="hover:text-white transition-colors duration-300">Vision</a></li>
+            <li><a href="#" class="hover:text-white transition-colors duration-300">Archive</a></li>
+            <li><a href="#" class="hover:text-white transition-colors duration-300">Studio</a></li>
+        </ul>
+        <a href="#" class="text-xs font-medium tracking-widest text-white uppercase hover:text-white/60 transition-colors duration-300">
+            Contact
+        </a>
+    </nav>
+
+    <main class="w-full max-w-[1600px] h-screen max-h-[900px] p-4 md:p-8 flex flex-col justify-between relative mt-12 md:mt-0">
+        
+        <!-- Top Slanted Pattern Border -->
+        <div class="w-full h-3 md:h-4 opacity-70" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='8' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='16' x2='8' y2='0' stroke='%23ffffff' stroke-width='1.5' opacity='0.8'/%3E%3C/svg%3E&quot;); background-repeat: repeat-x;"></div>
+
+        <!-- Main Triptych Container -->
+        <div class="flex-1 w-full relative grid grid-cols-3 gap-1 md:gap-2 my-4 md:my-6 h-full min-h-0">
+            
+            <!-- Global Main Title (Overlaps all panels) -->
+            <h1 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-semibold tracking-tighter z-30 pointer-events-none flex items-start drop-shadow-xl text-[#F4F4F4]">
+                <span class="reveal-title inline-block">AETHER</span>
+                <sup class="reveal-title text-xl sm:text-3xl md:text-4xl lg:text-6xl top-[-0.2em] md:top-[-0.3em] ml-1 md:ml-2 font-medium">™</sup>
+            </h1>
+
+            <!-- Panel 1 -->
+            <div class="relative overflow-hidden group h-full bg-[#111]">
+                <!-- Border Gradient Overlay -->
+                <div class="absolute inset-0 pointer-events-none z-20" style="background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: 1px;"></div>
+                
+                <!-- Background Image -->
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[15000ms] ease-out group-hover:scale-110" 
+                     style="background-image: url('https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/75134536-4198-40bf-9944-315511fe8c0b_3840w.jpg'); 
+                            filter: sepia(0.6) hue-rotate(30deg) saturate(1.4) contrast(1.25) brightness(0.85); background-position: 20% center;">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+
+                <!-- Text Overlay -->
+                <div class="absolute top-4 md:top-6 right-4 md:right-6 text-[10px] md:text-sm font-medium tracking-wide opacity-90 z-10 reveal-item">01-A.</div>
+                
+                <div class="absolute top-1/2 -translate-y-1/2 left-4 md:left-8 text-[10px] md:text-sm font-medium tracking-wide opacity-90 z-10 whitespace-nowrap reveal-item">
+                    EST. 2025 //
+                </div>
+
+                <div class="reveal-text absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[10px] md:text-sm font-medium leading-relaxed md:leading-relaxed opacity-90 max-w-[85%] z-10">
+                    Crafting experiences<br>
+                    that elevate, engage,<br>
+                    and resonate.
+                </div>
+            </div>
+
+            <!-- Panel 2 -->
+            <div class="relative overflow-hidden group h-full bg-[#111]">
+                <!-- Border Gradient Overlay -->
+                <div class="absolute inset-0 pointer-events-none z-20" style="background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: 1px;"></div>
+
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[15000ms] ease-out group-hover:scale-110" 
+                     style="background-image: url('https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/75134536-4198-40bf-9944-315511fe8c0b_3840w.jpg'); 
+                            filter: sepia(0.6) hue-rotate(30deg) saturate(1.4) contrast(1.25) brightness(0.85); background-position: 50% center;">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+
+                <div class="absolute top-4 md:top-6 right-4 md:right-6 text-[10px] md:text-sm font-medium tracking-wide opacity-90 z-10 reveal-item">02-B.</div>
+
+                <div class="reveal-text absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[10px] md:text-sm font-medium leading-relaxed md:leading-relaxed opacity-90 max-w-[85%] z-10">
+                    bridging the space between<br>
+                    bold concepts and digital<br>
+                    reality.
+                </div>
+            </div>
+
+            <!-- Panel 3 -->
+            <div class="relative overflow-hidden group h-full bg-[#111]">
+                <!-- Border Gradient Overlay -->
+                <div class="absolute inset-0 pointer-events-none z-20" style="background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; padding: 1px;"></div>
+
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-[15000ms] ease-out group-hover:scale-110" 
+                     style="background-image: url('https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/75134536-4198-40bf-9944-315511fe8c0b_3840w.jpg'); 
+                            filter: sepia(0.6) hue-rotate(30deg) saturate(1.4) contrast(1.25) brightness(0.85); background-position: 80% center;">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none"></div>
+
+                <div class="absolute top-4 md:top-6 right-4 md:right-6 text-[10px] md:text-sm font-medium tracking-wide opacity-90 z-10 reveal-item">03-C.</div>
+
+                <div class="absolute top-[35%] left-4 md:left-8 text-[10px] md:text-sm font-medium tracking-wide opacity-90 z-10 whitespace-nowrap reveal-item">
+                    PIXEL PERFECT // 5K+
+                </div>
+
+                <div class="absolute top-[60%] right-4 md:right-6 text-[10px] md:text-sm font-medium tracking-wide opacity-90 z-10 whitespace-nowrap reveal-item">
+                    // 14 AWARDS
+                </div>
+
+                <div class="reveal-text absolute bottom-4 md:bottom-8 left-4 md:left-8 text-xs sm:text-sm md:text-base lg:text-lg font-semibold tracking-tight uppercase opacity-95 z-10">
+                    THE NEW FRONTIER
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Slanted Pattern Border -->
+        <div class="w-full h-3 md:h-4 opacity-70" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='8' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='0' y1='16' x2='8' y2='0' stroke='%23ffffff' stroke-width='1.5' opacity='0.8'/%3E%3C/svg%3E&quot;); background-repeat: repeat-x;"></div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Setup masked text reveal structure for target paragraphs
+            document.querySelectorAll('.reveal-text').forEach(el => {
+                let html = '';
+                // Split by <br> or newlines to maintain line breaks
+                const lines = el.innerHTML.split(/<br\s*\/?>/i);
+                
+                lines.forEach((line, i) => {
+                    const words = line.trim().split(/\s+/).map(word => {
+                        if(!word) return '';
+                        return `<span class="inline-block overflow-hidden align-top"><span class="reveal-word inline-block translate-y-[110%] will-change-transform">${word}</span></span>`;
+                    });
+                    html += words.join(' ') + (i < lines.length - 1 ? '<br>' : '');
+                });
+                el.innerHTML = html;
+            });
+
+            // Master Timeline
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "main",
+                    start: "top center",
+                }
+            });
+
+            // Animate main title 
+            tl.fromTo(".reveal-title", 
+                { y: 50, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1.2, ease: "power4.out", stagger: 0.1 }
+            );
+
+            // Animate floating items
+            tl.fromTo(".reveal-item", 
+                { opacity: 0, y: 10 }, 
+                { opacity: 1, y: 0, duration: 1, ease: "power3.out", stagger: 0.1 },
+                "-=0.8"
+            );
+
+            // Staggered word reveal
+            tl.to(".reveal-word", {
+                y: "0%",
+                duration: 0.8,
+                ease: "power4.out",
+                stagger: 0.02
+            }, "-=0.6");
+        });
+    </script>
+</body>
+</html>

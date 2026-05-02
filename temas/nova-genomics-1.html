@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Genomics</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="bg-[#030305] font-sans text-zinc-900 antialiased selection:bg-zinc-900 selection:text-white overflow-x-hidden min-h-screen relative flex items-center justify-center p-4 md:p-12 lg:p-24">
+
+    <!-- Chromatic Dispersion Background System -->
+    <div class="fixed inset-0 z-0 bg-[#030305] pointer-events-none">
+        <!-- Base: WebGL Canvas -->
+        <canvas id="bg-canvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+        
+        <!-- Layer 1: Geometry Grid -->
+        <div class="absolute inset-0 z-10 opacity-20 mix-blend-screen pointer-events-none"
+             style="background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.03) 8px, rgba(255,255,255,0.03) 9px);"></div>
+             
+        <!-- Layer 2: SVG Texture Noise -->
+        <div class="absolute inset-0 z-20 opacity-[0.08] mix-blend-overlay pointer-events-none" 
+             style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+        
+        <!-- Layer 3: Atmosphere Gradient -->
+        <div class="absolute inset-0 z-30 pointer-events-none" 
+             style="background: linear-gradient(to top, #030305 0%, transparent 60%);"></div>
+             
+        <!-- Layer 4: Readability Gradient -->
+        <div class="absolute inset-0 z-40 pointer-events-none" 
+             style="background: linear-gradient(to bottom, rgba(3,3,5,0.6) 0%, rgba(3,3,5,0.1) 40%, rgba(3,3,5,0.95) 100%);"></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="relative z-10 w-full max-w-[1400px]">
+        
+        <!-- Premium Card Surface with Border Gradient and Beautiful Shadow -->
+        <div class="relative bg-[#f9f9fa] w-full p-8 md:p-12 lg:p-16 rounded-sm shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]"
+             style="background: linear-gradient(#f9f9fa, #f9f9fa) padding-box, linear-gradient(135deg, rgba(200,200,205,0.4) 0%, rgba(200,200,205,0.05) 50%, rgba(200,200,205,0.4) 100%) border-box; border: 1px solid transparent;">
+            
+            <!-- Top Grid Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 w-full mb-16 md:mb-24">
+                
+                <!-- Column 1 -->
+                <div class="flex flex-col">
+                    <div style="overflow: hidden;" class="mb-4 pb-4 border-b border-dashed border-zinc-300">
+                        <h3 class="reveal-text text-xs font-medium uppercase tracking-wider text-zinc-900">Discover</h3>
+                    </div>
+                    <ul class="flex flex-col gap-3">
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">Products</a></li>
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">Systems</a></li>
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">Science</a></li>
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">Research</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="flex flex-col">
+                    <div style="overflow: hidden;" class="mb-4 pb-4 border-b border-dashed border-zinc-300">
+                        <h3 class="reveal-text text-xs font-medium uppercase tracking-wider text-zinc-900">Help</h3>
+                    </div>
+                    <ul class="flex flex-col gap-3">
+                        <li style="overflow: hidden;"><a href="mailto:hello@nova.genomics" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">HELLO@NOVA.GENOMICS</a></li>
+                        <li style="overflow: hidden;"><span class="reveal-text block text-xs font-normal text-zinc-700">+1 800 555 0199</span></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="flex flex-col">
+                    <div style="overflow: hidden;" class="mb-4 pb-4 border-b border-dashed border-zinc-300">
+                        <h3 class="reveal-text text-xs font-medium uppercase tracking-wider text-zinc-900">Connect</h3>
+                    </div>
+                    <ul class="flex flex-col gap-3">
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">INSTAGRAM</a></li>
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">X</a></li>
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">LINKEDIN</a></li>
+                        <li style="overflow: hidden;"><a href="#" class="reveal-text block text-xs font-normal text-zinc-700 hover:text-black transition-colors">YOUTUBE</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 (Newsletter) -->
+                <div class="flex flex-col">
+                    <div style="overflow: hidden;" class="mb-4 pb-4 border-b border-dashed border-zinc-300">
+                        <h3 class="reveal-text text-xs font-medium uppercase tracking-wider text-zinc-900">Updates</h3>
+                    </div>
+                    <div style="overflow: hidden;" class="w-full">
+                        <div class="reveal-text w-full">
+                            <div class="relative flex items-center w-full mb-3 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] bg-transparent">
+                                <input type="email" placeholder="Email address" class="w-full bg-transparent text-xs py-3 pl-3 pr-12 text-zinc-900 placeholder:text-zinc-500 focus:outline-none" aria-label="Email address">
+                                <button type="submit" class="absolute right-[2px] top-[2px] bottom-[2px] bg-zinc-950 text-white w-10 flex items-center justify-center hover:bg-zinc-800 transition-colors" aria-label="Submit">
+                                    <iconify-icon icon="solar:arrow-right-linear" style="font-size: 1.25rem;" stroke-width="1.5"></iconify-icon>
+                                </button>
+                            </div>
+                            <p class="text-xs text-zinc-500 font-normal">By subscribing, you accept our terms & privacy policy</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Massive Logo Section -->
+            <div style="overflow: hidden;" class="w-full mb-8 lg:mb-12">
+                <div class="reveal-logo flex justify-between w-full leading-[0.8] font-bold text-[22vw] lg:text-[16vw] xl:text-[16vw] tracking-tight text-zinc-950 select-none">
+                    <span>N</span>
+                    <span>O</span>
+                    <span>V</span>
+                    <span>A</span>
+                </div>
+            </div>
+
+            <!-- Spaced Subtitle Section -->
+            <div style="overflow: hidden;" class="w-full mb-6 lg:mb-8 pb-6 lg:pb-8 border-b border-dashed border-zinc-300">
+                <div class="reveal-subtitle flex justify-between w-full text-base md:text-xl lg:text-3xl font-normal tracking-tight text-zinc-900 uppercase">
+                    <span>G</span>
+                    <span>E</span>
+                    <span>N</span>
+                    <span>O</span>
+                    <span>M</span>
+                    <span>I</span>
+                    <span>C</span>
+                    <span>S</span>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div style="overflow: hidden;" class="w-full flex justify-center">
+                <p class="reveal-text text-center text-xs text-zinc-500 font-normal">
+                    &copy; 2026 Nova. All rights reserved.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // GSAP Masked Reveal Animations
+            const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+            tl.fromTo(".reveal-text", 
+                { y: "120%", opacity: 0 },
+                { y: "0%", opacity: 1, duration: 1, stagger: 0.03 }
+            )
+            .fromTo(".reveal-logo span",
+                { y: "110%", rotate: 5 },
+                { y: "0%", rotate: 0, duration: 1.2, stagger: 0.1 },
+                "-=0.8"
+            )
+            .fromTo(".reveal-subtitle span",
+                { y: "100%", opacity: 0 },
+                { y: "0%", opacity: 1, duration: 0.8, stagger: 0.05 },
+                "-=0.8"
+            );
+
+            // Three.js Chromatic Dispersion WebGL System
+            const canvas = document.querySelector('#bg-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
+            
+            // DPR clamping for performance optimization
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // Orthographic Camera covering a 2x2 plane
+            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+            const scene = new THREE.Scene();
+
+            const geometry = new THREE.PlaneGeometry(2, 2);
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    u_time: { value: 0.0 },
+                    u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+                    u_interactive_fidelity: { value: 0.5 }
+                },
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform float u_time;
+                    uniform vec2 u_resolution;
+                    uniform float u_interactive_fidelity;
+                    varying vec2 vUv;
+
+                    void main() {
+                        // Map UV to -1 to 1 coordinate system, corrected for aspect ratio
+                        vec2 p = vUv * 2.0 - 1.0;
+                        p.x *= u_resolution.x / u_resolution.y;
+
+                        // Static rotation matrix (approx. 0.55 rad) for diagonal movement
+                        float c = cos(0.55);
+                        float s = sin(0.55);
+                        p = mat2(c, -s, s, c) * p;
+
+                        vec3 color = vec3(0.0);
+
+                        // Core Dispersion Logic
+                        float spread = 0.06 * (0.3 + u_interactive_fidelity * 0.7);
+                        for(int i = 0; i < 3; i++) {
+                            float offset = float(1 - i) * spread;
+                            float y = p.y + offset + (sin(p.x * 2.5 - u_time * 1.5) * 0.12);
+                            float wave = smoothstep(0.85, 0.99, sin(y * 6.0 + u_time * 2.0) * 0.5 + 0.5);
+                            if(i == 0) color.r += wave;
+                            if(i == 1) color.g += wave;
+                            if(i == 2) color.b += wave;
+                        }
+
+                        gl_FragColor = vec4(color, 1.0);
+                    }
+                `,
+                transparent: true
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            // Interactive Shader Parameters
+            let targetFidelity = 0.5;
+            document.addEventListener('mousemove', (e) => {
+                targetFidelity = e.clientX / window.innerWidth;
+            });
+
+            // Animation Loop
+            const clock = new THREE.Clock();
+
+            const tick = () => {
+                const elapsedTime = clock.getElapsedTime();
+                
+                material.uniforms.u_time.value = elapsedTime;
+                material.uniforms.u_interactive_fidelity.value += (targetFidelity - material.uniforms.u_interactive_fidelity.value) * 0.05;
+
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            };
+
+            tick();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                material.uniforms.u_resolution.value.set(window.innerWidth, window.innerHeight);
+            });
+        });
+    </script>
+</body>
+</html>

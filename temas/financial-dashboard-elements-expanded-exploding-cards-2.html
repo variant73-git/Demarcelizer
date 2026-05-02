@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard Elements - Expanded & Exploding Cards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#f7f7f8] text-zinc-900 font-sans min-h-screen flex items-center justify-center p-4 sm:p-8 md:p-12 selection:bg-zinc-200 antialiased" style="scrollbar-width: none;">
+
+    <div class="relative w-full max-w-[1140px] mx-auto py-8">
+        
+        <!-- Vertical Container Lines with Mini Corner Squares -->
+        <div class="absolute inset-y-0 left-0 w-[1px] bg-zinc-200/80 pointer-events-none z-0 hidden sm:block">
+            <div class="absolute top-0 -left-[3px] w-[7px] h-[7px] border border-zinc-300 bg-[#f7f7f8]"></div>
+            <div class="absolute bottom-0 -left-[3px] w-[7px] h-[7px] border border-zinc-300 bg-[#f7f7f8]"></div>
+        </div>
+        <div class="absolute inset-y-0 right-0 w-[1px] bg-zinc-200/80 pointer-events-none z-0 hidden sm:block">
+            <div class="absolute top-0 -left-[3px] w-[7px] h-[7px] border border-zinc-300 bg-[#f7f7f8]"></div>
+            <div class="absolute bottom-0 -left-[3px] w-[7px] h-[7px] border border-zinc-300 bg-[#f7f7f8]"></div>
+        </div>
+
+        <!-- Main Grid Layout: 2 columns for equal widths -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10 w-full px-0 sm:px-8">
+
+            <!-- Card 1: Left UI -->
+            <div class="group relative rounded-[2.5rem] bg-gradient-to-b from-zinc-600 via-zinc-800 to-zinc-950 p-[1px] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] hover:shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] transition-shadow duration-700 ease-out anim-float-up">
+                <div class="bg-gradient-to-b from-zinc-800 to-zinc-950 rounded-[calc(2.5rem-1px)] h-full w-full p-8 pt-16 sm:p-12 sm:pt-20 flex flex-col items-center relative h-[480px] sm:h-[540px] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.05)]">
+                    
+                    <!-- Visual Area: Leather Skeuomorphic Wallet -->
+                    <div class="relative w-full max-w-[280px] h-64 flex flex-col items-center justify-end mt-4 z-10">
+                        
+                        <div class="relative w-[240px] h-[180px] flex justify-center items-end group-hover:-translate-y-1 transition-transform duration-700 ease-out">
+                            
+                            <!-- Stacked Ad Budget Cards (Full cards, not cutoff) -->
+                            <!-- Card 3 (Back) -->
+                            <div class="absolute bottom-[115px] group-hover:bottom-[155px] group-hover:-ml-6 -translate-x-2 -rotate-3 w-[82%] h-[80px] bg-gradient-to-br from-orange-400 to-orange-500 rounded-xl z-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 py-3 border border-orange-200/50 flex justify-between items-start gsap-float-slower" style="transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1);">
+                                <span class="font-light text-orange-950 tracking-tight text-sm drop-shadow-sm">Paid Search</span>
+                                <span class="text-xs font-light text-orange-900 uppercase tracking-wider">$24.1k</span>
+                            </div>
+                            
+                            <!-- Card 2 (Middle) -->
+                            <div class="absolute bottom-[80px] group-hover:bottom-[105px] group-hover:ml-6 translate-x-2 rotate-2 w-[90%] h-[80px] bg-gradient-to-br from-amber-300 to-amber-500 rounded-xl z-20 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 py-3 border border-amber-100/50 flex justify-between items-start gsap-float-slower" style="transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1); animation-delay: -2s;">
+                                <span class="font-light text-amber-950 tracking-tight text-sm drop-shadow-sm">Social Media</span>
+                                <span class="text-xs font-light text-amber-900 uppercase tracking-wider">$19.2k</span>
+                            </div>
+                            
+                            <!-- Card 1 (Front) -->
+                            <div class="absolute bottom-[45px] group-hover:bottom-[35px] -rotate-1 w-[98%] h-[80px] bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-xl z-30 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 py-3 border border-yellow-100/50 flex justify-between items-start gsap-float-slower" style="transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1); animation-delay: -4s;">
+                                <span class="font-light text-yellow-950 tracking-tight text-sm drop-shadow-sm">Gross Spend</span>
+                                <span class="text-xs font-light text-yellow-800 uppercase tracking-wider">$43.3k</span>
+                            </div>
+
+                            <!-- Wallet Front Body -->
+                            <div class="relative z-40 w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.3)] pointer-events-none">
+                                <svg viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                                    <path d="M0 24 C0 10.7 10.7 0 24 0 H80 C98 0 108 38 140 38 C172 38 182 0 200 0 H256 C269.3 0 280 10.7 280 24 V106 C280 119.3 269.3 130 256 130 H24 C10.7 130 0 119.3 0 106 V24 Z" 
+                                          fill="url(#leather-brown-grad)" 
+                                          stroke="url(#leather-brown-edge-grad)" stroke-width="2"/>
+                                    
+                                    <path d="M2 24 C2 11.8 11.8 2 24 2 H79 C95 2 106 36 140 36 C174 36 185 2 201 2 H256 C268.2 2 278 11.8 278 24 V106 C278 118.2 268.2 128 256 128 H24 C11.8 128 2 118.2 2 106 V24 Z" 
+                                          stroke="white" stroke-width="1.5" stroke-opacity="0.1" style="mix-blend-mode: overlay;"/>
+
+                                    <path d="M8 26 C8 16 16 8 26 8 H78 C92 8 102 42 140 42 C178 42 188 8 202 8 H254 C264 8 272 16 272 26 V104 C272 114 264 122 254 122 H26 C16 122 8 114 8 104 V26 Z" 
+                                          stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.5"/>
+
+                                    <g transform="translate(126, 70) scale(0.65)">
+                                        <path d="M22 0L44 22L22 44L0 22L22 0Z" fill="#451A03" style="filter: drop-shadow(0px -1px 1px rgba(255,255,255,0.05)) drop-shadow(0px 1px 2px rgba(0,0,0,0.5));"/>
+                                        <path d="M22 8L36 22L22 36L8 22L22 8Z" fill="#280F02" />
+                                        <path d="M22 10L34 22L22 34L10 22L22 10Z" fill="#78350F" />
+                                    </g>
+
+                                    <path d="M0 24 C0 10.7 10.7 0 24 0 H80 C98 0 108 38 140 38 C172 38 182 0 200 0 H256 C269.3 0 280 10.7 280 24 V106 C280 119.3 269.3 130 256 130 H24 C10.7 130 0 119.3 0 106 V24 Z" 
+                                          fill="url(#dark-vol-grad)" style="mix-blend-mode: soft-light;" opacity="0.7"/>
+
+                                    <defs>
+                                        <linearGradient id="leather-brown-grad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#92400E"/>
+                                            <stop offset="1" stop-color="#451A03"/>
+                                        </linearGradient>
+                                        <linearGradient id="leather-brown-edge-grad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#F59E0B"/>
+                                            <stop offset="1" stop-color="#78350F"/>
+                                        </linearGradient>
+                                        <linearGradient id="dark-vol-grad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" stop-opacity="0.3"/>
+                                            <stop offset="0.3" stop-color="white" stop-opacity="0"/>
+                                            <stop offset="0.7" stop-color="black" stop-opacity="0"/>
+                                            <stop offset="1" stop-color="black" stop-opacity="0.8"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            
+                            <!-- Drop Shadow on ground -->
+                            <div class="absolute -bottom-4 w-[90%] h-5 bg-black/[0.4] blur-xl rounded-[100%] z-0 pointer-events-none"></div>
+                            <div class="absolute -bottom-1 w-[75%] h-2 bg-black/[0.6] blur-md rounded-[100%] z-0 pointer-events-none"></div>
+                        </div>
+                    </div>
+
+                    <!-- Text Content with Masked Reveal -->
+                    <div class="mt-auto text-center flex flex-col items-center z-20 w-full pb-4 pointer-events-none">
+                        <h2 class="text-xl sm:text-2xl font-medium text-white tracking-tight mb-3 reveal-wrapper overflow-hidden">
+                            <span class="flex items-center gap-2 reveal-text">
+                                <iconify-icon icon="solar:wallet-linear" class="text-amber-500"></iconify-icon>
+                                Track expenditures
+                            </span>
+                        </h2>
+                        <div class="reveal-wrapper overflow-hidden">
+                            <p class="text-sm text-zinc-400 font-light leading-relaxed max-w-[280px] reveal-text">
+                                Oversee your marketing investments and allocate resources efficiently across all active campaigns.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Right UI -->
+            <div class="group relative rounded-[2.5rem] bg-gradient-to-b from-white via-white to-zinc-100 p-[1px] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] hover:shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] transition-shadow duration-700 ease-out anim-float-up delay-100">
+                <div class="bg-white rounded-[calc(2.5rem-1px)] h-full w-full p-8 pt-16 sm:p-12 sm:pt-20 flex flex-col items-center relative h-[480px] sm:h-[540px] shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,1)]">
+                    
+                    <!-- Visual Area: Skeuomorphic Wallet -->
+                    <div class="relative w-full max-w-[280px] h-64 flex flex-col items-center justify-end mt-4 z-10">
+                        
+                        <div class="relative w-[240px] h-[180px] flex justify-center items-end group-hover:-translate-y-1 transition-transform duration-700 ease-out">
+                            
+                            <!-- Stacked Integration Cards (Full cards, not cutoff) -->
+                            <!-- Card 3 (Back) -->
+                            <div class="absolute bottom-[88px] group-hover:bottom-[138px] group-hover:-ml-5 w-[86%] h-[80px] bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl z-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 py-3 border border-white/40 flex justify-between items-start gsap-float-slower" style="transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1);">
+                                <span class="font-light text-white tracking-tight text-sm drop-shadow-sm">Data Cloud</span>
+                                <span class="text-xs font-light text-purple-100/90 uppercase tracking-wider">Active</span>
+                            </div>
+                            
+                            <!-- Card 2 (Middle) -->
+                            <div class="absolute bottom-[66px] group-hover:bottom-[96px] group-hover:ml-5 w-[92%] h-[80px] bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl z-20 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 py-3 border border-white/30 flex justify-between items-start gsap-float-slower" style="transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin 0.6s cubic-bezier(0.22, 1, 0.36, 1); animation-delay: -2s;">
+                                <span class="font-light text-white tracking-tight text-sm drop-shadow-sm">Ecommerce</span>
+                                <span class="text-xs font-light text-indigo-100/90 uppercase tracking-wider">Syncing</span>
+                            </div>
+                            
+                            <!-- Card 1 (Front) -->
+                            <div class="absolute bottom-[44px] group-hover:bottom-[36px] w-[98%] h-[80px] bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl z-30 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] px-5 py-3 border border-blue-300/50 flex justify-between items-start gsap-float-slower" style="transition: bottom 0.6s cubic-bezier(0.22, 1, 0.36, 1); animation-delay: -4s;">
+                                <span class="font-light text-white tracking-tight text-sm drop-shadow-sm">Workspace</span>
+                                <span class="text-xs font-light text-blue-100 uppercase tracking-wider">Live</span>
+                            </div>
+
+                            <!-- Wallet Front Body -->
+                            <div class="relative z-40 w-full drop-shadow-[0_15px_25px_rgba(0,0,0,0.1)] pointer-events-none">
+                                <svg viewBox="0 0 280 130" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                                    <path d="M0 24 C0 10.7 10.7 0 24 0 H80 C98 0 108 38 140 38 C172 38 182 0 200 0 H256 C269.3 0 280 10.7 280 24 V106 C280 119.3 269.3 130 256 130 H24 C10.7 130 0 119.3 0 106 V24 Z" 
+                                          fill="url(#leather-grad)" 
+                                          stroke="url(#leather-edge-grad)" stroke-width="2"/>
+                                    
+                                    <path d="M2 24 C2 11.8 11.8 2 24 2 H79 C95 2 106 36 140 36 C174 36 185 2 201 2 H256 C268.2 2 278 11.8 278 24 V106 C278 118.2 268.2 128 256 128 H24 C11.8 128 2 118.2 2 106 V24 Z" 
+                                          stroke="white" stroke-width="1.5" stroke-opacity="0.4" style="mix-blend-mode: overlay;"/>
+
+                                    <path d="M8 26 C8 16 16 8 26 8 H78 C92 8 102 42 140 42 C178 42 188 8 202 8 H254 C264 8 272 16 272 26 V104 C272 114 264 122 254 122 H26 C16 122 8 114 8 104 V26 Z" 
+                                          stroke="#93C5FD" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.8"/>
+
+                                    <g transform="translate(126, 70) scale(0.65)">
+                                        <path d="M22 0L44 22L22 44L0 22L22 0Z" fill="#2563EB" style="filter: drop-shadow(0px -1px 1px rgba(255,255,255,0.2)) drop-shadow(0px 1px 2px rgba(0,0,0,0.3));"/>
+                                        <path d="M22 8L36 22L22 36L8 22L22 8Z" fill="#1E3A8A" />
+                                        <path d="M22 10L34 22L22 34L10 22L22 10Z" fill="#3B82F6" />
+                                    </g>
+
+                                    <path d="M0 24 C0 10.7 10.7 0 24 0 H80 C98 0 108 38 140 38 C172 38 182 0 200 0 H256 C269.3 0 280 10.7 280 24 V106 C280 119.3 269.3 130 256 130 H24 C10.7 130 0 119.3 0 106 V24 Z" 
+                                          fill="url(#vol-grad)" style="mix-blend-mode: soft-light;" opacity="0.8"/>
+
+                                    <defs>
+                                        <linearGradient id="leather-grad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#60A5FA"/>
+                                            <stop offset="1" stop-color="#1D4ED8"/>
+                                        </linearGradient>
+                                        <linearGradient id="leather-edge-grad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#DBEAFE"/>
+                                            <stop offset="1" stop-color="#1E40AF"/>
+                                        </linearGradient>
+                                        <linearGradient id="vol-grad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="white" stop-opacity="0.9"/>
+                                            <stop offset="0.3" stop-color="white" stop-opacity="0"/>
+                                            <stop offset="0.7" stop-color="black" stop-opacity="0"/>
+                                            <stop offset="1" stop-color="black" stop-opacity="0.6"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            
+                            <!-- Drop Shadow on ground -->
+                            <div class="absolute -bottom-4 w-[90%] h-5 bg-black/[0.05] blur-xl rounded-[100%] z-0 pointer-events-none"></div>
+                            <div class="absolute -bottom-1 w-[75%] h-2 bg-black/[0.08] blur-md rounded-[100%] z-0 pointer-events-none"></div>
+                        </div>
+                    </div>
+
+                    <!-- Text Content with Masked Reveal -->
+                    <div class="mt-auto text-center flex flex-col items-center z-20 w-full pb-4 pointer-events-none">
+                        <h2 class="text-xl sm:text-2xl font-medium text-zinc-900 tracking-tight mb-3 reveal-wrapper overflow-hidden">
+                            <span class="flex items-center gap-2 reveal-text">
+                                <iconify-icon icon="solar:plug-circle-linear" class="text-blue-500"></iconify-icon>
+                                Link platforms
+                            </span>
+                        </h2>
+                        <div class="reveal-wrapper overflow-hidden">
+                            <p class="text-sm text-zinc-500 font-light leading-relaxed max-w-[240px] reveal-text">
+                                Integrate your core applications instantly without needing manual or complex setup.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Initialization Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const revealWrappers = document.querySelectorAll('.reveal-wrapper');
+            revealWrappers.forEach((wrapper) => {
+                const text = wrapper.querySelector('.reveal-text');
+                gsap.set(text, { y: '100%', rotateZ: 2, opacity: 0 });
+                
+                gsap.to(text, {
+                    y: '0%',
+                    rotateZ: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: 'power4.out',
+                    scrollTrigger: {
+                        trigger: wrapper,
+                        start: 'top 95%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+
+            gsap.set('.anim-float-up', { y: 60, opacity: 0 });
+            ScrollTrigger.batch('.anim-float-up', {
+                start: 'top 85%',
+                onEnter: batch => gsap.to(batch, {
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 1.4, 
+                    stagger: 0.15, 
+                    ease: 'back.out(1.1)',
+                    overwrite: true
+                }),
+            });
+            
+            const slowerFloats = document.querySelectorAll('.gsap-float-slower');
+            slowerFloats.forEach((el, i) => {
+                gsap.to(el, {
+                    y: -4,
+                    rotationZ: 0.5,
+                    duration: 4,
+                    delay: i * 0.5,
+                    ease: "sine.inOut",
+                    yoyo: true,
+                    repeat: -1
+                });
+            });
+        });
+    </script>
+</body>
+</html>

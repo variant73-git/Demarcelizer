@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderLuxe - Bespoke Travel</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Playfair+Display:wght@300;400;500&amp;display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#fafafa] text-gray-900 antialiased overflow-x-hidden selection:bg-gray-200 selection:text-gray-900" style="font-family: 'Inter', sans-serif; background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 20L20 0\' stroke=\'%23000000\' stroke-width=\'1\' stroke-opacity=\'0.02\' fill=\'none\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');">
+
+    <!-- Framed Grid Layout Overlay -->
+    <div class="pointer-events-none fixed inset-0 z-50 p-2 sm:p-4 md:p-6 lg:p-8">
+        <div class="relative w-full h-full border border-gray-900/5">
+            <!-- Corner L-Brackets -->
+            <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-gray-900/20 -translate-x-[1px] -translate-y-[1px]"></div>
+            <div class="absolute top-0 right-0 w-4 h-4 border-t border-r border-gray-900/20 translate-x-[1px] -translate-y-[1px]"></div>
+            <div class="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-gray-900/20 -translate-x-[1px] translate-y-[1px]"></div>
+            <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-gray-900/20 translate-x-[1px] translate-y-[1px]"></div>
+        </div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <main class="relative z-10 min-h-screen p-2 sm:p-4 md:p-6 lg:p-8 pt-4">
+        
+        <!-- Hero Section -->
+        <section class="relative w-full max-w-7xl mx-auto rounded-[2rem] overflow-hidden bg-gray-900 shadow-2xl h-[75vh] min-h-[500px] flex flex-col items-center justify-center">
+            
+            <!-- WebGL/Canvas Animation Background -->
+            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-0 opacity-40 mix-blend-screen"></canvas>
+            
+            <!-- Hero Image Asset (Mask removed) -->
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/03a48a8d-d063-45ae-9446-eddb1ddf225f_3840w.webp" alt="Modern glass villa in lush landscape" class="absolute inset-0 w-full h-full object-cover z-0 scale-105" style="transform-origin: center; animation: slowZoom 20s ease-out infinite alternate;">
+
+            <!-- Header / Nav -->
+            <header class="absolute top-0 left-0 w-full p-6 md:p-10 flex justify-between items-center z-20">
+                <div class="flex items-center gap-2 text-white drop-shadow-md">
+                    <iconify-icon icon="solar:routing-linear" width="24" height="24" style="stroke-width: 1.5;"></iconify-icon>
+                    <span class="text-lg tracking-wide" style="font-family: 'Playfair Display', serif;">WanderLuxe</span>
+                </div>
+                
+                <nav class="hidden md:flex items-center gap-8 text-sm text-white drop-shadow-md font-normal">
+                    <a href="#" class="hover:text-white/80 transition-colors duration-300">Curated Journeys</a>
+                    <a href="#" class="hover:text-white/80 transition-colors duration-300">Experiences</a>
+                    <a href="#" class="hover:text-white/80 transition-colors duration-300">Destinations</a>
+                    <a href="#" class="hover:text-white/80 transition-colors duration-300">Journal</a>
+                </nav>
+
+                <!-- Border Gradient Button -->
+                <div class="relative group p-[1px] rounded-full bg-gradient-to-r from-white/20 via-white/50 to-white/20 overflow-hidden hidden sm:block shadow-lg">
+                    <a href="#" class="relative flex items-center justify-center bg-white text-gray-900 text-sm font-normal rounded-full px-5 py-2.5 transition-transform duration-300 group-hover:scale-[0.98]">
+                        Start Planning
+                    </a>
+                </div>
+            </header>
+
+            <!-- Hero Content -->
+            <div class="relative z-20 text-center px-4 max-w-3xl mt-12 drop-shadow-xl">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white tracking-tight leading-[1.1] mask-reveal-text font-normal" style="font-family: 'Playfair Display', serif; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+                    Designing the world's<br>most exceptional<br>journeys
+                </h1>
+            </div>
+        </section>
+
+        <!-- Partner Logos Section -->
+        <section class="max-w-5xl mx-auto pt-24 pb-16 px-4 flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <div class="text-xl sm:text-2xl italic tracking-tighter" style="font-family: 'Playfair Display', serif;">The Explorer</div>
+            <div class="flex items-center gap-1 font-normal text-lg tracking-tighter"><div class="w-4 h-4 rounded-full bg-current opacity-20"></div>GLOBE MEDIA</div>
+            <div class="text-2xl font-light tracking-widest lowercase" style="font-family: 'Playfair Display', serif;">voyageur</div>
+            <div class="text-sm tracking-[0.3em] uppercase text-center leading-tight">Sanctuary<br><span class="text-[0.6em] tracking-widest opacity-60">Retreats &amp; Spas</span></div>
+            <div class="text-lg tracking-wider" style="font-family: 'Playfair Display', serif;">ATELIER <span class="text-xs opacity-50 ml-1" style="font-family: 'Inter', sans-serif;">HOTELS</span></div>
+        </section>
+
+        <!-- Main Copy Section -->
+        <section class="max-w-4xl mx-auto text-center py-16 px-4">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl text-gray-900 leading-[1.2] tracking-tight mask-reveal-text font-normal" style="font-family: 'Playfair Display', serif;">
+                We are a boutique travel atelier<br>crafting unforgettable itineraries.
+            </h2>
+        </section>
+
+        <!-- Image Trio Section -->
+        <section class="relative max-w-5xl mx-auto h-[400px] sm:h-[500px] md:h-[600px] flex justify-center items-center mt-8 mb-24">
+            
+            <!-- Left Image -->
+            <div class="absolute left-4 sm:left-[10%] md:left-[20%] w-[45%] max-w-[280px] aspect-[4/5] -rotate-6 z-10 transform-gpu hover:z-40 hover:scale-105 hover:-rotate-2 transition-all duration-500 ease-out">
+                <div class="w-full h-full bg-gray-200 rounded-xl sm:rounded-2xl border-[6px] sm:border-[10px] border-white shadow-xl overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gray-900/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3186f9ea-5f5a-49f7-8fcf-568ad52f515e_3840w.webp" alt="Portrait at destination" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <!-- Center Image -->
+            <div class="absolute left-1/2 -translate-x-1/2 w-[55%] max-w-[340px] aspect-[4/5] z-30 transform-gpu hover:scale-105 transition-all duration-500 ease-out">
+                <!-- Border Gradient on the center card for premium feel -->
+                <div class="p-[2px] rounded-xl sm:rounded-2xl bg-gradient-to-b from-gray-200 via-white to-gray-200 shadow-2xl">
+                    <div class="w-full h-full bg-white rounded-xl sm:rounded-2xl border-[6px] sm:border-[10px] border-white overflow-hidden relative">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5ee0a38a-b5d3-4531-8793-98beed4af162_1600w.jpg" alt="Futuristic destination" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="absolute right-4 sm:right-[10%] md:right-[20%] w-[45%] max-w-[280px] aspect-[4/5] rotate-6 z-20 transform-gpu hover:z-40 hover:scale-105 hover:rotate-2 transition-all duration-500 ease-out">
+                <div class="w-full h-full bg-gray-200 rounded-xl sm:rounded-2xl border-[6px] sm:border-[10px] border-white shadow-xl overflow-hidden relative group">
+                    <div class="absolute inset-0 bg-gray-900/10 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d868fef-f560-45ca-ab35-5dad4fc29059_3840w.webp" alt="Traveler portrait" class="w-full h-full object-cover object-top">
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Secondary Copy Section -->
+        <section class="max-w-2xl mx-auto text-center pb-32 px-4">
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-800 leading-relaxed mask-reveal-text tracking-tight font-normal" style="font-family: 'Playfair Display', serif;">
+                Our global network of experts curates highly personalized journeys—unlocking private access, cultural immersion, and secluded sanctuaries across the globe.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Inline Styles for specific animations -->
+    <style>
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+        
+        /* Utility for GSAP text masking */
+        .mask-word-container {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+            padding-bottom: 0.1em; /* Prevent descender clipping */
+            margin-right: 0.25em;
+        }
+        .mask-word-container:last-child {
+            margin-right: 0;
+        }
+        .mask-word {
+            display: inline-block;
+            transform: translateY(110%);
+            will-change: transform;
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Masked Word Reveal Logic
+            const splitTextToWords = (selector) => {
+                const elements = document.querySelectorAll(selector);
+                
+                elements.forEach(el => {
+                    let htmlContent = el.innerHTML;
+                    htmlContent = htmlContent.replace(/<br\s*[\/]?>/gi, ' [BR] ');
+                    
+                    const words = htmlContent.split(/\s+/).filter(word => word.trim().length > 0);
+                    
+                    let newHtml = '';
+                    words.forEach(word => {
+                        if (word === '[BR]') {
+                            newHtml += '<br>';
+                        } else {
+                            newHtml += `<span class="mask-word-container"><span class="mask-word">${word}</span></span>`;
+                        }
+                    });
+                    
+                    el.innerHTML = newHtml;
+
+                    const wordElements = el.querySelectorAll('.mask-word');
+                    
+                    gsap.to(wordElements, {
+                        y: "0%",
+                        ease: "power4.out",
+                        duration: 1.2,
+                        stagger: 0.03,
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%",
+                        }
+                    });
+                });
+            };
+
+            // Execute the text reveal
+            splitTextToWords('.mask-reveal-text');
+
+            // 2. Subtle WebGL-style Canvas Fluid/Particle Animation for Hero Background
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+
+            const resize = () => {
+                width = canvas.width = canvas.offsetWidth;
+                height = canvas.height = canvas.offsetHeight;
+            };
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.size = Math.random() * 2 + 1;
+                    this.color = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`;
+                    this.angle = Math.random() * Math.PI * 2;
+                }
+                
+                update() {
+                    this.angle += 0.01;
+                    this.x += Math.cos(this.angle) * 0.5 + this.vx;
+                    this.y += Math.sin(this.angle) * 0.5 + this.vy;
+
+                    if (this.x < 0) this.x = width;
+                    if (this.x > width) this.x = 0;
+                    if (this.y < 0) this.y = height;
+                    if (this.y > height) this.y = 0;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+            }
+
+            const initParticles = () => {
+                particles = [];
+                const numParticles = Math.min(width * height / 10000, 150);
+                for (let i = 0; i < numParticles; i++) {
+                    particles.push(new Particle());
+                }
+            };
+
+            initParticles();
+
+            const animate = () => {
+                ctx.clearRect(0, 0, width, height);
+                
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 100) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - dist/100)})`;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+
+                requestAnimationFrame(animate);
+            };
+
+            animate();
+
+            // Parallax effect on image trio on scroll
+            gsap.to('.absolute.left-4, .absolute.left-\\[10\\%\\]', {
+                y: -30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".relative.max-w-5xl",
+                    scrub: true
+                }
+            });
+            gsap.to('.absolute.right-4, .absolute.right-\\[10\\%\\]', {
+                y: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".relative.max-w-5xl",
+                    scrub: true
+                }
+            });
+        });
+    </script>
+
+</body></html>

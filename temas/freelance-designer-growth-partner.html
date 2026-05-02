@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Designer & Growth Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        /* Base typography adjustments to match reference styling strictly */
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Fluid typography for the massive headline */
+        .headline-text {
+            font-size: clamp(3rem, 10vw, 9rem);
+            line-height: 0.85;
+            letter-spacing: -0.04em;
+        }
+
+        /* Subtly animated gradient border effect for premium surfaces */
+        .premium-surface {
+            position: relative;
+        }
+        .premium-surface::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(0,0,0,0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<!-- Outer frame serving as the distinct neon border -->
+<body class="bg-[#ccff00] p-3 sm:p-5 md:p-8 min-h-screen box-border flex flex-col font-sans">
+
+    <!-- Inner container -->
+    <main class="relative flex-grow w-full rounded-2xl md:rounded-[2rem] overflow-hidden bg-[#111111] shadow-2xl premium-surface flex flex-col">
+        
+        <!-- Background Asset (Aura moody portrait variant) -->
+        <div class="absolute inset-0 w-full h-full">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d868fef-f560-45ca-ab35-5dad4fc29059_3840w.webp" 
+                 alt="Background Portrait" 
+                 class="w-full h-full object-cover object-center opacity-60 mix-blend-luminosity scale-105"
+                 style="filter: contrast(1.1) brightness(0.9);">
+            <!-- Vignette/Overlay for text contrast -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-black/60 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
+        </div>
+
+        <!-- Header / Navigation -->
+        <header class="absolute top-6 right-6 md:top-10 md:right-12 z-20">
+            <nav class="flex items-center gap-6 md:gap-10">
+                <a href="#" class="text-[#ccff00] text-xs md:text-sm uppercase tracking-widest hover:text-white transition-colors duration-300">Services</a>
+                <a href="#" class="text-[#ccff00] text-xs md:text-sm uppercase tracking-widest hover:text-white transition-colors duration-300">Work</a>
+                <a href="#" class="text-[#ccff00] text-xs md:text-sm uppercase tracking-widest hover:text-white transition-colors duration-300">About</a>
+                <a href="#" class="text-[#ccff00] text-xs md:text-sm uppercase tracking-widest hover:text-white transition-colors duration-300">Contact</a>
+            </nav>
+        </header>
+
+        <!-- Main Content Area Grid Layout -->
+        <div class="relative z-10 flex-grow w-full h-full flex flex-col justify-between p-6 md:p-12 pb-8 md:pb-12">
+            
+            <!-- Top spacer for flex layout -->
+            <div class="h-12 md:h-24"></div>
+
+            <!-- Hero Headline (Masked Reveal applied via GSAP) -->
+            <div class="max-w-5xl mt-8 md:mt-0">
+                <h1 class="text-[#ccff00] font-extrabold uppercase headline-text flex flex-col items-start gap-1">
+                    <!-- Overflow hidden wrappers for staggered reveal -->
+                    <span class="block overflow-hidden pb-1"><span class="block js-reveal translate-y-full">Freelance</span></span>
+                    <span class="block overflow-hidden pb-1"><span class="block js-reveal translate-y-full">Website</span></span>
+                    <span class="block overflow-hidden pb-1"><span class="block js-reveal translate-y-full">Designer &</span></span>
+                    <span class="block overflow-hidden pb-1"><span class="block js-reveal translate-y-full">Growth</span></span>
+                    <span class="block overflow-hidden pb-1"><span class="block js-reveal translate-y-full">Partner</span></span>
+                </h1>
+            </div>
+
+            <!-- Bottom Content Bar -->
+            <div class="w-full flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 mt-12 lg:mt-auto">
+                
+                <!-- Bottom Left: Identity & Description -->
+                <div class="flex flex-col gap-6 max-w-md js-fade-in opacity-0">
+                    
+                    <div class="flex flex-wrap items-center gap-4 md:gap-6">
+                        <!-- Custom grid logo matching reference -->
+                        <div class="flex items-center gap-3">
+                            <div class="grid grid-cols-2 gap-[3px] w-[18px] h-[18px] text-[#ccff00]">
+                                <div class="bg-current w-full h-full rounded-[1px]"></div>
+                                <div class="bg-current w-full h-full rounded-[1px]"></div>
+                                <div class="bg-current w-full h-full rounded-[1px]"></div>
+                                <div class="w-full h-full border-[2px] border-current rounded-[1px] opacity-80"></div>
+                            </div>
+                            <span class="text-white text-xs md:text-sm uppercase tracking-widest whitespace-nowrap">Richard Blackburn</span>
+                        </div>
+                        
+                        <!-- Purple Pill CTA -->
+                        <a href="#" class="inline-flex items-center justify-center bg-[#7b61ff] text-white px-6 py-2.5 rounded-full text-xs md:text-sm uppercase tracking-wide hover:bg-[#6a52e0] transition-colors duration-300">
+                            Contact Me
+                        </a>
+                    </div>
+
+                    <p class="text-[#ccff00] text-sm md:text-base leading-relaxed max-w-[360px] font-normal">
+                        I work directly with business owners to build high-performing websites & effective marketing campaigns that turn visitors into leads and sales.
+                    </p>
+                </div>
+
+                <!-- Bottom Right: Location & Scroll Indicator -->
+                <div class="flex flex-col lg:items-end gap-4 lg:gap-8 js-fade-in opacity-0">
+                    <p class="text-[#ccff00] text-sm md:text-base font-normal">
+                        Based in Bognor Regis, West sussex, UK
+                    </p>
+                    
+                    <div class="flex items-center gap-2 text-white text-xs md:text-sm uppercase tracking-widest">
+                        <iconify-icon icon="solar:arrow-down-linear" class="text-xl"></iconify-icon>
+                        <span>Scroll Down</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            // Masked Reveal for the main headline
+            gsap.to(".js-reveal", {
+                y: "0%",
+                duration: 1.2,
+                ease: "power4.out",
+                stagger: 0.1,
+                delay: 0.2
+            });
+
+            // Fade in for bottom content elements
+            gsap.to(".js-fade-in", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+                stagger: 0.2,
+                delay: 0.8
+            });
+            
+            // Subtle slow zoom on the background image for a premium feel
+            gsap.to("img", {
+                scale: 1,
+                duration: 10,
+                ease: "sine.out"
+            });
+        });
+    </script>
+</body>
+</html>

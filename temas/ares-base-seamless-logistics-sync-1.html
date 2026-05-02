@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ares Base | Seamless Logistics Sync</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP for Masked Reveal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&amp;display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#bc7f61] text-stone-600 antialiased selection:bg-orange-200 selection:text-orange-900 min-h-screen flex flex-col justify-center items-center py-10 px-4 md:py-20 md:px-8 overflow-x-hidden" style="font-family: 'Geist', sans-serif;">
+
+    <!-- Premium Gradient Border Wrapper (Monotone) -->
+    <div class="max-w-6xl w-full mx-auto p-[1px] rounded-[2.5rem] bg-gradient-to-b from-stone-300 via-stone-200/50 to-stone-100/20 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] relative z-10">
+        
+        <!-- Primary Application Shell -->
+        <div class="w-full bg-white rounded-[calc(2.5rem-1px)] flex flex-col items-center py-20 px-4 md:px-12 relative overflow-hidden z-20">
+            
+            <!-- Aura Asset Background (Subtle Martian Atmosphere) -->
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/586fe153-4525-4bc0-b6ff-39cbac276d12_3840w.jpg" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-[0.04] pointer-events-none mix-blend-multiply z-0">
+            
+            <!-- Atmospheric Glows -->
+            <div class="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-orange-100/40 blur-[100px] pointer-events-none z-0"></div>
+            <div class="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-red-100/30 blur-[100px] pointer-events-none z-0"></div>
+
+            <!-- Architectural Grid & Markers (Monotone Lines) -->
+            <div class="absolute inset-0 z-0 pointer-events-none" style="background: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 4rem 100%;"></div>
+            <div class="absolute top-6 left-6 w-1 h-1 bg-stone-300 z-10"></div>
+            <div class="absolute top-6 right-6 w-1 h-1 bg-stone-300 z-10"></div>
+            <div class="absolute bottom-6 left-6 w-1 h-1 bg-stone-300 z-10"></div>
+            <div class="absolute bottom-6 right-6 w-1 h-1 bg-stone-300 z-10"></div>
+
+            <!-- Badge -->
+            <div class="relative z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-orange-700 text-xs font-normal tracking-wide bg-orange-50 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                <iconify-icon icon="solar:planet-3-linear" class="text-base text-orange-500" stroke-width="1.5"></iconify-icon>
+                Ares Mission Sync
+            </div>
+
+            <!-- Masked Staggered Headline -->
+            <h1 class="gs-reveal-title relative z-10 text-4xl md:text-6xl leading-[1.1] text-stone-900 mt-8 text-center max-w-3xl tracking-tight font-light">
+                <span class="inline-block overflow-hidden align-bottom pb-1"><span class="reveal-word inline-block opacity-0" style="transform: translateY(100%);">Synchronize</span></span>
+                <span class="inline-block overflow-hidden align-bottom pb-1"><span class="reveal-word inline-block opacity-0" style="transform: translateY(100%);">Martian</span></span>
+                <span class="inline-block overflow-hidden align-bottom pb-1"><span class="reveal-word inline-block opacity-0" style="transform: translateY(100%);">outposts,</span></span>
+                <br class="hidden sm:block">
+                <span class="inline-block overflow-hidden align-bottom pb-1"><span class="reveal-word inline-block opacity-0" style="transform: translateY(100%);">zero</span></span>
+                <span class="inline-block overflow-hidden align-bottom pb-1"><span class="reveal-word inline-block opacity-0" style="transform: translateY(100%);">latency.</span></span>
+            </h1>
+
+            <!-- Added Divider -->
+            <hr class="w-full max-w-[1000px] border-stone-200 mt-12 relative z-10">
+
+            <!-- Diagram Container -->
+            <div class="relative z-10 w-full max-w-[1000px] mt-12 md:mt-16" style="aspect-ratio: 1000 / 550;">
+                
+                <!-- SVG Connections & Animations (Monotone Lines) -->
+                <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 550" preserveAspectRatio="xMidYMid meet">
+                    
+                    <!-- Background Pulse Effect -->
+                    <circle cx="500" cy="275" r="45" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5">
+                        <animate attributeName="r" values="45; 250" dur="5s" repeatCount="indefinite"></animate>
+                        <animate attributeName="opacity" values="1; 0" dur="5s" repeatCount="indefinite"></animate>
+                    </circle>
+                    <circle cx="500" cy="275" r="45" fill="none" stroke="rgba(0,0,0,0.1)" stroke-width="1.5">
+                        <animate attributeName="r" values="45; 250" dur="5s" begin="2.5s" repeatCount="indefinite"></animate>
+                        <animate attributeName="opacity" values="1; 0" dur="5s" begin="2.5s" repeatCount="indefinite"></animate>
+                    </circle>
+
+                    <!-- Base Light Infrastructure Lines -->
+                    <g stroke="#e7e5e4" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M 200 209 L 260 209 C 380 209, 420 275, 500 275"></path>
+                        <path d="M 320 275 L 500 275"></path>
+                        <path d="M 200 341 L 260 341 C 380 341, 420 275, 500 275"></path>
+                        <path d="M 440 368 C 440 320, 500 320, 500 275"></path>
+                        <path d="M 580 368 C 580 320, 500 320, 500 275"></path>
+                        <path d="M 680 275 L 500 275"></path>
+                        <path d="M 810 209 L 750 209 C 630 209, 580 275, 500 275"></path>
+                        <path d="M 810 341 L 750 341 C 630 341, 580 275, 500 275"></path>
+                    </g>
+
+                    <!-- Animated Flow Lines (Monotone) -->
+                    <g stroke="#57534e" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(87,83,78,0.3));">
+                        <path d="M 200 209 L 260 209 C 380 209, 420 275, 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -800" dur="3s" begin="0s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 320 275 L 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -400" dur="2s" begin="0.8s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 200 341 L 260 341 C 380 341, 420 275, 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -800" dur="3.5s" begin="1.2s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 440 368 C 440 320, 500 320, 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -300" dur="2.5s" begin="0.4s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 580 368 C 580 320, 500 320, 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -300" dur="2.8s" begin="1.8s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 680 275 L 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -400" dur="2.2s" begin="0.2s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 810 209 L 750 209 C 630 209, 580 275, 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -800" dur="3.2s" begin="1.5s" repeatCount="indefinite"></animate>
+                        </path>
+                        <path d="M 810 341 L 750 341 C 630 341, 580 275, 500 275" stroke-dasharray="15 1000" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="0; -800" dur="3.8s" begin="2.1s" repeatCount="indefinite"></animate>
+                        </path>
+                    </g>
+                </svg>
+
+                <!-- HTML Nodes -->
+                <!-- Node: Top Left -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 20%; top: 38%;">
+                    <iconify-icon icon="solar:radar-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Mid Left -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 32%; top: 50%;">
+                    <iconify-icon icon="solar:sort-vertical-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Bottom Left -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 20%; top: 62%;">
+                    <iconify-icon icon="solar:buildings-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Bottom Center Left -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 44%; top: 67%;">
+                    <iconify-icon icon="solar:ufo-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Bottom Center Right -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 58%; top: 67%;">
+                    <iconify-icon icon="solar:battery-charge-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Mid Right -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 68%; top: 50%;">
+                    <iconify-icon icon="solar:route-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Top Right -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 81%; top: 38%;">
+                    <iconify-icon icon="solar:map-point-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: Bottom Right Outer -->
+                <div class="absolute w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-10 bg-white shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]" style="left: 81%; top: 62%;">
+                    <iconify-icon icon="solar:shield-check-linear" class="text-xl md:text-2xl text-orange-600" stroke-width="1.5"></iconify-icon>
+                </div>
+
+                <!-- Node: CENTER (Active Dial/Module) -->
+                <div class="absolute w-20 h-20 md:w-28 md:h-28 rounded-full flex items-center justify-center -translate-x-1/2 -translate-y-1/2 z-20 shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] p-2" style="left: 50%; top: 50%; background: linear-gradient(145deg, #ffffff 0%, #f5f5f4 100%);">
+                    <div class="w-full h-full rounded-full flex items-center justify-center bg-gradient-to-br from-orange-400 to-red-600 shadow-[inset_0_2px_4px_rgba(255,255,255,0.4),inset_0_-4px_8px_rgba(0,0,0,0.2)]">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-3xl md:text-4xl text-white drop-shadow-sm" stroke-width="1.5"></iconify-icon>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Added Divider -->
+            <hr class="w-full max-w-[1000px] border-stone-200 mt-10 md:mt-12 relative z-10">
+
+            <!-- Trusted Crew Avatars -->
+            <div class="relative z-10 flex items-center justify-center mt-10">
+                <div class="flex -space-x-3 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-full bg-white p-1">
+                    <img class="w-8 h-8 rounded-full object-cover border-2 border-white" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2f563338-39fa-47ea-9761-658d4f3f84db_1600w.jpg" alt="Crew Member">
+                    <img class="w-8 h-8 rounded-full object-cover border-2 border-white" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4f5668c5-fc4a-44e0-bc5e-a664189d3c31_1600w.jpg" alt="Crew Member">
+                    <img class="w-8 h-8 rounded-full object-cover border-2 border-white" src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/eca707cc-a5b7-439a-b4fd-247f6106c2e1_1600w.jpg" alt="Crew Member">
+                </div>
+                <span class="ml-4 text-sm text-stone-500 font-normal">Trusted by leading mission commanders</span>
+            </div>
+
+            <!-- Subheadline -->
+            <p class="relative z-10 text-base md:text-lg text-stone-500 leading-relaxed text-center max-w-xl mx-auto mt-6">
+                Connect your rovers, habitats, and orbital relays with a single protocol. <br class="hidden md:block">
+                No complex atmospheric interference setups—just pure data velocity.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="relative z-10 mt-10 flex flex-col sm:flex-row items-center gap-4">
+                <button class="bg-orange-600 text-white px-8 py-3.5 rounded-full font-normal transition-all duration-200 active:scale-95 hover:bg-orange-700 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+                    Initialize Uplink
+                </button>
+                <button class="bg-white text-stone-700 px-8 py-3.5 rounded-full font-normal transition-all duration-200 active:scale-95 hover:bg-stone-50 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] ring-1 ring-stone-200/50">
+                    View Mission Logs
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- GSAP Initialization Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Masked Staggered Word Reveal
+            gsap.to('.reveal-word', {
+                y: '0%',
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power4.out',
+                stagger: 0.08,
+                scrollTrigger: {
+                    trigger: '.gs-reveal-title',
+                    start: 'top 85%'
+                }
+            });
+        });
+    </script>
+
+</body></html>

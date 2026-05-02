@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Quantum Infrastructure</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@300;400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#050505] text-[#FAFAFA] font-['Inter',system-ui,sans-serif] selection:bg-[#FF4500] selection:text-white overflow-x-hidden">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 left-0 w-full z-50 p-[clamp(1.5rem,3vw,2.5rem)] mix-blend-difference text-white pointer-events-none">
+        <div class="max-w-[100rem] mx-auto flex justify-between items-center pointer-events-auto">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <svg viewBox="0 0 100 100" class="w-[clamp(1.5rem,3vw,2rem)] h-[clamp(1.5rem,3vw,2rem)] stroke-white fill-none stroke-[6px]">
+                    <polygon points="10,50 50,10 90,50 50,90" stroke-linejoin="miter"></polygon>
+                    <circle cx="50" cy="50" r="15" class="fill-white stroke-none"></circle>
+                </svg>
+                <div class="font-['Inter_Tight',system-ui,sans-serif] font-normal tracking-widest text-xs uppercase">Nexus</div>
+            </div>
+            
+            <!-- Links -->
+            <div class="hidden md:flex justify-center gap-[clamp(2rem,4vw,3rem)] font-['JetBrains_Mono',monospace] text-xs uppercase tracking-widest text-gray-400">
+                <a href="#architecture" class="hover:text-white transition-colors duration-300">Architecture</a>
+                <a href="#metrics" class="hover:text-white transition-colors duration-300">Metrics</a>
+                <a href="#nodes" class="hover:text-white transition-colors duration-300">Nodes</a>
+            </div>
+            
+            <!-- CTA with Gradient Border (Skill Directive) -->
+            <div>
+                <a href="#connect" class="font-['JetBrains_Mono',monospace] text-xs text-white px-4 py-2 hover:text-[#FF4500] transition-all duration-300 relative rounded-sm" style="background: linear-gradient(#050505, #050505) padding-box, linear-gradient(to right, #FF4500, #1A1A1A) border-box; border: 1px solid transparent;">
+                    [ ESTABLISH LINK ]
+                </a>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen w-full bg-[#050505] overflow-hidden flex items-end pb-[clamp(4rem,8vw,8rem)]">
+        
+        <!-- WebGL Canvas Background -->
+        <canvas id="webgl-canvas" class="absolute inset-0 w-full h-full pointer-events-auto block"></canvas>
+        <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(to top, #050505 5%, transparent 60%);"></div>
+        
+        <!-- Content Container -->
+        <div class="relative z-10 w-full max-w-[100rem] mx-auto px-[clamp(1.5rem,5vw,5rem)] flex flex-col gap-[clamp(1.5rem,3vw,2rem)] text-white pointer-events-none">
+            
+            <!-- Subtitle -->
+            <div class="gsap-fade font-['JetBrains_Mono',monospace] text-xs text-[#FF4500] tracking-widest uppercase flex items-center gap-2 opacity-0" style="transform: translateY(2rem);">
+                <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: #FF4500;"></span> Core Online
+            </div>
+            
+            <!-- Main Title (Masked Reveal Target) -->
+            <h1 class="gsap-reveal font-['Inter_Tight',system-ui,sans-serif] font-light tracking-tight leading-[0.9] text-[clamp(3.5rem,9vw,8.5rem)] max-w-[12ch]">
+                Quantum Infrastructure.<br>Infinite Scalability.
+            </h1>
+            
+            <!-- Paragraph (Masked Reveal Target) -->
+            <p class="gsap-reveal font-['Inter',system-ui,sans-serif] font-light text-[clamp(1rem,1.2vw,1.125rem)] text-gray-400 max-w-[45ch] leading-relaxed">
+                We architect foundational systems that eradicate latency, accelerate data throughput, and unlock unparalleled computational dominance.
+            </p>
+            
+            <!-- Actions & Stats -->
+            <div class="flex flex-wrap items-center gap-[clamp(1rem,2vw,1.5rem)] mt-[clamp(1rem,2vw,2rem)] pointer-events-auto">
+                
+                <!-- Primary Action Button -->
+                <a href="#metrics" class="gsap-fade group relative inline-flex items-center justify-center px-[clamp(1.5rem,3vw,2.5rem)] py-[clamp(1rem,1.5vw,1.25rem)] text-white font-['Inter_Tight',system-ui,sans-serif] font-normal text-sm transition-all duration-300 overflow-hidden opacity-0" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); background-color: #FF4500; transform: translateY(2rem);">
+                    <span class="absolute inset-0 bg-white scale-x-0 origin-right transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 group-hover:origin-left z-0"></span>
+                    <span class="relative z-10 flex items-center gap-3 transition-colors duration-300 group-hover:text-[#050505] tracking-widest uppercase text-xs font-['JetBrains_Mono',monospace]">
+                        Initialize Sequence
+                        <iconify-icon icon="solar:arrow-right-linear" stroke-width="1.5" class="transition-transform duration-300 group-hover:translate-x-1"></iconify-icon>
+                    </span>
+                </a>
+                
+                <!-- Hero Stats -->
+                <div class="gsap-fade font-['JetBrains_Mono',monospace] text-xs text-gray-500 uppercase tracking-widest flex flex-col opacity-0" style="transform: translateY(2rem);">
+                    <span>Throughput: 10Tbps</span>
+                    <span>Latency: &lt;1ms</span>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Logic -->
+    <script>
+        // GSAP & ScrollTrigger Initialization
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Skill Directive: Masked Staggered Word Reveal
+        const revealElements = document.querySelectorAll('.gsap-reveal');
+        
+        revealElements.forEach((el, index) => {
+            const htmlStr = el.innerHTML;
+            el.innerHTML = '';
+            
+            // Split text by spaces or <br> tags while maintaining structure
+            const tokens = htmlStr.trim().split(/(\s+|<br\s*\/?>)/i).filter(t => t.length > 0);
+            const targets = [];
+            
+            tokens.forEach(token => {
+                if (/<br\s*\/?>/i.test(token)) {
+                    el.appendChild(document.createElement('br'));
+                } else if (token.trim().length > 0) {
+                    // Create overflow hidden mask
+                    const mask = document.createElement('span');
+                    mask.style.display = 'inline-flex';
+                    mask.style.overflow = 'hidden';
+                    mask.style.verticalAlign = 'bottom';
+                    mask.style.paddingTop = '0.1em';
+
+                    // Create inner animated word
+                    const inner = document.createElement('span');
+                    inner.innerHTML = token;
+                    inner.style.display = 'inline-block';
+                    inner.style.transform = 'translateY(120%) rotate(2deg)';
+                    inner.style.transformOrigin = 'top left';
+                    
+                    mask.appendChild(inner);
+                    el.appendChild(mask);
+                    
+                    // Maintain spacing
+                    el.appendChild(document.createTextNode(' '));
+                    targets.push(inner);
+                }
+            });
+
+            // ScrollTrigger Animation Execution
+            gsap.to(targets, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 95%",
+                },
+                y: '0%',
+                rotation: 0,
+                duration: 1.2,
+                stagger: 0.03,
+                ease: "power4.out",
+                delay: index * 0.15 + 0.2
+            });
+        });
+
+        // Simple fade-up for non-text UI elements
+        gsap.to('.gsap-fade', {
+            scrollTrigger: {
+                trigger: '.gsap-fade',
+                start: "top 95%",
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.6
+        });
+
+        // WebGL Particle Grid & Ripple Effect
+        const canvas = document.getElementById('webgl-canvas');
+        const gl = canvas.getContext('webgl');
+
+        const vsSource = `
+            attribute vec2 a_position;
+            void main() { gl_Position = vec4(a_position, 0.0, 1.0); }
+        `;
+
+        const fsSource = `
+            precision mediump float;
+            uniform vec2 u_resolution;
+            uniform vec2 u_mouse;
+            uniform float u_time;
+
+            void main() {
+                vec2 st = gl_FragCoord.xy / u_resolution.xy;
+                st.x *= u_resolution.x / u_resolution.y;
+                
+                vec2 m = u_mouse / u_resolution.xy;
+                m.x *= u_resolution.x / u_resolution.y;
+                
+                float dist = distance(st, m);
+                float ripple = sin(dist * 20.0 - u_time * 3.5) * 0.025;
+                ripple *= exp(-dist * 6.0);
+                
+                vec2 warpedSt = st + normalize(st - m) * ripple;
+
+                float gridDensity = 75.0;
+                vec2 grid = fract(warpedSt * gridDensity) - 0.5;
+                
+                float radius = 0.08;
+                float dot = 1.0 - smoothstep(radius, radius + 0.05, length(grid));
+                
+                vec3 bg = vec3(0.02, 0.02, 0.02);
+                vec3 accent = vec3(1.0, 0.27, 0.0);
+                vec3 secondary = vec3(0.15, 0.15, 0.15);
+                
+                float highlight = exp(-dist * 4.5) * 0.9;
+                vec3 dotColor = mix(secondary, accent, highlight + sin(u_time * 2.0 + warpedSt.x * 10.0)*0.15);
+                
+                vec3 finalColor = mix(bg, dotColor, dot * (0.2 + highlight));
+
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        function createShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            return shader;
+        }
+
+        const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+        gl.useProgram(program);
+
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+        
+        const positionLocation = gl.getAttribLocation(program, "a_position");
+        gl.enableVertexAttribArray(positionLocation);
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+        const resolutionLoc = gl.getUniformLocation(program, "u_resolution");
+        const mouseLoc = gl.getUniformLocation(program, "u_mouse");
+        const timeLoc = gl.getUniformLocation(program, "u_time");
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = window.innerHeight - e.clientY;
+        });
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            gl.uniform2f(resolutionLoc, canvas.width, canvas.height);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        function render(time) {
+            gl.uniform1f(timeLoc, time * 0.001);
+            gl.uniform2f(mouseLoc, mouseX, mouseY);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+    </script>
+</body>
+</html>

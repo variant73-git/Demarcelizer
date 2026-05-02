@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="relative w-screen h-screen overflow-hidden antialiased text-[#1A1A1A] selection:bg-black selection:text-white" style="background-color: #F2EBE1; font-family: 'Space Mono', monospace;">
+
+    <!-- Background Animated Canvas (WebGL feel) -->
+    <canvas id="timeline-canvas" class="absolute inset-0 z-10 pointer-events-none w-full h-full"></canvas>
+
+    <!-- Grid Lines Container -->
+    <div class="absolute inset-0 z-0 pointer-events-none flex justify-between px-[5vw]">
+        <!-- Line 1 -->
+        <div class="relative w-px h-full bg-black/10">
+            <span class="absolute top-[32vh] left-0 text-xs tracking-widest text-[#222]">Q1 '25</span>
+        </div>
+        <!-- Line 2 -->
+        <div class="relative w-px h-full bg-black/10">
+            <span class="absolute top-[32vh] left-0 text-xs tracking-widest text-[#222]">Q2 '25</span>
+        </div>
+        <!-- Line 3 -->
+        <div class="relative w-px h-full bg-black/10">
+            <span class="absolute top-[32vh] left-0 text-xs tracking-widest text-[#222]">Q3 '25</span>
+        </div>
+        <!-- Line 4 -->
+        <div class="relative w-px h-full bg-black/10">
+            <span class="absolute top-[32vh] left-0 text-xs tracking-widest text-[#222]">Q4 '25</span>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <header class="absolute top-0 left-0 w-full p-[5vw] lg:p-12 xl:p-16 flex flex-col md:flex-row justify-between items-start z-30">
+        <h1 class="text-6xl md:text-7xl lg:text-8xl tracking-tighter text-[#1A1A1A]" style="font-family: 'Playfair Display', serif;">
+            Master Strategy
+        </h1>
+        <div class="mt-8 md:mt-2 max-w-md flex flex-col gap-4 text-right md:text-left">
+            <div class="flex items-center md:items-start gap-2 font-bold tracking-tight text-sm md:text-base justify-end md:justify-start">
+                <span class="text-lg leading-none font-sans block transform -rotate-45 relative top-0.5">→</span>
+                <span>500% Scaling</span>
+                <span class="text-black/40 font-normal">$2M &rarr; $10M ARR</span>
+            </div>
+            <p class="text-xs md:text-sm leading-relaxed text-[#444] tracking-tight font-normal">
+                Series B funding accelerates core technology infrastructure, global market penetration, and key leadership hires. Path to 15,000 active instances and profitability by Q4 2026.
+            </p>
+        </div>
+    </header>
+
+    <!-- Timeline Text Overlay Container -->
+    <div class="absolute inset-0 z-30 pointer-events-none">
+        
+        <!-- Block 1: Purple -->
+        <div class="absolute" style="top: 40vh; left: 5vw; width: 25vw; height: 9vh;">
+            <span class="absolute top-2.5 left-3 text-xs uppercase tracking-widest font-bold text-[#111]">Core Infra</span>
+        </div>
+        <div class="absolute" style="top: 49vh; left: 5vw; width: 16vw;">
+            <p class="text-xs uppercase tracking-widest text-[#666] leading-tight font-normal">
+                Migrate databases, <br>establish CI/CD pipelines, <br>hire Devops Lead
+            </p>
+        </div>
+
+        <!-- Block 2: Pink -->
+        <div class="absolute" style="top: 49vh; left: 24vw; width: 25vw; height: 9vh;">
+            <span class="absolute top-2.5 left-3 text-xs uppercase tracking-widest font-bold text-[#111]">Platform V3 Alpha</span>
+        </div>
+        <div class="absolute" style="top: 58vh; left: 24vw; width: 18vw;">
+            <p class="text-xs uppercase tracking-widest text-[#666] leading-tight font-normal">
+                Machine learning engine beta, <br>100 early access users onboarded
+            </p>
+        </div>
+
+        <!-- Block 3: Orange -->
+        <div class="absolute" style="top: 58vh; left: 49vw; width: 22vw; height: 9vh;">
+            <span class="absolute top-2.5 left-3 text-xs uppercase tracking-widest font-bold text-[#111]">Global Launch</span>
+        </div>
+        <div class="absolute" style="top: 67vh; left: 49vw; width: 18vw;">
+            <p class="text-xs uppercase tracking-widest text-[#666] leading-tight font-normal">
+                Public release with full ML suite, <br>SOC2 compliance certification live
+            </p>
+        </div>
+
+        <!-- Block 4: Yellow -->
+        <div class="absolute" style="top: 67vh; left: 64vw; width: 20vw; height: 9vh;">
+            <span class="absolute top-2.5 left-3 text-xs uppercase tracking-widest font-bold text-[#111]">Market Expansion</span>
+        </div>
+        <div class="absolute" style="top: 76vh; left: 64vw; width: 17vw;">
+            <p class="text-xs uppercase tracking-widest text-[#666] leading-tight font-normal">
+                Sales force scaled to 20 reps, <br>marketing dominance in EU/APAC
+            </p>
+        </div>
+
+        <!-- Block 5: Blue -->
+        <div class="absolute" style="top: 76vh; left: 83vw; width: 12vw; height: 9vh;">
+            <span class="absolute top-2.5 left-3 text-xs uppercase tracking-widest font-bold text-[#111]">Monetization</span>
+        </div>
+        <div class="absolute" style="top: 85vh; left: 83vw; width: 15vw;">
+            <p class="text-xs uppercase tracking-widest text-[#666] leading-tight font-normal">
+                Reach 15k instances, <br>unit economics perfectly optimized
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('timeline-canvas');
+        const ctx = canvas.getContext('2d', { alpha: true });
+        
+        let width, height;
+        let time = 0;
+
+        // Data for blocks: [top_vh, left_vw, width_vw, height_vh, r, g, b]
+        const blocks = [
+            { t: 40, l: 5,  w: 26, h: 9, r: 218, g: 178, b: 239 }, // Purple
+            { t: 49, l: 24, w: 26, h: 9, r: 241, g: 172, b: 255 }, // Pink
+            { t: 58, l: 49, w: 22, h: 9, r: 245, g: 184, b: 103 }, // Orange
+            { t: 67, l: 64, w: 20, h: 9, r: 255, g: 224, b: 112 }, // Yellow
+            { t: 76, l: 83, w: 15, h: 9, r: 128, g: 178, b: 255 }  // Blue
+        ];
+
+        function resize() {
+            const dpr = window.devicePixelRatio || 1;
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.scale(dpr, dpr);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function drawPixelFade(x, y, w, h, r, g, b) {
+            const solidPct = 0.35; // Percentage of block that is solid
+            const solidW = w * solidPct;
+            const fadeW = w * (1 - solidPct);
+            
+            // Draw solid left portion
+            ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+            ctx.fillRect(x, y, solidW, h);
+
+            // Draw pixelated fade right portion
+            const blockSize = Math.max(6, Math.floor(h / 8)); // Dynamic pixel size
+            const cols = Math.ceil(fadeW / blockSize);
+            const rows = Math.ceil(h / blockSize);
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const px = x + solidW + col * blockSize;
+                    const py = y + row * blockSize;
+                    
+                    // Base fade based on distance from solid part
+                    let normalizedDist = col / cols;
+                    
+                    // Create blocky noise pattern
+                    // Use a simple pseudo-random hash based on position and time
+                    let noise = Math.sin(col * 12.9898 + row * 78.233 + time * 0.05) * 43758.5453;
+                    noise = noise - Math.floor(noise); 
+                    
+                    // Calculate alpha: drops off horizontally, modulated by animated noise
+                    let alpha = 1.0 - (normalizedDist * 1.2);
+                    alpha += (noise - 0.5) * 0.4; 
+                    
+                    // Shimmering effect
+                    let shimmer = Math.sin(time * 0.02 + col * 0.2 + row * 0.5) * 0.15;
+                    alpha += shimmer;
+
+                    // Clamp alpha
+                    alpha = Math.max(0, Math.min(1, alpha));
+
+                    // Only draw visible pixels to create the 'scattered' edge
+                    if (alpha > 0.05) {
+                        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                        ctx.fillRect(px, py, blockSize + 0.5, blockSize + 0.5); // +0.5 prevents tiny gaps
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw each block based on viewport percentages
+            blocks.forEach(b => {
+                const px = (b.l / 100) * width;
+                const py = (b.t / 100) * height;
+                const pw = (b.w / 100) * width;
+                const ph = (b.h / 100) * height;
+                
+                drawPixelFade(px, py, pw, ph, b.r, b.g, b.b);
+            });
+
+            time++;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

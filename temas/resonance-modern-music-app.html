@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance - Modern Music App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style></head>
+<body class="antialiased min-h-screen flex flex-col relative selection:bg-slate-500/30 selection:text-white bg-black text-white m-0 overflow-x-hidden" style="font-family: 'Inter', sans-serif;">
+
+    <!-- WebGL Background Canvas -->
+    <canvas id="glcanvas" class="absolute inset-0 w-full h-full -z-10 pointer-events-none"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="relative z-10 w-full px-6 py-8 md:px-12 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="text-2xl font-semibold tracking-tight select-none">
+            <span class="text-transparent bg-clip-text bg-slate-50 font-geist">Resonance</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center space-x-10">
+            <a href="#" class="text-sm font-medium text-white relative after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[1px] after:bg-white font-geist">Discover</a>
+            <a href="#" class="text-sm font-normal text-gray-400 hover:text-gray-200 transition-colors font-geist">Playlists</a>
+            <a href="#" class="text-sm font-normal text-gray-400 hover:text-gray-200 transition-colors font-geist">Artists</a>
+            <a href="#" class="text-sm font-normal text-gray-400 hover:text-gray-200 transition-colors font-geist">Premium</a>
+        </nav>
+
+        <!-- Mobile Menu Placeholder (Hidden on Desktop) -->
+        <div class="md:hidden w-6 h-6 flex flex-col justify-center space-y-1.5 cursor-pointer">
+            <div class="w-full h-[1px] bg-white"></div>
+            <div class="w-full h-[1px] bg-white"></div>
+        </div>
+    </header>
+
+    <!-- Main Hero Section -->
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center text-center px-4 pt-12 pb-32 md:pt-0">
+        
+        <h1 class="text-[2.5rem] md:text-[4rem] lg:text-[4.5rem] font-semibold tracking-tight leading-[1.1] mb-6 select-none">
+            <span class="text-[#bae6fd] font-geist font-light tracking-tighter">Feel</span> 
+            <span class="text-slate-50 font-geist font-light tracking-tighter">Every</span> 
+            <span class="text-slate-50 font-geist font-light tracking-tighter">Beat</span> 
+            <span class="text-slate-50 font-geist font-light tracking-tighter">Perfectly</span>
+        </h1>
+        
+        <p class="text-sm md:text-[15px] text-gray-200 font-light max-w-[750px] mx-auto leading-relaxed mb-8 font-geist">
+            Discover millions of tracks, curated playlists, and exclusive artists. Our high-fidelity audio engine and personalized recommendations ensure your daily soundtrack is always perfectly tuned to your life.
+        </p>
+        
+        <button class="px-7 py-2.5 rounded-[10px] border border-white/40 text-sm font-medium text-white hover:bg-white/10 hover:border-white/60 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/20 font-geist">
+            Start Listening
+        </button>
+
+    </main>
+
+    <!-- WebGL Animation Script -->
+    <script>
+        const canvas = document.getElementById('glcanvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+        if (!gl) {
+            console.error('WebGL not supported');
+        } else {
+            // Resize canvas to match window size
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Vertex Shader: simple pass-through
+            const vsSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            // Fragment Shader: creates the glowing, flowing ribbons
+            const fsSource = `
+                precision highp float;
+                uniform vec2 u_resolution;
+                uniform float u_time;
+
+                // Function to create a glowing ribbon
+                vec3 ribbon(vec2 uv, float offset, float speed, float freq, float amp, vec3 color, float thickness) {
+                    // Create base sine wave
+                    float y = sin(uv.x * freq + u_time * speed + offset) * amp;
+                    
+                    // Add secondary wave for complexity
+                    y += sin(uv.x * (freq * 1.5) - u_time * (speed * 0.8)) * (amp * 0.3);
+                    
+                    // Calculate distance to wave
+                    float dist = abs(uv.y - y);
+                    
+                    // Create core line and outer glow
+                    float core = smoothstep(thickness, 0.0, dist);
+                    float glow = (thickness * 0.5) / (dist + 0.001);
+                    
+                    return color * (core * 0.5 + glow * 1.2);
+                }
+
+                void main() {
+                    // Normalize coordinates (0 to 1)
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    
+                    // Center and adjust for aspect ratio
+                    vec2 p = uv * 2.0 - 1.0;
+                    p.x *= u_resolution.x / u_resolution.y;
+
+                    vec3 finalColor = vec3(0.0);
+                    
+                    // Shift entire visual down slightly
+                    p.y += 0.3;
+
+                    // 1. Deep Blue / Cyan Ribbon (Top/Left)
+                    finalColor += ribbon(p, 0.0, 0.4, 1.2, 0.4, vec3(0.05, 0.3, 1.0), 0.03);
+                    finalColor += ribbon(p, 0.2, 0.3, 1.0, 0.5, vec3(0.0, 0.8, 1.0), 0.02) * 0.5;
+
+                    // 2. Purple / Magenta Ribbon (Center/Sweeping up)
+                    finalColor += ribbon(p, 2.0, -0.5, 1.5, 0.6, vec3(0.7, 0.0, 1.0), 0.04);
+                    finalColor += ribbon(p, 2.2, -0.4, 1.3, 0.7, vec3(1.0, 0.0, 0.8), 0.02) * 0.6;
+
+                    // 3. Orange / Red Accent (Bottom Right)
+                    finalColor += ribbon(p, 4.0, 0.6, 1.8, 0.3, vec3(1.0, 0.2, 0.0), 0.03);
+
+                    // Global positioning masks
+                    
+                    // Fade out heavily towards the top to keep text readable
+                    float topMask = smoothstep(0.8, -0.2, p.y);
+                    finalColor *= topMask;
+                    
+                    // Fade out slightly at the very bottom
+                    float bottomMask = smoothstep(-1.2, -0.8, p.y);
+                    finalColor *= bottomMask;
+
+                    // Tone mapping / exposure to prevent blowout
+                    finalColor = vec3(1.0) - exp(-finalColor * 1.5);
+
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `;
+
+            // Compile shader helper
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+            // Create program
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error('Program link error:', gl.getProgramInfoLog(program));
+            }
+
+            gl.useProgram(program);
+
+            // Set up fullscreen quad geometry
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            const positions = [
+                -1.0, -1.0,
+                 1.0, -1.0,
+                -1.0,  1.0,
+                -1.0,  1.0,
+                 1.0, -1.0,
+                 1.0,  1.0,
+            ];
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            // Get uniform locations
+            const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+            const timeLocation = gl.getUniformLocation(program, 'u_time');
+
+            // Render loop
+            let startTime = Date.now();
+            function render() {
+                const currentTime = (Date.now() - startTime) / 1000.0;
+
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.uniform1f(timeLocation, currentTime);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+
+            render();
+        }
+    </script>
+
+</body></html>

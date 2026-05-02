@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+.env
+.env.local
+*.log
+
+# Generated at runtime by the engine
+temas/manifest.json

@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en" class="antialiased selection:bg-[#F2EAD3] selection:text-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Global Transfers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body class="bg-black text-[#F2EAD3] min-h-screen relative overflow-x-hidden font-sans" style="font-family: 'Inter', sans-serif;">
+
+    <!-- Background Texture Directive: Diagonal lines -->
+    <div class="fixed inset-0 pointer-events-none z-0" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 12px);"></div>
+
+    <!-- Framed Grid Layout Directive -->
+    <div class="relative z-10 w-full max-w-[1440px] mx-auto min-h-screen border-x border-white/[0.04] flex flex-col">
+        
+        <!-- Frame Corner Brackets -->
+        <div class="absolute top-0 left-0 w-6 h-6 border-t border-l border-white/20 pointer-events-none z-30"></div>
+        <div class="absolute top-0 right-0 w-6 h-6 border-t border-r border-white/20 pointer-events-none z-30"></div>
+        <div class="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-white/20 pointer-events-none z-30"></div>
+        <div class="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-white/20 pointer-events-none z-30"></div>
+
+        <!-- Reference Geometry: Deep Wavy Sunset Background (Restricted to top view) -->
+        <div class="absolute top-0 right-0 h-[100vh] w-full lg:w-[60%] pointer-events-none z-0 overflow-hidden flex justify-end">
+            <!-- Pronounced wavy SVG paths replacing the angular stripes -->
+            <svg viewBox="0 0 1000 1200" preserveAspectRatio="xMaxYMid slice" class="h-full w-auto opacity-90 lg:opacity-100">
+                <!-- Deep Yellow -->
+                <path class="animated-line" d="M 400,1200 C 1000,800 -200,400 800,-100 L 860,-100 C -140,400 1060,800 460,1200 Z" fill="#FDB813"></path>
+                <!-- Orange -->
+                <path class="animated-line" d="M 460,1200 C 1060,800 -140,400 860,-100 L 920,-100 C -80,400 1120,800 520,1200 Z" fill="#F68B1F"></path>
+                <!-- Hot Pink -->
+                <path class="animated-line" d="M 520,1200 C 1120,800 -80,400 920,-100 L 980,-100 C -20,400 1180,800 580,1200 Z" fill="#E01A59"></path>
+                <!-- Purple -->
+                <path class="animated-line" d="M 580,1200 C 1180,800 -20,400 980,-100 L 1040,-100 C 40,400 1240,800 640,1200 Z" fill="#6A2489"></path>
+            </svg>
+        </div>
+
+        <!-- Header -->
+        <header class="relative z-20 flex items-center justify-between px-8 lg:px-16 py-8 border-b border-white/[0.04]">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 text-xl font-normal tracking-tight">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4L20 20M20 4L4 20" stroke="#F2EAD3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm text-white/60 font-normal">
+                <a href="#" class="hover:text-white transition-colors">Receive</a>
+                <a href="#" class="hover:text-white transition-colors">Pricing</a>
+                <div class="flex items-center gap-2">
+                    <a href="#" class="hover:text-white transition-colors">Corridors</a>
+                    <span class="px-2 py-0.5 rounded-full bg-white/10 text-white/80 text-xs uppercase tracking-wider">120+</span>
+                </div>
+            </nav>
+
+            <!-- CTA -->
+            <button class="bg-[#F2EAD3] hover:bg-white text-black px-5 py-2 rounded-full text-sm font-normal transition-colors">
+                Send Funds
+            </button>
+        </header>
+
+        <!-- Main Hero Section -->
+        <main class="relative z-10 flex flex-col lg:flex-row gap-16 px-8 lg:px-16 py-16 lg:py-24 items-center min-h-[calc(100vh-100px)]">
+            
+            <!-- Left: Typography & Actions -->
+            <div class="max-w-xl w-full">
+                <!-- Masked Reveal Directive on Mixed Font Headline -->
+                <h1 class="text-5xl lg:text-7xl font-normal tracking-tight leading-[1.05] text-[#F2EAD3] reveal-headline">
+                    <span class="inline-block overflow-hidden pb-1"><span class="reveal-word inline-block transform translate-y-full tracking-tighter">Move</span></span>
+                    <span class="inline-block overflow-hidden pb-1"><span class="reveal-word inline-block transform translate-y-full italic pr-3 tracking-tighter" style="font-family: 'Playfair Display', serif;">capital</span></span><br>
+                    <span class="inline-block overflow-hidden pb-1"><span class="reveal-word inline-block transform translate-y-full tracking-tighter">worldwide</span></span>
+                    <span class="inline-block overflow-hidden pb-1"><span class="reveal-word inline-block transform translate-y-full tracking-tighter">with</span></span><br>
+                    <span class="inline-block overflow-hidden pb-1"><span class="reveal-word inline-block transform translate-y-full italic pr-3 tracking-tighter" style="font-family: 'Playfair Display', serif;">absolute</span></span>
+                    <span class="inline-block overflow-hidden pb-1 text-[#F68B1F]"><span class="reveal-word inline-block transform translate-y-full italic pr-3 tracking-tighter" style="font-family: 'Playfair Display', serif;">precision</span></span>
+                </h1>
+                
+                <p class="mt-8 text-lg text-white/50 max-w-md leading-relaxed reveal-subtext opacity-0 font-normal">
+                    Flawless, real-time international transfers powered by dynamic market rates. Command your global wealth without boundaries.
+                </p>
+
+                <div class="mt-12 flex flex-wrap items-center gap-4 reveal-actions opacity-0">
+                    <button class="bg-[#F2EAD3] hover:bg-white text-black px-8 py-3.5 rounded-full text-sm font-normal transition-all hover:scale-[1.02] active:scale-[0.98]">
+                        Send Funds
+                    </button>
+                    
+                    <!-- Border Gradients Directive on Secondary Button -->
+                    <button class="relative p-[1px] rounded-full overflow-hidden group">
+                        <span class="absolute inset-0 bg-gradient-to-r from-white/30 via-white/10 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></span>
+                        <span class="relative block px-8 py-3.5 bg-black rounded-full text-sm text-white/80 font-normal group-hover:text-white transition-colors">
+                            Explore Rates
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Social Proof & Company Logos -->
+                <div class="mt-16 pt-8 border-t border-white/[0.04] reveal-actions opacity-0">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="flex -space-x-2">
+                                <img src="https://i.pravatar.cc/100?img=33" alt="User" class="w-8 h-8 rounded-full border border-black grayscale opacity-80">
+                                <img src="https://i.pravatar.cc/100?img=13" alt="User" class="w-8 h-8 rounded-full border border-black grayscale opacity-80">
+                                <img src="https://i.pravatar.cc/100?img=48" alt="User" class="w-8 h-8 rounded-full border border-black grayscale opacity-80">
+                                <img src="https://i.pravatar.cc/100?img=69" alt="User" class="w-8 h-8 rounded-full border border-black grayscale opacity-80">
+                            </div>
+                            <div class="text-sm text-white/50 font-normal">
+                                Empowering <span class="text-white/90">15,000+</span> modern enterprises
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-6 lg:gap-8 opacity-40 grayscale">
+                            <div class="flex items-center gap-1.5 font-normal text-xs tracking-tight">
+                                <iconify-icon icon="solar:infinity-linear" width="20"></iconify-icon> QUANTUM
+                            </div>
+                            <div class="flex items-center gap-1.5 font-normal text-xs tracking-tight">
+                                <iconify-icon icon="solar:box-linear" width="20"></iconify-icon> AEROSPACE
+                            </div>
+                            <div class="flex items-center gap-1.5 font-normal text-xs tracking-tight hidden sm:flex">
+                                <iconify-icon icon="solar:chart-2-linear" width="20"></iconify-icon> NEXUS
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right: Interactive 3D Card Stack -->
+            <div class="relative w-full h-[600px] flex items-center justify-center lg:justify-end perspective-[1500px] reveal-card opacity-0">
+                
+                <!-- Stack Container -->
+                <div class="relative w-[300px] lg:w-[340px] aspect-[0.62]" style="transform-style: preserve-3d;">
+                    
+                    <!-- Card 3 (Back) -->
+                    <div class="floating-card absolute inset-0 rounded-3xl transform-gpu shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] opacity-40 z-0" style="transform: rotateY(-28deg) rotateX(12deg) rotateZ(6deg) translateZ(-200px) translateX(60px) translateY(-80px); transform-style: preserve-3d;">
+                        <div class="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-white/30 via-white/5 to-transparent z-10 overflow-hidden">
+                            <div class="absolute inset-0 bg-neutral-900 rounded-3xl w-full h-full border border-white/10" style="box-shadow: inset 0 0 40px rgba(255,255,255,0.02);">
+                                <div class="absolute inset-0 opacity-[0.15] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+                                <div class="relative h-full w-full p-8 flex flex-col justify-between z-20">
+                                    <div class="flex justify-between items-start w-full">
+                                        <div class="w-12 h-10 border border-white/20 rounded-md flex items-center justify-center bg-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                                            <iconify-icon icon="solar:sim-card-linear" width="24" class="text-[#F2EAD3]"></iconify-icon>
+                                        </div>
+                                        <iconify-icon icon="solar:wireless-charge-linear" width="28" class="text-white/40"></iconify-icon>
+                                    </div>
+                                    <div class="mt-auto w-full">
+                                        <div class="text-white/40 text-xs tracking-widest uppercase mb-2">Available Balance</div>
+                                        <div class="text-white text-3xl font-normal tracking-tight mb-8">$14,050.00</div>
+                                        <div class="flex items-end justify-between w-full">
+                                            <div class="flex flex-col gap-1.5">
+                                                <div class="text-white/80 text-xs font-mono tracking-widest">**** **** **** 3318</div>
+                                                <div class="flex gap-4 text-white/50 text-xs uppercase tracking-wider">
+                                                    <span>S. MILLER</span>
+                                                    <span>09/27</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-1.5 text-white/90 font-normal text-sm tracking-tight">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                                Nexus
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/[0.05] to-white/[0.12] pointer-events-none rounded-3xl"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 (Middle) -->
+                    <div class="floating-card absolute inset-0 rounded-3xl transform-gpu shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] opacity-70 z-10" style="transform: rotateY(-28deg) rotateX(12deg) rotateZ(6deg) translateZ(-100px) translateX(30px) translateY(-40px); transform-style: preserve-3d;">
+                        <div class="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-white/30 via-white/5 to-transparent z-10 overflow-hidden">
+                            <div class="absolute inset-0 bg-neutral-800 rounded-3xl w-full h-full border border-white/10" style="box-shadow: inset 0 0 40px rgba(255,255,255,0.02);">
+                                <div class="absolute inset-0 opacity-[0.15] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+                                <div class="relative h-full w-full p-8 flex flex-col justify-between z-20">
+                                    <div class="flex justify-between items-start w-full">
+                                        <div class="w-12 h-10 border border-white/20 rounded-md flex items-center justify-center bg-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                                            <iconify-icon icon="solar:sim-card-linear" width="24" class="text-[#F2EAD3]"></iconify-icon>
+                                        </div>
+                                        <iconify-icon icon="solar:wireless-charge-linear" width="28" class="text-white/40"></iconify-icon>
+                                    </div>
+                                    <div class="mt-auto w-full">
+                                        <div class="text-white/40 text-xs tracking-widest uppercase mb-2">Available Balance</div>
+                                        <div class="text-white text-3xl font-normal tracking-tight mb-8">$83,200.00</div>
+                                        <div class="flex items-end justify-between w-full">
+                                            <div class="flex flex-col gap-1.5">
+                                                <div class="text-white/80 text-xs font-mono tracking-widest">**** **** **** 9024</div>
+                                                <div class="flex gap-4 text-white/50 text-xs uppercase tracking-wider">
+                                                    <span>R. CHEN</span>
+                                                    <span>04/29</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-1.5 text-white/90 font-normal text-sm tracking-tight">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                                Nexus
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/[0.05] to-white/[0.12] pointer-events-none rounded-3xl"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 1 (Front) -->
+                    <div class="floating-card absolute inset-0 rounded-3xl transform-gpu shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] z-20" style="transform: rotateY(-28deg) rotateX(12deg) rotateZ(6deg) translateZ(0px); transform-style: preserve-3d;">
+                        <div class="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-white/30 via-white/5 to-transparent z-10 overflow-hidden">
+                            <div class="absolute inset-0 bg-neutral-700 rounded-3xl w-full h-full border border-white/10" style="box-shadow: inset 0 0 40px rgba(255,255,255,0.02);">
+                                <div class="absolute inset-0 opacity-[0.15] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+                                <div class="relative h-full w-full p-8 flex flex-col justify-between z-20">
+                                    <div class="flex justify-between items-start w-full">
+                                        <div class="w-12 h-10 border border-white/20 rounded-md flex items-center justify-center bg-white/10 shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                                            <iconify-icon icon="solar:sim-card-linear" width="24" class="text-[#F2EAD3]"></iconify-icon>
+                                        </div>
+                                        <iconify-icon icon="solar:wireless-charge-linear" width="28" class="text-white/40"></iconify-icon>
+                                    </div>
+                                    <div class="mt-auto w-full">
+                                        <div class="text-white/40 text-xs tracking-widest uppercase mb-2">Available Balance</div>
+                                        <div class="text-white text-3xl font-normal tracking-tight mb-8">$254,800.00</div>
+                                        <div class="flex items-end justify-between w-full">
+                                            <div class="flex flex-col gap-1.5">
+                                                <div class="text-white/80 text-xs font-mono tracking-widest">**** **** **** 7731</div>
+                                                <div class="flex gap-4 text-white/50 text-xs uppercase tracking-wider">
+                                                    <span>E. WRIGHT</span>
+                                                    <span>11/28</span>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-1.5 text-white/90 font-normal text-sm tracking-tight">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 4L20 20M20 4L4 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                </svg>
+                                                Nexus
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/[0.05] to-white/[0.12] pointer-events-none rounded-3xl"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fake shadow underneath the card to separate it from the stripes -->
+                        <div class="absolute inset-0 bg-black/60 blur-[40px] rounded-3xl -z-10 transform translate-y-8 translate-x-4 pointer-events-none"></div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+        <!-- Structured Architectural Footer -->
+        <footer class="relative z-20 w-full mt-auto bg-black border-t border-white/[0.04]">
+            <div class="px-8 lg:px-16 pt-16 lg:pt-24 pb-8">
+                
+                <!-- Immersive Pre-Footer CTA -->
+                <div class="relative overflow-hidden rounded-3xl bg-neutral-900 border border-white/10 p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 z-10 shadow-2xl">
+                    <div class="absolute inset-0 opacity-[0.15] mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+                    <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-l from-white/[0.05] to-transparent pointer-events-none"></div>
+                    
+                    <div class="relative z-10 max-w-xl w-full text-center lg:text-left">
+                        <h2 class="text-3xl lg:text-4xl font-normal tracking-tight text-[#F2EAD3]">
+                            Ready to command your wealth?
+                        </h2>
+                        <p class="mt-4 text-white/50 text-base font-normal">
+                            Join over 15,000 modern enterprises worldwide moving capital with absolute precision.
+                        </p>
+                    </div>
+                    <div class="relative z-10 flex flex-wrap items-center justify-center lg:justify-end gap-4 w-full lg:w-auto">
+                        <button class="bg-[#F2EAD3] hover:bg-white text-black px-8 py-3.5 rounded-full text-sm font-normal transition-colors w-full sm:w-auto">
+                            Open an Account
+                        </button>
+                        <button class="px-8 py-3.5 border border-white/20 rounded-full text-sm text-white/80 font-normal hover:bg-white/5 transition-colors w-full sm:w-auto">
+                            Talk to Sales
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Navigation Columns -->
+                <div class="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 border-b border-white/[0.04]">
+                    
+                    <!-- Brand Origin -->
+                    <div class="lg:col-span-2 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-xl font-normal tracking-tight mb-6">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 4L20 20M20 4L4 20" stroke="#F2EAD3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                                Nexus
+                            </div>
+                            <p class="text-sm text-white/50 font-normal max-w-sm mb-8">
+                                Flawless, real-time international transfers powered by dynamic market rates. Command your global wealth without boundaries.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 mt-auto">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500/80 animate-pulse"></div>
+                            <a href="#" class="text-xs text-white/40 font-normal hover:text-white transition-colors">All systems operational</a>
+                        </div>
+                    </div>
+
+                    <!-- Column 1 -->
+                    <div>
+                        <h3 class="text-white/90 text-sm font-normal tracking-tight mb-6">Platform</h3>
+                        <ul class="flex flex-col gap-4 text-sm text-white/50">
+                            <li><a href="#" class="hover:text-white transition-colors">Global Transfers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Multi-currency</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Corporate Cards</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">FX & Rates</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">API Integration</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Column 2 -->
+                    <div>
+                        <h3 class="text-white/90 text-sm font-normal tracking-tight mb-6">Company</h3>
+                        <ul class="flex flex-col gap-4 text-sm text-white/50">
+                            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Newsroom</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Partners</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div>
+                        <h3 class="text-white/90 text-sm font-normal tracking-tight mb-6">Resources</h3>
+                        <ul class="flex flex-col gap-4 text-sm text-white/50">
+                            <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Open Source</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4 -->
+                    <div>
+                        <h3 class="text-white/90 text-sm font-normal tracking-tight mb-6">Connect</h3>
+                        <ul class="flex flex-col gap-4 text-sm text-white/50">
+                            <li>
+                                <a href="#" class="hover:text-white transition-colors flex items-center gap-2">
+                                    <iconify-icon icon="solar:letter-linear" width="18" stroke-width="1.5"></iconify-icon> Contact Sales
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:text-white transition-colors flex items-center gap-2">
+                                    <iconify-icon icon="solar:chat-round-line-linear" width="18" stroke-width="1.5"></iconify-icon> Support Center
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:text-white transition-colors flex items-center gap-2">
+                                    <iconify-icon icon="solar:map-point-linear" width="18" stroke-width="1.5"></iconify-icon> Locations
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Legal & Social Layer -->
+                <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-8 gap-y-4 text-xs text-white/40">
+                        <span>&copy; 2024 Nexus Global, Inc.</span>
+                        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors">Cookie Preferences</a>
+                    </div>
+                    <div class="flex items-center gap-5 text-white/40">
+                        <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:twitter-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+                        <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:camera-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+                        <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:link-round-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+                        <a href="#" class="hover:text-white transition-colors"><iconify-icon icon="solar:figma-linear" width="20" stroke-width="1.5"></iconify-icon></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grand Wordmark Anchor -->
+            <div class="w-full mt-4 overflow-hidden flex justify-center items-end opacity-[0.03] select-none pointer-events-none leading-none relative z-0">
+                <span class="text-[17vw] tracking-tighter" style="font-family: 'Playfair Display', serif;">NEXUS</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- GSAP Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Masked Staggered Word Reveal
+            const words = document.querySelectorAll('.reveal-word');
+            gsap.to(words, {
+                y: '0%',
+                duration: 1.2,
+                stagger: 0.08,
+                ease: 'power4.out',
+                delay: 0.2
+            });
+
+            // Fade in subtext and actions
+            gsap.to(['.reveal-subtext', '.reveal-actions'], {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out',
+                delay: 0.8
+            });
+
+            // Card Reveal and continuous floating animation
+            const card = document.querySelector('.reveal-card');
+            
+            gsap.fromTo(card, 
+                { opacity: 0, x: 50, scale: 0.95 },
+                { 
+                    opacity: 1, 
+                    x: 0, 
+                    scale: 1,
+                    duration: 1.5, 
+                    ease: 'power3.out', 
+                    delay: 0.4,
+                    onComplete: () => {
+                        gsap.to(".floating-card", {
+                            y: -15,
+                            rotationX: "+=2",
+                            rotationY: "+=3",
+                            duration: 4,
+                            yoyo: true,
+                            repeat: -1,
+                            ease: "sine.inOut",
+                            stagger: 0.15
+                        });
+                    }
+                }
+            );
+
+            // Slow looping animation for the wavy background lines
+            gsap.to(".animated-line", {
+                x: -30,
+                y: 30,
+                scale: 1.05,
+                transformOrigin: "center center",
+                duration: 10,
+                yoyo: true,
+                repeat: -1,
+                ease: "sine.inOut",
+                stagger: 1.5
+            });
+        });
+    </script>
+</body>
+</html>

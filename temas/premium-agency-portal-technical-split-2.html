@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Agency Portal - Technical Split</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center py-12 md:py-20 px-4 md:px-8 relative selection:bg-[#F47C59] selection:text-white bg-[#FCF9F6] m-0 overflow-x-hidden font-sans text-[#241208]">
+
+    <!-- WebGL Background Container -->
+    <div id="webgl-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-50"></div>
+
+    <!-- Main Content Split Layout -->
+    <main class="flex flex-col md:flex-row w-full lg:min-h-[85vh] max-w-6xl border border-[#241208]/20 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] relative z-10 bg-[#FCF9F6] mx-auto main-container">
+        
+        <!-- Outer Frame Accents -->
+        <div class="absolute -top-[3px] -left-[3px] w-1.5 h-1.5 border border-[#241208] bg-[#FCF9F6] z-20"></div>
+        <div class="absolute -top-[3px] -right-[3px] w-1.5 h-1.5 border border-[#241208] bg-[#FCF9F6] z-20"></div>
+        <div class="absolute -bottom-[3px] -left-[3px] w-1.5 h-1.5 border border-[#241208] bg-[#FCF9F6] z-20"></div>
+        <div class="absolute -bottom-[3px] -right-[3px] w-1.5 h-1.5 border border-[#241208] bg-[#FCF9F6] z-20"></div>
+
+        <!-- LEFT PANEL -->
+        <section class="flex-1 flex flex-col relative p-6 md:p-10 lg:p-12 border-b md:border-b-0 md:border-r border-[#241208]/20">
+            <!-- Inner Framing Rules -->
+            <div class="absolute inset-2 md:inset-4 border border-[#241208]/10 pointer-events-none z-0"></div>
+            <div class="absolute top-2 left-2 md:top-4 md:left-4 w-2 h-2 border-t border-l border-[#241208]/40 pointer-events-none z-0"></div>
+            <div class="absolute top-2 right-2 md:top-4 md:right-4 w-2 h-2 border-t border-r border-[#241208]/40 pointer-events-none z-0"></div>
+            <div class="absolute bottom-2 left-2 md:bottom-4 md:left-4 w-2 h-2 border-b border-l border-[#241208]/40 pointer-events-none z-0"></div>
+            <div class="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-2 h-2 border-b border-r border-[#241208]/40 pointer-events-none z-0"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- Top Rail Metadata -->
+                <div class="flex justify-between items-end border-b border-[#241208]/20 pb-4 mb-10">
+                    <div class="text-xs font-mono text-[#241208]/60 uppercase tracking-widest leading-none">SYS.01 // Topo_Eval</div>
+                    <div class="text-xs font-mono text-[#241208]/40 uppercase tracking-widest leading-none hidden sm:block">Coords: 34.05°N</div>
+                </div>
+
+                <!-- Editorial Typography -->
+                <div class="mb-12">
+                    <h2 class="font-extralight text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-6 text-[#241208] gsap-reveal" style="font-family: 'Newsreader', serif;">Shape dictates<br>the user<br>journey.</h2>
+                    <p class="text-xs sm:text-sm text-[#241208]/70 leading-relaxed max-w-[85%] font-mono tracking-tight gsap-reveal-sub">Every touchpoint functions as measurable feedback. Geometric precision accelerates the conversion path.</p>
+                </div>
+
+                <!-- Premium Inset Surface (Coral Canvas) -->
+                <div class="relative w-full aspect-square md:aspect-auto md:flex-1 min-h-[250px] lg:min-h-[350px] bg-[#F47C59] overflow-hidden rounded-sm mt-auto group flex items-center justify-center shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                    <!-- Premium Border Gradient Overlay -->
+                    <div class="absolute inset-0 rounded-sm pointer-events-none z-50" style="padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.05) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></div>
+                    
+                    <!-- Perfect Geometric Assembly Sequence -->
+                    <div class="w-[80%] max-w-[280px] aspect-square relative z-10">
+                        <!-- Background Shape: Perfect Diamond -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 100 100">
+                            <polygon points="50,0 100,50 50,100 0,50" fill="#241208" />
+                        </svg>
+                        
+                        <!-- Form Intersection: Perfect Circle -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70.71%] aspect-square bg-[#F47C59] rounded-full z-10 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]"></div>
+
+                        <!-- Form Intersection: Perfect Square -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] aspect-square bg-[#241208] rounded-none z-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"></div>
+
+                        <!-- Technical Wireframe -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="35.35" fill="none" stroke="#241208" stroke-width="1.5" vector-effect="non-scaling-stroke" opacity="0.4"/>
+                            <rect x="25" y="25" width="50" height="50" fill="none" stroke="#F47C59" stroke-width="0.5" vector-effect="non-scaling-stroke" opacity="0.5"/>
+                            <line x1="0" y1="0" x2="100" y2="100" stroke="#241208" stroke-width="1" opacity="0.2" />
+                            <line x1="100" y1="0" x2="0" y2="100" stroke="#241208" stroke-width="1" opacity="0.2" />
+                        </svg>
+
+                        <!-- Calibration Nodes at Exact Geometrical Intersections -->
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] top-[50%] left-[0%] -translate-x-1/2 -translate-y-1/2 z-30"></div>
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] top-[50%] right-[0%] translate-x-1/2 -translate-y-1/2 z-30"></div>
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] top-[0%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-30"></div>
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] bottom-[0%] left-[50%] -translate-x-1/2 translate-y-1/2 z-30"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT PANEL -->
+        <section class="flex-1 flex flex-col relative p-6 md:p-10 lg:p-12">
+            <!-- Inner Framing Rules -->
+            <div class="absolute inset-2 md:inset-4 border border-[#241208]/10 pointer-events-none z-0"></div>
+            <div class="absolute top-2 left-2 md:top-4 md:left-4 w-2 h-2 border-t border-l border-[#241208]/40 pointer-events-none z-0"></div>
+            <div class="absolute top-2 right-2 md:top-4 md:right-4 w-2 h-2 border-t border-r border-[#241208]/40 pointer-events-none z-0"></div>
+            <div class="absolute bottom-2 left-2 md:bottom-4 md:left-4 w-2 h-2 border-b border-l border-[#241208]/40 pointer-events-none z-0"></div>
+            <div class="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-2 h-2 border-b border-r border-[#241208]/40 pointer-events-none z-0"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- Top Rail Metadata -->
+                <div class="flex justify-between items-end border-b border-[#241208]/20 pb-4 mb-10">
+                    <div class="text-xs font-mono text-[#241208]/60 uppercase tracking-widest leading-none">SYS.02 // Logic</div>
+                    <div class="text-xs font-mono text-[#241208]/40 uppercase tracking-widest leading-none hidden sm:block">Status: Secure</div>
+                </div>
+
+                <!-- Premium Inset Surface (Blue Canvas) -->
+                <div class="relative w-full aspect-square md:aspect-auto md:flex-1 min-h-[250px] lg:min-h-[350px] bg-[#92CFF2] overflow-hidden rounded-sm mb-12 group flex items-center justify-center shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
+                    <!-- Premium Border Gradient Overlay -->
+                    <div class="absolute inset-0 rounded-sm pointer-events-none z-50" style="padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 50%, rgba(0,0,0,0.05) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></div>
+                    
+                    <!-- Perfect Geometric Assembly Sequence -->
+                    <div class="w-[80%] max-w-[280px] aspect-square relative z-10">
+                        <!-- Background Shape: Perfect Circle -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="#241208" />
+                        </svg>
+                        
+                        <!-- Form Intersection: Perfect Square -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70.71%] aspect-square bg-[#92CFF2] rounded-none z-10 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]"></div>
+
+                        <!-- Form Intersection: Perfect Diamond -->
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] aspect-square bg-[#241208] rotate-45 z-10 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"></div>
+
+                        <!-- Technical Wireframe -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="50" fill="none" stroke="#92CFF2" stroke-width="0.5" vector-effect="non-scaling-stroke" opacity="0.5"/>
+                            <rect x="14.645" y="14.645" width="70.71" height="70.71" fill="none" stroke="#241208" stroke-width="1.5" vector-effect="non-scaling-stroke" opacity="0.4"/>
+                            <polygon points="50,14.645 85.355,50 50,85.355 14.645,50" fill="none" stroke="#92CFF2" stroke-width="0.5" vector-effect="non-scaling-stroke" opacity="0.5"/>
+                            <line x1="50" y1="45" x2="50" y2="55" stroke="#92CFF2" stroke-width="1" opacity="0.8" />
+                            <line x1="45" y1="50" x2="55" y2="50" stroke="#92CFF2" stroke-width="1" opacity="0.8" />
+                        </svg>
+
+                        <!-- Calibration Nodes -->
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] top-[14.645%] left-[14.645%] -translate-x-1/2 -translate-y-1/2 z-30"></div>
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] top-[14.645%] right-[14.645%] translate-x-1/2 -translate-y-1/2 z-30"></div>
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] bottom-[14.645%] left-[14.645%] -translate-x-1/2 translate-y-1/2 z-30"></div>
+                        <div class="absolute w-[5px] h-[5px] bg-[#FCF9F6] border border-[#241208] bottom-[14.645%] right-[14.645%] translate-x-1/2 translate-y-1/2 z-30"></div>
+                    </div>
+                </div>
+
+                <!-- Typography & Action -->
+                <div class="mt-auto">
+                    <h2 class="font-extralight text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight mb-6 text-[#241208] gsap-reveal" style="font-family: 'Newsreader', serif;">Unified framework.<br>Complete state<br>coherence.</h2>
+                    <p class="text-xs sm:text-sm text-[#241208]/70 leading-relaxed max-w-[90%] font-mono tracking-tight gsap-reveal-sub mb-8">Remove fragmented workflows. Our architecture unifies all components and phases into a single repository.</p>
+                    
+                    <!-- Footer Rail Action -->
+                    <div class="flex items-center justify-between w-full opacity-0 gsap-fade-in border-t border-[#241208]/20 pt-6">
+                        <button class="bg-[#F47C59] text-[#FCF9F6] text-xs px-6 py-3 font-mono tracking-widest hover:bg-[#241208] transition-colors duration-300 uppercase">
+                            Commence sync
+                        </button>
+                        <iconify-icon icon="solar:arrow-right-linear" width="24" height="24" class="text-[#241208]"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- GSAP Animations ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Text Masked Reveal Setup
+        const splitTextIntoSpans = (selector) => {
+            document.querySelectorAll(selector).forEach(el => {
+                let html = '';
+                const lines = el.innerHTML.split('<br>');
+                lines.forEach((line, index) => {
+                    let lineHtml = '';
+                    const words = line.split(' ');
+                    words.forEach(word => {
+                        if(word.trim() !== '') {
+                            lineHtml += `<span class="inline-block overflow-hidden align-bottom pb-1 -mb-1"><span class="inline-block translate-y-[110%] reveal-word">${word}</span></span> `;
+                        }
+                    });
+                    html += `<div class="block ${index < lines.length - 1 ? 'mb-1' : ''}">${lineHtml}</div>`;
+                });
+                el.innerHTML = html;
+            });
+        };
+
+        splitTextIntoSpans('.gsap-reveal');
+
+        // Animation Timeline
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".main-container",
+                start: "top 75%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        tl.to('.reveal-word', {
+            y: "0%",
+            duration: 1,
+            stagger: 0.04,
+            ease: "power4.out",
+        })
+        .fromTo('.gsap-reveal-sub', 
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 1, ease: "power2.out", stagger: 0.1 },
+            "-=0.6"
+        )
+        .to('.gsap-fade-in', {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out"
+        }, "-=0.4");
+
+
+        // --- Subtle WebGL Background Animation ---
+        const initWebGL = () => {
+            const container = document.getElementById('webgl-canvas');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Create a subtle floating geometric particle system
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = window.innerWidth < 768 ? 300 : 700;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 15;
+            }
+
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.02,
+                color: '#241208',
+                transparent: true,
+                opacity: 0.15,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(particlesGeometry, material);
+            scene.add(particlesMesh);
+
+            camera.position.z = 3;
+
+            // Mouse interaction for subtle parallax
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetX = 0;
+            let targetY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) - 0.5;
+                mouseY = (event.clientY / window.innerHeight) - 0.5;
+            });
+
+            const clock = new THREE.Clock();
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                const elapsedTime = clock.getElapsedTime();
+
+                targetX = mouseX * 0.5;
+                targetY = mouseY * 0.5;
+
+                particlesMesh.rotation.y += 0.001;
+                particlesMesh.rotation.x += 0.0005;
+
+                // Subtle wave motion
+                particlesMesh.position.y = Math.sin(elapsedTime * 0.2) * 0.1;
+                
+                // Parallax easing
+                camera.position.x += (targetX - camera.position.x) * 0.05;
+                camera.position.y += (-targetY - camera.position.y) * 0.05;
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
+
+        // Initialize WebGL only if WebGL is supported
+        if (window.WebGLRenderingContext) {
+            initWebGL();
+        }
+    </script>
+</body>
+</html>

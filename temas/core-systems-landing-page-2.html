@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Systems Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body class="bg-[#18181b] font-sans antialiased text-[#1a1a1a] selection:bg-neutral-300 selection:text-black">
+    <!-- Left dark sidebar area (simulated by body bg and padding on main wrapper) -->
+    <div class="flex min-h-screen">
+        <!-- Sidebar placeholder to match reference structure -->
+        <div class="hidden md:flex w-16 shrink-0 border-r border-[#27272a] items-start justify-center pt-8"></div>
+        
+        <!-- Main Content Wrapper -->
+        <main class="flex-1 bg-[#ebe6df] flex flex-col relative w-full overflow-hidden border-l border-[#1a1a1a]/10 md:border-none">
+            
+            <!-- Top Features Bar -->
+            <div class="flex items-center border-b border-[#1a1a1a]/15 h-14 relative w-full">
+                <!-- Intersection Diamond (Left) -->
+                <div class="absolute top-full left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20 md:hidden"></div>
+
+                <!-- Brand Name -->
+                <div class="px-6 md:px-10 flex items-center h-full border-r border-[#1a1a1a]/15 shrink-0">
+                    <span class="text-base tracking-tight font-semibold text-[#1a1a1a]">Core Systems</span>
+                </div>
+
+                <div class="px-6 md:px-10 flex items-center gap-3 shrink-0 whitespace-nowrap">
+                    <div class="w-1.5 h-1.5 rounded-full bg-[#1a1a1a]"></div>
+                    <span class="text-sm tracking-wide font-normal uppercase text-[#1a1a1a]/80 flex items-center gap-2">
+                        <iconify-icon icon="solar:cpu-linear" stroke-width="1.5"></iconify-icon>
+                        Capabilities
+                    </span>
+                </div>
+                <!-- Hatched flexible line -->
+                <div class="flex-1 h-full border-l border-[#1a1a1a]/15 opacity-40" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, #1a1a1a 2px, #1a1a1a 3px);"></div>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="px-6 md:px-10 py-16 md:py-24 relative border-b border-[#1a1a1a]/15">
+                <!-- Intersection Diamonds (Bottom edge of hero) -->
+                <div class="absolute top-full left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                <div class="absolute top-full left-full w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20 hidden md:block"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 max-w-[1400px]">
+                    <div class="col-span-1 md:col-span-8">
+                        <h1 class="text-4xl md:text-5xl lg:text-[3.5rem] leading-[1.1] tracking-tight font-normal text-[#1a1a1a]">
+                            Intelligent engines that<br class="hidden md:block">
+                            drive automated operations
+                        </h1>
+                    </div>
+                    <div class="col-span-1 md:col-span-4 flex items-center">
+                        <p class="text-sm leading-relaxed text-[#1a1a1a]/70 font-normal">
+                            Continuous data orchestration across platforms and state-based logic execution, demonstrating how our architecture increases throughput and systemic reliability.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Section Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#1a1a1a]/15 flex-1 relative bg-[#ebe6df]">
+                
+                <!-- Inner grid intersection diamonds (Top edge of cards) -->
+                <div class="hidden md:block absolute top-0 left-1/3 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                <div class="hidden md:block absolute top-0 left-2/3 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+
+                <!-- CARD 1 -->
+                <div class="flex flex-col relative group">
+                    <div class="p-6 md:p-10 flex flex-col h-full border-b border-[#1a1a1a]/15 relative">
+                        <!-- Bottom left diamond for mobile dividers -->
+                        <div class="md:hidden absolute top-full left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                        
+                        <div class="flex justify-between items-baseline mb-8">
+                            <h2 class="text-lg md:text-xl tracking-tight font-normal text-[#1a1a1a]">State Aggregation</h2>
+                            <span class="font-mono text-xs text-[#1a1a1a]/40 tracking-wider">001</span>
+                        </div>
+                        
+                        <!-- Graphic Box -->
+                        <div class="aspect-square w-full relative flex items-center justify-center border border-[#1a1a1a]/10 overflow-hidden mb-8 group-hover:border-[#1a1a1a]/30 transition-colors duration-500">
+                            <!-- Background pattern -->
+                            <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(-45deg, transparent, transparent 3px, #1a1a1a 3px, #1a1a1a 4px);"></div>
+                            
+                            <!-- Corner markers -->
+                            <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#1a1a1a]/40"></div>
+                            <div class="absolute top-2 right-2 w-2 h-2 border-t border-r border-[#1a1a1a]/40"></div>
+                            <div class="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-[#1a1a1a]/40"></div>
+                            <div class="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-[#1a1a1a]/40"></div>
+                            
+                            <!-- SVG Graphic (Venn/Circles) -->
+                            <svg class="w-40 h-40 text-[#1a1a1a] relative z-10 animate-[spin_25s_linear_infinite]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <circle cx="50" cy="42" r="22" class="transform-gpu origin-center transition-all duration-1000 ease-out group-hover:scale-105" />
+                                <circle cx="38" cy="60" r="22" class="transform-gpu origin-center transition-all duration-1000 ease-out delay-75 group-hover:scale-105" />
+                                <circle cx="62" cy="60" r="22" class="transform-gpu origin-center transition-all duration-1000 ease-out delay-150 group-hover:scale-105" />
+                                <!-- Center intersection shading simulation -->
+                                <path d="M 50 50 Q 55 58 50 65 Q 45 58 50 50 Z" fill="currentColor" fill-opacity="0.1" class="animate-[pulse_3s_ease-in-out_infinite]" />
+                            </svg>
+                        </div>
+                        
+                        <div class="mt-auto pt-6 border-t border-[#1a1a1a]/10 relative">
+                             <!-- Bottom diamonds for the text divider -->
+                             <div class="absolute top-0 left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                             <div class="hidden md:block absolute top-0 left-full w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+
+                            <p class="text-sm text-[#1a1a1a]/70 leading-relaxed font-normal">
+                                Consolidate fragmented data sources into a unified behavioral profile, ensuring context is accurately mapped before sequence initiation.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="flex flex-col relative group">
+                    <div class="p-6 md:p-10 flex flex-col h-full border-b border-[#1a1a1a]/15 relative">
+                        <!-- Bottom left diamond for mobile dividers -->
+                        <div class="md:hidden absolute top-full left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+
+                        <div class="flex justify-between items-baseline mb-8">
+                            <h2 class="text-lg md:text-xl tracking-tight font-normal text-[#1a1a1a]">Logic & Validation</h2>
+                            <span class="font-mono text-xs text-[#1a1a1a]/40 tracking-wider">002</span>
+                        </div>
+                        
+                        <!-- Graphic Box -->
+                        <div class="aspect-square w-full relative flex items-center justify-center border border-[#1a1a1a]/10 overflow-hidden mb-8 group-hover:border-[#1a1a1a]/30 transition-colors duration-500">
+                            <!-- Background pattern -->
+                            <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, #1a1a1a 3px, #1a1a1a 4px);"></div>
+                            
+                            <!-- Corner markers -->
+                            <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#1a1a1a]/40"></div>
+                            <div class="absolute top-2 right-2 w-2 h-2 border-t border-r border-[#1a1a1a]/40"></div>
+                            <div class="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-[#1a1a1a]/40"></div>
+                            <div class="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-[#1a1a1a]/40"></div>
+                            
+                            <!-- SVG Graphic (Pyramid) -->
+                            <svg class="w-44 h-44 text-[#1a1a1a] relative z-10 animate-[pulse_6s_cubic-bezier(0.4,0,0.6,1)_infinite]" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <g class="transform-gpu origin-center transition-transform duration-1000 group-hover:rotate-180 group-hover:scale-90">
+                                    <polygon points="50,15 15,80 85,80" />
+                                    <polygon points="50,30 25,75 75,75" stroke-opacity="0.6" />
+                                    <polygon points="50,45 35,70 65,70" stroke-opacity="0.3" />
+                                    <!-- Inner structural lines -->
+                                    <line x1="50" y1="15" x2="50" y2="80" stroke-dasharray="1 2" />
+                                    <line x1="15" y1="80" x2="50" y2="45" stroke-dasharray="1 2" />
+                                    <line x1="85" y1="80" x2="50" y2="45" stroke-dasharray="1 2" />
+                                </g>
+                            </svg>
+                        </div>
+                        
+                        <div class="mt-auto pt-6 border-t border-[#1a1a1a]/10 relative">
+                             <!-- Bottom diamonds for the text divider -->
+                             <div class="absolute top-0 left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                             <div class="hidden md:block absolute top-0 left-full w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+
+                            <p class="text-sm text-[#1a1a1a]/70 leading-relaxed font-normal">
+                                Enforce complex business rules with multi-tiered gatekeeping, automated compliance checks, and secure multi-signature approvals.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="flex flex-col relative group">
+                    <div class="p-6 md:p-10 flex flex-col h-full border-b border-[#1a1a1a]/15 relative">
+                        <div class="flex justify-between items-baseline mb-8">
+                            <h2 class="text-lg md:text-xl tracking-tight font-normal text-[#1a1a1a]">Task Dispatch</h2>
+                            <span class="font-mono text-xs text-[#1a1a1a]/40 tracking-wider">003</span>
+                        </div>
+                        
+                        <!-- Graphic Box -->
+                        <div class="aspect-square w-full relative flex items-center justify-center border border-[#1a1a1a]/10 overflow-hidden mb-8 group-hover:border-[#1a1a1a]/30 transition-colors duration-500">
+                            <!-- Background pattern -->
+                            <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(-45deg, transparent, transparent 3px, #1a1a1a 3px, #1a1a1a 4px);"></div>
+                            
+                            <!-- Corner markers -->
+                            <div class="absolute top-2 left-2 w-2 h-2 border-t border-l border-[#1a1a1a]/40"></div>
+                            <div class="absolute top-2 right-2 w-2 h-2 border-t border-r border-[#1a1a1a]/40"></div>
+                            <div class="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-[#1a1a1a]/40"></div>
+                            <div class="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-[#1a1a1a]/40"></div>
+                            
+                            <!-- SVG Graphic (Concentric/Orbit) -->
+                            <svg class="w-40 h-40 text-[#1a1a1a] relative z-10" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.5">
+                                <g class="transform-gpu origin-center animate-[spin_20s_linear_infinite_reverse]">
+                                    <circle cx="50" cy="50" r="35" stroke-dasharray="4 4" class="group-hover:stroke-opacity-50 transition-opacity" />
+                                    <circle cx="50" cy="50" r="25" />
+                                    <circle cx="50" cy="55" r="15" class="animate-[pulse_2s_ease-in-out_infinite]" />
+                                    <circle cx="50" cy="60" r="5" fill="currentColor" fill-opacity="0.2" />
+                                </g>
+                                <g class="transform-gpu origin-center animate-[spin_10s_linear_infinite]">
+                                    <!-- Orbital satellite simulation -->
+                                    <circle cx="85" cy="50" r="2" fill="currentColor" />
+                                </g>
+                            </svg>
+                        </div>
+                        
+                        <div class="mt-auto pt-6 border-t border-[#1a1a1a]/10 relative">
+                             <!-- Bottom diamonds for the text divider -->
+                             <div class="absolute top-0 left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+                             <div class="hidden md:block absolute top-0 left-full w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 -translate-y-1/2 z-20"></div>
+
+                            <p class="text-sm text-[#1a1a1a]/70 leading-relaxed font-normal">
+                                Instantly execute cross-platform commands and state mutations with guaranteed delivery protocols and automated fallback systems.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Bottom edge intersection diamonds for layout completeness -->
+            <div class="hidden md:block absolute bottom-0 left-0 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 translate-y-1/2 z-20"></div>
+            <div class="hidden md:block absolute bottom-0 left-1/3 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 translate-y-1/2 z-20"></div>
+            <div class="hidden md:block absolute bottom-0 left-2/3 w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 translate-y-1/2 z-20"></div>
+            <div class="hidden md:block absolute bottom-0 left-full w-3 h-3 bg-[#1a1a1a] rotate-45 transform -translate-x-1/2 translate-y-1/2 z-20"></div>
+
+            <!-- Extra space to let the last borders render properly -->
+            <div class="h-16 w-full bg-[#ebe6df]"></div>
+        </main>
+    </div>
+</body>
+</html>

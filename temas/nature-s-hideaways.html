@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><base href="https://neuform.ai/pages/change-texts-names-numbers-only-make-the-ui-20260309173822877-pn5z-prompt-remix-20260310123416834-zoab/index.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature's Hideaways</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body class="bg-[#0A1118] text-slate-300 font-sans antialiased relative selection:bg-teal-900 selection:text-teal-50 overflow-x-hidden">
+
+    <!-- Container Lines Directive -->
+    <div class="fixed inset-0 pointer-events-none flex justify-between max-w-[1400px] mx-auto w-full z-50 mix-blend-screen opacity-30 hidden md:flex">
+        <div class="w-px h-full bg-white/10 relative">
+            <div class="absolute top-8 -left-[2px] w-[5px] h-[5px] border border-white/30 bg-[#0A1118]"></div>
+            <div class="absolute bottom-8 -left-[2px] w-[5px] h-[5px] border border-white/30 bg-[#0A1118]"></div>
+        </div>
+        <div class="w-px h-full bg-white/10 relative">
+            <div class="absolute top-8 -left-[2px] w-[5px] h-[5px] border border-white/30 bg-[#0A1118]"></div>
+            <div class="absolute bottom-8 -left-[2px] w-[5px] h-[5px] border border-white/30 bg-[#0A1118]"></div>
+        </div>
+    </div>
+
+    <main class="relative min-h-screen flex flex-col">
+        
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col overflow-hidden pb-12">
+            <!-- Background Image -->
+            <img src="https://images.unsplash.com/photo-1506278940547-8a7b59598072?ixid=M3w3NTc5NzN8MHwxfHNlYXJjaHwyNXx8bG9kZ2V8ZW58MXwwfHx8MTc3MzExNzQwMHww&amp;ixlib=rb-4.1.0&amp;w=3840&amp;fit=max&amp;auto=format&amp;q=80" alt="Misty Forest Cabin" class="absolute inset-0 w-full h-full object-cover object-center z-[-2] scale-105" style="filter: brightness(0.6) contrast(1.1) saturate(0.8);">
+            
+            <!-- WebGL Simulated Line Overlay (Preserved from source) -->
+            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full z-[-1] opacity-30 mix-blend-screen"></canvas>
+
+            <!-- Gradients for text readability and transition -->
+            <div class="absolute inset-0 z-[-1]" style="background: linear-gradient(to right, rgba(10,17,24,0.8) 0%, rgba(10,17,24,0.2) 50%, rgba(10,17,24,0.4) 100%);"></div>
+            <div class="absolute bottom-0 left-0 w-full h-64 z-[-1]" style="background: linear-gradient(to bottom, transparent, #0A1118);"></div>
+
+            <!-- Header Navigation -->
+            <header class="relative z-20 w-full max-w-[1400px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-white font-medium">
+                    <iconify-icon icon="solar:leaf-linear" class="text-xl text-amber-500" stroke-width="1.5"></iconify-icon>
+                    <span>WoodNest</span>
+                </div>
+                
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
+                    <a href="#" class="hover:text-white transition-colors">Locations</a>
+                    <a href="#" class="hover:text-white transition-colors">Rooms</a>
+                    <a href="#" class="hover:text-white transition-colors">Experiences</a>
+                    <a href="#" class="hover:text-white transition-colors">Contact</a>
+                </nav>
+
+                <button class="bg-white text-slate-900 hover:bg-slate-100 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors shadow-sm">
+                    Book Now
+                </button>
+            </header>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-center justify-between gap-12 pt-12 lg:pt-0">
+                
+                <!-- Left: Typography & Info -->
+                <div class="flex-1 flex flex-col justify-center max-w-2xl w-full">
+                    <h1 class="text-6xl sm:text-7xl lg:text-[88px] font-medium text-white tracking-tighter leading-[0.95]" style="text-shadow: 0 4px 24px rgba(0,0,0,0.5);">
+                        Nature's<br>Perfect<br>Hideaways
+                    </h1>
+                    
+                    <div class="mt-12 lg:mt-32 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8 w-full max-w-lg border-l-2 border-white/20 pl-6">
+                        <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xs">
+                            Discover handpicked luxury cabins in breathtaking locations. Unplug, unwind, and reconnect with what matters most.
+                        </p>
+                        <div class="flex flex-col gap-1">
+                            <div class="flex items-center gap-1 text-amber-500 text-lg">
+                                <iconify-icon icon="solar:star-bold" class="text-amber-500"></iconify-icon>
+                                <span class="font-semibold text-white">4.7</span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-medium">from 1,800+ stays</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Booking Card with Border Gradient Directive -->
+                <div class="w-full max-w-md lg:w-[420px] shrink-0">
+                    <div class="p-[1px] rounded-3xl transition-all duration-500 hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)]" style="background: linear-gradient(145deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 100%);">
+                        <div class="bg-[#0F1720]/80 backdrop-blur-2xl rounded-[calc(1.5rem-1px)] p-6 sm:p-8 flex flex-col gap-6 w-full h-full shadow-2xl relative overflow-hidden">
+                            <!-- Subtle inner glow -->
+                            <div class="absolute -top-24 -right-24 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                            <div class="flex justify-between items-start gap-4">
+                                <h2 class="text-2xl font-medium text-white tracking-tight leading-snug">Evergreen<br>Pine Family Lodge</h2>
+                                <button class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors shrink-0">
+                                    <iconify-icon icon="solar:pen-linear" stroke-width="1.5"></iconify-icon>
+                                </button>
+                            </div>
+
+                            <!-- Date Selection -->
+                            <div class="grid grid-cols-2 gap-3 mt-2">
+                                <button class="flex items-center justify-between bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 transition-colors">
+                                    <div class="flex items-center gap-2">
+                                        <iconify-icon icon="solar:calendar-linear" class="text-slate-500"></iconify-icon>
+                                        <span>Feb 11</span>
+                                    </div>
+                                    <iconify-icon icon="solar:alt-arrow-down-linear" class="text-slate-500 text-xs"></iconify-icon>
+                                </button>
+                                <button class="flex items-center justify-between bg-black/40 border border-white/5 rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 transition-colors">
+                                    <div class="flex items-center gap-2">
+                                        <iconify-icon icon="solar:calendar-linear" class="text-slate-500"></iconify-icon>
+                                        <span>Mar 25</span>
+                                    </div>
+                                    <iconify-icon icon="solar:alt-arrow-down-linear" class="text-slate-500 text-xs"></iconify-icon>
+                                </button>
+                            </div>
+
+                            <!-- Times -->
+                            <div class="grid grid-cols-2 gap-3 pb-4 border-b border-white/10">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs text-slate-500 font-medium">Check-in</span>
+                                    <span class="text-xs text-slate-300">After 2:00 PM</span>
+                                </div>
+                                <div class="flex flex-col gap-1 pl-3 border-l border-white/5">
+                                    <span class="text-xs text-slate-500 font-medium">Check-out</span>
+                                    <span class="text-xs text-slate-300">Until 12:00 PM</span>
+                                </div>
+                            </div>
+
+                            <!-- Price & CTA -->
+                            <div class="flex items-end justify-between mt-2">
+                                <div class="flex items-baseline gap-1">
+                                    <span class="text-2xl font-medium text-white">$359</span>
+                                    <span class="text-xs text-slate-500">/night</span>
+                                </div>
+                                <span class="text-xs text-slate-300 font-medium">2–5 guests</span>
+                            </div>
+
+                            <button class="mt-2 w-full bg-white text-slate-900 py-3.5 rounded-xl text-sm font-semibold hover:bg-slate-100 transition-all active:scale-[0.98]">
+                                Reserve
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preserved Footer Structure, Adapted for Dark Theme -->
+        <section class="relative z-10 px-6 md:px-12 lg:px-24 py-16 md:py-24 max-w-[1400px] mx-auto w-full flex-grow border-t border-white/5">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-6">
+                <!-- Left Details -->
+                <div class="md:col-span-5 lg:col-span-6 flex flex-col justify-between space-y-12">
+                    <div class="space-y-3">
+                        <p class="text-sm text-slate-500 font-medium">© 2024 WoodNest Inc. All rights reserved.</p>
+                        <p class="text-sm text-slate-500 font-medium">Curated Wilderness Experiences • est. 2018</p>
+                    </div>
+                    <div class="flex items-center gap-8 text-sm font-medium text-slate-300">
+                        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+
+                <!-- Right Navigation -->
+                <div class="md:col-span-7 lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <div class="space-y-6 text-sm">
+                        <h3 class="text-xs font-semibold tracking-widest text-slate-500 uppercase">Discover</h3>
+                        <ul class="space-y-4 font-medium text-slate-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Our Cabins</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Journal</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Gift Cards</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-6 text-sm sm:col-span-1 col-span-2">
+                        <h3 class="text-xs font-semibold tracking-widest text-slate-500 uppercase">Connect</h3>
+                        <ul class="space-y-4 font-medium text-slate-400">
+                            <li><a href="#" class="hover:text-white transition-colors flex items-center justify-between group">Instagram <iconify-icon icon="solar:arrow-right-up-linear" class="opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0"></iconify-icon></a></li>
+                            <li><a href="#" class="hover:text-white transition-colors flex items-center justify-between group">Support <iconify-icon icon="solar:arrow-right-up-linear" class="opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0"></iconify-icon></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Giant Dot Logo Footer (Preserved & Adapted) -->
+        <section class="w-full overflow-hidden flex justify-center items-end pb-4 pt-12 border-t border-white/5 mt-auto">
+            <div class="w-full max-w-[1600px] px-4">
+                <svg width="100%" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" class="fill-slate-800 transition-all duration-1000 ease-out hover:fill-slate-700 hover:scale-[1.01]">
+                    <defs>
+                        <pattern id="dotGrid" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+                            <circle cx="7" cy="7" r="5.5"></circle>
+                        </pattern>
+                    </defs>
+                    <text x="50%" y="55%" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="280" text-anchor="middle" dominant-baseline="middle" fill="url(#dotGrid)" letter-spacing="4" style="transform-origin: center; animation: float 6s ease-in-out infinite alternate;">WOODNEST</text>
+                </svg>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Preserved Interactive Canvas Script -->
+    <script></script>
+
+</body></html>

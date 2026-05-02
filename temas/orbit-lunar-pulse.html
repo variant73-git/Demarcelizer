@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit • Lunar Pulse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #d4d4d4;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.01) 10px, rgba(0,0,0,0.01) 11px);
+        }
+
+        .clip-text-reveal {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        /* Subtle gradient border technique for the overlay */
+        .gradient-border-top-right {
+            position: relative;
+        }
+        .gradient-border-top-right::before {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; left: 0; bottom: 0;
+            border-top: 1px solid transparent;
+            border-right: 1px solid transparent;
+            background: linear-gradient(to bottom left, rgba(255,255,255,0.2), transparent) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8 antialiased text-white">
+
+    <!-- Main Framed Container -->
+    <main class="w-full max-w-[1400px] bg-[#0c0c0c] rounded-[2rem] overflow-hidden flex flex-col relative shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]">
+
+        <!-- Top Header -->
+        <header class="flex flex-col md:flex-row justify-between items-center px-6 md:px-10 py-5 border-b border-white/[0.08] relative z-10">
+            <!-- Left Branding -->
+            <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start mb-4 md:mb-0">
+                <div class="flex gap-3 text-xs uppercase tracking-widest">
+                    <span class="font-medium text-white">Orbit</span>
+                    <span class="text-white/40 font-light">Lunar Pulse</span>
+                </div>
+                <!-- Mobile Menu Icon (Hidden on Desktop) -->
+                <button class="md:hidden text-white/70">
+                    <iconify-icon icon="solar:hamburger-menu-linear" class="text-xl"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Center Navigation -->
+            <nav class="hidden md:flex items-center gap-10 text-xs uppercase tracking-widest text-white/80 font-light">
+                <a href="#" class="hover:text-white transition-colors duration-300">Schedule</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">The Ritual</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Access</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Faq</a>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="hidden md:flex items-center gap-8 text-xs uppercase tracking-widest">
+                <span class="text-white/40 font-light tracking-widest flex items-center gap-2">
+                    Jul–Aug 2026 <span class="text-[0.5rem]">•</span> Montréal
+                </span>
+                <button class="flex items-center gap-3 border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 transition-all duration-300 rounded-full px-5 py-2 font-light group">
+                    <span>Get Tickets</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#FF4500] group-hover:shadow-[0_0_8px_rgba(255,69,0,0.6)] transition-shadow"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Three Column Grid Area -->
+        <section class="flex flex-col lg:flex-row border-b border-white/[0.08] min-h-[60vh] relative z-0">
+            
+            <!-- Structural Corner Marks (Skill Directive) -->
+            <div class="absolute top-0 left-[28%] w-px h-2 bg-white/20 hidden lg:block z-20"></div>
+            <div class="absolute top-0 left-[72%] w-px h-2 bg-white/20 hidden lg:block z-20"></div>
+            <div class="absolute bottom-0 left-[28%] w-px h-2 bg-white/20 hidden lg:block z-20"></div>
+            <div class="absolute bottom-0 left-[72%] w-px h-2 bg-white/20 hidden lg:block z-20"></div>
+
+            <!-- Left Column (Dark) -->
+            <article class="w-full lg:w-[28%] p-8 lg:p-10 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/[0.08] relative">
+                <div class="clip-text-reveal">
+                    <p class="text-xs text-white/50 uppercase tracking-widest font-light leading-relaxed mb-10 gs-slide-up">
+                        Open-air salsa nights <span class="mx-1">•</span> Rotating<br>Montréal parks
+                    </p>
+                    <p class="text-lg md:text-xl font-light leading-relaxed text-white/90 pr-4 gs-slide-up" style="transition-delay: 0.1s;">
+                        Music brings strangers together — one park at a time.
+                    </p>
+                    
+                    <div class="flex items-center gap-3 mt-10 text-xs uppercase tracking-widest font-light gs-slide-up" style="transition-delay: 0.2s;">
+                        <span class="flex items-center gap-2">
+                            <span class="text-[#FF4500] text-[0.5rem]">•</span>
+                            <span class="text-white/80">Jul–Aug 2026</span>
+                        </span>
+                        <span class="text-white/30">/</span>
+                        <span class="flex items-center gap-2">
+                            <span class="text-white/30 text-[0.5rem]">•</span>
+                            <span class="text-white/50">Montréal</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-end mt-20 lg:mt-auto text-xs uppercase tracking-widest font-light clip-text-reveal">
+                    <span class="text-white/40 gs-slide-up">Next Night</span>
+                    <span class="gs-slide-up flex items-center gap-2">
+                        <span class="text-[#FF4500] font-medium">Sat</span>
+                        <span class="text-[0.5rem] text-white/30">•</span>
+                        <span class="text-white/80">7:30 PM</span>
+                    </span>
+                </div>
+            </article>
+
+            <!-- Center Column (Image) -->
+            <figure class="w-full lg:w-[44%] relative border-b lg:border-b-0 lg:border-r border-white/[0.08] min-h-[400px] lg:min-h-0 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?q=80&w=1200&auto=format&fit=crop" 
+                     alt="Couple dancing gracefully" 
+                     class="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-1000 ease-out" />
+                
+                <!-- Inner Image Overlay Box -->
+                <div class="absolute bottom-0 left-0 w-[85%] md:w-[75%] bg-[#080808]/95 backdrop-blur-xl p-6 md:p-8 gradient-border-top-right">
+                    <div class="clip-text-reveal">
+                        <p class="text-xs text-white/40 uppercase tracking-widest font-light mb-3 flex items-center gap-2 gs-slide-up">
+                            Orbit <span class="text-[0.5rem]">•</span> Lunar Pulse
+                        </p>
+                    </div>
+                    <div class="clip-text-reveal">
+                        <h3 class="text-2xl md:text-3xl font-medium tracking-tight text-white/90 gs-slide-up" style="transition-delay: 0.1s;">
+                            Dance under the city lights.
+                        </h3>
+                    </div>
+                </div>
+            </figure>
+
+            <!-- Right Column (Light) -->
+            <article class="w-full lg:w-[28%] bg-[#fcfcfc] text-[#0a0a0a] p-8 lg:p-10 flex flex-col justify-between relative">
+                <div class="flex justify-between items-start clip-text-reveal">
+                    <span class="text-xs uppercase tracking-widest font-medium text-black/40 gs-slide-up">Est. 2026</span>
+                    <span class="w-2 h-2 rounded-full bg-[#FF4500] gs-scale-in"></span>
+                </div>
+
+                <div class="mt-24 mb-24 lg:mt-auto lg:mb-32 flex flex-col clip-text-reveal">
+                    <h1 class="text-6xl md:text-7xl font-medium tracking-tighter mb-4 gs-slide-up">
+                        ORBIT
+                    </h1>
+                    <p class="text-xs uppercase tracking-widest font-medium text-black/50 gs-slide-up" style="transition-delay: 0.1s;">
+                        Montréal Parks Series
+                    </p>
+                </div>
+
+                <div class="w-full pt-5 border-t border-black/[0.08] mt-auto clip-text-reveal">
+                    <p class="text-xs uppercase tracking-widest font-medium text-black/40 flex items-center justify-between gs-slide-up">
+                        <span>Salsa</span>
+                        <span class="text-[0.5rem] text-black/20">•</span>
+                        <span>Bachata</span>
+                        <span class="text-[0.5rem] text-black/20">•</span>
+                        <span>Social</span>
+                    </p>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Bottom Giant Typography -->
+        <section class="w-full px-6 md:px-10 py-6 md:py-8 flex items-center justify-between overflow-hidden relative">
+            <div class="clip-text-reveal flex-1">
+                <h2 class="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-none text-white/90 gs-stagger-word">
+                    LUNAR
+                </h2>
+            </div>
+            
+            <div class="px-4 md:px-10 flex items-center justify-center">
+                <span class="text-5xl md:text-7xl lg:text-8xl text-[#FF4500] font-medium leading-none gs-spin-in inline-block mt-2 md:mt-4">
+                    *
+                </span>
+            </div>
+
+            <div class="clip-text-reveal flex-1 flex justify-end">
+                <h2 class="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-none text-white/90 gs-stagger-word text-right">
+                    PULSE
+                </h2>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Simple slide up reveal for smaller text blocks
+            gsap.utils.toArray('.gs-slide-up').forEach(element => {
+                gsap.fromTo(element, 
+                    { y: 30, opacity: 0 },
+                    { 
+                        y: 0, 
+                        opacity: 1, 
+                        duration: 1, 
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 95%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+            });
+
+            // Scale in for tiny dots
+            gsap.utils.toArray('.gs-scale-in').forEach(element => {
+                gsap.fromTo(element,
+                    { scale: 0 },
+                    {
+                        scale: 1,
+                        duration: 0.8,
+                        ease: "back.out(2)",
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 90%",
+                        }
+                    }
+                );
+            });
+
+            // Giant text staggered word reveal
+            gsap.utils.toArray('.gs-stagger-word').forEach(element => {
+                gsap.fromTo(element,
+                    { y: "100%" },
+                    {
+                        y: "0%",
+                        duration: 1.2,
+                        ease: "power4.out",
+                        scrollTrigger: {
+                            trigger: element.parentElement, // Trigger on the container
+                            start: "top 90%",
+                        }
+                    }
+                );
+            });
+
+            // Asterisk spin and scale in
+            gsap.fromTo('.gs-spin-in',
+                { scale: 0, rotation: -90 },
+                {
+                    scale: 1,
+                    rotation: 0,
+                    duration: 1.5,
+                    ease: "elastic.out(1, 0.5)",
+                    scrollTrigger: {
+                        trigger: '.gs-spin-in',
+                        start: "top 95%",
+                    }
+                }
+            );
+        });
+    </script>
+</body>
+</html>

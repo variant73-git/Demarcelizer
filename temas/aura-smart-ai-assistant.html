@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura - Smart AI Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        geist: ['Geist', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            text: '#3a281e',
+                            subtext: '#685a53',
+                            primary: '#f97316',
+                            dark: '#141110'
+                        }
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        tilt: {
+                            '0%, 50%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(1deg)' },
+                            '75%': { transform: 'rotate(-1deg)' },
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'tilt': 'tilt 10s infinite linear',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#faf9f9] text-gray-900 font-sans antialiased overflow-x-hidden selection:bg-brand-primary selection:text-white relative" style="perspective: 1000px;">
+
+    <!-- Agency Grid Lines Overlay (Container Lines with Mini Corner Squares) -->
+    <div class="fixed inset-0 pointer-events-none z-50 flex justify-center w-full max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 opacity-[0.04]">
+        <div class="w-full flex justify-between h-full relative">
+            <div class="h-full border-l border-black relative">
+                <div class="absolute -top-1 -left-[2.5px] w-1.5 h-1.5 border border-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"></div>
+            </div>
+            <div class="h-full border-l border-black hidden md:block relative"></div>
+            <div class="h-full border-l border-black hidden lg:block relative"></div>
+            <div class="h-full border-l border-black relative">
+                <div class="absolute -top-1 -left-[2.5px] w-1.5 h-1.5 border border-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="relative z-40 max-w-[90rem] mx-auto px-6 py-5 flex items-center justify-between">
+        <div class="flex items-center gap-2 group cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#f97316] to-[#fb923c] border border-white/20 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex items-center justify-center text-white transform transition duration-300 group-hover:scale-105">
+                <iconify-icon icon="solar:layers-linear" width="18" style="stroke-width: 1.5px;"></iconify-icon>
+            </div>
+            <span class="text-xl font-normal tracking-tight text-brand-dark font-geist">Aura</span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-8">
+            <a href="#" class="text-sm font-normal text-gray-500 hover:text-brand-dark transition-colors font-geist">Platform</a>
+            <a href="#" class="text-sm font-normal text-gray-500 hover:text-brand-dark transition-colors font-geist">Solutions</a>
+            <a href="#" class="text-sm font-normal text-gray-500 hover:text-brand-dark transition-colors font-geist">Insights</a>
+            <a href="#" class="text-sm font-normal text-gray-500 hover:text-brand-dark transition-colors font-geist">Plans</a>
+        </nav>
+
+        <div>
+            <a href="#" class="inline-flex items-center justify-center px-6 py-2.5 text-sm font-normal text-white bg-gradient-to-b from-[#2a2524] to-[#141110] rounded-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] hover:shadow-lg transition-all duration-300 hover:from-[#3a3332] hover:to-[#1a1615] font-geist">
+                Sign In
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="relative z-10 px-4 sm:px-6 lg:px-8 mt-2 pb-32">
+        <div class="max-w-[88rem] mx-auto relative rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6),0px_4px_20px_-5px_rgba(249,115,22,0.05)]" style="background-color: #fff7ed;">
+            
+            <!-- WebGL Background Canvas -->
+            <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-80 mix-blend-multiply"></canvas>
+            
+            <!-- CSS Diagonal Light Beams Overlay -->
+            <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.4) 25%, transparent 30%, transparent 60%, rgba(255,255,255,0.3) 65%, transparent 70%);"></div>
+            <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/40 via-transparent to-[#fff7ed]/80"></div>
+
+            <div class="relative z-20 flex flex-col items-center text-center pt-24 pb-48 md:pt-32 md:pb-64 px-4">
+                
+                <!-- Trust Pill -->
+                <div class="animate-fade-in-up inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-gradient-to-b from-white/90 to-white/70 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] mb-8 border border-white/60">
+                    <div class="flex -space-x-2">
+                        <img class="w-6 h-6 rounded-full border border-white" src="https://i.pravatar.cc/100?img=1" alt="User">
+                        <img class="w-6 h-6 rounded-full border border-white" src="https://i.pravatar.cc/100?img=2" alt="User">
+                        <img class="w-6 h-6 rounded-full border border-white" src="https://i.pravatar.cc/100?img=3" alt="User">
+                    </div>
+                    <span class="text-xs font-normal text-brand-text font-geist">Trusted by over 3,500 modern teams</span>
+                </div>
+
+                <!-- Headline -->
+                <h1 class="animate-fade-in-up max-w-4xl text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.1] font-medium tracking-tight text-brand-text flex flex-wrap justify-center items-center gap-x-4 gap-y-2" style="animation-delay: 100ms;">
+                    <span class="font-geist font-light tracking-tighter">Boost Performance</span>
+                    <span class="font-geist font-light tracking-tighter">with</span>
+                    <span class="inline-flex items-center justify-center relative w-[1.1em] h-[1.1em] rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#3a281e] to-[#1c120e] shadow-[0_8px_16px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.2)] mx-2 -translate-y-1 overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out"></div>
+                        <iconify-icon icon="solar:ghost-linear" class="text-white/90 text-[0.6em]" style="stroke-width: 1.5px;"></iconify-icon>
+                        <div class="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-white/20"></div>
+                    </span>
+                    <span class="font-geist font-light tracking-tighter">Assistance</span>
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="animate-fade-in-up mt-8 text-base md:text-lg text-brand-subtext max-w-2xl font-light leading-relaxed font-geist" style="animation-delay: 200ms;">
+                    Aura delivers context-aware, autonomous AI interactions engineered to simplify complex tasks and ensure reliable 24/7 resolution.
+                </p>
+
+                <!-- Buttons -->
+                <div class="animate-fade-in-up mt-10 flex flex-col sm:flex-row items-center gap-4" style="animation-delay: 300ms;">
+                    <a href="#" class="relative inline-flex group">
+                        <div class="absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#f97316] to-[#fb923c] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
+                        <button class="relative inline-flex items-center justify-center px-8 py-3.5 text-sm font-normal text-white bg-gradient-to-b from-[#f97316] to-[#ea580c] rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.1),0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)] transition-transform transform active:scale-95 font-geist">
+                            Start for Free
+                        </button>
+                    </a>
+                    <a href="#" class="inline-flex items-center justify-center px-8 py-3.5 text-sm font-normal text-brand-text bg-gradient-to-b from-white to-gray-50/80 backdrop-blur-sm rounded-xl shadow-[inset_0_1px_1px_rgba(255,255,255,1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:to-white transition-colors border border-gray-100/50 font-geist">
+                        Explore Capabilities
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard UI Mockup Overlay -->
+        <div class="relative z-30 max-w-[64rem] mx-auto -mt-24 md:-mt-40 px-4 group">
+            <!-- Outer Glow/Shadow Container -->
+            <div class="absolute -inset-1 bg-gradient-to-b from-white/40 to-transparent rounded-[2.5rem] blur-xl opacity-50 group-hover:opacity-70 transition duration-500"></div>
+            
+            <!-- Skeuomorphic Border Gradient Window Container -->
+            <div class="relative rounded-[2rem] p-[1px] bg-gradient-to-br from-white/90 via-white/40 to-white/10 shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] overflow-hidden transform transition-transform duration-700 hover:-translate-y-2">
+                <div class="relative bg-white/60 backdrop-blur-2xl rounded-[calc(2rem-1px)] p-2 h-full w-full">
+                    
+                    <!-- Simulated Sky Background Header -->
+                    <div class="absolute top-0 left-0 w-full h-48 opacity-40 mix-blend-overlay pointer-events-none rounded-t-[calc(2rem-1px)]" style="background: linear-gradient(to bottom, #d4bca5, #e8d2ca, transparent);"></div>
+                    
+                    <!-- Inner Application Area -->
+                    <div class="relative bg-white/90 backdrop-blur-md rounded-[1.5rem] shadow-[inset_0_1px_0_rgba(255,255,255,1),inset_0_0_0_1px_rgba(255,255,255,0.5)] overflow-hidden flex flex-col h-[28rem] md:h-[32rem]">
+                        
+                        <!-- App Header -->
+                        <div class="px-6 py-4 border-b border-gray-100/50 flex items-center gap-3 bg-gradient-to-b from-white/80 to-white/30 backdrop-blur-sm shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                            <div class="w-7 h-7 rounded-full bg-gradient-to-b from-[#2a2524] to-brand-dark flex items-center justify-center text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
+                                <iconify-icon icon="solar:smart-home-linear" width="14" style="stroke-width: 1.5px;"></iconify-icon>
+                            </div>
+                            <span class="text-sm font-normal text-gray-800 font-geist">Aura Assistant</span>
+                        </div>
+
+                        <!-- Chat Interface Area -->
+                        <div class="flex-1 p-6 flex flex-col gap-5 overflow-y-auto" style="background: linear-gradient(to bottom, transparent, rgba(255,247,237,0.4));">
+                            
+                            <!-- User Message Row -->
+                            <div class="flex items-start justify-end gap-3 animate-fade-in-up" style="animation-delay: 500ms;">
+                                <div class="bg-gradient-to-b from-[#3a3332] to-[#2c2625] text-white text-sm font-light px-5 py-3 rounded-2xl rounded-tr-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] max-w-sm font-geist">
+                                    Hi, the recent deployment to the production cluster failed.
+                                </div>
+                                <img class="w-8 h-8 rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] ring-2 ring-white/50" src="https://i.pravatar.cc/100?img=12" alt="User Avatar">
+                            </div>
+
+                            <!-- Agent Message Row 1 -->
+                            <div class="flex items-start justify-start gap-3 animate-fade-in-up" style="animation-delay: 1200ms;">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-b from-[#2a2524] to-brand-dark flex items-center justify-center text-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex-shrink-0">
+                                    <iconify-icon icon="solar:smart-home-linear" width="16" style="stroke-width: 1.5px;"></iconify-icon>
+                                </div>
+                                <div class="bg-gradient-to-b from-white to-[#f9f8f8] text-gray-800 text-sm font-light px-5 py-3 rounded-2xl rounded-tl-sm border border-white/80 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] max-w-sm font-geist">
+                                    Scanning the logs from the latest commit... Just a moment.
+                                </div>
+                            </div>
+
+                            <!-- Agent Message Row 2 -->
+                            <div class="flex items-start justify-start gap-3 animate-fade-in-up" style="animation-delay: 2500ms;">
+                                <div class="w-8 h-8 rounded-full opacity-0 flex-shrink-0"></div> <!-- Spacer for alignment -->
+                                <div class="bg-gradient-to-b from-white to-[#f9f8f8] text-gray-800 text-sm font-light px-5 py-3 rounded-2xl rounded-tl-sm border border-white/80 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] max-w-md font-geist">
+                                    Issue identified. The environment variable <code class="px-1.5 py-0.5 rounded bg-white text-brand-primary text-xs border border-gray-100 shadow-[inset_0_1px_1px_rgba(0,0,0,0.02)] font-geist">API_KEY_V2</code> is missing in the production config. Should I inject the fallback value?
+                                </div>
+                            </div>
+
+                            <!-- User Message Row -->
+                            <div class="flex items-start justify-end gap-3 animate-fade-in-up" style="animation-delay: 4000ms;">
+                                <div class="bg-gradient-to-b from-[#3a3332] to-[#2c2625] text-white text-sm font-light px-5 py-3 rounded-2xl rounded-tr-sm shadow-[inset_0_1px_1px_rgba(255,255,255,0.1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] max-w-sm font-geist">
+                                    Yes, inject it and restart the service.
+                                </div>
+                                <img class="w-8 h-8 rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] ring-2 ring-white/50" src="https://i.pravatar.cc/100?img=12" alt="User Avatar">
+                            </div>
+                             
+                             <!-- Typing indicator -->
+                             <div class="flex items-start justify-start gap-3 animate-fade-in-up" style="animation-delay: 5000ms;">
+                                 <div class="w-8 h-8 rounded-full bg-gradient-to-b from-[#2a2524] to-brand-dark flex items-center justify-center text-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex-shrink-0">
+                                    <iconify-icon icon="solar:smart-home-linear" width="16" style="stroke-width: 1.5px;"></iconify-icon>
+                                </div>
+                                <div class="bg-gradient-to-b from-white to-[#f9f8f8] px-4 py-3 rounded-2xl rounded-tl-sm border border-white/80 shadow-[inset_0_1px_1px_rgba(255,255,255,1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] flex gap-1 items-center h-10">
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+                                    <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
+                                </div>
+                             </div>
+
+                        </div>
+                        
+                        <!-- Input Area -->
+                        <div class="p-4 border-t border-gray-100/50 bg-white flex gap-3 items-center">
+                            <div class="w-full bg-gradient-to-b from-gray-50 to-gray-100/50 border border-gray-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.02),inset_0_0_0_1px_rgba(255,255,255,0.5)] rounded-full px-4 py-2.5 text-sm text-gray-400 font-light font-geist">
+                                Message Aura...
+                            </div>
+                            <button class="w-10 h-10 rounded-full bg-gradient-to-b from-[#f97316] to-[#ea580c] text-white flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),inset_0_-1px_1px_rgba(0,0,0,0.1),0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] hover:from-[#fb923c] hover:to-[#f97316] transition-colors">
+                                <iconify-icon icon="solar:plain-2-linear" width="18" style="stroke-width: 1.5px;"></iconify-icon>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- WebGL Background Shader Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('hero-canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+            if (!gl) {
+                console.warn('WebGL not supported');
+                return;
+            }
+
+            function resize() {
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientHeight;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const vsSource = `
+                attribute vec2 position;
+                void main() {
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            const fsSource = `
+                precision mediump float;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+
+                void main() {
+                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+                    
+                    float t = u_time * 0.2;
+                    
+                    float blob1 = sin(uv.x * 3.0 + t) * cos(uv.y * 2.0 + t * 0.8);
+                    float blob2 = sin(uv.x * 2.0 - t * 0.5) * cos(uv.y * 4.0 - t * 1.2);
+                    
+                    float noise = blob1 + blob2;
+                    
+                    vec3 color1 = vec3(1.0, 0.96, 0.93); // Light orange tint (#fff7ed)
+                    vec3 color2 = vec3(1.0, 0.92, 0.86); // Soft orange (#ffebd9)
+                    vec3 color3 = vec3(1.0, 1.0, 1.0);   // White
+                    
+                    vec3 finalColor = mix(color1, color2, noise * 0.5 + 0.5);
+                    finalColor = mix(finalColor, color3, sin(uv.x * 10.0 + t) * 0.1);
+                    
+                    float dist = distance(uv, vec2(0.5));
+                    finalColor = mix(finalColor, color3, dist * 0.5);
+
+                    gl_FragColor = vec4(finalColor, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return null;
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+            const shaderProgram = gl.createProgram();
+            gl.attachShader(shaderProgram, vertexShader);
+            gl.attachShader(shaderProgram, fragmentShader);
+            gl.linkProgram(shaderProgram);
+
+            gl.useProgram(shaderProgram);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            const positions = [
+                -1.0,  1.0,
+                 1.0,  1.0,
+                -1.0, -1.0,
+                 1.0, -1.0,
+            ];
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(shaderProgram, 'position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation = gl.getUniformLocation(shaderProgram, 'u_time');
+            const resolutionLocation = gl.getUniformLocation(shaderProgram, 'u_resolution');
+
+            function render(time) {
+                time *= 0.001; 
+                gl.uniform1f(timeLocation, time);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        });
+    </script>
+</body>
+</html>

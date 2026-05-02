@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Autonomous Scaling Infrastructure</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="bg-[#080808] text-[#EDEDED] font-light antialiased relative min-h-screen overflow-x-hidden selection:bg-[#EDEDED]/30 selection:text-white" style="background-color: #080808; font-family: 'Geist', sans-serif;">
+
+    <!-- Global Noise Overlay -->
+    <div class="fixed inset-0 pointer-events-none z-[9999]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%221%22/%3E%3C/svg%3E'); opacity: 0.015; mix-blend-mode: overlay;"></div>
+
+    <!-- Framed Layout Container -->
+    <div class="relative mx-auto max-w-[1400px] min-h-screen flex flex-col border-x border-neutral-800 bg-[#080808]" style="background-image: repeating-linear-gradient(45deg, rgba(237,237,237,0.01) 0, rgba(237,237,237,0.01) 1px, transparent 0, transparent 32px);">
+        
+        <!-- Corner Brackets -->
+        <div class="absolute top-0 left-0 w-6 h-6 border-t border-l border-neutral-800 z-10 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-6 h-6 border-t border-r border-neutral-800 z-10 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-neutral-800 z-10 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-neutral-800 z-10 pointer-events-none"></div>
+
+        <!-- Header -->
+        <header class="relative flex justify-between items-center px-6 lg:px-12 py-6 border-b border-neutral-800 bg-[#080808]/80 backdrop-blur-md z-50">
+            <!-- Logo -->
+            <div class="flex items-center gap-4 group cursor-pointer">
+                <div class="relative p-[1px] group flashlight-module rounded-[24px] bg-neutral-800">
+                    <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] blur-[12px] rounded-[24px] pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] rounded-[24px] pointer-events-none"></div>
+                    <div class="relative bg-[#080808] rounded-[23px] w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                        <iconify-icon icon="solar:infinity-linear" class="text-[#EDEDED] text-xl" style="stroke-width: 1.5;"></iconify-icon>
+                    </div>
+                </div>
+                <span class="text-lg font-light tracking-tight text-[#EDEDED]">Axiom</span>
+            </div>
+
+            <!-- Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-light text-neutral-400 tracking-tight">
+                <a href="#" class="hover:text-[#EDEDED] transition-colors duration-300">Ecosystem</a>
+                <a href="#" class="hover:text-[#EDEDED] transition-colors duration-300">Architecture</a>
+                <a href="#" class="hover:text-[#EDEDED] transition-colors duration-300">Enterprise</a>
+                <a href="#" class="hover:text-[#EDEDED] transition-colors duration-300">Docs</a>
+                <a href="#" class="hover:text-[#EDEDED] transition-colors duration-300">Pricing</a>
+            </nav>
+
+            <!-- CTA -->
+            <div class="hidden sm:block relative p-[1px] group flashlight-module rounded-[24px] bg-neutral-800 cursor-pointer">
+                <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] blur-[12px] rounded-[24px] pointer-events-none"></div>
+                <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] rounded-[24px] pointer-events-none"></div>
+                <div class="relative bg-[#080808] group-hover:bg-[#121212] rounded-[23px] px-5 py-2.5 flex items-center gap-2 transition-colors duration-300">
+                    <span class="text-sm font-light text-[#EDEDED] tracking-tight">Request Tokens</span>
+                    <iconify-icon icon="solar:arrow-right-linear" class="text-[#EDEDED]" style="stroke-width: 1.5;"></iconify-icon>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex flex-col lg:flex-row relative z-0">
+            
+            <!-- Center dividing line -->
+            <div class="hidden lg:block absolute top-0 bottom-0 left-1/2 w-px bg-neutral-800 -translate-x-1/2"></div>
+
+            <!-- Left Column: Copy & Actions -->
+            <div class="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:px-16 py-16 lg:py-24 relative">
+                
+                <!-- Crosshairs styling element -->
+                <div class="absolute top-1/4 -left-2 w-4 h-px bg-neutral-800"></div>
+                <div class="absolute top-1/4 -left-2 w-px h-4 bg-neutral-800 -translate-y-1/2 translate-x-2"></div>
+
+                <div class="max-w-xl">
+                    <!-- Masked Reveal Heading -->
+                    <h1 id="hero-heading" class="text-4xl lg:text-6xl leading-[1.1] tracking-tight font-light text-[#EDEDED] mb-6">
+                        Adaptive Architecture For Self-Governing Compute
+                    </h1>
+                    
+                    <p id="hero-subheading" class="text-base text-[#EDEDED]/70 mb-10 leading-relaxed font-light tracking-tight max-w-md opacity-0">
+                        Empower your technical teams with a centralized command center to deploy, monitor, and elastically scale resources with absolute certainty.
+                    </p>
+
+                    <div id="hero-buttons" class="flex flex-wrap items-center gap-5 mb-20 opacity-0">
+                        <!-- Primary Button -->
+                        <button class="relative p-[1px] group flashlight-module rounded-[24px] bg-neutral-800 focus:outline-none focus:ring-1 focus:ring-[#EDEDED]/50 text-left cursor-pointer">
+                            <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] blur-[12px] rounded-[24px] pointer-events-none transition-opacity duration-300"></div>
+                            <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] rounded-[24px] pointer-events-none transition-opacity duration-300"></div>
+                            <div class="relative bg-[#080808] group-hover:bg-[#121212] rounded-[23px] px-6 py-3.5 flex items-center gap-2 transition-colors duration-300">
+                                <span class="text-sm font-light text-[#EDEDED] tracking-tight">Initialize Grid</span>
+                                <iconify-icon icon="solar:rocket-linear" class="text-lg text-[#EDEDED]" style="stroke-width: 1.5;"></iconify-icon>
+                            </div>
+                        </button>
+
+                        <!-- Secondary Button -->
+                        <button class="relative p-[1px] group flashlight-module rounded-[24px] bg-neutral-800 focus:outline-none focus:ring-1 focus:ring-[#EDEDED]/50 text-left cursor-pointer">
+                            <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] blur-[12px] rounded-[24px] pointer-events-none transition-opacity duration-300"></div>
+                            <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] rounded-[24px] pointer-events-none transition-opacity duration-300"></div>
+                            <div class="relative bg-[#080808] group-hover:bg-[#121212] rounded-[23px] px-6 py-3.5 flex items-center gap-2 transition-colors duration-300">
+                                <span class="text-sm font-light text-[#EDEDED]/80 tracking-tight">View Schematics</span>
+                                <iconify-icon icon="solar:document-text-linear" class="text-lg text-[#EDEDED]/80" style="stroke-width: 1.5;"></iconify-icon>
+                            </div>
+                        </button>
+                    </div>
+
+                    <!-- Social Proof -->
+                    <div id="hero-logos" class="opacity-0">
+                        <p class="text-xs font-light text-neutral-500 mb-5 tracking-widest uppercase">Trusted by leading platform engineers</p>
+                        <div class="flex flex-wrap items-center gap-8 opacity-80">
+                            <div class="flex items-center gap-2 font-light text-[#EDEDED]/70 text-sm tracking-tight">
+                                <iconify-icon icon="solar:box-linear" class="text-[#EDEDED]" style="stroke-width: 1.5;"></iconify-icon> Strata
+                            </div>
+                            <div class="flex items-center gap-2 font-light text-[#EDEDED]/70 text-sm tracking-tight">
+                                <iconify-icon icon="solar:layers-linear" class="text-[#EDEDED]" style="stroke-width: 1.5;"></iconify-icon> Vortex
+                            </div>
+                            <div class="flex items-center gap-2 font-light text-[#EDEDED]/70 text-sm tracking-tight">
+                                <iconify-icon icon="solar:globus-linear" class="text-[#EDEDED]" style="stroke-width: 1.5;"></iconify-icon> Chronos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: WebGL Parallax Module -->
+            <div class="w-full lg:w-1/2 p-6 lg:p-12 min-h-[500px] lg:min-h-full flex items-center justify-center">
+                <div class="relative w-full h-full min-h-[400px] lg:min-h-full p-[1px] group flashlight-module rounded-[24px] bg-neutral-800">
+                    
+                    <!-- Flashlight Borders -->
+                    <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] blur-[12px] rounded-[24px] pointer-events-none transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 bg-[conic-gradient(from_var(--cursor-angle),#fff,transparent_60deg,transparent_300deg,#fff)] opacity-[calc(var(--proximity)/100)] rounded-[24px] pointer-events-none transition-opacity duration-300"></div>
+                    
+                    <!-- Inner Content Surface -->
+                    <div class="relative bg-[#080808] rounded-[23px] w-full h-full overflow-hidden flex items-center justify-center" id="parallax-wrapper" style="perspective: 1000px;">
+                        <div id="canvas-container" class="absolute inset-0 w-full h-full transform-gpu"></div>
+                        
+                        <!-- Technical grid overlay -->
+                        <div class="absolute inset-0 pointer-events-none" style="background-image: linear-gradient(to right, rgba(237,237,237,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(237,237,237,0.03) 1px, transparent 1px); background-size: 32px 32px; mask-image: radial-gradient(circle at center, black, transparent 80%); -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);"></div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- 1. Flashlight Glow Effect Directive ---
+        function setupFlashlight() {
+            document.addEventListener('pointermove', (e) => {
+                document.querySelectorAll('.flashlight-module').forEach(module => {
+                    const rect = module.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+
+                    const dx = e.clientX - centerX;
+                    const dy = e.clientY - centerY;
+
+                    // Calculate cursor angle
+                    let angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+                    module.style.setProperty('--cursor-angle', `${angle}deg`);
+
+                    // Calculate precise edge proximity (peaks at border edge)
+                    const absX = Math.abs(dx);
+                    const absY = Math.abs(dy);
+                    const isInside = absX <= rect.width / 2 && absY <= rect.height / 2;
+
+                    let dist;
+                    if (isInside) {
+                        dist = Math.min(rect.width / 2 - absX, rect.height / 2 - absY);
+                    } else {
+                        const edgeX = Math.max(0, absX - rect.width / 2);
+                        const edgeY = Math.max(0, absY - rect.height / 2);
+                        dist = Math.sqrt(edgeX * edgeX + edgeY * edgeY);
+                    }
+
+                    const maxDist = 150;
+                    const proximity = Math.max(0, 1 - (dist / maxDist));
+                    module.style.setProperty('--proximity', proximity * 100);
+                });
+            });
+        }
+
+        // --- 2. GSAP Masked Reveal Directive ---
+        function setupMaskedReveal() {
+            const heading = document.getElementById('hero-heading');
+            const words = heading.innerText.split(' ');
+            heading.innerHTML = '';
+            
+            words.forEach(word => {
+                const wrapper = document.createElement('span');
+                wrapper.className = 'mask-wrapper inline-block overflow-hidden align-bottom mr-[0.25em] pb-[0.1em]';
+                
+                const inner = document.createElement('span');
+                inner.className = 'mask-text inline-block';
+                inner.innerText = word;
+
+                wrapper.appendChild(inner);
+                heading.appendChild(wrapper);
+            });
+
+            gsap.fromTo('.mask-text', 
+                { y: '100%' },
+                { 
+                    y: '0%', 
+                    duration: 0.3, 
+                    ease: 'power3.out', 
+                    stagger: 0.05,
+                    delay: 0.2
+                }
+            );
+
+            gsap.to(['#hero-subheading', '#hero-buttons', '#hero-logos'], {
+                opacity: 1,
+                y: 0,
+                duration: 0.3,
+                stagger: 0.1,
+                ease: 'power3.out',
+                delay: 0.5,
+                startAt: { y: 15 }
+            });
+        }
+
+        // --- 3. Interactive Parallax Container ---
+        function setupParallax() {
+            const wrapper = document.getElementById('parallax-wrapper');
+            const container = document.getElementById('canvas-container');
+            
+            wrapper.addEventListener('mousemove', (e) => {
+                const rect = wrapper.getBoundingClientRect();
+                const xPos = e.clientX - rect.left;
+                const yPos = e.clientY - rect.top;
+                
+                const xMove = ((xPos / rect.width) - 0.5) * 20;
+                const yMove = ((yPos / rect.height) - 0.5) * 20;
+                const rotX = ((yPos / rect.height) - 0.5) * 2;
+                const rotY = ((xPos / rect.width) - 0.5) * 2;
+
+                gsap.to(container, {
+                    x: xMove,
+                    y: yMove,
+                    rotationX: -rotX,
+                    rotationY: rotY,
+                    duration: 0.3,
+                    ease: 'power3.out'
+                });
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                gsap.to(container, {
+                    x: 0,
+                    y: 0,
+                    rotationX: 0,
+                    rotationY: 0,
+                    duration: 0.6,
+                    ease: 'power3.out'
+                });
+            });
+        }
+
+        // --- 4. WebGL Animation (Three.js Isometric Scene) ---
+        function initWebGL() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            const scene = new THREE.Scene();
+            
+            const aspect = width / height;
+            const d = 10;
+            const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 1, 1000);
+            camera.position.set(20, 20, 20);
+            camera.lookAt(scene.position);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Dark Mode Palette Settings Updated
+            const materialColor = 0x080808;
+            const baseEdgeColor = 0x262626; 
+            const accentEdgeColor = 0xEDEDED; 
+            
+            function createOutlinedMesh(geometry, isAccent = false) {
+                const material = new THREE.MeshBasicMaterial({ 
+                    color: materialColor, 
+                    polygonOffset: true, 
+                    polygonOffsetFactor: 1, 
+                    polygonOffsetUnits: 1,
+                    transparent: true,
+                    opacity: 0.9
+                });
+                const mesh = new THREE.Mesh(geometry, material);
+                
+                const edges = new THREE.EdgesGeometry(geometry);
+                const lineColor = isAccent ? accentEdgeColor : baseEdgeColor;
+                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: lineColor, linewidth: 1.5 }));
+                mesh.add(line);
+                
+                return mesh;
+            }
+
+            const sceneGroup = new THREE.Group();
+            scene.add(sceneGroup);
+
+            // 1. Base Platform
+            const baseGeo = new THREE.BoxGeometry(12, 0.5, 12);
+            const base = createOutlinedMesh(baseGeo);
+            base.position.y = -2;
+            sceneGroup.add(base);
+
+            // 2. Central Core Architecture
+            const coreOuterGeo = new THREE.BoxGeometry(6, 4, 0.2);
+            const coreFront = createOutlinedMesh(coreOuterGeo);
+            coreFront.position.set(0, 0, 1.5);
+            coreFront.rotation.x = -0.05;
+            
+            const coreBack = createOutlinedMesh(coreOuterGeo);
+            coreBack.position.set(0, 0, -1.5);
+            coreBack.rotation.x = 0.05;
+
+            const folderGroup = new THREE.Group();
+            folderGroup.add(coreFront);
+            folderGroup.add(coreBack);
+            folderGroup.position.y = 0.5;
+            sceneGroup.add(folderGroup);
+
+            // 3. Floating Data Modules
+            const modules = [];
+            const numModules = 4;
+            const moduleGeo = new THREE.BoxGeometry(2.5, 0.2, 2.5);
+
+            for(let i=0; i<numModules; i++) {
+                const mod = createOutlinedMesh(moduleGeo, true);
+                const angle = (i / (numModules - 1)) * Math.PI - Math.PI/2;
+                const radius = 6;
+                
+                mod.userData = {
+                    initialX: Math.sin(angle) * radius,
+                    initialY: 8 + (Math.abs(Math.sin(angle)) * 2),
+                    initialZ: Math.cos(angle) * radius - 2,
+                    phase: i * (Math.PI * 2 / numModules)
+                };
+
+                mod.position.set(mod.userData.initialX, mod.userData.initialY, mod.userData.initialZ);
+                mod.rotation.x = 0.5;
+                mod.rotation.y = angle * 0.5;
+                
+                sceneGroup.add(mod);
+                modules.push(mod);
+            }
+
+            // Small decorative floating nodes
+            const decoNodes = [];
+            const decoGeo = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+            for(let i=0; i<5; i++) {
+                const node = createOutlinedMesh(decoGeo, true);
+                node.position.set((Math.random()-0.5)*15, (Math.random())*6, (Math.random()-0.5)*15);
+                sceneGroup.add(node);
+                decoNodes.push(node);
+            }
+
+            // Animation Loop
+            let time = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.015;
+
+                sceneGroup.position.y = Math.sin(time * 0.5) * 0.2;
+
+                modules.forEach((mod, i) => {
+                    let progress = (time * 0.15 + mod.userData.phase / (Math.PI * 2)) % 1;
+                    
+                    const startPos = new THREE.Vector3(mod.userData.initialX, mod.userData.initialY, mod.userData.initialZ);
+                    const endPos = new THREE.Vector3(0, 1, 0);
+                    
+                    mod.position.lerpVectors(startPos, endPos, Math.pow(progress, 2));
+                    
+                    if(progress > 0.8) {
+                        const scale = 1 - ((progress - 0.8) * 5);
+                        mod.scale.set(Math.max(scale,0), Math.max(scale,0), Math.max(scale,0));
+                    } else {
+                        mod.scale.set(1,1,1);
+                    }
+
+                    if(progress < 0.1) {
+                         mod.position.y += Math.sin(time * 2 + i) * 0.1;
+                    }
+                });
+
+                decoNodes.forEach((node, i) => {
+                    node.rotation.x += 0.01;
+                    node.rotation.y += 0.01;
+                    node.position.y += Math.sin(time + i) * 0.005;
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+                const newAspect = newWidth / newHeight;
+                
+                camera.left = -d * newAspect;
+                camera.right = d * newAspect;
+                camera.top = d;
+                camera.bottom = -d;
+                camera.updateProjectionMatrix();
+                
+                renderer.setSize(newWidth, newHeight);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setupFlashlight();
+            setupMaskedReveal();
+            setupParallax();
+            setTimeout(initWebGL, 100); 
+        });
+
+    </script>
+</body>
+</html>

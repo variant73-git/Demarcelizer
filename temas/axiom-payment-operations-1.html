@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom - Payment Operations</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="relative min-h-screen overflow-x-hidden selection:bg-black selection:text-white font-['Inter',sans-serif] bg-[#f5f3ef] text-[#111827] antialiased">
+
+    <!-- WebGL Background -->
+    <canvas id="bg-canvas" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+    <!-- Master Frame Grid -->
+    <div class="fixed inset-3 md:inset-5 border border-black/5 z-50 pointer-events-none">
+        <div class="absolute w-4 h-4 border-black/15 pointer-events-none -top-px -left-px border-t border-l"></div>
+        <div class="absolute w-4 h-4 border-black/15 pointer-events-none -top-px -right-px border-t border-r"></div>
+        <div class="absolute w-4 h-4 border-black/15 pointer-events-none -bottom-px -left-px border-b border-l"></div>
+        <div class="absolute w-4 h-4 border-black/15 pointer-events-none -bottom-px -right-px border-b border-r"></div>
+    </div>
+
+    <!-- Vertical Grid Lines -->
+    <div class="fixed inset-3 md:inset-5 flex justify-evenly z-10 pointer-events-none opacity-5" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 11px);">
+        <!-- 10 lines to create 11 columns matching the shader -->
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+        <div class="w-px h-full bg-black"></div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="relative z-20 flex flex-col min-h-screen px-3 md:px-5">
+        
+        <!-- Navigation -->
+        <nav class="flex items-center justify-between py-6 px-4 md:px-8">
+            <div class="text-lg md:text-xl font-medium tracking-tight">Axiom</div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-xs font-normal text-gray-700 hover:text-black transition-colors">Products</a>
+                <a href="#" class="text-xs font-normal text-gray-700 hover:text-black transition-colors">Use Cases</a>
+                <a href="#" class="text-xs font-normal text-gray-700 hover:text-black transition-colors">API Docs</a>
+                <button class="bg-black text-white px-5 py-2 text-xs font-medium rounded hover:bg-gray-800 transition-colors">
+                    Console
+                </button>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-gray-900" aria-label="Toggle Menu">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="24" height="24"></iconify-icon>
+            </button>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="flex-grow flex flex-col justify-center px-4 md:px-8 pt-16 pb-48 max-w-3xl">
+            <!-- Added Eyebrow -->
+            <span class="text-xs font-semibold tracking-wider text-[#a268cf] uppercase mb-4">Financial Infrastructure</span>
+            
+            <h1 class="gs-reveal text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-gray-900 leading-[1.05] mb-6">
+                Unified global treasury infrastructure for agile teams
+            </h1>
+            
+            <p class="text-xs md:text-sm font-normal text-gray-500 leading-relaxed max-w-md mb-8">
+                Centralize your corporate accounts, wire transfers, and liquidity management into one secure platform. Deploy your complete capital stack in under 10 minutes with our automated protocols.
+            </p>
+            
+            <div>
+                <div class="relative p-[1px] rounded-[4px] inline-block shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-shadow duration-300 cursor-pointer" style="background: linear-gradient(to right, rgba(95, 131, 234, 0.5), rgba(162, 104, 207, 0.5));">
+                    <button class="block w-full h-full bg-gradient-to-r from-[#5984ea] to-[#a268cf] text-white px-6 py-2.5 rounded-[3px] text-xs font-medium border border-white/10 relative overflow-hidden group">
+                        <span class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></span>
+                        <span class="relative z-10">Launch Sandbox</span>
+                    </button>
+                </div>
+                
+                <!-- Social Proof -->
+                <div class="mt-5 flex items-center gap-2 text-xs text-gray-500 font-medium">
+                    <div class="flex items-center text-[#a268cf] gap-0.5">
+                        <iconify-icon icon="solar:star-bold" width="14"></iconify-icon>
+                        <iconify-icon icon="solar:star-bold" width="14"></iconify-icon>
+                        <iconify-icon icon="solar:star-bold" width="14"></iconify-icon>
+                        <iconify-icon icon="solar:star-bold" width="14"></iconify-icon>
+                        <iconify-icon icon="solar:star-bold" width="14"></iconify-icon>
+                    </div>
+                    <span>4.8/5 based on 3,200+ verified ratings</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Logo Band (Background removed & positioned lower) -->
+        <footer class="absolute bottom-1 md:bottom-2 left-3 md:left-5 right-3 md:right-5 z-30 flex items-end pb-2 px-8">
+            <div class="w-full flex justify-between items-center opacity-40 text-[#f5f3ef]">
+                <div class="flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:nasa" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:spacex" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden sm:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:uber" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden sm:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:visa" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden md:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:grab" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden md:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:bose" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden lg:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:discover" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden lg:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:dji" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden xl:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:nikon" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden xl:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:craftsman" width="64" height="64"></iconify-icon>
+                </div>
+                <div class="hidden 2xl:flex items-center justify-center">
+                    <iconify-icon icon="simple-icons:sony" width="64" height="64"></iconify-icon>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // --- GSAP Masked Reveal Animation ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        const setupTextAnimation = () => {
+            const revealElements = document.querySelectorAll('.gs-reveal');
+            
+            revealElements.forEach(el => {
+                const text = el.innerText;
+                const words = text.split(' ');
+                el.innerHTML = '';
+                
+                words.forEach(word => {
+                    // Create wrapper and inner span for each word with Tailwind classes mapped from original CSS
+                    const wrap = document.createElement('span');
+                    wrap.className = 'overflow-hidden inline-block align-top';
+                    
+                    const inner = document.createElement('span');
+                    inner.className = 'word-inner inline-block';
+                    inner.style.transform = 'translateY(110%)';
+                    inner.innerHTML = word + '&nbsp;';
+                    
+                    wrap.appendChild(inner);
+                    el.appendChild(wrap);
+                });
+
+                gsap.to(el.querySelectorAll('.word-inner'), {
+                    y: '0%',
+                    duration: 1.2,
+                    stagger: 0.04,
+                    ease: 'power4.out',
+                    delay: 0.2
+                });
+            });
+        };
+
+        // --- Three.js WebGL Background ---
+        const initWebGL = () => {
+            const canvas = document.getElementById('bg-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+            
+            const geometry = new THREE.PlaneGeometry(2, 2);
+            
+            // Custom fragment shader to create the grainy stepped gradient
+            const fragmentShader = `
+                uniform vec2 u_resolution;
+                uniform float u_time;
+
+                // Random noise function
+                float random(vec2 st) {
+                    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+                }
+
+                void main() {
+                    vec2 st = gl_FragCoord.xy / u_resolution.xy;
+                    float y = st.y;
+
+                    // 11 columns to match layout
+                    float numBars = 11.0;
+                    float barIndex = floor(st.x * numBars);
+                    float t = barIndex / (numBars - 1.0);
+
+                    // Calculate height of each step, adding subtle animation
+                    float anim = sin(u_time * 0.5 + t * 3.0) * 0.02;
+                    float targetHeight = 0.08 + pow(t, 1.3) * 0.55 + anim;
+
+                    // Base background color (Off-white)
+                    vec3 bgColor = vec3(245.0/255.0, 243.0/255.0, 239.0/255.0);
+
+                    if (y > targetHeight) {
+                        gl_FragColor = vec4(bgColor, 1.0);
+                        return;
+                    }
+
+                    // Gradient color stops matching reference
+                    vec3 colDark = vec3(0.08, 0.04, 0.05);
+                    vec3 colBlue = vec3(0.23, 0.51, 0.96);
+                    vec3 colPink = vec3(0.93, 0.28, 0.60);
+                    vec3 colSand = vec3(0.89, 0.80, 0.64);
+
+                    // Map global Y position to gradient
+                    float yNorm = y / 0.65;
+                    
+                    vec3 color = mix(colDark, colBlue, smoothstep(0.0, 0.3, yNorm));
+                    color = mix(color, colPink, smoothstep(0.3, 0.6, yNorm));
+                    color = mix(color, colSand, smoothstep(0.6, 1.0, yNorm));
+
+                    // Add intense film grain effect
+                    float noise = random(st * u_time) * 0.15;
+                    color += noise;
+
+                    gl_FragColor = vec4(color, 1.0);
+                }
+            `;
+
+            const uniforms = {
+                u_resolution: { value: new THREE.Vector2() },
+                u_time: { value: 0.0 }
+            };
+
+            const material = new THREE.ShaderMaterial({
+                vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
+                fragmentShader: fragmentShader,
+                uniforms: uniforms
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+
+            const resize = () => {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                renderer.setSize(width, height);
+                uniforms.u_resolution.value.set(width, height);
+            };
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            const animate = (time) => {
+                uniforms.u_time.value = time * 0.001;
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            };
+
+            requestAnimationFrame(animate);
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTextAnimation();
+            initWebGL();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#0a0a0a] text-neutral-300 font-sans antialiased selection:bg-lime-500/30 selection:text-lime-200">
+
+    <!-- Radial Background Glow -->
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+        <div class="h-[800px] w-[800px] rounded-full bg-lime-500/5 blur-[120px]" style="transform: translate3d(0,0,0);"></div>
+    </div>
+
+    <section class="relative min-h-screen flex items-center py-24 sm:py-32 overflow-hidden">
+        
+        <!-- Container Lines with Mini Corner Squares -->
+        <div class="absolute inset-x-4 sm:inset-x-8 md:inset-x-12 max-w-6xl mx-auto inset-y-0 pointer-events-none">
+            <!-- Vertical Lines -->
+            <div class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+            
+            <!-- Corner Squares (Top Left, Top Right, Bottom Left, Bottom Right) -->
+            <div class="absolute -left-[3px] top-24 h-1.5 w-1.5 border border-white/20 bg-[#0a0a0a]"></div>
+            <div class="absolute -right-[3px] top-24 h-1.5 w-1.5 border border-white/20 bg-[#0a0a0a]"></div>
+            <div class="absolute -left-[3px] bottom-24 h-1.5 w-1.5 border border-white/20 bg-[#0a0a0a]"></div>
+            <div class="absolute -right-[3px] bottom-24 h-1.5 w-1.5 border border-white/20 bg-[#0a0a0a]"></div>
+        </div>
+
+        <div class="relative w-full max-w-5xl mx-auto px-6 lg:px-8 z-10">
+            
+            <!-- Header Text -->
+            <div class="text-center flex flex-col items-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-1.5 rounded-full bg-lime-400/10 px-3 py-1 text-xs text-lime-300 ring-1 ring-inset ring-lime-400/20 uppercase tracking-tight font-medium mb-6 backdrop-blur-sm">
+                    <iconify-icon icon="solar:link-minimalistic-linear" class="text-sm"></iconify-icon>
+                    Integrations
+                </div>
+
+                <!-- Masked Reveal Titles -->
+                <h2 class="gsap-reveal text-4xl sm:text-5xl md:text-6xl font-medium text-white tracking-tight leading-[1.1] max-w-3xl">
+                    Connect your entire tech stack
+                </h2>
+                
+                <p class="gsap-reveal mt-6 max-w-2xl text-sm sm:text-base text-neutral-400 leading-relaxed">
+                    One platform, infinite possibilities. Sync with all your favorite tools seamlessly and securely in real-time.
+                </p>
+            </div>
+
+            <!-- Visualization Area -->
+            <div class="relative mt-20 sm:mt-28 w-full max-w-4xl mx-auto aspect-[16/9] sm:aspect-[900/400]">
+                
+                <!-- Animated SVG Lines -->
+                <svg viewBox="0 0 900 360" class="absolute inset-0 w-full h-full pointer-events-none" fill="none" preserveAspectRatio="xMidYMin slice">
+                    <!-- Glow Filter -->
+                    <defs>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+                            <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+                        </filter>
+                    </defs>
+
+                    <!-- Background subtle dashed paths -->
+                    <path d="M150 30 C 150 120, 300 200, 450 300" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"></path>
+                    <path d="M270 30 C 270 130, 360 210, 450 300" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"></path>
+                    <path d="M390 30 C 390 80, 420 150, 450 300" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"></path>
+                    <path d="M510 30 C 510 80, 480 150, 450 300" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"></path>
+                    <path d="M630 30 C 630 130, 540 210, 450 300" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"></path>
+                    <path d="M750 30 C 750 120, 600 200, 450 300" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-dasharray="4 4" fill="none"></path>
+
+                    <!-- Animated Line 1 -->
+                    <path d="M450 300 C 450 200, 300 120, 150 30" stroke="#A3E635" stroke-width="1.5" stroke-linecap="round" fill="none" style="stroke-dasharray: 600; stroke-dashoffset: 600">
+                        <animate attributeName="stroke-dashoffset" values="600;0;600" dur="3s" begin="0s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
+                    </path>
+                    <!-- Animated Line 2 -->
+                    <path d="M450 300 C 450 210, 360 130, 270 30" stroke="#A3E635" stroke-width="1.5" stroke-linecap="round" fill="none" style="stroke-dasharray: 520; stroke-dashoffset: 520">
+                        <animate attributeName="stroke-dashoffset" values="520;0;520" dur="3s" begin="0.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
+                    </path>
+                    <!-- Animated Line 3 -->
+                    <path d="M450 300 C 450 150, 420 80, 390 30" stroke="#A3E635" stroke-width="1.5" stroke-linecap="round" fill="none" style="stroke-dasharray: 450; stroke-dashoffset: 450">
+                        <animate attributeName="stroke-dashoffset" values="450;0;450" dur="3s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
+                    </path>
+                    <!-- Animated Line 4 -->
+                    <path d="M450 300 C 450 150, 480 80, 510 30" stroke="#A3E635" stroke-width="1.5" stroke-linecap="round" fill="none" style="stroke-dasharray: 450; stroke-dashoffset: 450">
+                        <animate attributeName="stroke-dashoffset" values="450;0;450" dur="3s" begin="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
+                    </path>
+                    <!-- Animated Line 5 -->
+                    <path d="M450 300 C 450 210, 540 130, 630 30" stroke="#A3E635" stroke-width="1.5" stroke-linecap="round" fill="none" style="stroke-dasharray: 520; stroke-dashoffset: 520">
+                        <animate attributeName="stroke-dashoffset" values="520;0;520" dur="3s" begin="0.8s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
+                    </path>
+                    <!-- Animated Line 6 -->
+                    <path d="M450 300 C 450 200, 600 120, 750 30" stroke="#A3E635" stroke-width="1.5" stroke-linecap="round" fill="none" style="stroke-dasharray: 600; stroke-dashoffset: 600">
+                        <animate attributeName="stroke-dashoffset" values="600;0;600" dur="3s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"></animate>
+                    </path>
+
+                    <!-- Glowing Dots -->
+                    <circle cx="150" cy="30" r="3" fill="#A3E635" filter="url(#glow)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"></animate></circle>
+                    <circle cx="270" cy="30" r="3" fill="#A3E635" filter="url(#glow)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.2s" repeatCount="indefinite"></animate></circle>
+                    <circle cx="390" cy="30" r="3" fill="#A3E635" filter="url(#glow)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.4s" repeatCount="indefinite"></animate></circle>
+                    <circle cx="510" cy="30" r="3" fill="#A3E635" filter="url(#glow)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.6s" repeatCount="indefinite"></animate></circle>
+                    <circle cx="630" cy="30" r="3" fill="#A3E635" filter="url(#glow)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="0.8s" repeatCount="indefinite"></animate></circle>
+                    <circle cx="750" cy="30" r="3" fill="#A3E635" filter="url(#glow)"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" begin="1s" repeatCount="indefinite"></animate></circle>
+                </svg>
+
+                <!-- Top Row Nodes (Absolute positioning to match SVG viewbox coordinates 150, 270, 390, 510, 630, 750 over 900) -->
+                <!-- 16.6%, 30.0%, 43.3%, 56.6%, 70.0%, 83.3% -->
+                
+                <!-- Border Gradient Wrap 1 -->
+                <div class="absolute top-[30px] left-[16.6%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-gradient-to-b from-white/20 to-white/0 p-[1px] shadow-2xl z-10 transition-transform duration-500 hover:scale-110 hidden sm:block">
+                    <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#0a0a0a]">
+                        <iconify-icon icon="solar:code-square-linear" class="text-xl text-white"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Border Gradient Wrap 2 -->
+                <div class="absolute top-[30px] left-[30.0%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-gradient-to-b from-white/20 to-white/0 p-[1px] shadow-2xl z-10 transition-transform duration-500 hover:scale-110 hidden sm:block">
+                    <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#0a0a0a]">
+                        <iconify-icon icon="solar:hashtag-square-linear" class="text-xl text-white"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Border Gradient Wrap 3 -->
+                <div class="absolute top-[30px] left-[43.3%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-gradient-to-b from-white/20 to-white/0 p-[1px] shadow-2xl z-10 transition-transform duration-500 hover:scale-110 hidden sm:block">
+                    <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#0a0a0a]">
+                        <iconify-icon icon="solar:login-linear" class="text-xl text-white"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Border Gradient Wrap 4 -->
+                <div class="absolute top-[30px] left-[56.6%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-gradient-to-b from-white/20 to-white/0 p-[1px] shadow-2xl z-10 transition-transform duration-500 hover:scale-110 hidden sm:block">
+                    <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#0a0a0a]">
+                        <iconify-icon icon="solar:pen-new-square-linear" class="text-xl text-white"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Border Gradient Wrap 5 -->
+                <div class="absolute top-[30px] left-[70.0%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-gradient-to-b from-white/20 to-white/0 p-[1px] shadow-2xl z-10 transition-transform duration-500 hover:scale-110 hidden sm:block">
+                    <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#0a0a0a]">
+                        <iconify-icon icon="solar:server-square-linear" class="text-xl text-white"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Border Gradient Wrap 6 -->
+                <div class="absolute top-[30px] left-[83.3%] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-gradient-to-b from-white/20 to-white/0 p-[1px] shadow-2xl z-10 transition-transform duration-500 hover:scale-110 hidden sm:block">
+                    <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-[#0a0a0a]">
+                        <iconify-icon icon="solar:cloud-linear" class="text-xl text-white"></iconify-icon>
+                    </div>
+                </div>
+
+                <!-- Mobile fallback icons row -->
+                <div class="absolute top-0 left-0 w-full flex justify-between px-4 sm:hidden">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10"><iconify-icon icon="solar:code-square-linear" class="text-lg text-white"></iconify-icon></div>
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10"><iconify-icon icon="solar:kanban-linear" class="text-lg text-white"></iconify-icon></div>
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10"><iconify-icon icon="solar:cloud-linear" class="text-lg text-white"></iconify-icon></div>
+                </div>
+
+                <!-- Center Core Node (Bottom) -->
+                <!-- 50% left, maps to 300px Y on SVG aspect ratio. We use percentage based on 300/360 = 83.3% from top -->
+                <div class="absolute top-[83.3%] sm:top-[83.3%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="rounded-2xl bg-gradient-to-b from-lime-400/60 to-lime-400/0 p-[1px]" style="box-shadow: 0 0 40px -10px rgba(163,230,53,0.5), 0 0 80px -20px rgba(163,230,53,0.2);">
+                        <div class="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-[#0a0a0a] backdrop-blur-md">
+                            <iconify-icon icon="solar:bolt-linear" class="text-3xl text-lime-400"></iconify-icon>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Features Row -->
+            <div class="mt-16 sm:mt-24 pt-8">
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm text-neutral-400 font-medium tracking-wide">
+                    
+                    <div class="flex items-center gap-2.5 transition-colors hover:text-white">
+                        <iconify-icon icon="solar:share-linear" class="text-base text-lime-400"></iconify-icon>
+                        Instant sync
+                    </div>
+                    
+                    <div class="hidden sm:block w-8 md:w-16 h-px border-t border-dashed border-neutral-800"></div>
+                    
+                    <div class="flex items-center gap-2.5 transition-colors hover:text-white">
+                        <iconify-icon icon="solar:shield-check-linear" class="text-base text-lime-400"></iconify-icon>
+                        Enterprise security
+                    </div>
+                    
+                    <div class="hidden sm:block w-8 md:w-16 h-px border-t border-dashed border-neutral-800"></div>
+                    
+                    <div class="flex items-center gap-2.5 transition-colors hover:text-white">
+                        <iconify-icon icon="solar:stopwatch-linear" class="text-base text-lime-400"></iconify-icon>
+                        Real-time updates
+                    </div>
+                    
+                    <div class="hidden sm:block w-8 md:w-16 h-px border-t border-dashed border-neutral-800"></div>
+                    
+                    <div class="flex items-center gap-2.5 transition-colors hover:text-white">
+                        <iconify-icon icon="solar:mouse-minimalistic-linear" class="text-base text-lime-400"></iconify-icon>
+                        One-click setup
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GSAP Masked Reveal Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Text Splitter Utility for Masked Reveal
+            const splitTextToSpans = (selector) => {
+                document.querySelectorAll(selector).forEach(el => {
+                    const text = el.innerText;
+                    const words = text.split(' ');
+                    el.innerHTML = '';
+                    
+                    words.forEach(word => {
+                        const wrapperSpan = document.createElement('span');
+                        wrapperSpan.className = 'inline-flex overflow-hidden relative mr-[0.25em] align-top';
+                        
+                        const innerSpan = document.createElement('span');
+                        innerSpan.className = 'translate-y-[110%] inline-block pb-1'; // pb-1 prevents clipping of descenders
+                        innerSpan.innerText = word;
+                        
+                        wrapperSpan.appendChild(innerSpan);
+                        el.appendChild(wrapperSpan);
+                    });
+                });
+            };
+
+            // Apply splitting
+            splitTextToSpans('.gsap-reveal');
+
+            // Animate words on scroll
+            document.querySelectorAll('.gsap-reveal').forEach(container => {
+                const words = container.querySelectorAll('span > span');
+                
+                gsap.to(words, {
+                    y: '0%',
+                    duration: 1,
+                    stagger: 0.05,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: container,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+        });
+    </script>
+
+</body></html>

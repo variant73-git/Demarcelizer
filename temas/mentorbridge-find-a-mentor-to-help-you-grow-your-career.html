@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MentorBridge — Find a mentor to help you grow your career</title>
+  <meta name="description" content="MentorBridge connects students and junior professionals in Central Asia with trusted mentors in IT, design, marketing, business, and English." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+</head>
+<body class="bg-[#f5efe6] text-[#1f1b16] antialiased selection:bg-[#d7c2ab] selection:text-[#1f1b16]" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; scroll-behavior: smooth; background: radial-gradient(circle at top, rgba(237,228,214,0.9) 0%, rgba(245,239,230,1) 42%, rgba(241,234,223,1) 100%);">
+  <canvas id="bg-canvas" class="fixed top-0 left-0 w-screen h-screen -z-10 pointer-events-none opacity-40"></canvas>
+
+  <div class="fixed inset-y-0 left-1/2 hidden w-full max-w-7xl -translate-x-1/2 lg:block pointer-events-none">
+    <div class="absolute inset-y-0 left-0 w-px bg-[#d8cebf]"></div>
+    <div class="absolute inset-y-0 right-0 w-px bg-[#d8cebf]"></div>
+    <div class="absolute left-0 top-24 h-2 w-2 -translate-x-1/2 rounded-sm border border-[#c9bcaa] bg-[#f8f3eb]"></div>
+    <div class="absolute right-0 top-24 h-2 w-2 translate-x-1/2 rounded-sm border border-[#c9bcaa] bg-[#f8f3eb]"></div>
+    <div class="absolute left-0 bottom-24 h-2 w-2 -translate-x-1/2 rounded-sm border border-[#c9bcaa] bg-[#f8f3eb]"></div>
+    <div class="absolute right-0 bottom-24 h-2 w-2 translate-x-1/2 rounded-sm border border-[#c9bcaa] bg-[#f8f3eb]"></div>
+  </div>
+
+  <header class="sticky top-0 z-40 border-b border-[#ddd2c2]/80 backdrop-blur-xl" style="background: rgba(245,239,230,0.78);">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#top" class="flex items-center gap-3" aria-label="MentorBridge home">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#d7cbbb]" style="background: linear-gradient(180deg, #f9f4ec 0%, #efe5d7 100%);">
+          <span class="relative h-5 w-5">
+            <span class="absolute left-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-[#2f3a2f]"></span>
+            <span class="absolute right-0 top-0 h-2.5 w-2.5 rounded-full bg-[#8a5a37]"></span>
+            <span class="absolute left-1.5 top-2 h-2 w-2 rounded-full bg-[#c59a71]"></span>
+            <span class="absolute left-1.5 top-[0.45rem] h-px w-2.5 rotate-[24deg] bg-[#6e7a67]"></span>
+            <span class="absolute left-1.5 top-[0.55rem] h-px w-2.5 rotate-[-22deg] bg-[#6e7a67]"></span>
+          </span>
+        </span>
+        <div>
+          <div class="text-sm font-medium tracking-tight text-[#1f1b16]">MentorBridge</div>
+          <div class="text-xs text-[#7e7365]">Central Asia mentorship marketplace</div>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-8 md:flex">
+        <a href="#how" class="text-sm font-normal text-[#5c5145] transition hover:text-[#1f1b16]">How it works</a>
+        <a href="#why" class="text-sm font-normal text-[#5c5145] transition hover:text-[#1f1b16]">Why us</a>
+        <a href="#categories" class="text-sm font-normal text-[#5c5145] transition hover:text-[#1f1b16]">Categories</a>
+        <a href="#testimonials" class="text-sm font-normal text-[#5c5145] transition hover:text-[#1f1b16]">Stories</a>
+        <a href="#faq" class="text-sm font-normal text-[#5c5145] transition hover:text-[#1f1b16]">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#mentor-cta" class="hidden rounded-full border border-[#d7cbbb] px-4 py-2 text-sm font-medium text-[#1f1b16] md:inline-flex" style="background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(244,236,225,0.8) 100%);">Become a mentor</a>
+        <a href="#hero-cta" class="inline-flex rounded-full px-4 py-2 text-sm font-medium text-[#f8f4ed]" style="background: linear-gradient(135deg, #2e3a2f 0%, #5c3822 100%);">Find a mentor</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative overflow-hidden">
+      <div class="mx-auto max-w-7xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20 lg:px-8 lg:pt-24 lg:pb-20">
+        <div class="rounded-[2rem] border border-[#d9cfbf] p-4 sm:p-6 lg:p-8" style="background: linear-gradient(180deg, rgba(250,246,239,0.92) 0%, rgba(245,239,230,0.86) 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.75), 0 1px 0 rgba(114,93,72,0.04);">
+          <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+            <div class="max-w-2xl">
+              <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#dbcfbf] px-3 py-1.5 text-xs font-medium text-[#665a4d]" style="background: rgba(255,255,255,0.48);">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#7a916d]"></span>
+                Built for real people across Central Asia
+              </div>
+
+              <h1 class="reveal text-4xl font-semibold leading-tight tracking-tight text-[#1b1713] sm:text-5xl lg:text-6xl">
+                Find a mentor to help you grow your career
+              </h1>
+
+              <p class="mt-5 max-w-xl text-base font-normal leading-7 text-[#5c5145] sm:text-lg">
+                Hands-on learning from IT, design, business, and marketing professionals in Central Asia.
+              </p>
+
+              <div id="hero-cta" class="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href="#categories" class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[#f8f4ed]" style="background: linear-gradient(135deg, #2e3a2f 0%, #5c3822 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);">
+                  <iconify-icon icon="solar:users-group-rounded-linear" width="18" height="18" style="color:#f8f4ed;" data-inline="false"></iconify-icon>
+                  Find a mentor
+                </a>
+                <a href="#mentor-cta" class="inline-flex items-center justify-center gap-2 rounded-full border border-[#d7cbbb] px-5 py-3 text-sm font-medium text-[#1f1b16]" style="background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(244,236,225,0.94) 100%);">
+                  <iconify-icon icon="solar:hand-money-linear" width="18" height="18" style="color:#1f1b16;" data-inline="false"></iconify-icon>
+                  Become a mentor
+                </a>
+              </div>
+
+              <div class="mt-8 grid max-w-lg grid-cols-3 gap-3">
+                <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.46);">
+                  <div class="text-xl font-semibold tracking-tight text-[#1f1b16]">200+</div>
+                  <div class="mt-1 text-xs text-[#6b6054]">trusted mentors</div>
+                </div>
+                <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.46);">
+                  <div class="text-xl font-semibold tracking-tight text-[#1f1b16]">1500+</div>
+                  <div class="mt-1 text-xs text-[#6b6054]">successful sessions</div>
+                </div>
+                <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.46);">
+                  <div class="text-xl font-semibold tracking-tight text-[#1f1b16]">6</div>
+                  <div class="mt-1 text-xs text-[#6b6054]">career categories</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="absolute -left-4 -top-4 h-24 w-24 rounded-full blur-3xl" style="background: rgba(196,161,123,0.18);"></div>
+              <div class="absolute -bottom-4 -right-4 h-24 w-24 rounded-full blur-3xl" style="background: rgba(69,89,70,0.16);"></div>
+
+              <div class="relative rounded-[2rem] border border-[#d6cab9] p-3" style="background: linear-gradient(180deg, rgba(255,255,255,0.58) 0%, rgba(241,233,221,0.9) 100%);">
+                <div class="grid gap-3 lg:grid-cols-[1.2fr_0.8fr]">
+                  <div class="overflow-hidden rounded-[1.5rem] border border-[#d6cab9]">
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/3186f9ea-5f5a-49f7-8fcf-568ad52f515e_3840w.webp" alt="Mentor and mentee in conversation" class="h-full w-full object-cover" style="aspect-ratio: 4 / 5;" />
+                  </div>
+
+                  <div class="flex flex-col gap-3">
+                    <div class="rounded-[1.25rem] border border-[#d9cebe] p-4" style="background: rgba(249,244,236,0.92);">
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <div class="text-xs text-[#7b6f61]">Next step</div>
+                          <div class="mt-1 text-sm font-medium text-[#1f1b16]">Book your first 1:1 session</div>
+                        </div>
+                        <span class="rounded-full px-2.5 py-1 text-xs font-medium text-[#2e3a2f]" style="background: rgba(109,130,108,0.12);">Live</span>
+                      </div>
+                      <div class="mt-4 h-2 w-full overflow-hidden rounded-full bg-[#ece2d3]">
+                        <div class="h-full rounded-full" style="width: 72%; background: linear-gradient(90deg, #8a5a37 0%, #2e3a2f 100%);"></div>
+                      </div>
+                    </div>
+
+                    <div class="rounded-[1.25rem] border border-[#d9cebe] p-4" style="background: rgba(252,248,241,0.94);">
+                      <div class="flex items-center gap-3">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/eca707cc-a5b7-439a-b4fd-247f6106c2e1_1600w.jpg" alt="Mentor avatar" class="h-12 w-12 rounded-2xl object-cover" />
+                        <div>
+                          <div class="text-sm font-medium text-[#1f1b16]">Aida S.</div>
+                          <div class="text-xs text-[#6f6356]">Product Designer · 7 years</div>
+                        </div>
+                      </div>
+                      <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-[#62574b]">
+                        <div class="rounded-xl border border-[#e1d7c8] p-3">RU / EN / KZ</div>
+                        <div class="rounded-xl border border-[#e1d7c8] p-3">$18 / session</div>
+                      </div>
+                    </div>
+
+                    <div class="rounded-[1.25rem] border border-[#3f342b]/10 p-4 text-[#f8f4ed]" style="background: linear-gradient(135deg, #2e3a2f 0%, #5c3822 100%);">
+                      <div class="text-xs text-[#e8dacb]">Warm, practical guidance</div>
+                      <div class="mt-2 text-sm font-medium">Learn from people who understand your local context, language, and career path.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pointer-events-none absolute inset-0 rounded-[2rem]" style="padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.72), rgba(173,150,127,0.34), rgba(255,255,255,0.52)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <div class="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">How it works</div>
+          <h2 class="reveal text-3xl font-semibold tracking-tight text-[#1d1914] sm:text-4xl">Simple steps from curiosity to confidence</h2>
+          <p class="mt-4 text-sm leading-7 text-[#61564a] sm:text-base">A calm, transparent path that makes mentorship feel easy from the very first click.</p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-3">
+          <article class="rounded-[1.75rem] border border-[#d9cfbf] p-6" style="background: linear-gradient(180deg, rgba(251,247,240,0.9) 0%, rgba(245,239,230,0.88) 100%);">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.64);">
+              <iconify-icon icon="solar:widget-add-linear" width="22" height="22" style="color:#5c3822;" data-inline="false"></iconify-icon>
+            </div>
+            <div class="mt-5 flex items-center gap-2">
+              <span class="rounded-full border border-[#d9cfbf] px-2.5 py-1 text-xs text-[#6b6054]">Step 1</span>
+            </div>
+            <h3 class="mt-4 text-lg font-medium tracking-tight text-[#1f1b16]">Choose a field</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Pick UX/UI, programming, marketing, business, English, or career growth based on what you want to improve right now.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d9cfbf] p-6" style="background: linear-gradient(180deg, rgba(251,247,240,0.9) 0%, rgba(245,239,230,0.88) 100%);">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.64);">
+              <iconify-icon icon="solar:tuning-2-linear" width="22" height="22" style="color:#2e3a2f;" data-inline="false"></iconify-icon>
+            </div>
+            <div class="mt-5 flex items-center gap-2">
+              <span class="rounded-full border border-[#d9cfbf] px-2.5 py-1 text-xs text-[#6b6054]">Step 2</span>
+            </div>
+            <h3 class="mt-4 text-lg font-medium tracking-tight text-[#1f1b16]">Find a mentor with filters</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Compare mentors by experience, language, and price so the choice feels clear, human, and relevant to your goals.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d9cfbf] p-6" style="background: linear-gradient(180deg, rgba(251,247,240,0.9) 0%, rgba(245,239,230,0.88) 100%);">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.64);">
+              <iconify-icon icon="solar:chat-round-line-linear" width="22" height="22" style="color:#5c3822;" data-inline="false"></iconify-icon>
+            </div>
+            <div class="mt-5 flex items-center gap-2">
+              <span class="rounded-full border border-[#d9cfbf] px-2.5 py-1 text-xs text-[#6b6054]">Step 3</span>
+            </div>
+            <h3 class="mt-4 text-lg font-medium tracking-tight text-[#1f1b16]">Start learning in 1:1 sessions</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Get direct, practical help online—whether you need one consultation or ongoing mentorship across several weeks.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-4 lg:grid-cols-[1fr_1.15fr]">
+          <div class="rounded-[2rem] border border-[#d8cebe] p-6 sm:p-8" style="background: linear-gradient(180deg, rgba(250,246,239,0.94) 0%, rgba(244,237,226,0.92) 100%);">
+            <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Why MentorBridge</div>
+            <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-[#1d1914] sm:text-4xl">A mentorship experience that feels local, trusted, and easy to start</h2>
+            <p class="mt-4 text-sm leading-7 text-[#61564a] sm:text-base">
+              We believe real growth happens through personal connection. That is why MentorBridge focuses on trusted professionals, clear expectations, and guidance that fits life in Central Asia.
+            </p>
+
+            <div class="mt-8 grid grid-cols-2 gap-3">
+              <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.4);">
+                <div class="text-2xl font-semibold tracking-tight text-[#1f1b16]">200+</div>
+                <div class="mt-1 text-xs text-[#6b6054]">mentors across key industries</div>
+              </div>
+              <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.4);">
+                <div class="text-2xl font-semibold tracking-tight text-[#1f1b16]">1500+</div>
+                <div class="mt-1 text-xs text-[#6b6054]">sessions that moved careers forward</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(252,248,241,0.86);">
+              <iconify-icon icon="solar:shield-check-linear" width="22" height="22" style="color:#2e3a2f;" data-inline="false"></iconify-icon>
+              <h3 class="mt-4 text-lg font-medium tracking-tight text-[#1f1b16]">Vetted mentors</h3>
+              <p class="mt-2 text-sm leading-7 text-[#62574b]">Real-world professionals with practical experience, not only theory.</p>
+            </div>
+            <div class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(252,248,241,0.86);">
+              <iconify-icon icon="solar:global-linear" width="22" height="22" style="color:#5c3822;" data-inline="false"></iconify-icon>
+              <h3 class="mt-4 text-lg font-medium tracking-tight text-[#1f1b16]">Locally relevant</h3>
+              <p class="mt-2 text-sm leading-7 text-[#62574b]">Professionals from Central Asia who understand local culture, language, and opportunities.</p>
+            </div>
+            <div class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(252,248,241,0.86);">
+              <iconify-icon icon="solar:clock-circle-linear" width="22" height="22" style="color:#2e3a2f;" data-inline="false"></iconify-icon>
+              <h3 class="mt-4 text-lg font-medium tracking-tight text-[#1f1b16]">Flexible formats</h3>
+              <p class="mt-2 text-sm leading-7 text-[#62574b]">Book a single consultation or build a longer mentorship relationship.</p>
+            </div>
+            <div class="rounded-[1.75rem] border border-[#d8cebe] p-6 text-[#f8f4ed]" style="background: linear-gradient(135deg, #2e3a2f 0%, #5c3822 100%);">
+              <iconify-icon icon="solar:heart-angle-linear" width="22" height="22" style="color:#f3e7d9;" data-inline="false"></iconify-icon>
+              <h3 class="mt-4 text-lg font-medium tracking-tight">Human by design</h3>
+              <p class="mt-2 text-sm leading-7 text-[#eadfd0]">Warm, supportive guidance with transparent pricing and a sense of community.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories" class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div class="max-w-2xl">
+            <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Categories</div>
+            <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-[#1d1914] sm:text-4xl">Explore the paths people are growing in today</h2>
+          </div>
+          <p class="max-w-lg text-sm leading-7 text-[#61564a]">Whether you are preparing for your first job, improving your portfolio, or switching fields, you can start with the right guide.</p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(251,247,240,0.88);">
+            <div class="flex items-center justify-between">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.6);">
+                <iconify-icon icon="solar:palette-round-linear" width="22" height="22" style="color:#5c3822;" data-inline="false"></iconify-icon>
+              </div>
+              <span class="text-xs text-[#7f7366]">Design</span>
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-[#1f1b16]">UX/UI Design</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Portfolio feedback, product thinking, wireframes, interfaces, and case study support.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(251,247,240,0.88);">
+            <div class="flex items-center justify-between">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.6);">
+                <iconify-icon icon="solar:code-linear" width="22" height="22" style="color:#2e3a2f;" data-inline="false"></iconify-icon>
+              </div>
+              <span class="text-xs text-[#7f7366]">Tech</span>
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-[#1f1b16]">Programming</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Frontend, backend, interview prep, code reviews, and practical project help.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(251,247,240,0.88);">
+            <div class="flex items-center justify-between">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.6);">
+                <iconify-icon icon="solar:chart-2-linear" width="22" height="22" style="color:#5c3822;" data-inline="false"></iconify-icon>
+              </div>
+              <span class="text-xs text-[#7f7366]">Growth</span>
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-[#1f1b16]">Marketing</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Digital strategy, content, brand building, analytics, and campaign planning.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(251,247,240,0.88);">
+            <div class="flex items-center justify-between">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.6);">
+                <iconify-icon icon="solar:case-round-linear" width="22" height="22" style="color:#2e3a2f;" data-inline="false"></iconify-icon>
+              </div>
+              <span class="text-xs text-[#7f7366]">Leadership</span>
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-[#1f1b16]">Business</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Startups, operations, product strategy, freelance growth, and business basics.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(251,247,240,0.88);">
+            <div class="flex items-center justify-between">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.6);">
+                <iconify-icon icon="solar:chat-square-like-linear" width="22" height="22" style="color:#5c3822;" data-inline="false"></iconify-icon>
+              </div>
+              <span class="text-xs text-[#7f7366]">Language</span>
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-[#1f1b16]">English & Communication</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">Speaking confidence, interview language, business writing, and daily communication.</p>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(251,247,240,0.88);">
+            <div class="flex items-center justify-between">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#d7cbbb]" style="background: rgba(255,255,255,0.6);">
+                <iconify-icon icon="solar:arrow-right-up-linear" width="22" height="22" style="color:#2e3a2f;" data-inline="false"></iconify-icon>
+              </div>
+              <span class="text-xs text-[#7f7366]">Career</span>
+            </div>
+            <h3 class="mt-5 text-lg font-medium tracking-tight text-[#1f1b16]">Career Growth</h3>
+            <p class="mt-2 text-sm leading-7 text-[#62574b]">CV review, job search strategy, confidence building, and first-role breakthrough support.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Sample mentor profile</div>
+            <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-[#1d1914] sm:text-4xl">See how simple booking a mentor can feel</h2>
+            <p class="mt-4 max-w-xl text-sm leading-7 text-[#61564a] sm:text-base">
+              A clear profile, honest pricing, and practical expertise—so mentees know exactly who they are learning from.
+            </p>
+          </div>
+
+          <div class="rounded-[2rem] border border-[#d8cebe] p-4 sm:p-6" style="background: linear-gradient(180deg, rgba(250,246,239,0.95) 0%, rgba(245,239,230,0.9) 100%);">
+            <div class="grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
+              <div class="overflow-hidden rounded-[1.5rem] border border-[#d8cebe]">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0d868fef-f560-45ca-ab35-5dad4fc29059_3840w.webp" alt="Mentor profile" class="h-full w-full object-cover" style="aspect-ratio: 4 / 5;" />
+              </div>
+
+              <div class="flex flex-col">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 class="text-xl font-medium tracking-tight text-[#1f1b16]">Aizada Nur</h3>
+                    <p class="mt-1 text-sm text-[#675c50]">Senior Product Designer at a regional tech company</p>
+                  </div>
+                  <span class="rounded-full border border-[#ddd2c2] px-3 py-1 text-xs text-[#6b6054]" style="background: rgba(255,255,255,0.52);">Top rated</span>
+                </div>
+
+                <div class="mt-5 flex flex-wrap gap-2">
+                  <span class="rounded-full border border-[#ddd2c2] px-3 py-1.5 text-xs text-[#5e5347]">5+ years experience</span>
+                  <span class="rounded-full border border-[#ddd2c2] px-3 py-1.5 text-xs text-[#5e5347]">UX/UI</span>
+                  <span class="rounded-full border border-[#ddd2c2] px-3 py-1.5 text-xs text-[#5e5347]">RU / EN</span>
+                </div>
+
+                <div class="mt-5 grid grid-cols-2 gap-3">
+                  <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.46);">
+                    <div class="text-xs text-[#7b6f61]">Session price</div>
+                    <div class="mt-1 text-lg font-medium tracking-tight text-[#1f1b16]">$22</div>
+                  </div>
+                  <div class="rounded-2xl border border-[#ddd2c2] p-4" style="background: rgba(255,255,255,0.46);">
+                    <div class="text-xs text-[#7b6f61]">Rating</div>
+                    <div class="mt-1 flex items-center gap-1 text-lg font-medium tracking-tight text-[#1f1b16]">
+                      4.9
+                      <iconify-icon icon="solar:star-bold" width="16" height="16" style="color:#c68a55;" data-inline="false"></iconify-icon>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="mt-5 text-sm leading-7 text-[#61564a]">
+                  Helps junior designers build portfolios, prepare for interviews, and turn coursework into real case studies.
+                </p>
+
+                <div class="mt-6">
+                  <a href="#faq" class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-[#f8f4ed]" style="background: linear-gradient(135deg, #2e3a2f 0%, #5c3822 100%);">
+                    <iconify-icon icon="solar:calendar-linear" width="18" height="18" style="color:#f8f4ed;" data-inline="false"></iconify-icon>
+                    Book
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="pointer-events-none mt-4 rounded-[1.5rem] p-[1px]" style="background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(181,156,130,0.45), rgba(255,255,255,0.7));">
+              <div class="rounded-[1.45rem] px-4 py-3 text-xs text-[#6d6256]" style="background: rgba(248,242,233,0.92);">
+                Clear profile details help people book with confidence.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 max-w-2xl">
+          <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Testimonials</div>
+          <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-[#1d1914] sm:text-4xl">Small conversations, big turning points</h2>
+        </div>
+
+        <div class="grid gap-4 lg:grid-cols-3">
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(252,248,241,0.88);">
+            <p class="text-sm leading-7 text-[#50463c]">“After three sessions with my mentor, I got an offer as a junior UX designer. The feedback was practical, kind, and exactly what I needed.”</p>
+            <div class="mt-6 flex items-center gap-3">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/582afef4-b810-47b8-a047-8b3597c323e1_3840w.webp" alt="Mentee portrait" class="h-12 w-12 rounded-2xl object-cover" />
+              <div>
+                <div class="text-sm font-medium text-[#1f1b16]">Madina, 22</div>
+                <div class="text-xs text-[#726759]">Started a junior UX role</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6" style="background: rgba(252,248,241,0.88);">
+            <p class="text-sm leading-7 text-[#50463c]">“I was lost between courses and real work. My mentor helped me focus on marketing skills that employers actually ask for.”</p>
+            <div class="mt-6 flex items-center gap-3">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/65695f80-23f9-46ee-8487-cbb6c93cc48b_3840w.webp" alt="Mentee portrait" class="h-12 w-12 rounded-2xl object-cover" />
+              <div>
+                <div class="text-sm font-medium text-[#1f1b16]">Temirlan, 24</div>
+                <div class="text-xs text-[#726759]">Moved into digital marketing</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="rounded-[1.75rem] border border-[#d8cebe] p-6 text-[#f8f4ed]" style="background: linear-gradient(135deg, #2e3a2f 0%, #5c3822 100%);">
+            <p class="text-sm leading-7 text-[#efe3d6]">“As a mentor, I wanted a simple way to support young professionals from the region and also earn from my experience. This made it natural.”</p>
+            <div class="mt-6 flex items-center gap-3">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c92852bb-a510-405a-85ab-ffa0fde136a4_1600w.jpg" alt="Mentor portrait" class="h-12 w-12 rounded-2xl object-cover" />
+              <div>
+                <div class="text-sm font-medium">Azamat, 31</div>
+                <div class="text-xs text-[#dbcdbf]">Programming mentor</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mentor-cta" class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="rounded-[2rem] border border-[#d8cebe] p-6 sm:p-8 lg:p-10" style="background: linear-gradient(135deg, rgba(46,58,47,0.98) 0%, rgba(92,56,34,0.98) 100%);">
+          <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div class="max-w-2xl">
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-[#e7d9ca]">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#c7a27a]"></span>
+                For experienced specialists
+              </div>
+              <h2 class="reveal mt-4 text-3xl font-semibold tracking-tight text-[#fbf6f0] sm:text-4xl">Share your experience. Monetize your knowledge. Help develop the region.</h2>
+              <p class="mt-4 max-w-xl text-sm leading-7 text-[#eaded2] sm:text-base">
+                MentorBridge gives seasoned professionals a thoughtful way to support students and early-career talent while earning through consultations.
+              </p>
+            </div>
+            <div>
+              <a href="#footer" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6efe5] px-5 py-3 text-sm font-medium text-[#1f1b16]">
+                <iconify-icon icon="solar:user-plus-linear" width="18" height="18" style="color:#1f1b16;" data-inline="false"></iconify-icon>
+                Become a mentor
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-12 sm:py-16 lg:py-20">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="mb-10 text-center">
+          <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">FAQ</div>
+          <h2 class="reveal mt-3 text-3xl font-semibold tracking-tight text-[#1d1914] sm:text-4xl">Questions people usually ask before they start</h2>
+        </div>
+
+        <div class="space-y-3">
+          <details class="group rounded-[1.5rem] border border-[#d8cebe] p-5" style="background: rgba(251,247,240,0.86);">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-[#1f1b16]">
+              How do sessions work?
+              <span class="flex h-8 w-8 items-center justify-center rounded-full border border-[#ddd2c2] text-[#6f6458] transition group-open:rotate-45" style="background: rgba(255,255,255,0.56);">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-[#61564a]">You choose a mentor, book a time, and meet online for a 1:1 session focused on your goals, questions, or portfolio.</p>
+          </details>
+
+          <details class="group rounded-[1.5rem] border border-[#d8cebe] p-5" style="background: rgba(251,247,240,0.86);">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-[#1f1b16]">
+              How much does it cost?
+              <span class="flex h-8 w-8 items-center justify-center rounded-full border border-[#ddd2c2] text-[#6f6458] transition group-open:rotate-45" style="background: rgba(255,255,255,0.56);">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-[#61564a]">Prices vary by mentor, experience, and session format. You can compare profiles and choose an option that fits your budget.</p>
+          </details>
+
+          <details class="group rounded-[1.5rem] border border-[#d8cebe] p-5" style="background: rgba(251,247,240,0.86);">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-[#1f1b16]">
+              How do I choose a mentor?
+              <span class="flex h-8 w-8 items-center justify-center rounded-full border border-[#ddd2c2] text-[#6f6458] transition group-open:rotate-45" style="background: rgba(255,255,255,0.56);">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-[#61564a]">Use filters like field, language, experience, and price. Then review profiles, ratings, and focus areas to find the right match.</p>
+          </details>
+
+          <details class="group rounded-[1.5rem] border border-[#d8cebe] p-5" style="background: rgba(251,247,240,0.86);">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-[#1f1b16]">
+              Can I become a mentor without teaching experience?
+              <span class="flex h-8 w-8 items-center justify-center rounded-full border border-[#ddd2c2] text-[#6f6458] transition group-open:rotate-45" style="background: rgba(255,255,255,0.56);">+</span>
+            </summary>
+            <p class="mt-4 text-sm leading-7 text-[#61564a]">Yes. If you have strong practical experience and can guide others clearly and respectfully, you can apply to become a mentor.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="border-t border-[#ddd2c2] py-10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+        <div class="max-w-md">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#d7cbbb]" style="background: linear-gradient(180deg, #f9f4ec 0%, #efe5d7 100%);">
+              <span class="relative h-5 w-5">
+                <span class="absolute left-0 top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-[#2f3a2f]"></span>
+                <span class="absolute right-0 top-0 h-2.5 w-2.5 rounded-full bg-[#8a5a37]"></span>
+                <span class="absolute left-1.5 top-2 h-2 w-2 rounded-full bg-[#c59a71]"></span>
+                <span class="absolute left-1.5 top-[0.45rem] h-px w-2.5 rotate-[24deg] bg-[#6e7a67]"></span>
+                <span class="absolute left-1.5 top-[0.55rem] h-px w-2.5 rotate-[-22deg] bg-[#6e7a67]"></span>
+              </span>
+            </span>
+            <div>
+              <div class="text-sm font-medium text-[#1f1b16]">MentorBridge</div>
+              <div class="text-xs text-[#7e7365]">A bridge between experience and career growth</div>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-[#63584b]">
+            A human mentorship marketplace connecting mentors and mentees across Central Asia with warmth, trust, and transparency.
+          </p>
+        </div>
+
+        <div class="grid gap-8 sm:grid-cols-3">
+          <div>
+            <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Explore</div>
+            <div class="mt-4 space-y-3">
+              <a href="#how" class="block text-sm text-[#5d5246] hover:text-[#1f1b16]">How it works</a>
+              <a href="#categories" class="block text-sm text-[#5d5246] hover:text-[#1f1b16]">Categories</a>
+              <a href="#testimonials" class="block text-sm text-[#5d5246] hover:text-[#1f1b16]">Stories</a>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Contact</div>
+            <div class="mt-4 space-y-3 text-sm text-[#5d5246]">
+              <div>hello@mentorbridge.asia</div>
+              <div>+996 700 123 456</div>
+              <div>Central Asia</div>
+            </div>
+          </div>
+          <div>
+            <div class="text-xs font-medium uppercase tracking-[0.18em] text-[#847666]">Language</div>
+            <div class="mt-4 flex items-center gap-2">
+              <button type="button" class="rounded-full border border-[#d7cbbb] px-3 py-1.5 text-xs font-medium text-[#1f1b16]" style="background: rgba(255,255,255,0.6);">EN</button>
+              <button type="button" class="rounded-full border border-[#d7cbbb] px-3 py-1.5 text-xs text-[#6f6458]" style="background: rgba(245,239,230,0.72);">RU</button>
+            </div>
+            <div class="mt-5 flex items-center gap-3">
+              <a href="#" aria-label="Telegram" class="flex h-10 w-10 items-center justify-center rounded-full border border-[#d7cbbb]" style="background: rgba(255,255,255,0.58);">
+                <iconify-icon icon="solar:plain-2-linear" width="18" height="18" style="color:#1f1b16;" data-inline="false"></iconify-icon>
+              </a>
+              <a href="#" aria-label="Instagram" class="flex h-10 w-10 items-center justify-center rounded-full border border-[#d7cbbb]" style="background: rgba(255,255,255,0.58);">
+                <iconify-icon icon="solar:camera-linear" width="18" height="18" style="color:#1f1b16;" data-inline="false"></iconify-icon>
+              </a>
+              <a href="#" aria-label="LinkedIn" class="flex h-10 w-10 items-center justify-center rounded-full border border-[#d7cbbb]" style="background: rgba(255,255,255,0.58);">
+                <iconify-icon icon="solar:link-round-angle-linear" width="18" height="18" style="color:#1f1b16;" data-inline="false"></iconify-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 border-t border-[#ddd2c2] pt-6 text-xs text-[#7a6f62] sm:flex-row sm:items-center sm:justify-between">
+        <div>© 2026 MentorBridge. Built for meaningful career growth.</div>
+        <div class="flex flex-wrap gap-4">
+          <a href="#" class="hover:text-[#1f1b16]">Privacy</a>
+          <a href="#" class="hover:text-[#1f1b16]">Terms</a>
+          <a href="#" class="hover:text-[#1f1b16]">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach((el) => {
+        const text = el.textContent.trim().split(' ');
+        el.innerHTML = text.map((word) => {
+          return '<span style="display:inline-block; overflow:hidden; vertical-align:top; margin-right:0.28em;"><span class="reveal-word" style="display:inline-block; transform:translateY(115%); opacity:0;">' + word + '</span></span>';
+        }).join('');
+      });
+
+      gsap.registerPlugin(ScrollTrigger);
+      document.querySelectorAll('.reveal').forEach((el) => {
+        gsap.to(el.querySelectorAll('.reveal-word'), {
+          y: 0,
+          opacity: 1,
+          ease: 'power3.out',
+          duration: 0.9,
+          stagger: 0.045,
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 82%',
+            once: true
+          }
+        });
+      });
+    })();
+
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const gl = canvas.getContext('webgl', { alpha: true, antialias: true });
+      if (!gl) return;
+
+      const vertexSrc = `
+        attribute vec2 a_position;
+        void main() {
+          gl_Position = vec4(a_position, 0.0, 1.0);
+        }
+      `;
+
+      const fragmentSrc = `
+        precision highp float;
+        uniform float u_time;
+        uniform vec2 u_resolution;
+
+        float hash(vec2 p){
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+        }
+
+        float noise(vec2 p){
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+        }
+
+        mat2 rot(float a){
+          float s = sin(a), c = cos(a);
+          return mat2(c,-s,s,c);
+        }
+
+        float sdOctahedron(vec3 p, float s){
+          p = abs(p);
+          return (p.x + p.y + p.z - s) * 0.57735027;
+        }
+
+        float map(vec3 p){
+          vec3 q = p;
+          q.xy *= rot(0.35 + sin(u_time * 0.09) * 0.2);
+          q.xz *= rot(-0.2 + cos(u_time * 0.07) * 0.16);
+
+          float d1 = sdOctahedron(q - vec3(0.0, 0.1 * sin(u_time * 0.25), 3.6), 0.95);
+          float d2 = sdOctahedron((q - vec3(1.35, -0.25, 5.1)) * vec3(0.85, 1.25, 0.85), 0.82);
+          float d3 = sdOctahedron((q - vec3(-1.45, 0.35, 4.6)) * vec3(1.15, 0.8, 1.05), 0.76);
+
+          float drift = (noise(q.xy * 1.2 + u_time * 0.05) - 0.5) * 0.18;
+          float d = min(min(d1, d2), d3) + drift;
+          return d;
+        }
+
+        vec3 hueRotateSepia(vec3 c){
+          mat3 sepia = mat3(
+            0.393, 0.769, 0.189,
+            0.349, 0.686, 0.168,
+            0.272, 0.534, 0.131
+          );
+          vec3 s = c * sepia;
+          return mix(c, s, 0.34);
+        }
+
+        vec3 palette(float t){
+          vec3 brown = vec3(0.3608, 0.2196, 0.1333);
+          vec3 moss = vec3(0.1804, 0.2275, 0.1843);
+          vec3 warm = vec3(0.6902, 0.5647, 0.4392);
+          vec3 base = mix(moss, brown, t);
+          base = mix(base, warm, t * t * 0.32);
+          return hueRotateSepia(base);
+        }
+
+        void main(){
+          vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / u_resolution.y;
+
+          vec2 guv = gl_FragCoord.xy / u_resolution.xy;
+          float grain = noise(gl_FragCoord.xy * 0.85 + u_time * 0.35) * 0.06;
+          float field = noise(uv * 5.0 + vec2(0.0, u_time * 0.03));
+          float particles = smoothstep(0.82, 1.0, noise(uv * 60.0 + u_time * 0.02)) * 0.08;
+
+          vec3 ro = vec3(0.0, 0.0, -1.6);
+          vec3 rd = normalize(vec3(uv, 1.5));
+
+          float t = 0.0;
+          float hit = 0.0;
+          float glow = 0.0;
+
+          for(int i = 0; i < 72; i++){
+            vec3 p = ro + rd * t;
+            float d = map(p);
+            glow += 0.014 / (0.06 + abs(d));
+            if(d < 0.002){
+              hit = 1.0;
+              break;
+            }
+            t += d * 0.72;
+            if(t > 9.0) break;
+          }
+
+          float pulse = 0.5 + 0.5 * sin(u_time * 0.28);
+          float lum = smoothstep(0.0, 1.6, glow) * (0.65 + pulse * 0.18);
+
+          vec3 col = palette(clamp(lum, 0.0, 1.0));
+          col += vec3(field * 0.03 + particles + grain);
+          col *= 0.72;
+
+          float vignette = smoothstep(1.28, 0.12, length(uv));
+          col *= vignette;
+
+          float luma = dot(col, vec3(0.299, 0.587, 0.114));
+          col = mix(vec3(luma), col, 1.1);
+
+          col = tanh(col * 1.3);
+
+          float depthFade = smoothstep(9.0, 2.0, t);
+          float alpha = 0.22 + lum * 0.18 + depthFade * 0.04;
+
+          gl_FragColor = vec4(col, alpha);
+        }
+      `;
+
+      function compile(type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+      }
+
+      const vs = compile(gl.VERTEX_SHADER, vertexSrc);
+      const fs = compile(gl.FRAGMENT_SHADER, fragmentSrc);
+      const program = gl.createProgram();
+      gl.attachShader(program, vs);
+      gl.attachShader(program, fs);
+      gl.linkProgram(program);
+      gl.useProgram(program);
+
+      const buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array([
+          -1, -1,
+           1, -1,
+          -1,  1,
+          -1,  1,
+           1, -1,
+           1,  1
+        ]),
+        gl.STATIC_DRAW
+      );
+
+      const position = gl.getAttribLocation(program, 'a_position');
+      gl.enableVertexAttribArray(position);
+      gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+      const uTime = gl.getUniformLocation(program, 'u_time');
+      const uResolution = gl.getUniformLocation(program, 'u_resolution');
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(window.innerWidth * dpr);
+        canvas.height = Math.floor(window.innerHeight * dpr);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      function render(time) {
+        gl.uniform1f(uTime, time * 0.001);
+        gl.uniform2f(uResolution, canvas.width, canvas.height);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+    })();
+  </script>
+</body>
+</html>
