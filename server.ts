@@ -352,7 +352,82 @@ type TemplateMeta = {
   description: string;
   colors: Record<string, string>;
   fonts: { display?: string; body?: string; label?: string };
+  height?: number;
+  header?: {
+    badge?: string;
+    headline?: string;
+    subheadline?: string;
+    cta?: string;
+    secondary_cta?: string;
+    nav?: string[];
+  };
 };
+
+function extractHeaderContent(html: string) {
+  const stripTags = (s: string) => s
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&[a-z#0-9]+;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const limit = (s: string, n: number) => s.length > n ? s.slice(0, n).replace(/\s+\S*$/, '') + '…' : s;
+  // Drop scripts/styles to avoid extracting JS/CSS content
+  const clean = html
+    .replace(/<script\b[\s\S]*?<\/script>/gi, '')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, '')
+    .replace(/<noscript\b[\s\S]*?<\/noscript>/gi, '');
+
+  // h1
+  const h1 = clean.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
+  const headline = h1 ? limit(stripTags(h1[1]), 90) : '';
+
+  // first <p> after h1
+  let subheadline = '';
+  if (h1) {
+    const after = clean.slice((h1.index || 0) + h1[0].length);
+    const p = after.match(/<p\b[^>]*>([\s\S]*?)<\/p>/i);
+    if (p) subheadline = limit(stripTags(p[1]), 160);
+  }
+
+  // first prominent button
+  const btn = clean.match(/<button\b[^>]*>([\s\S]*?)<\/button>/i);
+  let cta = btn ? limit(stripTags(btn[1]), 32) : '';
+  // fallback: link with class containing "button"/"btn"/"cta"
+  if (!cta) {
+    const a = clean.match(/<a\b[^>]*class=["'][^"']*(?:button|\bbtn\b|cta)[^"']*["'][^>]*>([\s\S]*?)<\/a>/i);
+    if (a) cta = limit(stripTags(a[1]), 32);
+  }
+
+  // secondary cta = next button after primary
+  let secondary_cta = '';
+  if (btn) {
+    const after = clean.slice((btn.index || 0) + btn[0].length);
+    const btn2 = after.match(/<button\b[^>]*>([\s\S]*?)<\/button>/i);
+    if (btn2) secondary_cta = limit(stripTags(btn2[1]), 32);
+  }
+
+  // badge: small element near the hero with badge-like class
+  let badge = '';
+  const badgeMatch = clean.match(/<(?:span|div|a)\b[^>]*class=["'][^"']*(?:badge|pill|eyebrow|chip|tag)[^"']*["'][^>]*>([\s\S]*?)<\/(?:span|div|a)>/i);
+  if (badgeMatch) badge = limit(stripTags(badgeMatch[1]), 32);
+
+  // nav: take first few links inside <nav>
+  let nav: string[] = [];
+  const navMatch = clean.match(/<nav\b[\s\S]*?<\/nav>/i);
+  if (navMatch) {
+    const links = [...navMatch[0].matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/gi)];
+    nav = links
+      .map(l => stripTags(l[1]))
+      .filter(t => t.length > 0 && t.length < 28)
+      .slice(0, 4);
+  }
+
+  return { badge, headline, subheadline, cta, secondary_cta, nav };
+}
 
 function parseDesignMd(text: string): Omit<TemplateMeta, 'slug'> | null {
   const m = text.match(/^---\s*\n([\s\S]*?)\n---/);
@@ -421,6 +496,17 @@ async function loadTemplates(): Promise<TemplateMeta[]> {
   const files = await readdir(dir);
   const designs = files.filter(f => /-DESIGN\.md$/.test(f) && !/\(\d+\)/.test(f));
   const list: TemplateMeta[] = [];
+
+  // Merge cached heights from previous manifest if it exists
+  const heightCache = new Map<string, number>();
+  try {
+    const manifestRaw = await readFile(join(dir, 'manifest.json'), 'utf-8');
+    const cached = JSON.parse(manifestRaw);
+    if (Array.isArray(cached)) {
+      for (const t of cached) if (typeof t.height === 'number') heightCache.set(t.slug, t.height);
+    }
+  } catch { /* no manifest yet */ }
+
   for (const file of designs) {
     const slug = file.replace(/-DESIGN\.md$/, '');
     const htmlFile = `${slug}.html`;
@@ -429,12 +515,46 @@ async function loadTemplates(): Promise<TemplateMeta[]> {
       const md = await readFile(join(dir, file), 'utf-8');
       const parsed = parseDesignMd(md);
       if (!parsed) continue;
-      list.push({ slug, ...parsed });
+      const meta: TemplateMeta = { slug, ...parsed };
+      if (heightCache.has(slug)) meta.height = heightCache.get(slug);
+      try {
+        const html = await readFile(join(dir, htmlFile), 'utf-8');
+        meta.header = extractHeaderContent(html);
+      } catch {}
+      list.push(meta);
     } catch {}
   }
   list.sort((a, b) => (a.name || a.slug).localeCompare(b.name || b.slug));
   TEMPLATES_CACHE = list;
   return list;
+}
+
+async function measureTemplateHeights(templates: TemplateMeta[]): Promise<void> {
+  const need = templates.filter(t => typeof t.height !== 'number');
+  if (!need.length) return;
+  console.log(`Measuring rendered heights of ${need.length} template(s) at 1440×900…`);
+  const browser = await chromium.launch({ headless: true });
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  page.setDefaultTimeout(15_000);
+  const dir = join(ROOT, 'temas');
+  for (const t of need) {
+    try {
+      const html = await readFile(join(dir, `${t.slug}.html`), 'utf-8');
+      await page.setContent(html, { waitUntil: 'load', timeout: 15_000 }).catch(() => {});
+      await page.waitForTimeout(400);
+      const h = await page.evaluate(() => Math.max(
+        document.documentElement.scrollHeight,
+        document.body?.scrollHeight || 0
+      ));
+      t.height = h;
+    } catch (e) {
+      t.height = 0;
+    }
+  }
+  await page.close();
+  await ctx.close();
+  await browser.close();
 }
 
 const app = new Hono();
@@ -640,18 +760,21 @@ ${trim(refCss, 50_000)}${refShot ? '\n\nThe attached image is the rendered REFER
 
 const port = Number(process.env.PORT || 3000);
 
-// Pre-load templates + write static manifest.json (so the page can use templates even without the engine)
+// Pre-load templates + measure heights + write static manifest.json
 loadTemplates().then(async (t) => {
+  try { await measureTemplateHeights(t); }
+  catch (e) { console.warn('Height measurement failed:', e); }
   try {
     await writeFile(join(ROOT, 'temas', 'manifest.json'), JSON.stringify(t, null, 2));
   } catch (e) { console.warn('Could not write manifest.json:', e); }
+  const tall = t.filter(x => (x.height || 0) >= 1000).length;
   console.log(`
 ✦ Demarcelizer 2.0 · local engine
   → http://localhost:${port}
 
   GET  /api/health
-  GET  /api/templates       → ${t.length} template(s) loaded
-  GET  /temas/<filename>    (also: temas/manifest.json regenerated at startup)
+  GET  /api/templates       → ${t.length} loaded · ${tall} ≥ 1 viewport tall
+  GET  /temas/<filename>    (manifest.json regenerated at startup)
   POST /api/demarcelize     (SSE)
 `);
 }).catch(e => {

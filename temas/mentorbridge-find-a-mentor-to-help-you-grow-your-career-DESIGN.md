@@ -1,6 +1,6 @@
 ---
 version: "neuform"
-name: "MentorBridge — Find a mentor to help you grow your career"
+name: "Galleon"
 description: "MentorBridge connects students and junior professionals in Central Asia with trusted mentors in IT, design, marketing, business, and English."
 colors:
   primary: "#D8CEBE"

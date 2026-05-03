@@ -22,8 +22,15 @@
             --color-border: #E5E7EB;
         }
         html, body { font-family: 'Inter', system-ui, sans-serif; }
-        .font-mono { font-family: 'Inter', system-ui, sans-serif; letter-spacing: normal; font-variant-numeric: tabular-nums; }
+        .font-mono { font-family: 'Inter', system-ui, sans-serif !important; letter-spacing: normal; font-variant-numeric: tabular-nums; }
         .uppercase { text-transform: none !important; }
+        .tracking-widest { letter-spacing: 0.04em !important; }
+        .frozen-nav-inner {
+            background: rgba(228, 226, 221, 0.45);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            backdrop-filter: blur(28px) saturate(180%);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(255,255,255,0.15);
+        }
         body { background: var(--color-background); color: var(--color-text-primary); }
         .gs-word { display: inline-block; transform: translateY(110%); }
         .grain::before {
@@ -50,23 +57,115 @@
               radial-gradient(40% 40% at 50% 100%, rgba(44,29,17,0.1), transparent 60%);
         }
         .cta-shadow { box-shadow: 0 20px 40px -12px rgba(217,119,6,0.55), inset 0 1px 0 rgba(255,255,255,0.25); }
+        .demarcelize-btn {
+            position: absolute; left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 40;
+            width: 104px; height: 104px;
+            border-radius: 9999px; border: none;
+            background: linear-gradient(180deg, #F97316 0%, #D97706 100%);
+            box-shadow: 0 16px 40px -10px rgba(217,119,6,0.55), inset 0 1px 0 rgba(255,255,255,0.32), 0 0 0 6px rgba(228,226,221,1);
+            color: white;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, filter 0.3s ease;
+        }
+        .circular-text-svg {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            transform-origin: center center;
+        }
+        .circular-text-svg text {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            fill: white;
+        }
+        .demarcelize-btn[data-state="ready"]:hover .circular-text-svg {
+            animation: circOrbit 5s linear infinite;
+        }
+        .demarcelize-btn[data-state="loading"] .circular-text-svg {
+            animation: circOrbit 3.5s linear infinite;
+        }
+        @keyframes circOrbit { to { transform: rotate(360deg); } }
+        .demarcelize-icon-center {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none;
+            color: white;
+        }
+        .demarcelize-btn::before {
+            content: ""; position: absolute; inset: -10px;
+            border-radius: 9999px;
+            background: conic-gradient(from 0deg, rgba(249,115,22,0), rgba(249,115,22,0.6), rgba(217,119,6,0.7), rgba(249,115,22,0.6), rgba(249,115,22,0));
+            z-index: -1; opacity: 0;
+            transition: opacity 0.4s ease;
+            filter: blur(8px);
+        }
+        .demarcelize-btn[data-state="disabled"] {
+            background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+            box-shadow: 0 6px 18px -8px rgba(100,116,139,0.3), 0 0 0 6px rgba(228,226,221,1);
+            cursor: not-allowed; filter: saturate(0.4);
+        }
+        .demarcelize-btn[data-state="ready"]:hover {
+            transform: translate(-50%, -50%) scale(1.08) rotate(-3deg);
+            box-shadow: 0 22px 50px -10px rgba(217,119,6,0.7), inset 0 1px 0 rgba(255,255,255,0.4), 0 0 0 6px rgba(228,226,221,1);
+        }
+        .demarcelize-btn[data-state="ready"]:hover::before { opacity: 1; }
+        .demarcelize-btn[data-state="ready"]:active { transform: translate(-50%, -50%) scale(0.94); }
+        .demarcelize-btn[data-state="loading"] {
+            cursor: wait;
+            background: linear-gradient(180deg, #F97316 0%, #B45309 100%);
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+        .demarcelize-btn[data-state="loading"]::before { opacity: 1; animation: btnSpin 4s linear infinite; }
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 16px 40px -10px rgba(217,119,6,0.55), 0 0 0 6px rgba(228,226,221,1), 0 0 0 0 rgba(217,119,6,0.5); }
+            50% { box-shadow: 0 20px 50px -8px rgba(217,119,6,0.75), 0 0 0 6px rgba(228,226,221,1), 0 0 0 14px rgba(217,119,6,0); }
+        }
+        @keyframes btnSpin { to { transform: rotate(360deg); } }
+        .demarcelize-btn .icon-spin { animation: spin360 0.9s linear infinite; }
+        @keyframes spin360 { to { transform: rotate(360deg); } }
+        @media (max-width: 768px) {
+            .demarcelize-btn { position: relative; left: auto; top: auto; transform: none; margin: 24px auto; }
+            .demarcelize-btn[data-state="ready"]:hover { transform: scale(1.08) rotate(-3deg); }
+            .demarcelize-btn[data-state="ready"]:active { transform: scale(0.94); }
+        }
         .ring-tick { position: absolute; width: 1px; background: rgba(44,29,17,0.18); }
         @media (max-width: 768px) {
             .browser-card { aspect-ratio: auto; }
         }
+        @media (min-width: 768px) {
+            body[data-mode="template"] #target-card,
+            body[data-mode="template"] #template-card {
+                height: 600px;
+                max-height: 600px;
+            }
+            body[data-mode="template"] #target-card > div {
+                overflow-y: auto;
+                scrollbar-width: thin;
+            }
+            body[data-mode="template"] #target-card > div::-webkit-scrollbar { width: 6px; }
+            body[data-mode="template"] #target-card > div::-webkit-scrollbar-thumb { background: rgba(44,29,17,0.18); border-radius: 9999px; }
+            body[data-mode="template"] #template-grid { scrollbar-width: thin; }
+            body[data-mode="template"] #template-grid::-webkit-scrollbar { width: 6px; }
+            body[data-mode="template"] #template-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 9999px; }
+        }
     </style>
 </head>
-<body class="min-h-screen overflow-x-hidden antialiased selection:bg-orange-500 selection:text-white">
+<body data-mode="url" class="min-h-screen overflow-x-hidden antialiased selection:bg-orange-500 selection:text-white">
 
     <div class="absolute inset-0 gradient-mesh pointer-events-none -z-0"></div>
 
     <!-- Top navigation -->
-    <nav class="fixed top-5 left-1/2 -translate-x-1/2 z-50 rounded-full p-[1px] bg-gradient-to-b from-white/70 via-slate-300/50 to-slate-400/30 shadow-sm w-[min(92vw,860px)]">
-        <div class="bg-[#E4E2DD]/85 backdrop-blur-xl rounded-full pl-4 pr-2 py-2 flex items-center gap-3 sm:gap-6">
+    <nav class="frozen-nav fixed top-5 left-1/2 -translate-x-1/2 z-50 rounded-full p-[1px] bg-gradient-to-b from-white/80 via-white/30 to-slate-400/20 shadow-[0_10px_30px_-10px_rgba(44,29,17,0.18)] w-[min(92vw,860px)]">
+        <div class="frozen-nav-inner rounded-full pl-4 pr-2 py-2 flex items-center gap-3 sm:gap-6">
             <a href="#" class="text-sm font-semibold tracking-tight text-slate-900 flex items-center gap-2 shrink-0">
                 <div class="w-1.5 h-1.5 rounded-full bg-orange-500 pulse-dot"></div>
                 Demarcelizer<span class="font-mono text-[10px] text-slate-500 ml-0.5">2.0</span>
-                <span id="engine-badge" class="hidden text-[9px] font-mono uppercase tracking-widest text-emerald-700 bg-emerald-100 border border-emerald-200 px-1.5 py-0.5 rounded-full ml-1" title="Local engine on">LOCAL</span>
+                <span id="engine-badge" class="hidden text-[9px] tracking-wide text-emerald-700 bg-emerald-100 border border-emerald-200 px-1.5 py-0.5 rounded-full ml-1" title="Local engine on">Local</span>
             </a>
 
             <div class="ml-auto flex items-center gap-2">
@@ -74,7 +173,7 @@
                 <details class="relative" id="key-menu">
                     <summary class="list-none cursor-pointer select-none flex items-center gap-2 pl-3 pr-2 py-1.5 rounded-full bg-white/60 hover:bg-white border border-slate-300/70 text-[11px] font-mono uppercase tracking-wider text-slate-700 transition-colors">
                         <span class="w-1.5 h-1.5 rounded-full bg-slate-400" id="key-status-dot"></span>
-                        <span id="key-provider-label">BYO-KEY</span>
+                        <span id="key-provider-label">BYO key</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" class="text-slate-500 chev"></iconify-icon>
                     </summary>
                     <div class="absolute right-0 mt-2 w-[320px] rounded-2xl bg-[#FAFAF7] border border-slate-300/70 key-pop p-3 z-50">
@@ -159,16 +258,25 @@
             <!-- Two browsers side by side -->
             <section id="run" class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
-                <!-- Connector arrow on desktop -->
-                <div class="hidden md:flex absolute inset-y-0 left-1/2 -translate-x-1/2 items-center justify-center pointer-events-none z-20">
-                    <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#2C1D11] text-[10px] font-mono uppercase tracking-widest text-orange-300 shadow-lg">
-                        <iconify-icon icon="solar:transfer-horizontal-linear" class="text-orange-400"></iconify-icon>
-                        Apply
-                    </div>
-                </div>
+                <!-- Demarcelize button (centered between cards) -->
+                <button id="demarcelize-btn" class="demarcelize-btn" data-state="disabled" disabled aria-label="Demarcelizar">
+                    <svg class="circular-text-svg" viewBox="0 0 100 100" aria-hidden="true">
+                        <defs>
+                            <path id="dem-circle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" fill="none" />
+                        </defs>
+                        <text>
+                            <textPath href="#dem-circle" startOffset="0%">DEMARCELIZAR · DEMARCELIZAR · </textPath>
+                        </text>
+                    </svg>
+                    <span id="demarcelize-icon" class="demarcelize-icon-center">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+                            <polygon points="8 5 20 12 8 19" />
+                        </svg>
+                    </span>
+                </button>
 
                 <!-- TARGET browser (left) -->
-                <div class="browser-card relative rounded-[28px] p-[1px] bg-gradient-to-b from-white/80 via-white/30 to-transparent browser-shadow group">
+                <div id="target-card" class="browser-card relative rounded-[28px] p-[1px] bg-gradient-to-b from-white/80 via-white/30 to-transparent browser-shadow group">
                     <div class="relative h-full bg-[#FAFAF7] rounded-[27px] overflow-hidden flex flex-col">
 
                         <!-- Browser chrome -->
@@ -355,27 +463,8 @@
                 </div>
             </section>
 
-            <!-- CTA + flow indicator -->
-            <section class="relative z-20 mt-10 md:mt-14 flex flex-col items-center gap-5">
-                <div class="hidden md:flex items-center gap-3 text-[10px] font-mono uppercase tracking-widest text-slate-500">
-                    <span>Target</span>
-                    <span class="w-24 h-px arrow-line"></span>
-                    <span class="text-orange-700">Demarcelizer</span>
-                    <span class="w-24 h-px arrow-line"></span>
-                    <span>Reborn</span>
-                </div>
-
-                <button id="demarcelize-btn" class="cta-shadow group inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 active:bg-orange-700 transition-colors text-white font-medium tracking-tight pl-6 pr-2 py-2 rounded-full">
-                    <span class="text-[15px]">Demarcelize</span>
-                    <span class="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 group-hover:bg-white/25 transition-colors">
-                        <iconify-icon icon="solar:arrow-right-linear" class="text-white text-base"></iconify-icon>
-                    </span>
-                </button>
-
-                <p id="status-line" class="text-[11px] font-mono uppercase tracking-widest text-slate-500 min-h-[16px]">
-                    Idle · waiting for target & reference
-                </p>
-            </section>
+            <!-- Hidden error display (only visible on errors) -->
+            <p id="status-line" class="hidden text-center mt-6 text-[12px] text-rose-700 bg-rose-50 border border-rose-200 px-3 py-2 rounded-full max-w-md mx-auto"></p>
 
             <!-- Result · Reborn target -->
             <section id="result" class="hidden relative z-10 mt-20">
@@ -433,10 +522,10 @@
                     <h3 class="text-lg font-light tracking-tight text-slate-900 mt-2 mb-1">Pick the donor</h3>
                     <p class="text-[13px] text-slate-600 leading-relaxed">Drop a reference URL. We crawl the site, render it, and synthesize a self-contained DESIGN.md.</p>
                 </div>
-                <div class="rounded-3xl p-5 bg-[#2C1D11] text-white border border-white/5">
-                    <div class="text-[10px] font-mono uppercase tracking-widest text-orange-300">02</div>
-                    <h3 class="text-lg font-light tracking-tight mt-2 mb-1">Run the model</h3>
-                    <p class="text-[13px] text-white/70 leading-relaxed">Your BYO key powers the rewrite. Anthropic for fidelity, Google for speed — your call.</p>
+                <div class="rounded-3xl p-5 bg-white/50 border border-slate-300/60 backdrop-blur">
+                    <div class="text-[10px] tracking-wide text-slate-500">02</div>
+                    <h3 class="text-lg font-light tracking-tight text-slate-900 mt-2 mb-1">Run the model</h3>
+                    <p class="text-[13px] text-slate-600 leading-relaxed">Your BYO key powers the rewrite. Anthropic for fidelity, Google for speed — your call.</p>
                 </div>
                 <div class="rounded-3xl p-5 bg-white/50 border border-slate-300/60 backdrop-blur">
                     <div class="text-[10px] font-mono uppercase tracking-widest text-slate-500">03</div>
@@ -445,9 +534,8 @@
                 </div>
             </section>
 
-            <footer class="relative z-10 mt-24 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] font-mono uppercase tracking-widest text-slate-500">
+            <footer class="relative z-10 mt-24 flex items-center justify-center text-[11px] tracking-wide text-slate-500">
                 <span>© Demarcelizer 2.0 · re-skin engine</span>
-                <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange-500 pulse-dot"></span> Local-first · BYO Key</span>
             </footer>
         </div>
     </main>
@@ -539,7 +627,7 @@ the product's visual identity.`;
             keyLabel.textContent = cfg.fieldLabel;
             keyInput.value = state.keys[provider] || '';
             const hasKey = !!state.keys[provider];
-            providerLabel.textContent = hasKey ? `${cfg.label} · key set` : `BYO-KEY · ${cfg.label}`;
+            providerLabel.textContent = hasKey ? `${cfg.label} · key set` : `BYO key · ${cfg.label}`;
             statusDot.className = 'w-1.5 h-1.5 rounded-full ' + (hasKey ? 'bg-orange-500' : 'bg-slate-400');
         }
 
@@ -579,17 +667,42 @@ the product's visual identity.`;
             } catch { return false; }
         }
 
-        function updateIdle() {
-            const t = isValidUrl(targetEl.value);
-            const r = isValidUrl(referenceEl.value);
-            if (!t && !r) status.textContent = 'Idle · waiting for target & reference';
-            else if (t && !r) status.textContent = 'Target locked · awaiting reference';
-            else if (!t && r) status.textContent = 'Reference locked · awaiting target';
-            else status.textContent = 'Ready · press Demarcelize to start';
+        function showError(msg) {
+            status.textContent = msg;
+            status.classList.remove('hidden');
         }
-        targetEl.addEventListener('input', updateIdle);
-        referenceEl.addEventListener('input', updateIdle);
-        updateIdle();
+        function clearStatus() {
+            status.textContent = '';
+            status.classList.add('hidden');
+        }
+        const PLAY_ICON_SVG = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><polygon points="8 5 20 12 8 19"/></svg>';
+        const SPINNER_ICON = '<iconify-icon icon="svg-spinners:90-ring-with-bg" class="text-2xl"></iconify-icon>';
+        function setButtonState(state) {
+            const btn = document.getElementById('demarcelize-btn');
+            const icon = document.getElementById('demarcelize-icon');
+            if (!btn || !icon) return;
+            btn.dataset.state = state;
+            btn.disabled = state !== 'ready';
+            icon.innerHTML = state === 'loading' ? SPINNER_ICON : PLAY_ICON_SVG;
+        }
+        function checkRunReady() {
+            // skip while running
+            const btn = document.getElementById('demarcelize-btn');
+            if (btn && btn.dataset.state === 'loading') return;
+            const targetReady = (targetHtmlInput && targetHtmlInput.value.trim()) || isValidUrl(targetEl.value);
+            let referenceReady = false;
+            if (typeof MODE !== 'undefined' && MODE === 'template') {
+                referenceReady = !!(typeof SELECTED_TEMPLATE !== 'undefined' && SELECTED_TEMPLATE);
+            } else {
+                referenceReady = (referenceHtmlInput && referenceHtmlInput.value.trim())
+                    || isValidUrl(referenceEl.value)
+                    || (typeof referenceShot !== 'undefined' && !!referenceShot);
+            }
+            setButtonState(targetReady && referenceReady ? 'ready' : 'disabled');
+        }
+        targetEl.addEventListener('input', checkRunReady);
+        referenceEl.addEventListener('input', checkRunReady);
+        // initial state set after textareas/template state is wired below
 
         // ---- Result section refs + tabs ----
         const resultSection = document.getElementById('result');
@@ -840,6 +953,10 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
         const demBtn = document.getElementById('demarcelize-btn');
         const targetHtmlInput = document.getElementById('target-html-input');
         const referenceHtmlInput = document.getElementById('reference-html-input');
+        targetHtmlInput.addEventListener('input', checkRunReady);
+        referenceHtmlInput.addEventListener('input', checkRunReady);
+        // initial checkRunReady() is called at the end of the script,
+        // AFTER MODE / SELECTED_TEMPLATE / referenceShot are declared
 
         // Reference screenshot upload
         let referenceShot = null;
@@ -853,6 +970,7 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
             referenceShot = { mediaType: file.type || 'image/png', base64, name: file.name };
             shotLabel.textContent = file.name.length > 22 ? file.name.slice(0, 22) + '…' : file.name;
             shotClear.classList.remove('hidden');
+            checkRunReady();
         });
         shotClear.addEventListener('click', (e) => {
             e.preventDefault();
@@ -860,6 +978,7 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
             shotInput.value = '';
             shotLabel.textContent = 'Attach screenshot';
             shotClear.classList.add('hidden');
+            checkRunReady();
         });
 
         // ---- Local engine detection (Bun server) ----
@@ -894,6 +1013,7 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
 
         function setMode(next) {
             MODE = next;
+            document.body.dataset.mode = next;
             const isUrl = next === 'url';
             referenceCardEl.classList.toggle('hidden', !isUrl);
             templateCardEl.classList.toggle('hidden', isUrl);
@@ -904,6 +1024,7 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
             tabTemplate.classList.toggle('text-white', !isUrl);
             tabTemplate.classList.toggle('text-slate-600', isUrl);
             if (next === 'template' && TEMPLATES.length === 0) loadTemplates();
+            checkRunReady();
         }
         tabUrl.addEventListener('click', () => setMode('url'));
         tabTemplate.addEventListener('click', () => setMode('template'));
@@ -930,36 +1051,64 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
                 return;
             }
 
+            const withAlpha = (hex, a) => {
+                if (!hex) return `rgba(0,0,0,${a})`;
+                let h = String(hex).trim().replace('#', '');
+                if (h.length === 3) h = h.split('').map(c => c + c).join('');
+                if (h.length !== 6 || /[^0-9a-fA-F]/.test(h)) return `rgba(0,0,0,${a})`;
+                const r = parseInt(h.slice(0, 2), 16);
+                const g = parseInt(h.slice(2, 4), 16);
+                const b = parseInt(h.slice(4, 6), 16);
+                return `rgba(${r},${g},${b},${a})`;
+            };
+
             templateGrid.innerHTML = filtered.map(t => {
                 const c = t.colors || {};
                 const f = t.fonts || {};
                 const bg = c['background'] || '#FAFAF7';
-                const surface = c['surface'] || c['background'] || '#F2F0EA';
                 const primary = c['primary'] || '#F97316';
                 const accent = c['accent'] || c['primary'] || '#D97706';
+                const surface = c['surface'] || c['background'] || '#F2F0EA';
                 const textPrimary = c['text-primary'] || '#111827';
                 const textSecondary = c['text-secondary'] || '#4B5563';
-                const border = c['border'] || 'rgba(0,0,0,0.1)';
+                const border = c['border'] || '#E5E7EB';
                 const display = (f.display || 'Inter').replace(/"/g, '&quot;');
                 const body = (f.body || 'Inter').replace(/"/g, '&quot;');
                 const swatches = [primary, accent, c['secondary'] || surface, surface, textPrimary, textSecondary, border]
-                    .map(col => `<span class="flex-1 h-2 rounded-sm" style="background:${col}"></span>`).join('');
+                    .map(col => `<span class="flex-1 h-2 rounded-sm" style="background:${col}; border:1px solid ${withAlpha(textPrimary, 0.08)};"></span>`).join('');
                 const desc = (t.description || '').replace(/"/g, '&quot;');
+                const name = (t.name || t.slug).replace(/"/g, '&quot;');
                 const isSel = SELECTED_TEMPLATE && SELECTED_TEMPLATE.slug === t.slug;
+                const frameStroke = withAlpha(textPrimary, 0.18);
+                const dotStroke = withAlpha(textPrimary, 0.45);
+                const h = t.header || {};
+                const escapeHtml = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                const headline = escapeHtml(h.headline || name);
+                const subheadline = escapeHtml(h.subheadline || desc.slice(0, 140));
+                const cta = escapeHtml(h.cta || 'Get started');
+                const secondaryCta = escapeHtml(h.secondary_cta || '');
+                const badge = escapeHtml(h.badge || '');
+                const navLinks = (h.nav || []).slice(0, 4).map(escapeHtml);
                 return `
-                <button data-slug="${t.slug}" class="template-card text-left rounded-xl overflow-hidden border transition-all hover:-translate-y-0.5 ${isSel ? 'ring-2 ring-orange-400 ring-offset-2 ring-offset-[#2C1D11]' : ''}" style="border-color:${border};">
-                    <div class="flex items-center gap-1 px-2 py-1.5" style="background:${surface}; border-bottom:1px solid ${border};">
-                        <span class="w-1.5 h-1.5 rounded-full" style="background:${primary}"></span>
-                        <span class="w-1.5 h-1.5 rounded-full" style="background:${accent}"></span>
-                        <span class="w-1.5 h-1.5 rounded-full" style="background:${textSecondary}"></span>
-                        <span class="ml-auto text-[8px] truncate" style="color:${textSecondary}; font-family:'${body}', system-ui;">${t.slug.slice(0, 18)}</span>
+                <div data-slug="${t.slug}" role="button" tabindex="0" class="template-card cursor-pointer block w-full text-left rounded-xl overflow-hidden border transition-all hover:-translate-y-0.5 hover:shadow-xl ${isSel ? 'ring-2 ring-orange-400 ring-offset-2 ring-offset-[#2C1D11]' : ''}" style="background:${bg}; color:${textPrimary}; border-color:${frameStroke}; min-height:280px; display:flex; flex-direction:column;">
+                    <div class="flex items-center gap-1.5 px-3 py-2 border-b shrink-0" style="border-color:${frameStroke};">
+                        <span class="w-2 h-2 rounded-full" style="border:1px solid ${dotStroke};"></span>
+                        <span class="w-2 h-2 rounded-full" style="border:1px solid ${dotStroke};"></span>
+                        <span class="w-2 h-2 rounded-full" style="border:1px solid ${dotStroke};"></span>
+                        <span class="ml-auto leading-none" style="font-family:'${body}', system-ui; font-size:10px; color:${textSecondary}; opacity:0.8;">${escapeHtml(name)}</span>
                     </div>
-                    <div class="p-3" style="background:${bg}; color:${textPrimary};">
-                        <div class="leading-tight truncate" style="font-family:'${display}', system-ui; font-size:14px; font-weight:500;">${(t.name || t.slug).replace(/"/g, '&quot;')}</div>
-                        <div class="text-[10px] mt-1 leading-snug opacity-60" style="font-family:'${body}', system-ui; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${desc.slice(0, 110)}</div>
-                        <div class="mt-3 flex gap-0.5">${swatches}</div>
+                    <div class="p-4 flex-1" style="display:flex; flex-direction:column; gap:12px;">
+                        ${navLinks.length ? `<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">${navLinks.map(l => `<span style="font-family:'${body}', system-ui; font-size:10.5px; color:${textSecondary};">${l}</span>`).join('')}</div>` : ''}
+                        ${badge ? `<span style="display:inline-flex; align-self:flex-start; padding:4px 10px; border-radius:9999px; border:1px solid ${frameStroke}; background:${withAlpha(primary, 0.08)}; color:${textPrimary}; font-family:'${body}', system-ui; font-size:10px;">${badge}</span>` : ''}
+                        <div style="font-family:'${display}', system-ui; font-size:22px; font-weight:500; line-height:1.05; letter-spacing:-0.01em; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${headline}</div>
+                        <div style="font-family:'${body}', system-ui; font-size:11.5px; line-height:1.45; color:${textSecondary}; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${subheadline}</div>
+                        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:auto;">
+                            <span style="display:inline-flex; align-items:center; padding:6px 14px; border-radius:9999px; background:${primary}; color:${bg}; font-family:'${body}', system-ui; font-size:11px; font-weight:500;">${cta}</span>
+                            ${secondaryCta ? `<span style="display:inline-flex; align-items:center; padding:6px 12px; border-radius:9999px; border:1px solid ${frameStroke}; color:${textPrimary}; font-family:'${body}', system-ui; font-size:11px;">${secondaryCta}</span>` : ''}
+                        </div>
+                        <div style="display:flex; gap:2px;">${swatches}</div>
                     </div>
-                </button>`;
+                </div>`;
             }).join('');
 
             templateGrid.querySelectorAll('.template-card').forEach(btn => {
@@ -968,6 +1117,7 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
                     SELECTED_TEMPLATE = TEMPLATES.find(t => t.slug === slug) || null;
                     templateSelectedLabel.textContent = SELECTED_TEMPLATE ? SELECTED_TEMPLATE.name || SELECTED_TEMPLATE.slug : 'none selected';
                     renderTemplates(templateSearch.value);
+                    checkRunReady();
                 });
             });
         }
@@ -1067,18 +1217,18 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
             const pastedTarget = targetHtmlInput.value.trim();
             const pastedReference = referenceHtmlInput.value.trim();
 
-            if (!pastedTarget && !isValidUrl(target)) { status.textContent = 'Missing target URL or pasted HTML'; targetEl.focus(); return; }
+            if (!pastedTarget && !isValidUrl(target)) { showError('Missing target URL or pasted HTML'); targetEl.focus(); return; }
             if (MODE === 'template') {
-                if (!SELECTED_TEMPLATE) { status.textContent = 'Pick a template first'; return; }
+                if (!SELECTED_TEMPLATE) { showError('Pick a template first'); return; }
             } else {
-                if (!pastedReference && !isValidUrl(reference) && !referenceShot) { status.textContent = 'Missing reference URL, HTML, or screenshot'; referenceEl.focus(); return; }
+                if (!pastedReference && !isValidUrl(reference) && !referenceShot) { showError('Missing reference URL, HTML, or screenshot'); referenceEl.focus(); return; }
             }
             const provider = state.provider;
             const apiKey = state.keys[provider];
-            if (!apiKey) { status.textContent = `Add your ${PROVIDERS[provider].label} key (top right) first`; return; }
+            if (!apiKey) { showError(`Add your ${PROVIDERS[provider].label} key (top right) first`); return; }
 
-            demBtn.disabled = true;
-            demBtn.classList.add('opacity-60', 'pointer-events-none');
+            clearStatus();
+            setButtonState('loading');
             resultSection.classList.add('hidden');
 
             // ---- LOCAL ENGINE PATH (preferred) ----
@@ -1097,13 +1247,12 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
                     resultSection.classList.remove('hidden');
                     setResultTab('preview');
                     resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    status.textContent = 'Done · target reborn (local engine)';
                 } catch (err) {
                     console.error(err);
-                    status.textContent = `Engine error · ${err.message || err}`;
+                    showError(err.message || String(err));
                 } finally {
-                    demBtn.disabled = false;
-                    demBtn.classList.remove('opacity-60', 'pointer-events-none');
+                    demBtn.dataset.state = '';
+                    checkRunReady();
                 }
                 return;
             }
@@ -1235,13 +1384,11 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
                 resultSection.classList.remove('hidden');
                 setResultTab('preview');
                 resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                status.textContent = 'Done · target reborn';
             } catch (err) {
                 console.error(err);
-                status.textContent = `Error · ${err.message || err}`;
+                showError(err.message || String(err));
             } finally {
-                demBtn.disabled = false;
-                demBtn.classList.remove('opacity-60', 'pointer-events-none');
+                checkRunReady();
             }
         });
 
@@ -1266,6 +1413,8 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
                 gsap.from('.browser-card', { y: 40, opacity: 0, duration: 1, stagger: 0.15, ease: 'power3.out', delay: 0.4 });
                 gsap.from('#demarcelize-btn', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.9 });
             }
+            // Initial button state — safe here, all module-level lets are declared
+            checkRunReady();
         });
     </script>
 </body>

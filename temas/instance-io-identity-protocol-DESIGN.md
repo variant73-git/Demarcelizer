@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Instance.io - Identity Protocol"
+name: "Pulse"
 description: "Instance Identity Button Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#E4573D"

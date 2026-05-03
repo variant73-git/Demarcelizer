@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Resonance - Modern Music App"
+name: "Magma"
 description: "Resonance Modern Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences."
 colors:
   primary: "#BAE6FD"

@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Premium Studio Card Component"
+name: "Zenith"
 description: "Premium Studio Card Component is designed for grouping related content in a compact container. Key features include clear structure, reusable styling patterns, and production-ready layout behavior. Built with Tailwind CSS, it is suitable for component libraries and responsive web projects. It includes animated visual t"
 colors:
   primary: "#4A1711"

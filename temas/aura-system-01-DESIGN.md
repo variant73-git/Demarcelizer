@@ -1,6 +1,6 @@
 ---
 version: "neuform"
-name: "Aura • System 01"
+name: "Ember"
 description: "Aura System Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences."
 colors:
   primary: "#FF4500"

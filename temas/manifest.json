@@ -1,0 +1,1835 @@
+[
+  {
+    "slug": "nexus-analytics-dashboard-2",
+    "name": "Anchor",
+    "description": "Nexus Analytics Card Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#83B740",
+      "secondary": "#303236",
+      "accent": "#E69223",
+      "background": "#303236",
+      "surface": "#16171A",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#303236"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "DM Sans",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Revenue Analytics",
+      "subheadline": "Monitor daily revenue fluctuations and track the performance of your primary conversion funnels.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Overview",
+        "Campaigns",
+        "Audience",
+        "Revenue"
+      ]
+    },
+    "height": 964
+  },
+  {
+    "slug": "nexuscore-unify-your-data",
+    "name": "Antler",
+    "description": "Nexuscore Unify Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#FF0B0B",
+      "secondary": "#FFFFFF",
+      "accent": "#FF0B0B",
+      "background": "#FFFFFF",
+      "surface": "#FFFFFF",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Unify Your Data. Accelerate Growth.",
+      "subheadline": "Streamline operations, synchronize your entire tech stack, and drive predictable revenue with a single source of truth built for modern enterprise.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Platform",
+        "Solutions",
+        "Pricing",
+        "Company"
+      ]
+    },
+    "height": 901
+  },
+  {
+    "slug": "system-interface-remixed",
+    "name": "Apex",
+    "description": "System Interface - Remixed Node_01 Activate .Execute() Verifying connections. Procedural Sequences. Data_Mesh NODE ALPHA Flow .Align() Calibrating metrics. Prism Visual Green #5EBD3E Yellow #FFB900 Orange #F78200 Red #E2",
+    "colors": {
+      "primary": "#FFB900",
+      "secondary": "#F78200",
+      "accent": "#F78200",
+      "background": "#FFFFFF",
+      "surface": "#1F1F1F",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "DM Mono",
+      "body": "Instrument Serif",
+      "label": "DM Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "ares-base-seamless-logistics-sync-1",
+    "name": "Atrium",
+    "description": "Ares Base Hero Section is designed for introducing a product with clear above-the-fold messaging. Key features include headline hierarchy, supporting copy, and a primary call-to-action. It is suitable for homepage hero areas and campaign landing pages.",
+    "colors": {
+      "primary": "#BC7F61",
+      "secondary": "#000000",
+      "accent": "#BC7F61",
+      "background": "#BC7F61",
+      "surface": "#191C21",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#57534E"
+    },
+    "fonts": {
+      "display": "Geist",
+      "body": "Geist",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Synchronize Martian outposts, zero latency.",
+      "subheadline": "Connect your rovers, habitats, and orbital relays with a single protocol. No complex atmospheric interference setups—just pure data velocity.",
+      "cta": "Initialize Uplink",
+      "secondary_cta": "View Mission Logs",
+      "nav": []
+    },
+    "height": 1538
+  },
+  {
+    "slug": "aegisnet-infrastructure",
+    "name": "Aurora",
+    "description": "Aegisnet Infrastructure UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#050505",
+      "secondary": "#000000",
+      "accent": "#050505",
+      "background": "#050505",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Architect the global data grid.",
+      "subheadline": "Initialize hyper-distributed edge networks with absolute zero config. Industrial-grade infrastructure engineered for sub-millisecond real-time telemetry.",
+      "cta": "Initialize",
+      "secondary_cta": "Deploy Matrix",
+      "nav": [
+        "Grid Architecture",
+        "Telemetry",
+        "Capacities",
+        "Protocols"
+      ]
+    },
+    "height": 1156
+  },
+  {
+    "slug": "aura-finance-mobile-flow-2",
+    "name": "Beacon",
+    "description": "Aura Finance Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#E2C854",
+      "secondary": "#FFFFFF",
+      "accent": "#10B981",
+      "background": "#FFFFFF",
+      "surface": "#1A1A1A",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "€34,550.80",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "nature-s-hideaways",
+    "name": "Bloom",
+    "description": "Nature Hideaways UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#0A1118",
+      "secondary": "#FFFFFF",
+      "accent": "#0A1118",
+      "background": "#0A1118",
+      "surface": "#0F1720",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Nature's Perfect Hideaways",
+      "subheadline": "Discover handpicked luxury cabins in breathtaking locations. Unplug, unwind, and reconnect with what matters most.",
+      "cta": "Book Now",
+      "secondary_cta": "",
+      "nav": [
+        "Locations",
+        "Rooms",
+        "Experiences",
+        "Contact"
+      ]
+    },
+    "height": 1620
+  },
+  {
+    "slug": "creatorflow-master-your-content-strategy",
+    "name": "Cascade",
+    "description": "Connect with elite content creators, brand strategists, and marketing experts to elevate your digital presence.",
+    "colors": {
+      "primary": "#E01E65",
+      "secondary": "#FB2875",
+      "accent": "#E01E65",
+      "background": "#112345",
+      "surface": "#18181B",
+      "text-primary": "#F8FAFC",
+      "text-secondary": "#FB2875",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Manrope",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Elevate your content game with industry experts.",
+      "subheadline": "Stop guessing the algorithm. Get practical 1:1 guidance on strategy, production, and monetization from creators who have actually done it.",
+      "cta": "Book Session",
+      "secondary_cta": "",
+      "nav": [
+        "Process",
+        "Benefits",
+        "Expertise",
+        "Results"
+      ]
+    },
+    "height": 5141
+  },
+  {
+    "slug": "omnistack-global-infrastructure",
+    "name": "Chasm",
+    "description": "Omnistack Global Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. Built with custom CSS, it is suitable for subscription pricing pages and plan comparison experiences.",
+    "colors": {
+      "primary": "#1A5BFA",
+      "secondary": "#FFFFFF",
+      "accent": "#BFDBFE",
+      "background": "#1A5BFA",
+      "surface": "#BFDBFE",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Architect the next web. Scale on OmniStack. Deploy globally.",
+      "subheadline": "An intelligent deployment mesh engineered for absolute performance. Push your repository, and our planetary edge network synchronizes it everywhere in…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Architecture",
+        "Integrations",
+        "Telemetry",
+        "Billing"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "aura-mobile-finance",
+    "name": "Cipher",
+    "description": "Aura Mobile Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#A3E635",
+      "secondary": "#FFFFFF",
+      "accent": "#A3E635",
+      "background": "#0C0C0E",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "$142,550",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "capital-overview-dashboard-1",
+    "name": "Citadel",
+    "description": "Capital Overview Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#818CF8",
+      "secondary": "#FFFFFF",
+      "accent": "#F472B6",
+      "background": "#0E0E10",
+      "surface": "#18181C",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Executive Financial Summary",
+      "subheadline": "Monitor overall operational liquidity, structural outflow streams, and global aggregated metrics across enterprise accounts.",
+      "cta": "Export Report",
+      "secondary_cta": "",
+      "nav": [
+        "Overview",
+        "Wallets",
+        "Funding",
+        "Metrics"
+      ]
+    },
+    "height": 1107
+  },
+  {
+    "slug": "nexus-next-generation-intelligence",
+    "name": "Cobalt",
+    "description": "Nexus Next Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#191C21",
+      "accent": "#000000",
+      "background": "#F4F1EB",
+      "surface": "#191C21",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#8F8880"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "INTELLIGENCE",
+      "subheadline": "Nexus provides a refined cognitive engine, enabling teams to instantly launch hyper-scaled analytical reasoning pipelines.",
+      "cta": "Activate Core",
+      "secondary_cta": "Learn more",
+      "nav": []
+    },
+    "height": 1086
+  },
+  {
+    "slug": "axiom-payment-operations-1",
+    "name": "Compass",
+    "description": "Axiom Payment Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#A268CF",
+      "secondary": "#F5F3EF",
+      "accent": "#5984EA",
+      "background": "#F5F3EF",
+      "surface": "#111827",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Unified global treasury infrastructure for agile teams",
+      "subheadline": "Centralize your corporate accounts, wire transfers, and liquidity management into one secure platform. Deploy your complete capital stack in under 10 minutes…",
+      "cta": "Console",
+      "secondary_cta": "",
+      "nav": [
+        "Products",
+        "Use Cases",
+        "API Docs"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "voxaura-ai-voice-synthesizer",
+    "name": "Cordillera",
+    "description": "Voxaura Voice Background Effect is designed for delivering a visual treatment or immersive background effect. Key features include atmospheric visuals, motion depth, and flexible presentation layering. It is suitable for visual-first pages, motion studies, and atmospheric hero treatments.",
+    "colors": {
+      "primary": "#4F46E5",
+      "secondary": "#030712",
+      "accent": "#06B6D4",
+      "background": "#030712",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Geist",
+      "body": "Geist",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Converse Fluidly. Beyond Barriers. Infinite Scale.",
+      "subheadline": "Generate lifelike speech in milliseconds, matching voice signatures with incredible precision. Embed seamlessly into apps, entertainment, and platforms. Fast.…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Platform",
+        "Use Cases",
+        "API",
+        "About"
+      ]
+    },
+    "height": 924
+  },
+  {
+    "slug": "core-systems-landing-page-2",
+    "name": "Drift",
+    "description": "Core Systems Sidebar Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#1A1A1A",
+      "secondary": "#EBE6DF",
+      "accent": "#1A1A1A",
+      "background": "#18181B",
+      "surface": "#1A1A1A",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Intelligent engines that drive automated operations",
+      "subheadline": "Continuous data orchestration across platforms and state-based logic execution, demonstrating how our architecture increases throughput and systemic…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 1069
+  },
+  {
+    "slug": "sylvan-testimonials-array",
+    "name": "Echo",
+    "description": "Sylvan Testimonials UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#10B981",
+      "secondary": "#1B2B22",
+      "accent": "#34D399",
+      "background": "#EEF1EA",
+      "surface": "#1B2B22",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#1B2B22"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "Join for $9.99/m",
+      "secondary_cta": "Read more",
+      "nav": []
+    },
+    "height": 1018
+  },
+  {
+    "slug": "nexus-digital-studio",
+    "name": "Eclipse",
+    "description": "Nexus Digital Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#191C21",
+      "accent": "#FFFFFF",
+      "background": "#FFFFFF",
+      "surface": "#191C21",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#A1A1AA"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "We design identities, platforms, and interactive journeys",
+      "subheadline": "We establish the core pillars of your positioning and design language, building a scalable framework for your future.",
+      "cta": "",
+      "secondary_cta": "View Case Studies",
+      "nav": [
+        "INDEX",
+        "WORK",
+        "AGENCY",
+        "INSIGHTS"
+      ]
+    },
+    "height": 3068
+  },
+  {
+    "slug": "aura-system-01",
+    "name": "Ember",
+    "description": "Aura System Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#FF4500",
+      "secondary": "#A1A1AA",
+      "accent": "#FF4500",
+      "background": "#050507",
+      "surface": "#18181B",
+      "text-primary": "#E5E5E5",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "STRUCTURAL",
+      "subheadline": "Industrial minimalism characterized by monochromatic high-contrast, strict architectural lines, and rigorous dimensional framing.",
+      "cta": "",
+      "secondary_cta": "Initiate",
+      "nav": [
+        "Architecture",
+        "Parameters",
+        "Telemetry"
+      ]
+    },
+    "height": 1151
+  },
+  {
+    "slug": "nexus-ai-synthetic-data-2",
+    "name": "Filament",
+    "description": "Nexus Synthetic Sidebar Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#191C21",
+      "accent": "#000000",
+      "background": "#ECECE8",
+      "surface": "#191C21",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#DCDCC8"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "JetBrains Mono",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Synthesize Perfect Data, Train Superior Models",
+      "subheadline": "Generate high-fidelity synthetic datasets that protect privacy while accelerating your machine learning and analytics initiatives.",
+      "cta": "Start Building Now",
+      "secondary_cta": "Deploy Environment",
+      "nav": [
+        "Product",
+        "Company",
+        "Solutions",
+        "Resources"
+      ]
+    },
+    "height": 1969
+  },
+  {
+    "slug": "orbit-lunar-pulse",
+    "name": "Fjord",
+    "description": "Orbit Lunar FAQ Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#FF4500",
+      "secondary": "#FFFFFF",
+      "accent": "#FF4500",
+      "background": "#FFFFFF",
+      "surface": "#D4D4D4",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#D4D4D4"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "ORBIT",
+      "subheadline": "Montréal Parks Series",
+      "cta": "",
+      "secondary_cta": "Get Tickets",
+      "nav": [
+        "Schedule",
+        "The Ritual",
+        "Access",
+        "Faq"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "integration-platform",
+    "name": "Forge",
+    "description": "Integration Platform Onboarding Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#A3E635",
+      "secondary": "#0A0A0A",
+      "accent": "#A3E635",
+      "background": "#0A0A0A",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 1170
+  },
+  {
+    "slug": "mentorbridge-find-a-mentor-to-help-you-grow-your-career",
+    "name": "Galleon",
+    "description": "MentorBridge connects students and junior professionals in Central Asia with trusted mentors in IT, design, marketing, business, and English.",
+    "colors": {
+      "primary": "#D8CEBE",
+      "secondary": "#D7CBBB",
+      "accent": "#DDD2C2",
+      "background": "#1F1B16",
+      "surface": "#847666",
+      "text-primary": "#F8F4ED",
+      "text-secondary": "#D7CBBB",
+      "border": "#6E7A67"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "BlinkMacSystemFont",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Find a mentor to help you grow your career",
+      "subheadline": "Hands-on learning from IT, design, business, and marketing professionals in Central Asia.",
+      "cta": "EN",
+      "secondary_cta": "RU",
+      "nav": [
+        "How it works",
+        "Why us",
+        "Categories",
+        "Stories"
+      ]
+    },
+    "height": 5373
+  },
+  {
+    "slug": "nexus-quantum-infrastructure",
+    "name": "Glacier",
+    "description": "Quantum Infrastructure UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#FF4500",
+      "secondary": "#050505",
+      "accent": "#FF4500",
+      "background": "#050505",
+      "surface": "#1A1A1A",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter Tight",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Quantum Infrastructure. Infinite Scalability.",
+      "subheadline": "We architect foundational systems that eradicate latency, accelerate data throughput, and unlock unparalleled computational dominance.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Architecture",
+        "Metrics",
+        "Nodes",
+        "[ ESTABLISH LINK ]"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "decentralized-compute-network",
+    "name": "Halo",
+    "description": "Decentralized Compute Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. Built with custom CSS, it is suitable for subscription pricing pages and plan comparison experiences.",
+    "colors": {
+      "primary": "#34D399",
+      "secondary": "#FFFFFF",
+      "accent": "#60A5FA",
+      "background": "#030303",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "DM Sans",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Decentralized Compute Network",
+      "subheadline": "Enabling engineering teams to orchestrate globally distributed services with infinite scaling and microsecond latency.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Overview",
+        "Clusters",
+        "Topology",
+        "API"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "nexus-autonomous-scaling-infrastructure",
+    "name": "Hearth",
+    "description": "Nexus Autonomous Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. It is suitable for subscription pricing pages and plan comparison experiences.",
+    "colors": {
+      "primary": "#EDEDED",
+      "secondary": "#FFFFFF",
+      "accent": "#EDEDED",
+      "background": "#080808",
+      "surface": "#EDEDED",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Geist",
+      "body": "Geist",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Adaptive Architecture For Self-Governing Compute",
+      "subheadline": "Empower your technical teams with a centralized command center to deploy, monitor, and elastically scale resources with absolute certainty.",
+      "cta": "Initialize Grid",
+      "secondary_cta": "View Schematics",
+      "nav": [
+        "Ecosystem",
+        "Architecture",
+        "Enterprise",
+        "Docs"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "aura-architecting-digital-frontiers",
+    "name": "Helix",
+    "description": "Aura Architecting Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#050505",
+      "accent": "#FFFFFF",
+      "background": "#050505",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "DM Sans",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Architecting Frontiers for Tomorrow",
+      "subheadline": "Designing modular environments with precision-crafted systems that evolve with your vision.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 901
+  },
+  {
+    "slug": "financial-dashboard-elements-expanded-exploding-cards-2",
+    "name": "Lattice",
+    "description": "Financial Elements Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#78350F",
+      "secondary": "#000000",
+      "accent": "#451A03",
+      "background": "#F7F7F8",
+      "surface": "#191C21",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "freelance-designer-growth-partner",
+    "name": "Loom",
+    "description": "Freelance Designer Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#CCFF00",
+      "secondary": "#7B61FF",
+      "accent": "#CCFF00",
+      "background": "#111111",
+      "surface": "#18181B",
+      "text-primary": "#CCFF00",
+      "text-secondary": "#7B61FF",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "BlinkMacSystemFont",
+      "body": "BlinkMacSystemFont",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Freelance Website Designer & Growth Partner",
+      "subheadline": "I work directly with business owners to build high-performing websites & effective marketing campaigns that turn visitors into leads and sales.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Services",
+        "Work",
+        "About",
+        "Contact"
+      ]
+    },
+    "height": 1040
+  },
+  {
+    "slug": "aeronet-visualization",
+    "name": "Lumen",
+    "description": "Aeronet Visualization Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#000000",
+      "accent": "#FFFFFF",
+      "background": "#FFFFFF",
+      "surface": "#18181B",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Planet Core",
+      "subheadline": "Uninterrupted worldwide relay networks driving next-generation infrastructure.",
+      "cta": "Deploy Node",
+      "secondary_cta": "",
+      "nav": [
+        "Mapping",
+        "Framework",
+        "Metrics",
+        "Docs"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "resonance-modern-music-app",
+    "name": "Magma",
+    "description": "Resonance Modern Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#BAE6FD",
+      "secondary": "#FFFFFF",
+      "accent": "#BAE6FD",
+      "background": "#BAE6FD",
+      "surface": "#FFFFFF",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Geist",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Feel Every Beat Perfectly",
+      "subheadline": "Discover millions of tracks, curated playlists, and exclusive artists. Our high-fidelity audio engine and personalized recommendations ensure your daily…",
+      "cta": "Start Listening",
+      "secondary_cta": "",
+      "nav": [
+        "Discover",
+        "Playlists",
+        "Artists",
+        "Premium"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "nexcore-security-remixed-bento",
+    "name": "Marble",
+    "description": "Nexcore Security UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#FDE047",
+      "secondary": "#000000",
+      "accent": "#FDE047",
+      "background": "#111111",
+      "surface": "#F4F4F0",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Space Mono",
+      "label": "Space Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 992
+  },
+  {
+    "slug": "nova-genomics-1",
+    "name": "Mica",
+    "description": "Nova Genomics Footer Section is designed for organizing site-wide navigation, legal links, and utility content. Key features include multi-column navigation groups and clear legal pathways. It is suitable for SaaS websites, product marketing pages, and documentation hubs.",
+    "colors": {
+      "primary": "#030305",
+      "secondary": "#C8C8CD",
+      "accent": "#030305",
+      "background": "#030305",
+      "surface": "#C8C8CD",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#C8C8CD"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 916
+  },
+  {
+    "slug": "auralis-neural-audio-engine",
+    "name": "Mosaic",
+    "description": "Auralis Neural Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#EA580C",
+      "secondary": "#FFFFFF",
+      "accent": "#FDBA74",
+      "background": "#FFFFFF",
+      "surface": "#191C21",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Geist",
+      "body": "Geist",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Converse Naturally. Beyond Boundaries. Infinite Scale.",
+      "subheadline": "Generate highly realistic human audio instantly, replicating vocal signatures with stunning precision. Embed smoothly into applications, media, and interactive…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Platform",
+        "Solutions",
+        "Developers",
+        "Company"
+      ]
+    },
+    "height": 1097
+  },
+  {
+    "slug": "nexus-architecture",
+    "name": "Murmur",
+    "description": "Nexus Architecture Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#22C55E",
+      "secondary": "#000000",
+      "accent": "#22C55E",
+      "background": "#000000",
+      "surface": "#232323",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#DFDDCD"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "JetBrains Mono",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Adaptive infrastructure for autonomous routing.",
+      "subheadline": "Nexus operates as a unified execution engine, intelligently routing requests, applying governance, and triggering actions across your entire stack.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "telemetry-interface-5",
+    "name": "Nimbus",
+    "description": "Telemetry Interface Background Effect is designed for delivering a visual treatment or immersive background effect. Key features include atmospheric visuals, motion depth, and flexible presentation layering. It is suitable for visual-first pages, motion studies, and atmospheric hero treatments.",
+    "colors": {
+      "primary": "#8B5CF6",
+      "secondary": "#FFFFFF",
+      "accent": "#A78BFA",
+      "background": "#FFFFFF",
+      "surface": "#161824",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "aether-the-new-frontier",
+    "name": "Onyx",
+    "description": "Aether New Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#111111",
+      "accent": "#FFFFFF",
+      "background": "#050505",
+      "surface": "#F4F4F4",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "AETHER ™",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Vision",
+        "Archive",
+        "Studio",
+        "Contact"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "nexus-ai-data-pipeline-2",
+    "name": "Pivot",
+    "description": "Nexus Data Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences.",
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#191C21",
+      "accent": "#000000",
+      "background": "#FAFAFA",
+      "surface": "#191C21",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Google Sans Flex",
+      "body": "Google Sans Flex",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Unify data streams. Accelerate AI deployments natively.",
+      "subheadline": "Nexus consolidates your dispersed databases, endpoints, and file structures into a unified, high-performance vector graph designed for enterprise LLMs.",
+      "cta": "Start For Free",
+      "secondary_cta": "View Documentation",
+      "nav": [
+        "Platform",
+        "Solutions",
+        "Changelog",
+        "Developers"
+      ]
+    },
+    "height": 900
+  },
+  {
+    "slug": "nexus-interface",
+    "name": "Plinth",
+    "description": "Interface Synchronize UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#F97316",
+      "secondary": "#E4E2DD",
+      "accent": "#D97706",
+      "background": "#E4E2DD",
+      "surface": "#2C1D11",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "Core Relay",
+      "headline": "Synchronize decentralized networks with absolute precision.",
+      "subheadline": "A singular command center to deploy, monitor, and scale global systems. Equip your engineers with instant analytics and automated resource allocation.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Nexus",
+        "Architecture",
+        "Primitives",
+        "Changelog"
+      ]
+    },
+    "height": 2324
+  },
+  {
+    "slug": "instance-io-identity-protocol",
+    "name": "Pulse",
+    "description": "Instance Identity Button Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#E4573D",
+      "secondary": "#191C21",
+      "accent": "#34D399",
+      "background": "#181716",
+      "surface": "#191C21",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#D1CFC7"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Identity Protocol",
+      "subheadline": "",
+      "cta": "Initialize Sequence",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 1076
+  },
+  {
+    "slug": "aether-call-to-action",
+    "name": "Quartz",
+    "description": "Aether Call Onboarding Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#000000",
+      "secondary": "#FFFFFF",
+      "accent": "#000000",
+      "background": "#000000",
+      "surface": "#F4F4F5",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#71717A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "Open free account",
+      "secondary_cta": "Contact sales",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "prime-1",
+    "name": "Reed",
+    "description": "Prime Expand Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#EAB308",
+      "secondary": "#1A1A1A",
+      "accent": "#EAB308",
+      "background": "#EAB308",
+      "surface": "#1A1A1A",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Instrument Serif",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Expand your portfolio with prime real estate assets.",
+      "subheadline": "At PrimeEstates, we facilitate your growth through carefully vetted properties, data-backed strategies, and end-to-end investment support.",
+      "cta": "Schedule call",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 1334
+  },
+  {
+    "slug": "nexus-global-transfers-5",
+    "name": "Refuge",
+    "description": "Nexus Global Footer Section is designed for organizing site-wide navigation, legal links, and utility content. Key features include multi-column navigation groups and clear legal pathways. It is suitable for SaaS websites, product marketing pages, and documentation hubs.",
+    "colors": {
+      "primary": "#F68B1F",
+      "secondary": "#F2EAD3",
+      "accent": "#FDB813",
+      "background": "#F2EAD3",
+      "surface": "#FFFFFF",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Playfair Display",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Move capital worldwide with absolute precision",
+      "subheadline": "Flawless, real-time international transfers powered by dynamic market rates. Command your global wealth without boundaries.",
+      "cta": "Send Funds",
+      "secondary_cta": "Send Funds",
+      "nav": [
+        "Receive",
+        "Pricing",
+        "Corridors"
+      ]
+    },
+    "height": 1969
+  },
+  {
+    "slug": "auralis-neural-audio-engine-2",
+    "name": "Slate",
+    "description": "Auralis Neural Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#4F46E5",
+      "secondary": "#FFFFFF",
+      "accent": "#06B6D4",
+      "background": "#FFFFFF",
+      "surface": "#1C1C1E",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Geist",
+      "body": "Geist",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Speak Naturally. Across Borders. Limitless Reach.",
+      "subheadline": "Synthesize human-like audio instantly, clone vocal profiles with striking accuracy. Integrate smoothly into applications, games, and media. Swift. Secure.…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Platform",
+        "Solutions",
+        "Developers",
+        "Company"
+      ]
+    },
+    "height": 915
+  },
+  {
+    "slug": "system-metrics-ui-showcase-section",
+    "name": "Solace",
+    "description": "System Metrics UI Showcase Section is designed for demonstrating an app-style product interface. Key features include dashboard-like information hierarchy and app-style visual structure. Built with custom CSS, it is suitable for product showcases and interface-driven hero presentations. It includes animated visual trea",
+    "colors": {
+      "primary": "#F97316",
+      "secondary": "#FFFFFF",
+      "accent": "#EAB308",
+      "background": "#FFFFFF",
+      "surface": "#525252",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#525252"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "System Metrics",
+      "subheadline": "",
+      "cta": "7 days",
+      "secondary_cta": "Node: Cluster Alpha",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "wanderluxe-bespoke-travel-1",
+    "name": "Spectrum",
+    "description": "Wanderluxe Bespoke Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#FAFAFA",
+      "accent": "#FFFFFF",
+      "background": "#FAFAFA",
+      "surface": "#FFFFFF",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Playfair Display",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Designing the world's most exceptional journeys",
+      "subheadline": "Our global network of experts curates highly personalized journeys—unlocking private access, cultural immersion, and secluded sanctuaries across the globe.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Curated Journeys",
+        "Experiences",
+        "Destinations",
+        "Journal"
+      ]
+    },
+    "height": 2127
+  },
+  {
+    "slug": "infrastructure-workload-tuning",
+    "name": "Spire",
+    "description": "Infrastructure Workload Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#EF4444",
+      "secondary": "#FCFCFF",
+      "accent": "#DC2626",
+      "background": "#FCFCFF",
+      "surface": "#FFFFFF",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Infrastructure Workload Tuning",
+      "subheadline": "Dynamic provisioning, cost containment, and resource agility built specifically for next-generation cloud architectures.",
+      "cta": "Sign In",
+      "secondary_cta": "Launch Dashboard",
+      "nav": [
+        "Features",
+        "Ecosystem",
+        "Analytics",
+        "Business"
+      ]
+    },
+    "height": 1049
+  },
+  {
+    "slug": "registration-platform",
+    "name": "Spool",
+    "description": "Registration Platform Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#191C21",
+      "secondary": "#050505",
+      "accent": "#191C21",
+      "background": "#191C21",
+      "surface": "#D0DFC2",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#94988E"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Initialize Workspace",
+      "subheadline": "Connect with visionaries and access premium architectural blueprints tailored for your team.",
+      "cta": "Launch Workspace",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "premium-agency-portal-technical-split-2",
+    "name": "Stratum",
+    "description": "Premium Agency Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#92CFF2",
+      "secondary": "#F47C59",
+      "accent": "#92CFF2",
+      "background": "#241208",
+      "surface": "#18181B",
+      "text-primary": "#FCF9F6",
+      "text-secondary": "#F47C59",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Newsreader",
+      "body": "Newsreader",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "Commence sync",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 1030
+  },
+  {
+    "slug": "verdant-syntax-precision-botanical-architecture",
+    "name": "Tempest",
+    "description": "Verdant Syntax Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#767873",
+      "secondary": "#767873",
+      "accent": "#767873",
+      "background": "#1C201C",
+      "surface": "#767873",
+      "text-primary": "#F6F5F2",
+      "text-secondary": "#767873",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Playfair Display",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Architectural Botanicals for Defined Spaces",
+      "subheadline": "Precision-grown organic forms structured to enhance spatial dynamics and cognitive clarity. Uncompromised natural aesthetics.",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Arrangements",
+        "Ethos",
+        "Publications"
+      ]
+    },
+    "height": 4658
+  },
+  {
+    "slug": "master-strategy",
+    "name": "Tessera",
+    "description": "Master Strategy Background Effect is designed for delivering a visual treatment or immersive background effect. Key features include atmospheric visuals, motion depth, and flexible presentation layering. It is suitable for visual-first pages, motion studies, and atmospheric hero treatments.",
+    "colors": {
+      "primary": "#111111",
+      "secondary": "#666666",
+      "accent": "#111111",
+      "background": "#111111",
+      "surface": "#666666",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#666666"
+    },
+    "fonts": {
+      "display": "Playfair Display",
+      "body": "Space Mono",
+      "label": "Space Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Master Strategy",
+      "subheadline": "Series B funding accelerates core technology infrastructure, global market penetration, and key leadership hires. Path to 15,000 active instances and…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "instant-digital-content-section",
+    "name": "Threshold",
+    "description": "Instant Digital Content Section is designed for structuring key content in a full-width page block. Key features include clear structure, reusable styling patterns, and production-ready layout behavior. Built with custom CSS, it is suitable for component libraries and responsive web projects. Interaction states are des",
+    "colors": {
+      "primary": "#0A0A0A",
+      "secondary": "#0F0F0F",
+      "accent": "#0A0A0A",
+      "background": "#0A0A0A",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Your vision,",
+      "subheadline": "",
+      "cta": "Menu",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "novaflow",
+    "name": "Topaz",
+    "description": "Novaflow Updates Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. It is suitable for subscription pricing pages and plan comparison experiences.",
+    "colors": {
+      "primary": "#0062D6",
+      "secondary": "#DCFC5C",
+      "accent": "#DCFC5C",
+      "background": "#DCFC5C",
+      "surface": "#FFFFFF",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "NovaFlow",
+      "subheadline": "NovaFlow is an intelligent data routing system that converts complex API streams into clear, manageable workflows.",
+      "cta": "Legal Info",
+      "secondary_cta": "Join",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "nexus-core-autonomous-systems",
+    "name": "Vault",
+    "description": "Nexus Core Onboarding Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#00E5FF",
+      "secondary": "#0A0A0A",
+      "accent": "#00CCE5",
+      "background": "#050505",
+      "surface": "#18181B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "JetBrains Mono",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Orchestrate Systems Intelligently",
+      "subheadline": "NEXUS.CORE initiates neural nodes that process, route, and optimize data streams across your architecture with absolute precision and limitless scalability.",
+      "cta": "Initialize",
+      "secondary_cta": "Commence Sync",
+      "nav": [
+        "Platform",
+        "Modules",
+        "Metrics",
+        "API"
+      ]
+    },
+    "height": 941
+  },
+  {
+    "slug": "synapse-decentralized-compute-1",
+    "name": "Veil",
+    "description": "Synapse Decentralized Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products.",
+    "colors": {
+      "primary": "#4ADE80",
+      "secondary": "#FFFFFF",
+      "accent": "#BBF7D0",
+      "background": "#FDFDFD",
+      "surface": "#BBF7D0",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Space Grotesk",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Global Scale. Zero Friction. Boundless Compute.",
+      "subheadline": "Execute intensive models in real-time. Route workloads seamlessly. Distribute tasks across edge devices, serverless environments, and dedicated hardware.…",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": [
+        "Overview",
+        "Network",
+        "Pricing",
+        "Features"
+      ]
+    },
+    "height": 1026
+  },
+  {
+    "slug": "aether-architects",
+    "name": "Vellum",
+    "description": "Aether Architects UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences.",
+    "colors": {
+      "primary": "#FFFFFF",
+      "secondary": "#52525B",
+      "accent": "#FFFFFF",
+      "background": "#050505",
+      "surface": "#52525B",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#52525B"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "JetBrains Mono",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 914
+  },
+  {
+    "slug": "digital-infrastructure-platform-2",
+    "name": "Verdant",
+    "description": "Digital Infrastructure Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#6366F1",
+      "secondary": "#27272A",
+      "accent": "#6366F1",
+      "background": "#6366F1",
+      "surface": "#27272A",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#27272A"
+    },
+    "fonts": {
+      "display": "Inter",
+      "body": "Inter",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "Modular, flexible solutions for modern digital infrastructure",
+      "subheadline": "We create future-proof systems that scale seamlessly and adapt to your business needs. Platform's key capabilities include:",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 926
+  },
+  {
+    "slug": "platform-features-remixed",
+    "name": "Vessel",
+    "description": "Platform Features Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable layout structure, responsive behavior, and production-ready styling. Built with custom CSS, it is suitable for component libraries and responsive product interfaces.",
+    "colors": {
+      "primary": "#D97706",
+      "secondary": "#FAFAFA",
+      "accent": "#F59E0B",
+      "background": "#FAFAFA",
+      "surface": "#E2E8F0",
+      "text-primary": "#111827",
+      "text-secondary": "#4B5563",
+      "border": "#E5E7EB"
+    },
+    "fonts": {
+      "display": "Newsreader",
+      "body": "Newsreader",
+      "label": "JetBrains Mono"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  },
+  {
+    "slug": "premium-studio-card-component",
+    "name": "Zenith",
+    "description": "Premium Studio Card Component is designed for grouping related content in a compact container. Key features include clear structure, reusable styling patterns, and production-ready layout behavior. Built with Tailwind CSS, it is suitable for component libraries and responsive web projects. It includes animated visual t",
+    "colors": {
+      "primary": "#4A1711",
+      "secondary": "#E6E1D6",
+      "accent": "#4A1711",
+      "background": "#0F0A09",
+      "surface": "#E6E1D6",
+      "text-primary": "#FFFFFF",
+      "text-secondary": "#A1A1AA",
+      "border": "#5A4A46"
+    },
+    "fonts": {
+      "display": "ui-sans-serif",
+      "body": "ui-monospace",
+      "label": "ui-monospace"
+    },
+    "header": {
+      "badge": "",
+      "headline": "",
+      "subheadline": "",
+      "cta": "",
+      "secondary_cta": "",
+      "nav": []
+    },
+    "height": 900
+  }
+]

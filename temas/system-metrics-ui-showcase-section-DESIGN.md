@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "System Metrics UI Showcase Section"
+name: "Solace"
 description: "System Metrics UI Showcase Section is designed for demonstrating an app-style product interface. Key features include dashboard-like information hierarchy and app-style visual structure. Built with custom CSS, it is suitable for product showcases and interface-driven hero presentations. It includes animated visual trea"
 colors:
   primary: "#F97316"

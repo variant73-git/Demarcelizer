@@ -1,6 +1,6 @@
 ---
 version: "neuform-top-creators-featured"
-name: "Design Inspiration Layout"
+name: "Solstice"
 description: "Design Inspiration Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#FD6703"

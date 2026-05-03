@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Decentralized Compute Network"
+name: "Halo"
 description: "Decentralized Compute Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. Built with custom CSS, it is suitable for subscription pricing pages and plan comparison experiences."
 colors:
   primary: "#34D399"

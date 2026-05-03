@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Axiom - Payment Operations"
+name: "Compass"
 description: "Axiom Payment Dashboard Section is designed for demonstrating application workflows and interface hierarchy. Key features include clear information density, modular panels, and interface rhythm. It is suitable for product showcases, admin panels, and analytics experiences."
 colors:
   primary: "#A268CF"

@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Infrastructure Workload Tuning"
+name: "Spire"
 description: "Infrastructure Workload Login Section is designed for authenticating users through a focused access flow. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for authentication screens in web products."
 colors:
   primary: "#EF4444"

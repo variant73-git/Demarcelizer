@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Aether - Call to Action"
+name: "Quartz"
 description: "Aether Call Onboarding Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#000000"

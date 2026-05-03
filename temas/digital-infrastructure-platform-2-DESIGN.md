@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Digital Infrastructure Platform"
+name: "Verdant"
 description: "Digital Infrastructure Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#6366F1"

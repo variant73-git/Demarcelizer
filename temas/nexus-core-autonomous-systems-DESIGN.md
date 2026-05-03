@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Nexus Core - Autonomous Systems"
+name: "Vault"
 description: "Nexus Core Onboarding Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#00E5FF"

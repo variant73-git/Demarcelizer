@@ -1,6 +1,6 @@
 ---
 version: "neuform"
-name: "CreatorFlow — Master your content strategy"
+name: "Cascade"
 description: "Connect with elite content creators, brand strategists, and marketing experts to elevate your digital presence."
 colors:
   primary: "#E01E65"

@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Nature's Hideaways"
+name: "Bloom"
 description: "Nature Hideaways UI Showcase Section is designed for demonstrating an application interface and hierarchy. Key features include dashboard-like visual hierarchy and dense but readable content organization. Built with custom CSS, it is suitable for product showcases and interface-first landing experiences."
 colors:
   primary: "#0A1118"

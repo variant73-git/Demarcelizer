@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Ares Base | Seamless Logistics Sync"
+name: "Atrium"
 description: "Ares Base Hero Section is designed for introducing a product with clear above-the-fold messaging. Key features include headline hierarchy, supporting copy, and a primary call-to-action. It is suitable for homepage hero areas and campaign landing pages."
 colors:
   primary: "#BC7F61"

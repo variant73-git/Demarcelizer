@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Aether - The New Frontier"
+name: "Onyx"
 description: "Aether New Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#FFFFFF"

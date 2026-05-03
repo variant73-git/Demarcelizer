@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Nexus - Autonomous Scaling Infrastructure"
+name: "Hearth"
 description: "Nexus Autonomous Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. It is suitable for subscription pricing pages and plan comparison experiences."
 colors:
   primary: "#EDEDED"

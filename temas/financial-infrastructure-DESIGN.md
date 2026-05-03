@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Financial Infrastructure"
+name: "Cinder"
 description: "Financial Infrastructure Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. It is suitable for subscription pricing pages and plan comparison experiences."
 colors:
   primary: "#3B82F6"

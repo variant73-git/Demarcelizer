@@ -1,6 +1,6 @@
 ---
 version: "neuform"
-name: "Premium Agency Portal - Technical Split"
+name: "Stratum"
 description: "Premium Agency Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#92CFF2"

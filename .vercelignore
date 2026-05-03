@@ -1,0 +1,7 @@
+server.ts
+package.json
+bun.lock
+node_modules/
+.git/
+.DS_Store
+*.log

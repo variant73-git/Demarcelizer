@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Core Systems Landing Page"
+name: "Drift"
 description: "Core Systems Sidebar Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#1A1A1A"

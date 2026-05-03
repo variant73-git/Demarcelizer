@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "OmniStack - Global Infrastructure"
+name: "Chasm"
 description: "Omnistack Global Pricing Section is designed for comparing plans and supporting conversion decisions. Key features include plan comparison blocks and conversion-oriented actions. Built with custom CSS, it is suitable for subscription pricing pages and plan comparison experiences."
 colors:
   primary: "#1A5BFA"

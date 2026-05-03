@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Nexus Analytics Dashboard"
+name: "Anchor"
 description: "Nexus Analytics Card Component is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#83B740"

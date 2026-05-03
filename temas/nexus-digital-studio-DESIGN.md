@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Nexus - Digital Studio"
+name: "Eclipse"
 description: "Nexus Digital Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#FFFFFF"

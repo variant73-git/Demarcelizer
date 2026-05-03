@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Aura Mobile Finance"
+name: "Cipher"
 description: "Aura Mobile Feature Section is designed for highlighting product capabilities and value points. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#A3E635"

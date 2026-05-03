@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Instant Digital Content Section"
+name: "Threshold"
 description: "Instant Digital Content Section is designed for structuring key content in a full-width page block. Key features include clear structure, reusable styling patterns, and production-ready layout behavior. Built with custom CSS, it is suitable for component libraries and responsive web projects. Interaction states are des"
 colors:
   primary: "#0A0A0A"

@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Platform Features - Remixed"
+name: "Vessel"
 description: "Platform Features Testimonial Section is designed for showcasing social proof and customer credibility. Key features include reusable layout structure, responsive behavior, and production-ready styling. Built with custom CSS, it is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#D97706"

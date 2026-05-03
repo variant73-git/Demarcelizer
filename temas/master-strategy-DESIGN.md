@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Master Strategy"
+name: "Tessera"
 description: "Master Strategy Background Effect is designed for delivering a visual treatment or immersive background effect. Key features include atmospheric visuals, motion depth, and flexible presentation layering. It is suitable for visual-first pages, motion studies, and atmospheric hero treatments."
 colors:
   primary: "#111111"

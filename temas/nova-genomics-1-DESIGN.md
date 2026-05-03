@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Nova Genomics"
+name: "Mica"
 description: "Nova Genomics Footer Section is designed for organizing site-wide navigation, legal links, and utility content. Key features include multi-column navigation groups and clear legal pathways. It is suitable for SaaS websites, product marketing pages, and documentation hubs."
 colors:
   primary: "#030305"

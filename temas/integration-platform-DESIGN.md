@@ -1,6 +1,6 @@
 ---
 version: "neuform-pro"
-name: "Integration Platform"
+name: "Forge"
 description: "Integration Platform Onboarding Section is designed for building reusable UI components in modern web projects. Key features include reusable structure, responsive behavior, and production-ready presentation. It is suitable for component libraries and responsive product interfaces."
 colors:
   primary: "#A3E635"
