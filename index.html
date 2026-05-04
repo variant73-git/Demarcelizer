@@ -134,8 +134,55 @@
             .demarcelize-btn[data-state="ready"]:active { transform: scale(0.94); }
         }
         .ring-tick { position: absolute; width: 1px; background: rgba(44,29,17,0.18); }
+        .demarcelize-label-mobile { display: none; }
         @media (max-width: 768px) {
             .browser-card { aspect-ratio: auto; }
+            main { padding-bottom: 96px; }
+            .demarcelize-btn {
+                position: fixed !important;
+                left: 16px !important;
+                right: 16px !important;
+                bottom: 16px !important;
+                top: auto !important;
+                width: auto !important;
+                height: auto !important;
+                padding: 16px 24px !important;
+                border-radius: 9999px !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                transform: none !important;
+                box-shadow: 0 16px 40px -10px rgba(217,119,6,0.5), inset 0 1px 0 rgba(255,255,255,0.32) !important;
+            }
+            .demarcelize-btn .circular-text-svg { display: none; }
+            .demarcelize-btn .demarcelize-icon-center {
+                position: static;
+                inset: auto;
+                width: 22px; height: 22px;
+            }
+            .demarcelize-btn .demarcelize-label-mobile {
+                display: inline-block;
+                font-family: 'Inter', system-ui, sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.14em;
+                color: white;
+            }
+            .demarcelize-btn[data-state="ready"]:hover {
+                transform: none !important;
+                filter: brightness(1.05);
+            }
+            .demarcelize-btn[data-state="ready"]:active {
+                transform: scale(0.98) !important;
+            }
+            .demarcelize-btn[data-state="loading"] { animation: none; }
+            .demarcelize-btn[data-state="loading"] .demarcelize-icon-center {
+                animation: spin360 0.9s linear infinite;
+            }
+            .demarcelize-btn[data-state="disabled"] {
+                box-shadow: 0 8px 20px -8px rgba(100,116,139,0.4), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+            }
         }
         @media (min-width: 768px) {
             body[data-mode="template"] #target-card,
@@ -273,6 +320,7 @@
                             <polygon points="8 5 20 12 8 19" />
                         </svg>
                     </span>
+                    <span class="demarcelize-label-mobile">DEMARCELIZAR</span>
                 </button>
 
                 <!-- TARGET browser (left) -->
@@ -867,7 +915,63 @@ the product's visual identity.`;
         }
 
         // ---- Demarcelize action (real) ----
-        const EXTRACT_SYSTEM = `You extract visible content from a website's HTML. Output ONLY a single JSON object — no markdown fences, no preface, no commentary, no surrounding text.`;
+        const TASTE_PRINCIPLES = `
+TASTE PRINCIPLES (apply with strong influence to every visual decision):
+
+CONTENT AUTHENTICITY
+- Use the target's exact words. Never paraphrase into AI marketing clichés ("Elevate", "Seamless", "Unleash", "Next-Gen", "Empower", "Transform", "Discover", "Revolutionize").
+- Preserve real numbers, prices, percentages, dates, proper nouns. No fake "99%", "50%", "10x", "John Doe", "Sarah Chan", "Acme", "Nexus", "SmartFlow".
+- Zero emojis in any output.
+
+TYPOGRAPHY
+- Use the reference's exact display + body fonts as declared (Geist, Satoshi, Cabinet Grotesk, Outfit, Manrope, etc.). Never silently substitute "Inter" if the reference uses something else.
+- Control hierarchy with weight and color, not just oversized H1s.
+- Mono fonts (JetBrains Mono, Geist Mono, etc.) ONLY where the reference explicitly uses them — never on body copy.
+
+COLOR
+- Use the reference's exact hex tokens. Don't shift toward "AI purple/blue" gradients or oversaturated accents.
+- Maximum one accent color. Saturation below 80%.
+- Avoid pure #000000 — if the reference declares #000, render as #0a0a0a or zinc-950 to avoid LCD crush.
+- No outer/neon glows on shadows. Inner shadows or shadows tinted to the background hue only.
+
+LAYOUT
+- Preserve the reference's section count and order verbatim (chassis contract).
+- Avoid generic three-equal-card rows; prefer asymmetric grids, 2-column zig-zag, bento layouts, or horizontal scroll if the reference allows.
+- Use CSS Grid (grid grid-cols-…) instead of flex percentage math.
+- Constrain outer containers with max-w-7xl mx-auto or max-w-[1400px].
+- Hero sections must use min-h-[100dvh], NEVER h-screen (h-screen jumps on iOS Safari).
+
+MOTION
+- Animate exclusively transform and opacity. Never animate top, left, width, or height.
+- Use cubic-bezier(0.16, 1, 0.3, 1) for UI transitions; spring physics (stiffness 100, damping 20) for interactive elements where motion is non-linear.
+- Stagger reveal sequences: parent then children with 80–120ms cascading delays.
+- Continuous loops (pulse, shimmer, float) only on small isolated elements (status dots, skeleton placeholders), never on scrolling containers.
+
+INTERACTIVE STATES
+- Buttons on :active should translate-y-[1px] or scale-[0.98] for tactile feedback.
+- Skeleton loaders that match the layout silhouette — no generic circular spinners as content placeholders.
+- Provide hover feedback on every clickable element.
+
+PERFORMANCE
+- Grain/noise filters only on fixed pseudo-elements with pointer-events:none. Never on scrollable containers (continuous GPU repaints).
+- z-index is reserved for systemic layers (sticky nav, modal, overlay). No arbitrary z-50/z-10 sprinkles.
+
+IMAGES
+- No Unsplash URLs (often broken). Use https://picsum.photos/seed/<unique-string>/<w>/<h> or solid color/SVG placeholders.
+- No generic egg/user-icon avatars. Use believable photo placeholders (picsum) styled to fit the design.
+
+FORBIDDEN PATTERNS (failure if violated)
+- Emojis anywhere in markup, text, or alt attributes.
+- "AI purple/blue" gradient aesthetic.
+- Marketing-AI filler vocabulary.
+- Fake "John Doe / 99% / Acme" placeholders.
+- Custom mouse cursors.
+- Outer neon shadow glows.
+- Centered text-over-dark-image generic hero (when the reference is asymmetric, KEEP it asymmetric).`;
+
+        const EXTRACT_SYSTEM = `You extract visible content from a website's HTML. Output ONLY a single JSON object — no markdown fences, no preface, no commentary, no surrounding text.
+
+When extracting, preserve the target's exact wording, real numbers, real names, and real proper nouns. Do NOT paraphrase to generic AI clichés. Do NOT round numbers to clean fakes (99%, 50%). Do NOT substitute names with placeholders. Capture what the page actually says.`;
 
         const INJECT_SYSTEM = `You receive STRUCTURED CONTENT (JSON) and a REFERENCE HTML chassis. Your job: emit the REFERENCE HTML with every visible text node REPLACED by values from STRUCTURED CONTENT.
 
@@ -901,7 +1005,8 @@ HARD RULES
 - If null/missing for a slot, expand from related fields in the same brand context.
 
 OUTPUT
-Single complete self-contained HTML5 document starting with <!DOCTYPE html>. No commentary, no markdown fences, no preface.`;
+Single complete self-contained HTML5 document starting with <!DOCTYPE html>. No commentary, no markdown fences, no preface.
+${TASTE_PRINCIPLES}`;
 
         function parseJsonLoose(text) {
             const cleaned = (text || '')
@@ -1388,6 +1493,7 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
                 console.error(err);
                 showError(err.message || String(err));
             } finally {
+                demBtn.dataset.state = '';
                 checkRunReady();
             }
         });
