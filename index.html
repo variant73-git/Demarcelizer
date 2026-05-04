@@ -134,8 +134,55 @@
             .demarcelize-btn[data-state="ready"]:active { transform: scale(0.94); }
         }
         .ring-tick { position: absolute; width: 1px; background: rgba(44,29,17,0.18); }
+        .demarcelize-label-mobile { display: none; }
         @media (max-width: 768px) {
             .browser-card { aspect-ratio: auto; }
+            main { padding-bottom: 96px; }
+            .demarcelize-btn {
+                position: fixed !important;
+                left: 16px !important;
+                right: 16px !important;
+                bottom: 16px !important;
+                top: auto !important;
+                width: auto !important;
+                height: auto !important;
+                padding: 16px 24px !important;
+                border-radius: 9999px !important;
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                transform: none !important;
+                box-shadow: 0 16px 40px -10px rgba(217,119,6,0.5), inset 0 1px 0 rgba(255,255,255,0.32) !important;
+            }
+            .demarcelize-btn .circular-text-svg { display: none; }
+            .demarcelize-btn .demarcelize-icon-center {
+                position: static;
+                inset: auto;
+                width: 22px; height: 22px;
+            }
+            .demarcelize-btn .demarcelize-label-mobile {
+                display: inline-block;
+                font-family: 'Inter', system-ui, sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.14em;
+                color: white;
+            }
+            .demarcelize-btn[data-state="ready"]:hover {
+                transform: none !important;
+                filter: brightness(1.05);
+            }
+            .demarcelize-btn[data-state="ready"]:active {
+                transform: scale(0.98) !important;
+            }
+            .demarcelize-btn[data-state="loading"] { animation: none; }
+            .demarcelize-btn[data-state="loading"] .demarcelize-icon-center {
+                animation: spin360 0.9s linear infinite;
+            }
+            .demarcelize-btn[data-state="disabled"] {
+                box-shadow: 0 8px 20px -8px rgba(100,116,139,0.4), inset 0 1px 0 rgba(255,255,255,0.2) !important;
+            }
         }
         @media (min-width: 768px) {
             body[data-mode="template"] #target-card,
@@ -273,6 +320,7 @@
                             <polygon points="8 5 20 12 8 19" />
                         </svg>
                     </span>
+                    <span class="demarcelize-label-mobile">DEMARCELIZAR</span>
                 </button>
 
                 <!-- TARGET browser (left) -->
@@ -1445,6 +1493,7 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
                 console.error(err);
                 showError(err.message || String(err));
             } finally {
+                demBtn.dataset.state = '';
                 checkRunReady();
             }
         });
