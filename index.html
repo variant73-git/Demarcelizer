@@ -204,7 +204,7 @@
         /* ─── IA Assist mode ─── */
         body[data-mode="ai"] #run { display: none; }
         body[data-mode="ai"] #ai-assist-card { display: block; }
-        #ai-assist-card { display: none; }
+        #ai-assist-card { display: none; max-width: 760px; margin: 0 auto; width: 100%; }
 
         /* Tokens (reuse existing 2.0 vars; add a few aliases for the chat panel) */
         :root {
@@ -219,9 +219,10 @@
         .ai-frame {
             display: grid;
             grid-template-rows: auto auto 1fr auto;
-            height: 78vh;
-            min-height: 560px;
-            border-radius: 28px;
+            height: min(78vh, 820px);
+            min-height: 520px;
+            max-height: calc(100vh - 200px);
+            border-radius: 24px;
             background: var(--ai-bone);
             box-shadow:
                 0 1px 0 rgba(255,255,255,0.6) inset,
@@ -294,12 +295,12 @@
         /* Thread (scroll only) */
         .ai-thread-wrap {
             overflow-y:auto;
-            padding: 24px 28px 36px;
+            padding: 20px 24px 28px;
             scroll-behavior:smooth;
         }
         .ai-thread {
-            max-width:720px; margin:0 auto;
-            display:flex; flex-direction:column; gap:48px;
+            max-width:640px; margin:0 auto;
+            display:flex; flex-direction:column; gap:36px;
         }
 
         /* Turn */
@@ -568,11 +569,11 @@
 
         /* Composer (bottom pill) */
         .ai-composer-bar {
-            padding:14px 28px 18px;
+            padding:12px 24px 16px;
             background:linear-gradient(180deg, transparent 0%, rgba(228,226,221,.96) 35%);
             backdrop-filter:blur(8px);
         }
-        .ai-composer-inner-wrap { max-width:720px; margin:0 auto; }
+        .ai-composer-inner-wrap { max-width:640px; margin:0 auto; }
         .ai-composer {
             border-radius:9999px; padding:1px;
             background:linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(213,210,203,.5) 50%, rgba(213,210,203,.25) 100%);
