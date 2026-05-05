@@ -375,6 +375,34 @@
             content:""; position:absolute; left:0; top:11px;
             width:6px; height:1px; background:var(--ai-rust);
         }
+        /* Clickable inline option (was **bold**) */
+        .ai-link {
+            color: var(--ai-rust);
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            text-decoration-color: rgba(249,115,22,0.45);
+            transition: color .15s, text-decoration-color .15s, background .15s;
+            border-radius: 3px;
+            padding: 0 2px;
+        }
+        .ai-link:hover {
+            color: var(--ai-walnut);
+            text-decoration-color: var(--ai-rust);
+            background: rgba(249,115,22,0.08);
+        }
+        .ai-msg .small .ai-link {
+            color: var(--ai-walnut);
+            text-decoration-color: rgba(217,119,6,0.4);
+        }
+        .ai-msg .small .ai-link:hover {
+            color: var(--ai-ink);
+            text-decoration-color: var(--ai-walnut);
+            background: rgba(217,119,6,0.08);
+        }
         .ai-typing { display:inline-flex; gap:5px; align-items:center; height:14px; vertical-align:middle; }
         .ai-typing span {
             width:6px; height:6px; border-radius:50%;
@@ -566,6 +594,38 @@
             content:""; width:5px; height:5px; border-radius:50%; background:var(--ai-ink-2);
         }
         .ai-sys-pill.error::before { background:var(--ai-rust); }
+
+        /* Tag row (quick-reply chips above the composer) */
+        .ai-tag-row {
+            display: flex; gap: 6px; flex-wrap: wrap;
+            padding: 0 4px 10px;
+            max-height: 92px; overflow: hidden;
+        }
+        .ai-tag-row[hidden] { display: none; }
+        .ai-tag {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            background: rgba(241,239,234,.95);
+            border: 1px solid var(--ai-bone-deep);
+            color: var(--ai-ink);
+            font-size: 12px; font-weight: 400; letter-spacing: 0; line-height: 1.2;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background .15s, color .15s, border-color .15s, transform .15s;
+            display: inline-flex; align-items: center; gap: 6px;
+            max-width: 100%;
+        }
+        .ai-tag::before {
+            content: ""; flex-shrink: 0;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--ai-rust);
+            box-shadow: 0 0 4px rgba(249,115,22,0.5);
+        }
+        .ai-tag:hover {
+            background: var(--ai-ink); color: var(--ai-bone);
+            border-color: var(--ai-ink); transform: translateY(-1px);
+        }
+        .ai-tag:hover::before { background: var(--ai-bone); box-shadow: none; }
 
         /* Composer (bottom pill) */
         .ai-composer-bar {
@@ -1007,6 +1067,7 @@
                 </main>
                 <footer class="ai-composer-bar">
                   <div class="ai-composer-inner-wrap">
+                    <div class="ai-tag-row" id="ai-tag-row" hidden></div>
                     <div class="ai-composer">
                       <div class="ai-composer-inner">
                         <input type="text" class="ai-composer-text" id="ai-composer-input" placeholder="cole a URL ou responda em texto livre…" autocomplete="off">
@@ -2157,6 +2218,8 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
         $thread.appendChild(turn);
         if (opts.animate !== false) requestAnimationFrame(() => turn.classList.add('show'));
         else turn.classList.add('show');
+        // Only the LATEST ai turn drives the tag row.
+        if (opts.updateTags !== false) updateTagRow(turn);
         scrollToBottom();
         return turn;
       }
@@ -2179,12 +2242,45 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
         if (m.dataset.empty !== '0') { m.dataset.empty = '0'; m.innerHTML = ''; m.dataset.raw = ''; }
         m.dataset.raw = (m.dataset.raw || '') + chunk;
         m.innerHTML = renderAiContent(m.dataset.raw);
+        updateTagRow(turn);
         scrollToBottom();
       }
       function finalizeStreamTurn(turn) {
         const m = turn?.querySelector('.ai-msg[data-role="stream"]');
         if (!m) return;
         m.removeAttribute('data-role'); m.removeAttribute('data-raw'); m.removeAttribute('data-empty');
+        updateTagRow(turn);
+      }
+
+      // Mirror **bold** options from the latest AI turn as quick-reply chips above the composer.
+      function updateTagRow(turn) {
+        const row = document.getElementById('ai-tag-row');
+        if (!row) return;
+        if (!turn) { row.hidden = true; row.innerHTML = ''; return; }
+        const links = turn.querySelectorAll('.ai-link');
+        if (!links.length) { row.hidden = true; row.innerHTML = ''; return; }
+        const seen = new Set();
+        const frag = document.createDocumentFragment();
+        for (const a of links) {
+          const text = a.dataset.fill || a.textContent;
+          if (!text || seen.has(text)) continue;
+          seen.add(text);
+          const tag = document.createElement('button');
+          tag.type = 'button';
+          tag.className = 'ai-tag';
+          tag.textContent = text;
+          tag.dataset.fill = text;
+          frag.appendChild(tag);
+        }
+        row.innerHTML = '';
+        row.appendChild(frag);
+        row.hidden = false;
+      }
+      function clearTagRow() {
+        const row = document.getElementById('ai-tag-row');
+        if (!row) return;
+        row.hidden = true;
+        row.innerHTML = '';
       }
 
       // ─── Markdown-ish ─→ HTML ───
@@ -2208,7 +2304,8 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
       }
       function inlineFmt(s) {
         s = escapeHtml(s);
-        s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        // **bold** → clickable option link (data-fill is read by click handler).
+        s = s.replace(/\*\*([^*\n]+?)\*\*/g, (_m, t) => `<a href="#" class="ai-link" data-fill="${t}">${t}</a>`);
         s = s.replace(/(^|[\s>(\[])\*([^*]+)\*(?=[\s.,!?:;)\]]|$)/g, '$1<em>$2</em>');
         s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
         return s;
@@ -2233,6 +2330,19 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
       $send.addEventListener('click', () => trySend());
       $input.addEventListener('keydown', e => {
         if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); trySend(); }
+      });
+
+      // Click delegation: .ai-link inside the thread and .ai-tag chips above the
+      // composer both populate the input with the option text.
+      document.addEventListener('click', (e) => {
+        const target = e.target.closest('.ai-link, .ai-tag');
+        if (!target) return;
+        if (!target.closest('#ai-assist-card')) return;
+        e.preventDefault();
+        const text = target.dataset.fill || target.textContent || '';
+        if (!text.trim()) return;
+        $input.value = text;
+        $input.focus();
       });
 
       function getApiKey() {
@@ -2267,6 +2377,7 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
           return;
         }
         $input.value = '';
+        clearTagRow();
         addUserTurn(text);
         await sendMessage(text, apiKey);
       }
