@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <style>
         :root {
             --color-primary: #F97316;
@@ -200,6 +200,542 @@
             body[data-mode="template"] #template-grid::-webkit-scrollbar { width: 6px; }
             body[data-mode="template"] #template-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 9999px; }
         }
+
+        /* ─── IA Assist mode ─── */
+        body[data-mode="ai"] #run { display: none; }
+        body[data-mode="ai"] #ai-assist-card { display: block; }
+        #ai-assist-card { display: none; max-width: 760px; margin: 0 auto; width: 100%; }
+
+        /* Tokens (reuse existing 2.0 vars; add a few aliases for the chat panel) */
+        :root {
+            --ai-bone:#E4E2DD; --ai-bone-soft:#F1EFEA; --ai-bone-deep:#D5D2CB;
+            --ai-ink:#0F172A; --ai-ink-2:#475569;
+            --ai-walnut:#D97706; --ai-rust:#F97316;
+            --ai-moss:#65A30D; --ai-dim:#94A3B8; --ai-very-dim:#CBD5E1;
+            --ai-surface-dark:#0A0A0A;
+        }
+
+        /* Frame: card-shaped panel that lives inside the existing page */
+        .ai-frame {
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            height: min(78vh, 820px);
+            min-height: 520px;
+            max-height: calc(100vh - 200px);
+            border-radius: 24px;
+            background: var(--ai-bone);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.6) inset,
+                0 30px 60px -20px rgba(44,29,17,0.18),
+                0 10px 24px -12px rgba(44,29,17,0.12);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Optional inline label at top */
+        .ai-frame-stamp {
+            display:flex; align-items:center; justify-content:center; gap:8px;
+            padding: 12px 16px 4px;
+            font-family:'Instrument Serif',Georgia,serif;
+            font-style: italic; font-size: 18px;
+            color: var(--ai-ink);
+            line-height: 1;
+        }
+        .ai-frame-stamp .dot {
+            width:6px; height:6px; border-radius:50%;
+            background:var(--ai-rust);
+            box-shadow:0 0 8px rgba(249,115,22,.6);
+        }
+
+        /* Stage rail — dots-on-a-line stepper */
+        .ai-stage-rail {
+            display:flex; align-items:flex-start; justify-content:space-between;
+            padding: 14px 36px 10px;
+            max-width: 560px; margin: 0 auto; width: 100%;
+        }
+        .ai-stage-rail .ai-step {
+            flex:1; position:relative;
+            display:flex; flex-direction:column; align-items:center; gap:8px;
+            min-width:0;
+        }
+        .ai-stage-rail .ai-step::after {
+            content:""; position:absolute;
+            top:5px; left:calc(50% + 7px); right:calc(-50% + 7px);
+            height:1px; background:var(--ai-bone-deep);
+            z-index:1; transition:background .3s ease;
+        }
+        .ai-stage-rail .ai-step:last-child::after { display:none; }
+        .ai-stage-rail .ai-step .ai-dot {
+            width:10px; height:10px; border-radius:50%;
+            background:var(--ai-bone-soft); border:1px solid var(--ai-bone-deep);
+            box-sizing:border-box; position:relative; z-index:2;
+            transition:background .3s, border-color .3s, transform .3s, box-shadow .3s;
+        }
+        .ai-stage-rail .ai-step .ai-step-label {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:9.5px; letter-spacing:.18em;
+            color:var(--ai-dim); text-transform:lowercase; white-space:nowrap;
+            transition:color .3s, font-weight .3s;
+        }
+        .ai-stage-rail .ai-step[data-state="done"] .ai-dot { background:var(--ai-moss); border-color:var(--ai-moss); }
+        .ai-stage-rail .ai-step[data-state="done"]::after { background:var(--ai-moss); }
+        .ai-stage-rail .ai-step[data-state="done"] .ai-step-label { color:var(--ai-ink-2); }
+        .ai-stage-rail .ai-step[data-state="active"] .ai-dot {
+            background:var(--ai-rust); border-color:var(--ai-rust);
+            transform:scale(1.4);
+            box-shadow:0 0 0 4px rgba(249,115,22,.15), 0 0 10px rgba(249,115,22,.45);
+            animation:ai-pulse-dot 2.6s infinite ease-in-out;
+        }
+        .ai-stage-rail .ai-step[data-state="active"] .ai-step-label { color:var(--ai-ink); font-weight:500; }
+        @keyframes ai-pulse-dot {
+            0%,100% { box-shadow:0 0 0 4px rgba(249,115,22,.12), 0 0 8px rgba(249,115,22,.35); }
+            50%     { box-shadow:0 0 0 6px rgba(249,115,22,.18), 0 0 14px rgba(249,115,22,.55); }
+        }
+
+        /* Thread (scroll only) */
+        .ai-thread-wrap {
+            overflow-y:auto;
+            padding: 20px 24px 28px;
+            scroll-behavior:smooth;
+        }
+        .ai-thread {
+            max-width:640px; margin:0 auto;
+            display:flex; flex-direction:column; gap:36px;
+        }
+
+        /* Turn */
+        .ai-turn {
+            display:flex; flex-direction:column;
+            opacity:0; transform:translateY(14px);
+            transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.1,1);
+        }
+        .ai-turn.show { opacity:1; transform:translateY(0); }
+        .ai-turn.ai { align-items:flex-start; }
+        .ai-turn.user { align-items:flex-end; }
+
+        .ai-stamp {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:10.5px; letter-spacing:.18em; font-weight:500;
+            color:var(--ai-ink-2); margin-bottom:14px;
+            display:inline-flex; gap:8px; align-items:center;
+            padding:5px 10px 5px 12px;
+            border:1px solid rgba(213,210,203,.6);
+            border-radius:9999px;
+            background:rgba(241,239,234,.6);
+            backdrop-filter:blur(4px);
+        }
+        .ai-turn.ai .ai-stamp::before {
+            content:""; display:inline-block;
+            width:6px; height:6px; border-radius:50%;
+            background:var(--ai-rust);
+            box-shadow:0 0 8px rgba(249,115,22,.55);
+            animation:ai-pulse-dot 2.6s infinite ease-in-out;
+        }
+        .ai-turn.user .ai-stamp {
+            color:var(--ai-walnut);
+            border-color:rgba(217,119,6,.25);
+            background:rgba(253,186,116,.15);
+        }
+        .ai-turn.user .ai-stamp::before {
+            content:""; display:inline-block;
+            width:6px; height:6px; border-radius:50%;
+            background:var(--ai-walnut);
+        }
+
+        /* AI message — editorial display (Instrument Serif italic for accents) */
+        .ai-msg {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-weight:300; font-size:30px; line-height:1.1;
+            letter-spacing:-.022em; color:var(--ai-ink);
+            max-width:680px;
+        }
+        .ai-msg em, .ai-msg .em {
+            font-family:'Instrument Serif',Georgia,serif;
+            color:var(--ai-rust); font-style:italic; font-weight:400;
+        }
+        .ai-msg strong { font-weight:500; }
+        .ai-msg .small {
+            display:block;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-weight:300; font-size:15px; letter-spacing:0; line-height:1.55;
+            color:var(--ai-ink-2);
+            margin-top:16px; max-width:580px;
+        }
+        .ai-msg .small em, .ai-msg .small .em {
+            font-family:'Instrument Serif',Georgia,serif;
+            color:var(--ai-walnut); font-style:italic; font-weight:400;
+        }
+        .ai-msg .small strong { color:var(--ai-ink); font-weight:500; }
+        .ai-msg ul, .ai-msg .small ul { list-style:none; margin-top:10px; padding-left:0; }
+        .ai-msg li, .ai-msg .small li {
+            position:relative; padding-left:18px; margin-top:6px;
+            font-weight:300; font-size:15px; color:var(--ai-ink-2); line-height:1.55;
+        }
+        .ai-msg li::before, .ai-msg .small li::before {
+            content:""; position:absolute; left:0; top:11px;
+            width:6px; height:1px; background:var(--ai-rust);
+        }
+        /* Clickable inline option (was **bold**) */
+        .ai-link {
+            color: var(--ai-rust);
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            text-decoration-color: rgba(249,115,22,0.45);
+            transition: color .15s, text-decoration-color .15s, background .15s;
+            border-radius: 3px;
+            padding: 0 2px;
+        }
+        .ai-link:hover {
+            color: var(--ai-walnut);
+            text-decoration-color: var(--ai-rust);
+            background: rgba(249,115,22,0.08);
+        }
+        .ai-msg .small .ai-link {
+            color: var(--ai-walnut);
+            text-decoration-color: rgba(217,119,6,0.4);
+        }
+        .ai-msg .small .ai-link:hover {
+            color: var(--ai-ink);
+            text-decoration-color: var(--ai-walnut);
+            background: rgba(217,119,6,0.08);
+        }
+        .ai-typing { display:inline-flex; gap:5px; align-items:center; height:14px; vertical-align:middle; }
+        .ai-typing span {
+            width:6px; height:6px; border-radius:50%;
+            background:var(--ai-rust); opacity:.3;
+            animation:ai-bounce 1.4s infinite ease-in-out;
+        }
+        .ai-typing span:nth-child(2) { animation-delay:.2s; }
+        .ai-typing span:nth-child(3) { animation-delay:.4s; }
+        @keyframes ai-bounce {
+            0%,80%,100% { transform:scale(.6); opacity:.3; }
+            40% { transform:scale(1); opacity:1; }
+        }
+
+        /* User message (pill chip) */
+        .ai-user-msg {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-weight:400; font-size:14px;
+            color:var(--ai-ink);
+            background:var(--ai-bone-soft);
+            padding:14px 20px;
+            border:1px solid var(--ai-bone-deep);
+            border-radius:9999px;
+            max-width:520px; line-height:1.45;
+            box-shadow:0 1px 2px rgba(15,23,42,.04);
+            word-break:break-word;
+        }
+
+        /* Inline cards (theme picker, project picker) */
+        .ai-cards {
+            margin-top:20px;
+            display:grid; grid-template-columns:1fr 1fr; gap:10px;
+            width:100%; max-width:640px;
+        }
+        .ai-card {
+            background:var(--ai-bone-soft);
+            border:.5px solid var(--ai-bone-deep);
+            padding:16px 18px;
+            cursor:pointer;
+            transition:background .2s, color .2s, border-color .2s, transform .2s;
+            position:relative; text-align:left;
+            display:flex; flex-direction:column; gap:6px; min-height:96px;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+        }
+        .ai-card:hover {
+            background:var(--ai-ink); color:var(--ai-bone);
+            border-color:var(--ai-ink); transform:translateY(-1px);
+        }
+        .ai-card:hover .ac-meta { color:rgba(228,226,221,.6); }
+        .ai-card:hover .ac-arrow { color:var(--ai-rust); }
+        .ai-card .ac-name {
+            font-family:'Instrument Serif',Georgia,serif;
+            font-style:italic; font-size:22px; line-height:1.1;
+            letter-spacing:-.005em; color:inherit;
+        }
+        .ai-card .ac-name em { color:var(--ai-rust); font-style:italic; font-weight:400; }
+        .ai-card .ac-meta {
+            font-size:10.5px; letter-spacing:.18em; color:var(--ai-ink-2);
+            margin-top:auto;
+        }
+        .ai-card .ac-arrow {
+            position:absolute; top:14px; right:16px;
+            font-family:'Instrument Serif',Georgia,serif; font-style:italic;
+            font-size:20px; color:var(--ai-walnut);
+            transition:color .2s;
+        }
+        .ai-card.wide { grid-column:1 / -1; }
+        .ai-card.cta {
+            background:var(--ai-ink); color:var(--ai-bone);
+            border-color:var(--ai-ink);
+            align-items:flex-start; justify-content:space-between;
+        }
+        .ai-card.cta:hover { background:var(--ai-rust); border-color:var(--ai-rust); }
+        .ai-card.cta .ac-name { color:var(--ai-bone); }
+        .ai-card.cta .ac-meta { color:rgba(228,226,221,.55); }
+        .ai-card.cta .ac-arrow { color:var(--ai-bone); }
+
+        /* Inline preview iframe (theme / output) */
+        .ai-preview {
+            margin-top:20px; width:100%; max-width:640px;
+            border:.5px solid var(--ai-bone-deep);
+            background:#000;
+            aspect-ratio:16/10; position:relative; overflow:hidden;
+        }
+        .ai-preview iframe { width:100%; height:100%; border:0; }
+        .ai-preview .pv-stamp {
+            position:absolute; top:10px; left:10px;
+            background:rgba(0,0,0,.6); color:var(--ai-bone);
+            padding:5px 10px;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:9.5px; letter-spacing:.22em;
+            border:1px solid rgba(255,255,255,.1);
+            backdrop-filter:blur(6px); z-index:5;
+        }
+        .ai-preview .pv-stamp .live { color:var(--ai-rust); margin-right:6px; }
+        .ai-preview .pv-actions {
+            position:absolute; top:10px; right:10px; z-index:5;
+            display:flex; gap:6px;
+        }
+        .ai-preview .pv-actions button {
+            background:rgba(0,0,0,.6); color:var(--ai-bone);
+            border:1px solid rgba(255,255,255,.1);
+            padding:5px 11px;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:9.5px; letter-spacing:.18em;
+            cursor:pointer; backdrop-filter:blur(6px);
+            border-radius:9999px;
+            transition:background .15s;
+        }
+        .ai-preview .pv-actions button:hover { background:var(--ai-rust); border-color:var(--ai-rust); }
+
+        /* Side-by-side previews when AI offers multiple themes */
+        .ai-preview-grid {
+            margin-top: 20px; width: 100%; max-width: 720px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+        }
+        .ai-preview-grid .ai-preview { margin-top: 0; aspect-ratio: 4/3; }
+        @media(max-width:680px){ .ai-preview-grid { grid-template-columns: 1fr; } }
+
+        /* Final artifact card (download) */
+        .ai-artifacts {
+            margin-top:20px; width:100%; max-width:640px;
+            border-radius:32px; padding:1px;
+            background:linear-gradient(180deg, rgba(255,255,255,.3) 0%, rgba(255,255,255,.05) 50%, transparent 100%);
+            box-shadow:0 30px 60px -20px rgba(15,23,42,.4), 0 12px 24px -10px rgba(15,23,42,.18);
+        }
+        .ai-artifacts-inner {
+            background:var(--ai-surface-dark); color:#fff;
+            padding:28px 30px; border-radius:31px;
+            position:relative; overflow:hidden;
+        }
+        .ai-artifacts-inner::before {
+            content:""; position:absolute;
+            top:-30%; left:-10%; width:60%; height:60%;
+            background:radial-gradient(ellipse, rgba(249,115,22,.18), transparent 70%);
+            pointer-events:none; filter:blur(40px);
+        }
+        .ai-artifacts h4 {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-weight:300; font-size:30px;
+            line-height:1.1; letter-spacing:-.025em;
+            margin-bottom:6px; color:#fff;
+            position:relative; z-index:1;
+        }
+        .ai-artifacts h4 em {
+            font-family:'Instrument Serif',Georgia,serif;
+            color:var(--ai-rust); font-style:italic; font-weight:400;
+        }
+        .ai-artifacts .sub {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:10.5px; letter-spacing:.18em;
+            color:rgba(255,255,255,.45);
+            margin-bottom:20px; font-weight:400;
+            position:relative; z-index:1;
+        }
+        .ai-artifacts .actions {
+            display:flex; gap:10px; flex-wrap:wrap;
+            position:relative; z-index:1;
+        }
+        .ai-artifacts .ac-btn {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            background:#fff; color:var(--ai-ink); border:0;
+            padding:11px 20px;
+            font-size:13px; font-weight:500;
+            border-radius:9999px; cursor:pointer;
+            transition:transform .15s, background .15s;
+            display:inline-flex; align-items:center; gap:8px;
+        }
+        .ai-artifacts .ac-btn.ghost {
+            background:transparent; color:rgba(255,255,255,.85);
+            border:1px solid rgba(255,255,255,.2);
+        }
+        .ai-artifacts .ac-btn:hover { transform:translateY(-1px); background:var(--ai-rust); color:#fff; }
+        .ai-artifacts .ac-btn.ghost:hover { background:rgba(255,255,255,.1); color:#fff; }
+
+        /* Tool/system inline pill */
+        .ai-sys-pill {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:10.5px; letter-spacing:.16em;
+            color:var(--ai-ink-2);
+            padding:4px 11px;
+            border:1px solid rgba(213,210,203,.6);
+            border-radius:9999px;
+            background:rgba(241,239,234,.6);
+            margin-top:10px;
+            display:inline-flex; gap:6px; align-items:center;
+        }
+        .ai-sys-pill.error { color:var(--ai-rust); border-color:rgba(249,115,22,.35); background:rgba(249,115,22,.08); }
+        .ai-sys-pill::before {
+            content:""; width:5px; height:5px; border-radius:50%; background:var(--ai-ink-2);
+        }
+        .ai-sys-pill.error::before { background:var(--ai-rust); }
+
+        /* Tag row (quick-reply chips above the composer) */
+        .ai-tag-row {
+            display: flex; gap: 6px; flex-wrap: wrap;
+            padding: 0 4px 10px;
+            max-height: 92px; overflow: hidden;
+        }
+        .ai-tag-row[hidden] { display: none; }
+        .ai-tag {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            background: rgba(241,239,234,.95);
+            border: 1px solid var(--ai-bone-deep);
+            color: var(--ai-ink);
+            font-size: 12px; font-weight: 400; letter-spacing: 0; line-height: 1.2;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background .15s, color .15s, border-color .15s, transform .15s;
+            display: inline-flex; align-items: center; gap: 6px;
+            max-width: 100%;
+        }
+        .ai-tag::before {
+            content: ""; flex-shrink: 0;
+            width: 5px; height: 5px; border-radius: 50%;
+            background: var(--ai-rust);
+            box-shadow: 0 0 4px rgba(249,115,22,0.5);
+        }
+        .ai-tag:hover {
+            background: var(--ai-ink); color: var(--ai-bone);
+            border-color: var(--ai-ink); transform: translateY(-1px);
+        }
+        .ai-tag:hover::before { background: var(--ai-bone); box-shadow: none; }
+
+        /* Composer (bottom pill) */
+        .ai-composer-bar {
+            padding:12px 24px 16px;
+            background:linear-gradient(180deg, transparent 0%, rgba(228,226,221,.96) 35%);
+            backdrop-filter:blur(8px);
+        }
+        .ai-composer-inner-wrap { max-width:640px; margin:0 auto; }
+        .ai-composer {
+            border-radius:9999px; padding:1px;
+            background:linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(213,210,203,.5) 50%, rgba(213,210,203,.25) 100%);
+            box-shadow:0 1px 2px rgba(15,23,42,.06), 0 12px 30px -10px rgba(15,23,42,.18);
+            transition:box-shadow .25s, background .25s;
+        }
+        .ai-composer-inner {
+            background:rgba(241,239,234,.95);
+            backdrop-filter:blur(12px);
+            border-radius:9999px;
+            padding:8px 8px 8px 16px;
+            display:flex; align-items:center; gap:10px;
+        }
+        .ai-composer:focus-within {
+            background:linear-gradient(180deg, rgba(249,115,22,.4) 0%, rgba(213,210,203,.5) 60%, rgba(213,210,203,.25) 100%);
+            box-shadow:0 1px 2px rgba(15,23,42,.06), 0 12px 30px -10px rgba(249,115,22,.18);
+        }
+        .ai-composer-text {
+            flex:1; min-width:80px;
+            background:transparent; border:0; outline:none;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:14px; font-weight:400; color:var(--ai-ink);
+            padding:8px 6px;
+        }
+        .ai-composer-text::placeholder { color:var(--ai-dim); font-weight:300; font-size:14px; }
+        .ai-send-btn {
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            background:var(--ai-ink); color:#fff; border:0;
+            height:36px; padding:0 18px;
+            font-weight:500; font-size:12px; letter-spacing:.02em;
+            cursor:pointer;
+            display:flex; align-items:center; gap:8px; flex-shrink:0;
+            transition:background .15s, transform .15s, opacity .15s;
+            border-radius:9999px;
+            box-shadow:0 1px 2px rgba(15,23,42,.18);
+        }
+        .ai-send-btn:hover { background:#1f2937; transform:translateY(-1px); }
+        .ai-send-btn:disabled { opacity:.55; cursor:not-allowed; transform:none; background:var(--ai-ink); }
+        .ai-send-btn .arr { font-weight:400; font-size:14px; line-height:1; }
+
+        /* Modal (gallery / fullscreen preview) — opens over whole shell */
+        .ai-modal-backdrop {
+            position:fixed; inset:0; z-index:60;
+            background:rgba(15,23,42,.7);
+            backdrop-filter:blur(6px);
+        }
+        .ai-modal {
+            position:fixed; inset:32px; z-index:61;
+            background:var(--ai-bone);
+            border-radius:18px;
+            display:flex; flex-direction:column; overflow:hidden;
+            box-shadow:0 30px 80px -20px rgba(15,23,42,.4);
+        }
+        .ai-modal header {
+            padding:14px 20px;
+            border-bottom:1px solid var(--ai-bone-deep);
+            display:flex; align-items:center; justify-content:space-between;
+            background:var(--ai-bone-soft);
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+        }
+        .ai-modal .ai-gallery-grid {
+            display:grid; grid-template-columns:repeat(4, minmax(0,1fr));
+            gap:14px; padding:20px; overflow-y:auto;
+        }
+        .ai-modal .ai-gallery-card {
+            background:var(--ai-bone-soft);
+            border:.5px solid var(--ai-bone-deep);
+            padding:12px; text-align:left;
+            cursor:pointer;
+            transition:border-color .15s, transform .15s;
+            border-radius:8px;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+        }
+        .ai-modal .ai-gallery-card:hover { border-color:var(--ai-ink); transform:translateY(-1px); }
+        .ai-modal .ai-gallery-card .thumb {
+            aspect-ratio:16/10; background:#000;
+            margin-bottom:10px; overflow:hidden; border-radius:4px;
+        }
+        .ai-modal .ai-gallery-card .thumb iframe {
+            width:200%; height:200%; border:0;
+            transform:scale(.5); transform-origin:0 0; pointer-events:none;
+        }
+        .ai-modal .ai-gallery-card .nm { font-size:13px; font-weight:500; color:var(--ai-ink); }
+        .ai-modal .ai-gallery-card .tags { font-size:10.5px; letter-spacing:.12em; color:var(--ai-ink-2); margin-top:4px; }
+        @media(max-width:680px){ .ai-modal .ai-gallery-grid { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+        .ai-btn-text {
+            background:transparent; border:0;
+            color:var(--ai-ink-2); cursor:pointer;
+            font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+            font-size:12px; letter-spacing:.04em;
+            padding:6px 10px; border-radius:9999px;
+            transition:color .15s, background .15s;
+        }
+        .ai-btn-text:hover { color:var(--ai-ink); background:rgba(213,210,203,.5); }
+
+        @media(max-width:680px){
+            .ai-cards { grid-template-columns:1fr; }
+            .ai-msg { font-size:24px; }
+            .ai-frame { height:auto; min-height:520px; max-height:none; }
+            .ai-stage-rail { padding:10px 12px 6px; max-width:none; }
+            .ai-stage-rail .ai-step .ai-step-label { font-size:9px; letter-spacing:.12em; }
+        }
     </style>
 </head>
 <body data-mode="url" class="min-h-screen overflow-x-hidden antialiased selection:bg-orange-500 selection:text-white">
@@ -299,6 +835,7 @@
                 <div class="flex items-center gap-1 p-1 rounded-full bg-white/70 border border-slate-300/70 shadow-sm">
                     <button id="mode-tab-url" class="mode-tab text-xs font-medium px-4 py-1.5 rounded-full bg-slate-900 text-white transition-colors">URL</button>
                     <button id="mode-tab-template" class="mode-tab text-xs font-medium px-4 py-1.5 rounded-full text-slate-600 hover:text-slate-900 transition-colors">Usar template</button>
+                    <button id="mode-tab-ai" class="mode-tab text-xs font-medium px-4 py-1.5 rounded-full text-slate-600 hover:text-slate-900 transition-colors">IA Assist</button>
                 </div>
             </div>
 
@@ -509,6 +1046,37 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- ── IA Assist (third tab) ── -->
+            <section id="ai-assist-card" class="relative z-10 mt-2" aria-hidden="true">
+              <div class="ai-frame">
+                <div class="ai-frame-stamp">
+                  <span class="dot"></span>
+                  <span>Demarcelizer · IA Assist</span>
+                </div>
+                <nav class="ai-stage-rail" id="ai-stage-rail" hidden>
+                  <div class="ai-step" data-stage="1"><span class="ai-dot"></span><span class="ai-step-label">extract</span></div>
+                  <div class="ai-step" data-stage="2"><span class="ai-dot"></span><span class="ai-step-label">briefing</span></div>
+                  <div class="ai-step" data-stage="3"><span class="ai-dot"></span><span class="ai-step-label">tema</span></div>
+                  <div class="ai-step" data-stage="4"><span class="ai-dot"></span><span class="ai-step-label">reescrita</span></div>
+                  <div class="ai-step" data-stage="5"><span class="ai-dot"></span><span class="ai-step-label">final</span></div>
+                </nav>
+                <main class="ai-thread-wrap" id="ai-thread-wrap">
+                  <div class="ai-thread" id="ai-thread"></div>
+                </main>
+                <footer class="ai-composer-bar">
+                  <div class="ai-composer-inner-wrap">
+                    <div class="ai-tag-row" id="ai-tag-row" hidden></div>
+                    <div class="ai-composer">
+                      <div class="ai-composer-inner">
+                        <input type="text" class="ai-composer-text" id="ai-composer-input" placeholder="cole a URL ou responda em texto livre…" autocomplete="off">
+                        <button class="ai-send-btn" id="ai-send-btn" type="button">enviar <span class="arr">↵</span></button>
+                      </div>
+                    </div>
+                  </div>
+                </footer>
+              </div>
             </section>
 
             <!-- Hidden error display (only visible on errors) -->
@@ -1116,23 +1684,32 @@ Single, complete, self-contained HTML5 document starting with <!DOCTYPE html>. N
         const templateCount = document.getElementById('template-count');
         const templateSelectedLabel = document.getElementById('template-selected-label');
 
+        const tabAi = document.getElementById('mode-tab-ai');
         function setMode(next) {
             MODE = next;
             document.body.dataset.mode = next;
             const isUrl = next === 'url';
+            const isTemplate = next === 'template';
+            const isAi = next === 'ai';
+            // Show/hide reference vs template cards (only when NOT in ai mode)
             referenceCardEl.classList.toggle('hidden', !isUrl);
-            templateCardEl.classList.toggle('hidden', isUrl);
-            tabUrl.classList.toggle('bg-slate-900', isUrl);
-            tabUrl.classList.toggle('text-white', isUrl);
-            tabUrl.classList.toggle('text-slate-600', !isUrl);
-            tabTemplate.classList.toggle('bg-slate-900', !isUrl);
-            tabTemplate.classList.toggle('text-white', !isUrl);
-            tabTemplate.classList.toggle('text-slate-600', isUrl);
-            if (next === 'template' && TEMPLATES.length === 0) loadTemplates();
+            templateCardEl.classList.toggle('hidden', !isTemplate);
+            // Active state on each tab
+            const setTabActive = (el, on) => {
+                el.classList.toggle('bg-slate-900', on);
+                el.classList.toggle('text-white', on);
+                el.classList.toggle('text-slate-600', !on);
+            };
+            setTabActive(tabUrl, isUrl);
+            setTabActive(tabTemplate, isTemplate);
+            setTabActive(tabAi, isAi);
+            if (isTemplate && TEMPLATES.length === 0) loadTemplates();
+            if (isAi && typeof window.__aiAssist?.activate === 'function') window.__aiAssist.activate();
             checkRunReady();
         }
         tabUrl.addEventListener('click', () => setMode('url'));
         tabTemplate.addEventListener('click', () => setMode('template'));
+        tabAi.addEventListener('click', () => setMode('ai'));
 
         function loadGoogleFonts(families) {
             const valid = Array.from(new Set(families.filter(f => f && /^[A-Za-z][A-Za-z0-9 ]*$/.test(f))));
@@ -1522,6 +2099,561 @@ ${trimForContext(referenceCss || '/* none */', 50000)}${referenceShot ? '\n\nThe
             // Initial button state — safe here, all module-level lets are declared
             checkRunReady();
         });
+    </script>
+
+    <!-- ── IA Assist client (chat over /api/chat SSE) ── -->
+    <script>
+    (function () {
+      'use strict';
+      const STORAGE_KEY = 'demarcelizer.aiAssist.v1';
+      const $thread = document.getElementById('ai-thread');
+      const $threadWrap = document.getElementById('ai-thread-wrap');
+      const $rail = document.getElementById('ai-stage-rail');
+      const $input = document.getElementById('ai-composer-input');
+      const $send = document.getElementById('ai-send-btn');
+
+      // Persisted session state (in localStorage; stateless server)
+      // shape: { messages: AnthropicMessageParam[], target_url, target_content, current_stage }
+      let session = loadSession();
+      let isStreaming = false;
+      let currentAiTurn = null;
+      let initialized = false;
+
+      function loadSession() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return blankSession();
+          const s = JSON.parse(raw);
+          if (!Array.isArray(s.messages)) s.messages = [];
+          return s;
+        } catch { return blankSession(); }
+      }
+      function blankSession() {
+        return { messages: [], target_url: null, target_content: null, current_stage: 0 };
+      }
+      function saveSession() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(session)); } catch {}
+      }
+      function resetSession() {
+        session = blankSession();
+        saveSession();
+        $thread.innerHTML = '';
+        setStage(0);
+        renderInitialTurn();
+      }
+
+      // ─── Activate (called by setMode('ai')) ───
+      function activate() {
+        if (initialized) { focusComposer(); return; }
+        initialized = true;
+        renderHistoryOrGreeting();
+        focusComposer();
+      }
+      window.__aiAssist = { activate, reset: resetSession };
+
+      function focusComposer() { setTimeout(() => $input?.focus(), 50); }
+
+      function renderHistoryOrGreeting() {
+        $thread.innerHTML = '';
+        if (session.current_stage > 0) setStage(session.current_stage);
+        else setStage(0);
+
+        // Replay stored messages as turns. Anthropic-format messages have
+        // content as either string (user) or array of blocks (assistant + tool).
+        for (const m of session.messages) {
+          if (m.role === 'user') {
+            const txt = typeof m.content === 'string'
+              ? m.content
+              : (m.content || [])
+                  .filter(b => b.type === 'tool_result' && !b.is_error)
+                  .map(() => null)
+                  .filter(Boolean)
+                  .join('');
+            if (typeof m.content === 'string' && m.content.trim()) {
+              addUserTurn(m.content, { animate: false });
+            }
+            // (tool_result-only user turns are skipped from UI; they're internal)
+          } else if (m.role === 'assistant') {
+            const blocks = Array.isArray(m.content) ? m.content : [];
+            const text = blocks.filter(b => b.type === 'text').map(b => b.text).join('');
+            if (text.trim()) addAiTurn(text, { animate: false });
+          }
+        }
+
+        if (session.messages.length === 0) renderInitialTurn();
+        scrollToBottom();
+      }
+
+      function renderInitialTurn() {
+        const turn = mkTurn('ai');
+        turn.appendChild(mkStamp('demarcelizer · anfitriã'));
+        const msg = el('div', 'ai-msg');
+        msg.innerHTML = `Olá. Vamos <em>Desmarcelizar</em> uma página juntos.<span class="small">Cola a URL do site que você quer re-skinar com um template da nossa biblioteca local. A gente decide o tom e o visual em conversa, sem despejos.<br><br>Se a sessão anterior ainda fizer sentido pra você, a gente continua. Se não, é só limpar lá em "<em>nova conversa</em>" no fim da tela.</span>`;
+        turn.appendChild(msg);
+        $thread.appendChild(turn);
+        requestAnimationFrame(() => turn.classList.add('show'));
+      }
+
+      // ─── Turn factories ───
+      function el(tag, cls) { const x = document.createElement(tag); if (cls) x.className = cls; return x; }
+      function mkTurn(kind) { const t = el('div', 'ai-turn ' + kind); return t; }
+      function mkStamp(text) { const s = el('div', 'ai-stamp'); s.textContent = text; return s; }
+
+      function addUserTurn(text, opts = {}) {
+        const turn = mkTurn('user');
+        turn.appendChild(mkStamp(opts.label || 'você'));
+        const m = el('div', 'ai-user-msg'); m.textContent = text;
+        turn.appendChild(m);
+        $thread.appendChild(turn);
+        if (opts.animate !== false) requestAnimationFrame(() => turn.classList.add('show'));
+        else turn.classList.add('show');
+        scrollToBottom();
+        return turn;
+      }
+      function addAiTurn(content, opts = {}) {
+        const turn = mkTurn('ai');
+        turn.appendChild(mkStamp(opts.stamp || 'demarcelizer'));
+        const m = el('div', 'ai-msg'); m.innerHTML = renderAiContent(content);
+        turn.appendChild(m);
+        $thread.appendChild(turn);
+        if (opts.animate !== false) requestAnimationFrame(() => turn.classList.add('show'));
+        else turn.classList.add('show');
+        // Only the LATEST ai turn drives the tag row.
+        if (opts.updateTags !== false) updateTagRow(turn);
+        scrollToBottom();
+        return turn;
+      }
+      function startStreamingAiTurn() {
+        const turn = mkTurn('ai');
+        turn.appendChild(mkStamp('demarcelizer'));
+        const m = el('div', 'ai-msg');
+        m.dataset.role = 'stream';
+        m.innerHTML = '<span class="ai-typing"><span></span><span></span><span></span></span>';
+        turn.appendChild(m);
+        $thread.appendChild(turn);
+        requestAnimationFrame(() => turn.classList.add('show'));
+        scrollToBottom();
+        currentAiTurn = turn;
+        return turn;
+      }
+      function appendStreamText(turn, chunk) {
+        const m = turn.querySelector('.ai-msg[data-role="stream"]');
+        if (!m) return;
+        if (m.dataset.empty !== '0') { m.dataset.empty = '0'; m.innerHTML = ''; m.dataset.raw = ''; }
+        m.dataset.raw = (m.dataset.raw || '') + chunk;
+        m.innerHTML = renderAiContent(m.dataset.raw);
+        updateTagRow(turn);
+        scrollToBottom();
+      }
+      function finalizeStreamTurn(turn) {
+        const m = turn?.querySelector('.ai-msg[data-role="stream"]');
+        if (!m) return;
+        m.removeAttribute('data-role'); m.removeAttribute('data-raw'); m.removeAttribute('data-empty');
+        updateTagRow(turn);
+      }
+
+      // Mirror **bold** options from the latest AI turn as quick-reply chips above the composer.
+      function updateTagRow(turn) {
+        const row = document.getElementById('ai-tag-row');
+        if (!row) return;
+        if (!turn) { row.hidden = true; row.innerHTML = ''; return; }
+        const links = turn.querySelectorAll('.ai-link');
+        if (!links.length) { row.hidden = true; row.innerHTML = ''; return; }
+        const seen = new Set();
+        const frag = document.createDocumentFragment();
+        for (const a of links) {
+          const text = a.dataset.fill || a.textContent;
+          if (!text || seen.has(text)) continue;
+          seen.add(text);
+          const tag = document.createElement('button');
+          tag.type = 'button';
+          tag.className = 'ai-tag';
+          tag.textContent = text;
+          tag.dataset.fill = text;
+          frag.appendChild(tag);
+        }
+        row.innerHTML = '';
+        row.appendChild(frag);
+        row.hidden = false;
+      }
+      function clearTagRow() {
+        const row = document.getElementById('ai-tag-row');
+        if (!row) return;
+        row.hidden = true;
+        row.innerHTML = '';
+      }
+
+      // ─── Markdown-ish ─→ HTML ───
+      function renderAiContent(raw) {
+        if (!raw) return '<span class="ai-typing"><span></span><span></span><span></span></span>';
+        const parts = raw.split(/\n{2,}/);
+        const head = parts.shift() || '';
+        let html = inlineFmt(head).replace(/\n/g, '<br>');
+        if (parts.length) html += `<span class="small">${parts.map(p => formatBlock(p)).join('')}</span>`;
+        return html;
+      }
+      function formatBlock(block) {
+        if (/^\s*[-*]\s+/.test(block)) {
+          const items = block.split(/\n/).filter(Boolean).map(ln => {
+            const t = ln.replace(/^\s*[-*]\s+/, '');
+            return `<li>${inlineFmt(t)}</li>`;
+          }).join('');
+          return `<ul>${items}</ul>`;
+        }
+        return `<p style="margin-top:14px">${inlineFmt(block).replace(/\n/g, '<br>')}</p>`;
+      }
+      function inlineFmt(s) {
+        s = escapeHtml(s);
+        // **bold** → clickable option link (data-fill is read by click handler).
+        s = s.replace(/\*\*([^*\n]+?)\*\*/g, (_m, t) => `<a href="#" class="ai-link" data-fill="${t}">${t}</a>`);
+        s = s.replace(/(^|[\s>(\[])\*([^*]+)\*(?=[\s.,!?:;)\]]|$)/g, '$1<em>$2</em>');
+        s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+        return s;
+      }
+      function escapeHtml(s) {
+        return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]);
+      }
+
+      // ─── Stage rail ───
+      function setStage(n) {
+        session.current_stage = n;
+        $rail.dataset.active = String(n);
+        $rail.hidden = n === 0;
+        $rail.querySelectorAll('.ai-step').forEach(stepEl => {
+          const s = Number(stepEl.dataset.stage);
+          stepEl.dataset.state = s < n ? 'done' : (s === n ? 'active' : 'future');
+        });
+        saveSession();
+      }
+
+      // ─── Composer ───
+      $send.addEventListener('click', () => trySend());
+      $input.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); trySend(); }
+      });
+
+      // Click delegation: .ai-link inside the thread and .ai-tag chips above the
+      // composer both populate the input with the option text.
+      document.addEventListener('click', (e) => {
+        const target = e.target.closest('.ai-link, .ai-tag');
+        if (!target) return;
+        if (!target.closest('#ai-assist-card')) return;
+        e.preventDefault();
+        const text = target.dataset.fill || target.textContent || '';
+        if (!text.trim()) return;
+        $input.value = text;
+        $input.focus();
+      });
+
+      function getApiKey() {
+        try {
+          const raw = localStorage.getItem('demarcelizer.byok.v1');
+          if (!raw) return null;
+          const s = JSON.parse(raw);
+          return s?.keys?.anthropic || null;
+        } catch { return null; }
+      }
+
+      function flashSysPill(msg, isError = true) {
+        const target = lastAiTurn() || (() => {
+          const t = mkTurn('ai');
+          t.appendChild(mkStamp('aviso'));
+          $thread.appendChild(t);
+          requestAnimationFrame(() => t.classList.add('show'));
+          return t;
+        })();
+        const pill = el('div', 'ai-sys-pill' + (isError ? ' error' : ''));
+        pill.textContent = msg;
+        target.appendChild(pill);
+        scrollToBottom();
+      }
+
+      async function trySend() {
+        const text = $input.value.trim();
+        if (!text || isStreaming) return;
+        const apiKey = getApiKey();
+        if (!apiKey) {
+          flashSysPill('Configure sua chave Anthropic no menu "BYO key" no topo da página.');
+          return;
+        }
+        $input.value = '';
+        clearTagRow();
+        addUserTurn(text);
+        await sendMessage(text, apiKey);
+      }
+
+      function setComposerBusy(busy) {
+        $send.disabled = busy;
+        $input.disabled = busy;
+        $send.innerHTML = busy ? 'processando <span class="arr">…</span>' : 'enviar <span class="arr">↵</span>';
+      }
+
+      async function sendMessage(text, apiKey) {
+        isStreaming = true;
+        setComposerBusy(true);
+        const turn = startStreamingAiTurn();
+        try {
+          const resp = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              apiKey,
+              history: session.messages,
+              user_message: text,
+              target_url: session.target_url,
+              target_content: session.target_content,
+            }),
+          });
+          if (!resp.ok || !resp.body) throw new Error(`HTTP ${resp.status}`);
+
+          const reader = resp.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = '';
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const events = buffer.split('\n\n');
+            buffer = events.pop() ?? '';
+            for (const ev of events) handleSseEvent(ev, turn);
+          }
+        } catch (err) {
+          console.error('[ai-assist] stream failed:', err);
+          flashSysPill(`falha no stream: ${err?.message ?? err}`);
+        } finally {
+          finalizeStreamTurn(turn);
+          setComposerBusy(false);
+          isStreaming = false;
+          currentAiTurn = null;
+          focusComposer();
+          scrollToBottom();
+          saveSession();
+        }
+      }
+
+      function handleSseEvent(raw, turn) {
+        const lines = raw.split('\n');
+        let ev = 'message', data = '';
+        for (const ln of lines) {
+          if (ln.startsWith('event:')) ev = ln.slice(6).trim();
+          else if (ln.startsWith('data:')) data += ln.slice(5).trim();
+        }
+        if (!data) return;
+        let payload; try { payload = JSON.parse(data); } catch { return; }
+
+        switch (ev) {
+          case 'text':
+            appendStreamText(turn, payload.text);
+            break;
+          case 'tool_use':
+            if (payload.name === 'extract_url') sysPill(turn, `extraindo conteúdo de ${stripUrl(payload.input?.url)}…`);
+            else if (payload.name === 'suggest_rewrite') sysPill(turn, 'reescrevendo o copy…');
+            else if (payload.name === 'inject_theme') sysPill(turn, `aplicando o template "${payload.input?.theme_slug}" — pode levar 30–90s…`);
+            break;
+          case 'progress':
+            if (payload.msg) sysPill(turn, payload.msg);
+            break;
+          case 'tool_error':
+            sysPill(turn, `erro: ${payload.error}`, true);
+            break;
+          case 'tool_progress':
+            if (payload.message) sysPill(turn, payload.message);
+            break;
+          case 'ui_signal':
+            handleUiSignal(payload, turn);
+            break;
+          case 'error':
+            sysPill(turn, payload.message, true);
+            break;
+          case 'done':
+            if (Array.isArray(payload.messages)) session.messages = payload.messages;
+            if (payload.target_url) session.target_url = payload.target_url;
+            if (payload.target_content) session.target_content = payload.target_content;
+            saveSession();
+            break;
+        }
+      }
+
+      function sysPill(turn, text, isError = false) {
+        const pill = el('div', 'ai-sys-pill' + (isError ? ' error' : ''));
+        pill.textContent = text;
+        turn.appendChild(pill);
+        scrollToBottom();
+      }
+
+      function handleUiSignal(signal, turn) {
+        if (signal.kind === 'set_stage_indicator') {
+          setStage(Number(signal.payload.stage));
+          if (signal.payload.stage >= 5) appendArtifactCard(turn);
+        } else if (signal.kind === 'push_mockup') {
+          renderMockup(turn, signal.payload);
+        } else if (signal.kind === 'output_ready') {
+          if (signal.payload?.html) {
+            session.last_html = signal.payload.html;
+            saveSession();
+          }
+          appendOutputPreview(turn, signal.payload);
+          appendArtifactCard(turn, signal.payload?.html);
+        } else if (signal.kind === 'open_theme_gallery') {
+          openThemeGallery();
+        }
+      }
+
+      function renderMockup(turn, payload) {
+        const target = turn || lastAiTurn();
+        if (!target) return;
+        if (payload.kind === 'theme_preview' && Array.isArray(payload.theme_slugs)) {
+          const grid = el('div', 'ai-preview-grid');
+          for (const slug of payload.theme_slugs.slice(0, 3)) {
+            grid.appendChild(buildPreview({ src: `/temas/${slug}.html`, caption: slug, slug }));
+          }
+          target.appendChild(grid);
+        } else if (payload.kind === 'rewrite_preview') {
+          // Preview the JSON content as a small system pill — could extend to a diff later.
+          sysPill(target, 'reescrita pronta · ' + Object.keys(payload.content || {}).slice(0, 4).join(', ') + '…');
+        } else if (payload.kind === 'custom_html' && payload.html) {
+          target.appendChild(buildPreview({ srcdoc: payload.html, caption: payload.caption || 'preview' }));
+        }
+        scrollToBottom();
+      }
+
+      function buildPreview({ src, srcdoc, caption, slug }) {
+        const wrap = el('div', 'ai-preview');
+        const stamp = el('div', 'pv-stamp');
+        stamp.innerHTML = `<span class="live">●</span> ${escapeHtml(caption || 'preview')}`;
+        wrap.appendChild(stamp);
+        const actions = el('div', 'pv-actions');
+        const fs = document.createElement('button'); fs.type = 'button'; fs.textContent = 'tela cheia';
+        actions.appendChild(fs);
+        wrap.appendChild(actions);
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+        if (src) iframe.src = src;
+        else if (srcdoc) iframe.srcdoc = srcdoc;
+        wrap.appendChild(iframe);
+        fs.addEventListener('click', () => openFullscreen({ src, srcdoc, caption: caption || slug }));
+        return wrap;
+      }
+
+      function appendOutputPreview(turn, payload) {
+        const target = turn || lastAiTurn();
+        if (!target) return;
+        target.appendChild(buildPreview({
+          srcdoc: payload?.html || '',
+          caption: `${payload?.slug || 'final'} · aplicado`,
+        }));
+      }
+
+      function lastAiTurn() {
+        const turns = $thread.querySelectorAll('.ai-turn.ai');
+        return turns[turns.length - 1] || null;
+      }
+
+      function appendArtifactCard(turn, htmlOverride) {
+        const target = turn || lastAiTurn();
+        if (!target) return;
+        if (target.querySelector('.ai-artifacts')) return;
+        const card = el('div', 'ai-artifacts');
+        card.innerHTML = `
+          <div class="ai-artifacts-inner">
+            <h4>Pronto. Sua página está <em>desmarcelizada</em>.</h4>
+            <div class="sub">arquivos finais</div>
+            <div class="actions">
+              <button class="ac-btn" data-act="download">baixar HTML</button>
+              <button class="ac-btn ghost" data-act="reset">nova conversa</button>
+            </div>
+          </div>`;
+        card.querySelector('[data-act="download"]').addEventListener('click', () => {
+          const html = htmlOverride || extractLastInjectedHtml();
+          if (!html) { flashSysPill('output ainda não está pronto.'); return; }
+          const slug = (session.target_url || 'desmarcelizado').replace(/^https?:\/\//, '').replace(/[^a-z0-9-]+/gi, '-').slice(0, 60);
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+          a.download = `${slug}.html`; a.click();
+          URL.revokeObjectURL(a.href);
+        });
+        card.querySelector('[data-act="reset"]').addEventListener('click', () => {
+          if (!confirm('Limpar a conversa atual e começar uma nova?')) return;
+          resetSession();
+        });
+        target.appendChild(card);
+        scrollToBottom();
+      }
+
+      function extractLastInjectedHtml() {
+        return session.last_html || null;
+      }
+
+      // Theme gallery (modal over the whole shell)
+      async function openThemeGallery() {
+        let templates;
+        try { templates = await fetch('/api/templates').then(r => r.json()).then(j => j.templates || []); }
+        catch (err) { flashSysPill(`falha ao carregar galeria: ${err.message}`); return; }
+        const backdrop = el('div', 'ai-modal-backdrop');
+        const modal = el('div', 'ai-modal');
+        modal.innerHTML = `
+          <header>
+            <button class="ai-btn-text" data-act="close">← voltar</button>
+            <span style="font-family:Inter,sans-serif;font-size:11px;letter-spacing:.18em;color:var(--ai-ink-2)">galeria · ${templates.length}</span>
+            <span></span>
+          </header>
+          <div class="ai-gallery-grid"></div>
+        `;
+        const grid = modal.querySelector('.ai-gallery-grid');
+        for (const t of templates) {
+          const card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'ai-gallery-card';
+          card.innerHTML = `
+            <div class="thumb"><iframe src="/temas/${t.slug}.html" loading="lazy" sandbox="allow-same-origin allow-scripts"></iframe></div>
+            <div class="nm">${escapeHtml(t.name)}</div>
+            <div class="tags">${escapeHtml((t.description || '').slice(0, 80))}</div>
+          `;
+          card.addEventListener('click', () => {
+            close();
+            $input.value = `Quero usar o template "${t.slug}".`;
+            trySend();
+          });
+          grid.appendChild(card);
+        }
+        document.body.appendChild(backdrop);
+        document.body.appendChild(modal);
+        const close = () => { backdrop.remove(); modal.remove(); };
+        backdrop.addEventListener('click', close);
+        modal.querySelector('[data-act="close"]').addEventListener('click', close);
+      }
+
+      function openFullscreen({ src, srcdoc, caption }) {
+        const backdrop = el('div', 'ai-modal-backdrop');
+        const modal = el('div', 'ai-modal');
+        modal.innerHTML = `
+          <header>
+            <button class="ai-btn-text" data-act="close">← voltar</button>
+            <span style="font-family:Inter,sans-serif;font-size:11px;letter-spacing:.18em;color:var(--ai-ink-2)">${escapeHtml(caption || 'preview')}</span>
+            <span></span>
+          </header>
+          <iframe style="flex:1;border:0;background:#fff" sandbox="allow-same-origin allow-scripts"></iframe>
+        `;
+        const iframe = modal.querySelector('iframe');
+        if (src) iframe.src = src;
+        else if (srcdoc) iframe.srcdoc = srcdoc;
+        document.body.appendChild(backdrop);
+        document.body.appendChild(modal);
+        const close = () => { backdrop.remove(); modal.remove(); };
+        backdrop.addEventListener('click', close);
+        modal.querySelector('[data-act="close"]').addEventListener('click', close);
+      }
+
+      function stripUrl(u) {
+        if (!u) return '';
+        try { const x = new URL(u); return x.host + (x.pathname === '/' ? '' : x.pathname); }
+        catch { return u; }
+      }
+      function scrollToBottom() {
+        requestAnimationFrame(() => { $threadWrap.scrollTop = $threadWrap.scrollHeight; });
+      }
+
+    })();
     </script>
 </body>
 </html>

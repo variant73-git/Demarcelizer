@@ -189,6 +189,249 @@ ADAPTATION (when shapes don't match)
 OUTPUT
 Single complete self-contained HTML5 document starting with <!DOCTYPE html>. No commentary, no markdown fences, no preface, no truncation.`;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Chat (IA Assist) — conversational orchestration on top of the demarcelize
+// pipeline. Stateless server: history lives in the user's browser localStorage
+// and is re-sent with each turn. Uses Anthropic tool-use loop.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const TASTE_DNA = `
+## Taste DNA — referência obrigatória em TODA decisão de design e copy
+
+Você é, antes de mais nada, um Senior UI/UX Engineer com taste calibrado.
+Toda recomendação de tema, descrição de direção visual, escolha de mockup,
+reescrita de copy e resposta a dúvida estética PASSA por estas regras.
+
+### Baseline de geração (use como vetor padrão; só desvie se o usuário pedir)
+- DESIGN_VARIANCE: 8/10 (assimetria, deslocamentos, white-space proposital)
+- MOTION_INTENSITY: 6/10 (transições fluidas, micro-loops contidos)
+- VISUAL_DENSITY: 4/10 (respiro generoso, hierarquia por peso e cor)
+
+### Regras de tipografia (NÃO viole)
+- Display/headline: leading curto, tracking apertado.
+- Body: leading-relaxed, largura ~65ch, cor secundária (não preto puro).
+- Banido: Inter para vibes "premium"/"creative". Prefira Geist, Outfit, Cabinet Grotesk, Satoshi.
+- Banido: Serif em dashboards/SaaS UI. Serif só editorial/luxury/cultural.
+- Banido: ALL CAPS no copy. Banido: monoespaçada em copy.
+- Hierarquia se controla por peso e cor antes de escala.
+
+### Regras de cor (NÃO viole)
+- Máx. 1 cor de destaque por tema. Saturação < 80%.
+- BANIDO: "AI Purple/Blue glow", neon gradient, lilás default.
+- Bases neutras absolutas: Zinc/Slate. Acento contrastante e único (Emerald, Electric Blue, Deep Rose, etc).
+- Nunca #000000. Use off-black, zinc-950, charcoal.
+- Não flutue entre warm e cool grays no mesmo projeto.
+
+### Regras de layout (NÃO viole)
+- Hero centralizado é BANIDO quando variance > 4. Force split-screen, left-aligned + right asset, ou white-space assimétrico.
+- "3 cards iguais em linha" como feature row é BANIDO.
+- Card por reflexo é tell. Use card SÓ quando elevation comunica hierarquia.
+
+### Regras de copy (NÃO viole — também valem na reescrita)
+- BANIDO: "Elevate", "Seamless", "Unleash", "Next-Gen", "Empower", "Revolutionize". Verbos concretos vencem.
+- BANIDO: "John Doe", "Acme", "Nexus". Nomes/marcas críveis e contextuais.
+- BANIDO: dados redondos demais (99,99%, 50%). Use dados orgânicos.
+- Tom: direto, sem floreio. Frase curta carrega mais. Adjetivo que não muda nada → corta.
+
+### Tells de "AI slop" — CHEQUE antes de propor qualquer coisa
+- Glow roxo/neon, gradient text em headers grandes, cursor custom, 3-card row, card com sombra-padrão sem motivo, H1 gigante por reflexo, "Acme/Nexus", "Elevate seamless next-gen".
+- Se a sua sugestão tem qualquer um destes, REFAÇA antes de mandar.
+
+### Quando descrever uma direção de tema para o usuário
+- Aponte a tipografia (família + peso + tracking) e a cor de acento explicitamente.
+- Mencione o gesto de layout (assimétrico? split? bento?) e UM elemento de motion ou textura.
+- Se um tema tem qualquer "tell de AI slop", chame na hora ou descarte.
+- Nunca venda em adjetivos vazios ("moderno", "sofisticado", "elegante") — descreva o que o usuário vai VER.
+`.trim();
+
+const CHAT_SYSTEM_PROMPT = `# Demarcelizer IA Assist
+
+Você é o Demarcelizer no modo conversacional. Sua função: pegar o conteúdo de um site (URL alvo) e re-skinar com um template da biblioteca local, escolhido conjuntamente via brainstorming. O verbo é "Desmarcelizar".
+
+${TASTE_DNA}
+
+## Regras absolutas
+
+- Nunca sugira fontes monoespaçadas em copy ou design.
+- Nunca sugira ALL CAPS (CSS uppercase ou texto em caixa-alta no markup).
+- Nunca invente conteúdo: tudo vem da URL extraída.
+- Reescrita de conteúdo só após gate explícito ("acha que pode melhorar?"). Se SIM, faça reescrita GLOBAL única (não slot-by-slot).
+- Linguagem: pt-BR, tom direto, sem floreio.
+- Uma pergunta por vez. Máximo 3 opções por mensagem.
+- Visual companion (push_mockup): use sempre que houver decisão visual concreta.
+- Toda resposta com decisão estética PASSA pela "Taste DNA" acima.
+
+## Mapa de stages
+
+### STAGE 0 — Onboarding
+Sessão nova: pergunte "Olá! Qual a URL do site que você quer Desmarcelizar?"
+Sessão retomada: "Bom te ver de volta. Continuamos de onde paramos: <último estado>?"
+
+### STAGE 1 — Extract
+User fornece URL:
+  - Chame set_stage_indicator(1)
+  - Chame extract_url(url) — isso pega o conteúdo via Playwright e retorna JSON estruturado
+  - Resuma: "Extraí: brand <X>, hero '<headline>', N features, M stats…"
+  - Chame set_stage_indicator(2)
+
+### STAGE 2 — Briefing
+Faça 3-5 perguntas adaptativas (NÃO todas se não precisar):
+  - Vibe (editorial / tech / corporate / human / luxury / brutalist)
+  - Família de cor (light / dark / warm / cool — stick numa família)
+  - Tom (sério / consultivo / vendedor / técnico)
+  - Audiência (executivo / criador / dev / B2B / B2C)
+  - Referências que admira (se relevante)
+Quando tiver contorno claro: chame set_stage_indicator(3)
+
+### STAGE 3 — Funil de tema
+3a) Descreva 2-3 direções possíveis em texto. Nomeie tipografia (família + tracking), cor de acento concreta, gesto de layout (assimétrico/split/bento), um elemento de motion. Banido vender em adjetivo vago.
+3b) Convergir: chame search_themes({ query: "...", limit: 3 }) com filtros do briefing.
+3c) Apresentar: chame push_mockup({ kind: 'theme_preview', theme_slugs: ['slug1', 'slug2', ...] }). User vê preview inline.
+3d) Galeria opcional: se user pedir "ver todos", chame open_theme_gallery().
+3e) User confirma escolha: chame set_stage_indicator(4).
+
+### STAGE 4 — Reescrita opcional (GATE ÚNICO)
+Pergunte UMA vez: "Acha que o texto pode melhorar?"
+Se SIM: pergunte sobre tom (3 itens max por mensagem) → chame suggest_rewrite(content, tone_brief) UMA vez → push_mockup({ kind: 'rewrite_preview', content: <novo JSON> }) → user aprova ou volta (1-2 iterações max).
+Se NÃO: pula para STAGE 5.
+Chame set_stage_indicator(5).
+
+### STAGE 5 — Inject + preview
+Chame inject_theme({ theme_slug }). Isso aplica o tema ao conteúdo extraído (server reusa pipeline de demarcelize). Tool retorna { html }; ui_signal output_ready dispara render do HTML inline pra o user.
+Avise: "Pronto. Pode baixar o HTML pelo botão abaixo, ou voltar pra ajustar."
+Não chame set_stage_indicator(6) — não tem stage 6 nesse modo.
+
+## Tools
+
+- set_stage_indicator(stage): atualiza o indicador de progresso no UI.
+- extract_url(url): mira a URL via Playwright e extrai conteúdo estruturado em JSON (brand, hero, features, stats, sections, footer).
+- search_themes({ query?, vibe?, family?, limit? }): busca templates na biblioteca local (~100+ designs prontos) e retorna até N matches com slug, name, description, colors, fonts.
+- push_mockup({ kind, theme_slugs?, html?, content?, caption? }): mostra um preview inline no chat. kind="theme_preview" recebe theme_slugs (renderiza iframes lado a lado); kind="rewrite_preview" recebe content (mostra antes/depois); kind="custom_html" recebe html cru.
+- open_theme_gallery(): abre galeria full-screen com TODOS os templates da biblioteca.
+- suggest_rewrite({ content, tone_brief }): reescreve o JSON do conteúdo no novo tom, preservando estrutura. Retorna o JSON novo.
+- inject_theme({ theme_slug }): aplica o template escolhido ao conteúdo extraído. Retorna { html, slug } e dispara output_ready (preview inline).
+
+## Marcação de opções clicáveis (CRÍTICO)
+
+Sempre que oferecer OPÇÕES de resposta pra o usuário escolher (múltipla escolha, vibes,
+tons, templates, qualquer coisa onde o usuário precisa "responder X"), marque o NOME de
+CADA opção em **negrito** (markdown \`**...**\`).
+
+A UI lê o markdown e:
+1. Renderiza cada **trecho-em-negrito** como link clicável dentro da mensagem.
+2. Lista os mesmos trechos como tags acima do campo de texto.
+Em ambos os casos, clicar preenche o composer com o texto exato em negrito.
+
+Por isso, regras estritas:
+- Use \`**negrito**\` SÓ pra opções de resposta. Não use pra ênfase comum.
+- Pra ênfase, use \`_itálico_\` ou reescreva mais direto.
+- Mantenha o nome da opção CURTO (1-4 palavras). A descrição vem fora do negrito.
+- 2-4 opções por pergunta. Múltiplas perguntas no mesmo turno: marque opções de cada uma.
+
+Exemplo bom:
+"Vibe geral — qual chega mais perto?
+- a) **Institucional sóbrio** — editorial limpo, peso de consultoria de RH
+- b) **Tech humano** — produto digital, dados em destaque, mas com empatia
+- c) **Brutalist direto** — tipografia pesada, contraste agressivo, sem enfeite"
+
+Exemplo ruim (negrito sem ser opção):
+"Esta página é **muito importante** — qual a vibe?"
+
+## Estilo de mensagens
+
+- Markdown leve (listas curtas, _itálico_ pra ênfase). Sem headings dentro do chat.
+- Sempre proponha next step explícito ao final.
+- Se usuário responder ambíguo: pergunte de volta, não suponha.
+- Erros de tool: surface o erro e ofereça caminho alternativo.
+`;
+
+const REWRITE_SYSTEM = `Você reescreve o conteúdo extraído de um site, preservando exatamente a estrutura JSON original. Mantenha todos os campos. Mude apenas o texto conforme o tone_brief fornecido. Nunca invente fatos novos. Nunca remova ou adicione slots.
+
+${TASTE_DNA}
+
+## Regras específicas de reescrita
+- Verbo concreto > verbo de marketing. "Cortamos prazo em 11 dias" > "Aceleramos processos".
+- Frase com mais de 22 palavras → quebre.
+- Adjetivo que não muda significado → corta.
+- Números crus: prefira dado orgânico (47,2%) a redondo (50%).
+- Nunca: "Elevate", "Seamless", "Unleash", "Next-Gen", "Revolutionize", "Empower", "Game-changer", "Cutting-edge".
+- Tom default pt-BR: direto, sem floreio.
+
+Output: JSON válido com a mesma shape do input. Sem markdown fences, sem comentário.`;
+
+const CHAT_TOOLS: any[] = [
+  {
+    name: 'set_stage_indicator',
+    description: 'Atualiza o indicador de progresso (stage rail) no UI. Use ao mudar de etapa.',
+    input_schema: {
+      type: 'object',
+      properties: { stage: { type: 'integer', minimum: 1, maximum: 5, description: '1=extract, 2=briefing, 3=tema, 4=reescrita, 5=final' } },
+      required: ['stage'],
+    },
+  },
+  {
+    name: 'extract_url',
+    description: 'Mira a URL via Playwright e extrai conteúdo estruturado em JSON.',
+    input_schema: {
+      type: 'object',
+      properties: { url: { type: 'string', description: 'URL absoluta começando com http(s)://' } },
+      required: ['url'],
+    },
+  },
+  {
+    name: 'search_themes',
+    description: 'Busca templates da biblioteca local. Retorna até N matches.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string', description: 'palavra-chave (vibe, marca de referência, estilo)' },
+        limit: { type: 'integer', minimum: 1, maximum: 12, default: 6 },
+      },
+    },
+  },
+  {
+    name: 'push_mockup',
+    description: 'Mostra um preview inline no chat (theme_preview, rewrite_preview, ou custom_html).',
+    input_schema: {
+      type: 'object',
+      properties: {
+        kind: { type: 'string', enum: ['theme_preview', 'rewrite_preview', 'custom_html'] },
+        theme_slugs: { type: 'array', items: { type: 'string' }, description: 'para kind=theme_preview' },
+        html: { type: 'string', description: 'para kind=custom_html' },
+        content: { type: 'object', description: 'para kind=rewrite_preview (JSON do novo conteúdo)' },
+        caption: { type: 'string' },
+      },
+      required: ['kind'],
+    },
+  },
+  {
+    name: 'open_theme_gallery',
+    description: 'Abre galeria full-screen com todos os templates da biblioteca.',
+    input_schema: { type: 'object', properties: {} },
+  },
+  {
+    name: 'suggest_rewrite',
+    description: 'Reescreve o JSON do conteúdo no novo tom, preservando estrutura.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        content: { type: 'object', description: 'o JSON extraído anteriormente' },
+        tone_brief: { type: 'string', description: 'descrição do tom desejado' },
+      },
+      required: ['content', 'tone_brief'],
+    },
+  },
+  {
+    name: 'inject_theme',
+    description: 'Aplica o template escolhido ao conteúdo extraído. Retorna o HTML final.',
+    input_schema: {
+      type: 'object',
+      properties: { theme_slug: { type: 'string' } },
+      required: ['theme_slug'],
+    },
+  },
+];
+
 type Mirror = { html: string; css: string; screenshot: string; finalUrl: string; title: string };
 
 async function mirrorSite(url: string, browser: Browser, send: (event: string, data: any) => Promise<void>): Promise<Mirror> {
@@ -812,6 +1055,222 @@ ${trim(refCss, 50_000)}${refShot ? '\n\nThe attached image is the rendered REFER
       'connection': 'keep-alive',
       'x-accel-buffering': 'no',
     },
+  });
+});
+
+// ── Chat (IA Assist) tool dispatcher ────────────────────────────────────────
+type ChatCtx = {
+  apiKey: string;
+  target_url?: string;
+  target_content?: any;
+  send: (event: string, data: any) => Promise<void>;
+};
+
+function filterThemes(all: TemplateMeta[], f: { query?: string; limit?: number }): TemplateMeta[] {
+  if (!f) return all;
+  const q = String(f.query || '').toLowerCase().trim();
+  if (!q) return all;
+  // Naive token scoring: count token hits across name+description+colors+fonts.
+  const tokens = q.split(/\s+/).filter(Boolean);
+  const scored = all.map((t) => {
+    const blob = (
+      `${t.name} ${t.description} ${Object.values(t.colors || {}).join(' ')} ${Object.values(t.fonts || {}).join(' ')}`
+    ).toLowerCase();
+    let score = 0;
+    for (const tok of tokens) if (blob.includes(tok)) score += 1;
+    return { t, score };
+  });
+  return scored.filter((x) => x.score > 0).sort((a, b) => b.score - a.score).map((x) => x.t);
+}
+
+async function executeChatTool(name: string, input: any, ctx: ChatCtx): Promise<{ result: any; ui_signal?: any }> {
+  switch (name) {
+    case 'set_stage_indicator':
+      return { result: { ack: true }, ui_signal: { kind: 'set_stage_indicator', payload: { stage: Number(input.stage) || 1 } } };
+
+    case 'extract_url': {
+      const url = String(input.url || '').trim();
+      if (!/^https?:\/\//i.test(url)) throw new Error('URL inválida — precisa começar com http(s)://');
+      const browser = await chromium.launch({ headless: true });
+      try {
+        const m = await mirrorSite(url, browser, ctx.send);
+        const content = await extractTargetContent({
+          apiKey: ctx.apiKey,
+          provider: 'anthropic',
+          targetHtml: m.html,
+          send: ctx.send,
+        });
+        ctx.target_url = m.finalUrl || url;
+        ctx.target_content = content;
+        return { result: content };
+      } finally {
+        try { await browser.close(); } catch {}
+      }
+    }
+
+    case 'search_themes': {
+      const all = await loadTemplates();
+      const filtered = filterThemes(all, input);
+      const limit = Math.min(Math.max(Number(input.limit) || 6, 1), 12);
+      const out = filtered.slice(0, limit).map((t) => ({
+        slug: t.slug,
+        name: t.name,
+        description: t.description,
+        colors: t.colors,
+        fonts: t.fonts,
+      }));
+      return { result: { count: out.length, themes: out } };
+    }
+
+    case 'push_mockup':
+      return { result: { ack: true }, ui_signal: { kind: 'push_mockup', payload: input } };
+
+    case 'open_theme_gallery':
+      return { result: { ack: true }, ui_signal: { kind: 'open_theme_gallery' } };
+
+    case 'suggest_rewrite': {
+      const content = input.content ?? ctx.target_content;
+      const tone = String(input.tone_brief || '').trim();
+      if (!content) throw new Error('content ausente — chame extract_url antes');
+      if (!tone) throw new Error('tone_brief é obrigatório');
+      const userText = `STRUCTURED CONTENT TO REWRITE:\n${JSON.stringify(content, null, 2)}\n\nTONE BRIEF:\n${tone}`;
+      const raw = await callAnthropic({
+        apiKey: ctx.apiKey,
+        model: 'claude-sonnet-4-6',
+        system: REWRITE_SYSTEM,
+        userText,
+        send: ctx.send,
+      });
+      try { return { result: parseJsonLoose(raw) }; }
+      catch (err: any) { throw new Error(`reescrita não retornou JSON válido: ${err?.message || err}`); }
+    }
+
+    case 'inject_theme': {
+      const slug = String(input.theme_slug || '').replace(/[^a-zA-Z0-9_-]/g, '');
+      if (!slug) throw new Error('theme_slug obrigatório');
+      const content = ctx.target_content;
+      if (!content) throw new Error('target_content ausente — chame extract_url antes de inject_theme');
+      let refHtml: string;
+      try { refHtml = await readFile(join(ROOT, 'temas', `${slug}.html`), 'utf-8'); }
+      catch { throw new Error(`template "${slug}" não encontrado em /temas`); }
+      const designMd = await readFile(join(ROOT, 'temas', `${slug}-DESIGN.md`), 'utf-8').catch(() => '');
+      await ctx.send('progress', { msg: `Aplicando "${slug}"… (30–90s)` });
+      const userText = `STRUCTURED CONTENT (JSON) — these are the words that must appear in your output:
+${JSON.stringify(content, null, 2)}
+
+REFERENCE DESIGN.md (visual identity tokens):
+${designMd}
+
+REFERENCE HTML to populate (preserve every tag, class, style, script, and section — replace only visible text nodes):
+${trim(refHtml, 100_000)}`;
+      const raw = await callAnthropic({
+        apiKey: ctx.apiKey,
+        model: 'claude-opus-4-7',
+        system: INJECT_SYSTEM,
+        userText,
+        send: ctx.send,
+      });
+      const html = extractHtmlBlock(raw);
+      return { result: { slug, html_length: html.length }, ui_signal: { kind: 'output_ready', payload: { html, slug } } };
+    }
+
+    default:
+      throw new Error(`tool desconhecida: ${name}`);
+  }
+}
+
+// ── Chat (IA Assist) route ──────────────────────────────────────────────────
+app.post('/api/chat', (c) => {
+  return streamSSE(c, async (stream) => {
+    const send = async (event: string, data: any) => {
+      try { await stream.writeSSE({ event, data: JSON.stringify(data) }); } catch {}
+    };
+
+    let body: any;
+    try { body = await c.req.json(); }
+    catch { await send('error', { message: 'JSON inválido' }); return; }
+
+    const { apiKey, history = [], user_message, target_url, target_content } = body || {};
+    if (!apiKey || typeof apiKey !== 'string') { await send('error', { message: 'apiKey é obrigatório (Anthropic)' }); return; }
+    if (!user_message || typeof user_message !== 'string') { await send('error', { message: 'user_message é obrigatório' }); return; }
+
+    const anthropic = new Anthropic({ apiKey, timeout: 600_000, maxRetries: 1 });
+
+    // Hist comes from client in Anthropic format. Append the new user message.
+    const apiMessages: any[] = Array.isArray(history) ? [...history] : [];
+    apiMessages.push({ role: 'user', content: user_message });
+    await send('user_appended', { content: user_message });
+
+    const ctx: ChatCtx = { apiKey, target_url, target_content, send };
+
+    let iteration = 0;
+    let stoppedNaturally = false;
+    while (iteration < 8) {
+      iteration++;
+      let resp: any;
+      try {
+        resp = await anthropic.messages.create({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 4_000,
+          system: CHAT_SYSTEM_PROMPT,
+          tools: CHAT_TOOLS,
+          messages: apiMessages,
+        });
+      } catch (err: any) {
+        await send('error', { message: err?.message || String(err) });
+        return;
+      }
+
+      const assistantContent = resp.content || [];
+
+      for (const block of assistantContent) {
+        if (block.type === 'text') {
+          await send('text', { text: block.text });
+        } else if (block.type === 'tool_use') {
+          await send('tool_use', { id: block.id, name: block.name, input: block.input });
+        }
+      }
+
+      apiMessages.push({ role: 'assistant', content: assistantContent });
+
+      if (resp.stop_reason !== 'tool_use') { stoppedNaturally = true; break; }
+
+      const toolResults: any[] = [];
+      for (const block of assistantContent) {
+        if (block.type !== 'tool_use') continue;
+        try {
+          const { result, ui_signal } = await executeChatTool(block.name, block.input, ctx);
+          if (ui_signal) await send('ui_signal', ui_signal);
+          toolResults.push({
+            type: 'tool_result',
+            tool_use_id: block.id,
+            content: typeof result === 'string' ? result : JSON.stringify(result),
+          });
+          await send('tool_result', { tool_use_id: block.id, output: result });
+        } catch (err: any) {
+          const msg = err?.message || String(err);
+          toolResults.push({
+            type: 'tool_result',
+            tool_use_id: block.id,
+            content: JSON.stringify({ error: msg }),
+            is_error: true,
+          });
+          await send('tool_error', { tool_use_id: block.id, error: msg });
+        }
+      }
+
+      apiMessages.push({ role: 'user', content: toolResults });
+    }
+
+    if (!stoppedNaturally) {
+      await send('error', { message: 'limite de 8 iterações atingido — finalizando.' });
+    }
+
+    await send('done', {
+      messages: apiMessages,
+      target_url: ctx.target_url,
+      target_content: ctx.target_content,
+    });
   });
 });
 
